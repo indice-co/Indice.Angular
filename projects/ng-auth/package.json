@@ -1,0 +1,35 @@
+{
+  "name": "@indice/ng-auth",
+  "version": "0.1.0",
+  "keywords": [
+    "node",
+    "angular",
+    "typescript",
+    "authentication",
+    "oidc-client",
+    "openid"
+  ],
+  "author": "INDICE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/indice-co/Indice.Angular/issues"
+  },
+  "homepage": "https://github.com/indice-co/Indice.Angular#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/indice-co/Indice.Angular.git"
+  },
+  "peerDependencies": {
+    "@angular/common": "^11.2.14",
+    "@angular/core": "^11.2.14",
+    "@angular/router": "^11.2.14",
+    "oidc-client": "^1.11.5"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "oidc-client": "^1.11.5",
+    "@angular/router": "^11.2.14"
+  }
+}

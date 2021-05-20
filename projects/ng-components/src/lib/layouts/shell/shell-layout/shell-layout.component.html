@@ -1,0 +1,25 @@
+<div class="shell-container">
+  <div class="shell-header-container">
+    <div class="shell-header-container-inner">
+      <lib-shell-header></lib-shell-header>
+    </div>
+  </div>
+  <main class="shell-content-container">
+    <div class="shell-content-container-inner">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <div class="shell-footer-container">
+    <div class="shell-footer-container-inner">
+      <lib-shell-footer></lib-shell-footer>
+    </div>
+  </div>
+  <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
+  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
+    <div class="w-screen max-w-md">
+      <div class="side-pane">
+        <router-outlet name="rightpane" (activate)="onSidePaneActivated($event)" (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

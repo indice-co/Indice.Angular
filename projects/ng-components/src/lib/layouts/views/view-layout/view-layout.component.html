@@ -1,0 +1,111 @@
+<header *ngIf="header" class="view-layout-paddings">
+
+  <div class="view-layout-title-container">
+    <div class="flex-1 justify-start items-center">
+      <i *ngIf="icon"
+         [class]="icon + ' text-xl text-white font-thin mr-1'"
+         aria-hidden="true"></i>
+      <h1 [class]="busy ? 'animate-pulse inline text-xl text-gray-200' : 'inline text-xl text-white'">
+        {{title}}
+      </h1>
+    </div>
+    <div *ngIf="metaItems && metaItems.length > 0"
+         class="flex flex-2 space-x-2">
+      <ng-container *ngFor="let meta of metaItems">
+        <div class="mt-2 flex items-center text-xs text-gray-500">
+          <i *ngIf="meta.icon"
+             [class]="meta.icon + ' text-sm text-gray-400 mr-1 sm:mr-2'"
+             aria-hidden="true"></i>
+          {{meta.text}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="hidden md:flex justify-between items-center">
+    <div class="flex-1 justify-start">
+      <i *ngIf="icon"
+         [class]="icon + ' text-2xl text-white font-thin mr-2 mt-1'"
+         aria-hidden="true"></i>
+      <h1 [class]="busy ? 'animate-pulse inline text-3xl text-gray-200' : 'inline text-3xl text-white'">
+        {{title}}
+      </h1>
+      <div *ngIf="metaItems && metaItems.length > 0"
+           class="flex flex-wrap sm:flex-row space-x-2 sm:space-x-4">
+        <ng-container *ngFor="let meta of metaItems">
+          <div class="mt-2 flex items-center text-xs text-gray-500">
+            <i *ngIf="meta.icon"
+               [class]="meta.icon + ' text-sm text-gray-400 mr-1 sm:mr-2'"
+               aria-hidden="true"></i>
+            {{meta.text}}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-end">
+      <ng-container *ngFor="let action of actions"
+                    [ngSwitch]="action.type">
+        <ng-container *ngSwitchCase="'switch-view'">
+          <button [disabled]="view==action.param"
+                  type="button"
+                  href="#"
+                  class="ml-1 disabled:opacity-50 btn-view-header"
+                  (click)="switchViewActionClick(action)">
+            <span class="inline-block relative">
+              <i [class]="action.icon"></i>
+              <span *ngIf="view==action.param"
+                    class="absolute top-0 right-0 block ml-2 h-1.5 w-1.5 rounded-full ring-1 ring-white bg-blue-300"></span>
+            </span>
+          </button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'search'">
+          <label for="search"
+                 class="sr-only">Search</label>
+          <div class="relative text-gray-400 focus-within:text-gray-600 ml-2 hover:shadow-sm hover:bg-gray-900">
+            <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+              <!--<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+              </svg>-->
+            </div>
+            <input id="search"
+                   #search
+                   class="block w-60 focus:w-96 bg-gray-50 rounded-sm text-gray-900 placeholder-gray-500 outline-none text-xs"
+                   [placeholder]="searchPlaceholder"
+                   type="search"
+                   name="search"
+                   (input)="searchActionType(search.value)">
+          </div>
+          <button type="button"
+                  href="#"
+                  class="btn-view-header rounded-l-none"
+                  (click)="searchActionClick(action, search.value)">
+            <i [class]="action.icon"></i>
+          </button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'router-link'">
+          <button type="button"
+                  href="#"
+                  class="ml-1 btn-view-header"
+                  (click)="routerLinkActionClick(action)">
+            <i [class]="action.icon"></i>
+          </button>
+        </ng-container>
+
+        <!---->
+        <ng-container *ngSwitchDefault>
+          <button type="button"
+                  class="ml-1 btn-view-header"
+                  (click)="emitActionClick(action)">
+            <i [class]="action.icon"></i>
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</header>
+
+<!-- component -->
+<div [class]="fluid ? 'view-container-fluid' : 'view-container'">
+  <ng-content></ng-content>
+</div>

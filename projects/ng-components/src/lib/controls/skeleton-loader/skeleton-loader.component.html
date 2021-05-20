@@ -1,0 +1,52 @@
+<ng-container *ngSwitch="type">
+  <div class="cards-deck-4" *ngSwitchCase="'small-tile'">
+    <ng-container *ngFor="let i of counter(count)">
+      <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto">
+        <div class="animate-pulse flex space-x-4">
+          <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>
+          <div class="flex-1 space-y-4 py-1">
+            <div class="h-4 bg-light-blue-400 rounded w-3/4">&nbsp;</div>
+            <div class="space-y-2">
+              <div class="h-4 bg-light-blue-400 rounded">&nbsp;</div>
+              <div class="h-4 bg-light-blue-400 rounded w-5/6">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="cards-deck-3" *ngSwitchCase="'large-tile'">
+    <ng-container *ngFor="let i of counter(count)">
+      <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto">
+        <div class="animate-pulse flex space-x-4">
+          <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>
+          <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>
+          <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>
+          <div class="flex-1 space-y-4 py-1">
+            <div class="h-4 bg-light-blue-400 rounded w-3/4">&nbsp;</div>
+            <div class="space-y-2">
+              <div class="h-4 bg-light-blue-400 rounded">&nbsp;</div>
+              <div class="h-4 bg-light-blue-400 rounded w-5/6">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="cards-deck-1" *ngSwitchCase="'table-rows'">
+    <ng-container *ngFor="let i of counter(count)">
+      <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto mb-4">
+        <div class="animate-pulse flex space-x-4">
+          <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>
+          <div class="flex-1 space-y-4 py-1">
+            <div class="h-4 bg-light-blue-400 rounded w-3/4">&nbsp;</div>
+            <div class="space-y-2">
+              <div class="h-4 bg-light-blue-400 rounded">&nbsp;</div>
+              <div class="h-4 bg-light-blue-400 rounded w-5/6">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

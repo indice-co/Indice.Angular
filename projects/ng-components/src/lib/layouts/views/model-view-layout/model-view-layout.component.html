@@ -1,0 +1,40 @@
+<lib-view-layout [title]="title">
+  <main class="details-view-container">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+      <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-4 md:col-span-3">
+        <section aria-labelledby="menu" class="min-w-full">
+          <div class="bg-white shadow rounded-sm">
+            <div class="flex flex-col justify-stretch bg-gray-50 border-b">
+              <ng-content></ng-content>
+            </div>
+            <!-- menu items -->
+            <div class="mt-2 px-4 py-4 flow-root">
+              <nav class="h-full flex flex-col">
+                <div class="space-y-1">
+                  <ng-container *ngFor="let section of primary">
+                    <a href="#" [routerLinkActive]="['view-nav-link-active']" [routerLink]="section.link" class="view-nav-link">
+                      {{section.text}}
+                    </a>
+                  </ng-container>
+                </div>
+
+                <div class="mt-auto pt-10 space-y-1">
+                  <ng-container *ngFor="let section of secondary">
+                    <a href="#" [routerLinkActive]="['view-nav-link-active']" [routerLinkActiveOptions]="{ exact: true }"
+                       [routerLink]="section.link" class="view-nav-link">
+                      {{section.text}}
+                    </a>
+                  </ng-container>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-8 md:col-span-9">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+
