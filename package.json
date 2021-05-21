@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "build-prod": "ng build",
-    "postbuild": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
+    "build-auth": "ng build ng-auth --prod",
+    "build-components": "ng build ng-components --prod",
+    "postbuild-components": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
     "test": "ng test",
     "lint": "ng lint",
     "build:prod": "cross-env NODE_ENV=production ng build --prod"
@@ -20,8 +21,6 @@
     "@angular/forms": "~11.2.7",
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
-    "ng-auth": "0.0.4",
-    "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },

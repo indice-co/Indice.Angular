@@ -1,6 +1,8 @@
 {
   "name": "@indice/ng-auth",
-  "version": "0.1.0",
+  "description": "Indice extensions for Angular 2+ using oidc-client",
+  "version": "0.1.2",
+  "private": false,
   "keywords": [
     "node",
     "angular",
@@ -23,13 +25,14 @@
     "@angular/common": "^11.2.14",
     "@angular/core": "^11.2.14",
     "@angular/router": "^11.2.14",
-    "oidc-client": "^1.11.5"
+    "oidc-client": "^1.11.5",
+    "rxjs": "~6.6.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
   },
   "devDependencies": {
-    "oidc-client": "^1.11.5",
-    "@angular/router": "^11.2.14"
+    "@angular/router": "^11.2.14",
+    "oidc-client": "^1.11.5"
   }
 }

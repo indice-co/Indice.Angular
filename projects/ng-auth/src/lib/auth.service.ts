@@ -48,7 +48,7 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return from(this.manager.getUser()).pipe(map<User | null, boolean>((user) => {
+    return from(this.manager.getUser()).pipe(map<User | null, boolean>((user: User | null, index: number) => {
         if (user) {
           return !user.expired;
         } else {

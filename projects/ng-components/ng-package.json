@@ -5,7 +5,7 @@
     "entryFile": "src/public-api.ts",
     "styleIncludePaths": [ "./src/assets/styles/*.*" ],
     "umdModuleIds": {
-      "ng-auth": "ng-auth"
+      "@indice/ng-auth": "indice-ng-auth"
     }
   }
 }
