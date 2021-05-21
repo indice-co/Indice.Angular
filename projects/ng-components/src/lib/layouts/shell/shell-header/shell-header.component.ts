@@ -3,7 +3,7 @@ import { User } from 'oidc-client';
 import { NavigationStart, Router, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { IAppLinks } from '../../../types';
-import { AuthService } from 'ng-auth';
+import { AuthService } from '@indice/ng-auth';
 import { APP_LINKS } from '../../../tokens';
 
 @Component({

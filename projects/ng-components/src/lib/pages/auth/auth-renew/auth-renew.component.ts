@@ -1,7 +1,7 @@
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'ng-auth';
+import { AuthService } from '@indice/ng-auth';
 
 
 @Component({ selector: 'lib-auth-renew', template: ''})

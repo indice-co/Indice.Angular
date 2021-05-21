@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, catchError } from 'rxjs/operators';
-import { AuthService } from '../public-api';
+import { AuthService } from './auth.service';
 
 // for use with HTTPCLIENT!
 @Injectable({

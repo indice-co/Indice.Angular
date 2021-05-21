@@ -22,7 +22,8 @@ import { ModelViewLayoutComponent } from './layouts/views/model-view-layout/mode
 import { SideViewLayoutComponent } from './layouts/views/side-view-layout/side-view-layout.component';
 import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.component';
 import { AuthRenewComponent } from './pages/auth/auth-renew/auth-renew.component';
-import { AddressPipe, DurationFormatPipe } from '../public-api';
+import { AddressPipe } from './pipes/address.pipe';
+import { DurationFormatPipe } from './pipes/duration-format.pipe';
 
 @NgModule({
   declarations: [
