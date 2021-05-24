@@ -108,7 +108,6 @@
             "main": "projects/demo-app/src/main.ts",
             "polyfills": "projects/demo-app/src/polyfills.ts",
             "tsConfig": "projects/demo-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/demo-app/src/favicon.ico",
               "projects/demo-app/src/assets"
@@ -132,7 +131,7 @@
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",

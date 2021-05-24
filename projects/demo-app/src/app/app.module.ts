@@ -1,12 +1,11 @@
 import { HomeComponent } from './features/home/home.component';
 import { IndiceComponentsModule } from './../../../ng-components/src/lib/ng-components.module';
-import { IndiceAuthModule } from '../../../ng-auth/src/lib/ng-auth.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuardService, AuthHttpInterceptor, AuthService } from '@indice/ng-auth';
+import { AuthGuardService, AuthHttpInterceptor, AuthService, IndiceAuthModule } from '@indice/ng-auth';
 import { APP_LINKS } from '@indice/ng-components';
 import { AppLinks } from './app.links';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';

@@ -14,13 +14,13 @@ export class ListViewComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('page-size') pageSize = 20;
   // tslint:disable-next-line:no-input-rename
-  @Input('page-size-options') pageSizeOptions: MenuOption[] | null = null;
+  @Input('page-size-options') pageSizeOptions: MenuOption[] = [];
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
-  @Input('sort-options') sortOptions: MenuOption[] | null = [];
+  @Input('sort-options') sortOptions: MenuOption[] = [];
   // tslint:disable-next-line:no-input-rename
   @Input('sort') sort: string | null = null;
   // tslint:disable-next-line:no-input-rename
