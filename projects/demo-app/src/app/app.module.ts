@@ -7,9 +7,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuardService, AuthHttpInterceptor, AuthService } from '@indice/ng-auth';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_LINKS } from '@indice/ng-components';
 import { AppLinks } from './app.links';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
