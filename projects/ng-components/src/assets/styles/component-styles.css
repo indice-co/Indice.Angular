@@ -46,12 +46,25 @@
     @apply max-w-7xl mx-auto;
   }
 
+  .shell-header-container-inner-fluid {
+    @apply w-full mx-auto;
+  }
+
   .shell-content-container {
     @apply -mt-24 sm:-mt-32;
   }
 
+  .shell-content-container-no-header {
+    /* overide this style in your app  */
+    @apply mx-auto;
+  }
+
   .shell-content-container-inner {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen;
+  }
+
+  .shell-content-container-inner-fluid {
+    @apply w-full mx-auto min-h-screen;
   }
 
   .shell-footer-container {
@@ -60,6 +73,10 @@
 
   .shell-footer-container-inner {
     @apply max-w-7xl mx-auto;
+  }
+
+  .shell-footer-container-inner-fluid {
+    @apply w-full mx-auto;
   }
 
   .side-pane-overlay {

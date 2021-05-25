@@ -89,3 +89,15 @@ export interface IAddress {
   region?: string | null;
   postalCode?: string | null;
 }
+
+export interface IShellConfig {
+  showHeader: boolean;
+  showFooter: boolean;
+  fluid: boolean;
+}
+
+export class DefaultShellConfig implements IShellConfig {
+  showHeader = true;
+  showFooter = true;
+  fluid = false;
+}

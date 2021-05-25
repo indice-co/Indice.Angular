@@ -1,16 +1,16 @@
 <div class="shell-container">
-  <div class="shell-header-container">
-    <div class="shell-header-container-inner">
+  <div class="shell-header-container" *ngIf="activeConfig.showHeader">
+    <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
       <lib-shell-header></lib-shell-header>
     </div>
   </div>
-  <main class="shell-content-container">
-    <div class="shell-content-container-inner">
+  <main [class]="activeConfig.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
+    <div [class]="activeConfig.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
       <router-outlet></router-outlet>
     </div>
   </main>
-  <div class="shell-footer-container">
-    <div class="shell-footer-container-inner">
+  <div class="shell-footer-container" *ngIf="activeConfig.showFooter">
+    <div [class]="activeConfig.fluid ? 'shell-footer-container-inner-fluid' : 'shell-footer-container-inner'">
       <lib-shell-footer></lib-shell-footer>
     </div>
   </div>
