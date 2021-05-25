@@ -6,7 +6,7 @@ import { AuthService } from '@indice/ng-auth';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'lib-auth-callback',
-  template: './auth-callback.component.html'
+  templateUrl: './auth-callback.component.html'
 })
 export class AuthCallbackComponent implements OnInit {
   public status = 'παρακαλώ περιμένετε...';
@@ -22,20 +22,23 @@ export class AuthCallbackComponent implements OnInit {
           self.router.navigate(['/unauthorized']);
           return;
         }
+
         // did you want to go somewhere?
         const user = self.authService.currentUser();
         if (user && user.state && user.state.url) {
           // TODO: should parse this at some point :)
-          // console.log('AuthCallbackComponent user state',user.state);
+          console.log('AuthCallbackComponent user state', user.state);
           self.router.navigateByUrl('/dashboard');
           return;
         } else {
           self.router.navigateByUrl('/dashboard');
           return;
         }
+
+        //
         // lets check your subscriptions...
         // self.status = `we're loading your subscription information, please wait...`;
-        //// ok get the subscriptions for the user
+        // ok get the subscriptions for the user
         // self.appState.subscriptions.subscribe((subs) => {
         //  self.subscriptions = subs;
         //  if (subs === null || subs.length === 0) {
@@ -49,13 +52,15 @@ export class AuthCallbackComponent implements OnInit {
         // }, error => {
         //  self.status = `oups! an error occured, sorry about that! please try again in a while :)`;
         // });
+        //
+
       });
     });
   }
 
-  //public selectSubscription(subscription: any) {
-  //  this.appState.selectSubscription(subscription);
-  //  this.router.navigate([subscription.homePath]);
-  //}
+  // public selectSubscription(subscription: any) {
+  //   this.appState.selectSubscription(subscription);
+  //   this.router.navigate([subscription.homePath]);
+  // }
 
 }
