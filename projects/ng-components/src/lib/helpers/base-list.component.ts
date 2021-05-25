@@ -17,8 +17,8 @@ export abstract class BaseListComponent<T> implements OnInit {
   public sort: string | null = '';
   public sortdir: string | null = '-';
   public search: string | null = '';
-  public sortOptions: MenuOption[] | null = null;
-  public metaItems: HeaderMetaItem[] | null = [];
+  public sortOptions: MenuOption[] = [];
+  public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
 
   constructor(private route$: ActivatedRoute, private router$: Router) {

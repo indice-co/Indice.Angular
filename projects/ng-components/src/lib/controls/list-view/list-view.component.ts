@@ -42,7 +42,7 @@ export class ListViewComponent implements OnInit {
   @ContentChild(ListTileComponent, {read: ListTileComponent})
   set tiles(refs: QueryList<ListTileComponent>) {
     this.tiles$ = refs;
-    this.tile = this.tiles$.toArray()[0];
+    this.tile = this.tiles$?.toArray()[0];
   }
   constructor() { }
 
