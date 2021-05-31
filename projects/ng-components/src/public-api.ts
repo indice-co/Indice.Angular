@@ -11,6 +11,7 @@ export * from './lib/controls/pager/pager.component';
 export * from './lib/controls/list-view/list-view.component';
 export * from './lib/controls/list-view/list-column.component';
 export * from './lib/controls/list-view/list-tile.component';
+export * from './lib/controls/list-view/list-details-section.component';
 export * from './lib/controls/skeleton-loader/skeleton-loader.component';
 
 // shell layout

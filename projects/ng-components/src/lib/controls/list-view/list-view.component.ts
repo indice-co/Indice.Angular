@@ -1,13 +1,19 @@
-import { Component, ContentChild, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChildren } from '@angular/core';
+import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { MenuOption } from '../../types';
 import { ListTileComponent } from './list-tile.component';
 import { ListColumnComponent } from './list-column.component';
+import { ListDetailsSectionComponent } from './list-details-section.component';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
-export class ListViewComponent implements OnInit {
+export class ListViewComponent implements OnChanges {
+  // tslint:disable-next-line:no-input-rename
+  @Input('show-pager') showPager = true;
+  // DATA SOURCE!
+  @Input() items: any[] | null | undefined;
+
   // PAGING - pass through for pager component
   @Input() count: number | null = null;
   @Input() page = 1;
@@ -17,6 +23,13 @@ export class ListViewComponent implements OnInit {
   @Input('page-size-options') pageSizeOptions: MenuOption[] = [];
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Output() detailsOpened: EventEmitter<{item: any, open: boolean}> = new EventEmitter<{item: any, open: boolean}>();
+
+  public tableViewSupported = false;
+  public tilesViewSupported = false;
+  public detailsSectionSupported = false;
+
+  @Input() view = 'table';
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
@@ -30,26 +43,53 @@ export class ListViewComponent implements OnInit {
 
   // COLUMNS
   public columns: any[] = [];
-  private cols$: QueryList<ListColumnComponent> | null = null;
-  @Input() items: any[] | null | undefined;
   @ContentChildren(ListColumnComponent, { read: ListColumnComponent })
   set cols(refs: QueryList<ListColumnComponent>) {
-    this.cols$ = refs;
-    this.columns = this.cols$.toArray();
+    this.columns = refs?.toArray();
+    if(this.columns && this.columns.length > 0) {
+      this.tableViewSupported = true;
+    }
   }
-  public tile: any | null | undefined = null;
-  private tiles$: QueryList<ListTileComponent> | null = null;
+
+  public tilesDeckClass = 'cards-deck-4';
+  // tslint:disable-next-line:no-input-rename
+  @Input('tiles-count') tilesCount = 4;
+
+  public tileTemplate: any | null | undefined = null;
   @ContentChild(ListTileComponent, {read: ListTileComponent})
-  set tiles(refs: QueryList<ListTileComponent>) {
-    this.tiles$ = refs;
-    this.tile = this.tiles$?.toArray()[0];
+  set tiles(ref: ListTileComponent) {
+    this.tileTemplate = ref;
+    if (this.tileTemplate) {
+      this.tilesViewSupported = true;
+    }
   }
+
+  public detailsTemplate: any | null | undefined = null;
+  @ContentChild(ListDetailsSectionComponent, {read: ListDetailsSectionComponent})
+  set details(ref: ListDetailsSectionComponent) {
+    this.detailsTemplate = ref;
+    if (this.detailsTemplate) {
+      this.detailsSectionSupported = true;
+    }
+  }
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges', changes);
+    const tilesCountChange = changes['tiles-count'] || changes.tilesCount ;
+    if (tilesCountChange) {
+      this.setTilesDeckClass(tilesCountChange.currentValue);
+    }
+    const itemsChange = changes.items;
+    if (itemsChange && itemsChange.currentValue) {
+      // this.detailsState = new Array(itemsChange.currentValue.length);
+    } else {
+      // this.detailsState = [];
+    }
   }
 
-
+  // events
   public emitPageChanged($event: number): void  {
     this.pageChanged.emit($event);
   }
@@ -64,4 +104,19 @@ export class ListViewComponent implements OnInit {
   public emitSortdirChanged($event: string): void {
     this.sortdirChanged.emit($event);
   }
+
+  public toggleDetails(item: any): void {
+    item.detailsExpanded = !item.detailsExpanded;
+    this.detailsOpened.emit({ item, open: item.detailsExpanded });
+  }
+
+  // helpers
+  private setTilesDeckClass(tiles: number): void {
+    if ( tiles >= 1 && tiles <= 4 ) {
+      this.tilesDeckClass = `cards-deck-${tiles}`;
+    } else {
+      this.tilesDeckClass = 'cards-deck-3';
+    }
+  }
+
 }

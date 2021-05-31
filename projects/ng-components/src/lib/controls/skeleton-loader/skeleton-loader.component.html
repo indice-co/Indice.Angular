@@ -1,5 +1,5 @@
 <ng-container *ngSwitch="type">
-  <div class="cards-deck-4" *ngSwitchCase="'small-tile'">
+  <div class="cards-deck-4" *ngSwitchCase="'tiles'">
     <ng-container *ngFor="let i of counter(count)">
       <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto">
         <div class="animate-pulse flex space-x-4">
@@ -15,7 +15,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="cards-deck-3" *ngSwitchCase="'large-tile'">
+  <div class="cards-deck-3" *ngSwitchCase="'large-tiles'">
     <ng-container *ngFor="let i of counter(count)">
       <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto">
         <div class="animate-pulse flex space-x-4">
@@ -33,7 +33,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="cards-deck-1" *ngSwitchCase="'table-rows'">
+  <div class="cards-deck-1" *ngSwitchCase="'table'">
     <ng-container *ngFor="let i of counter(count)">
       <div class="border border-light-blue-300 shadow rounded-sm p-4 max-w-sm w-full mx-auto mb-4">
         <div class="animate-pulse flex space-x-4">

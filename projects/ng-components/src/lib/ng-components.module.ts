@@ -1,3 +1,4 @@
+import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UnauthorizedComponent } from './pages/http-status/unauthorized/unauthorized.component';
@@ -35,6 +36,7 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     ListViewComponent,
     ListColumnComponent,
     ListTileComponent,
+    ListDetailsSectionComponent,
     SkeletonLoaderComponent,
     // shell layout
     ShellLayoutComponent,
@@ -68,6 +70,7 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     ListViewComponent,
     ListColumnComponent,
     ListTileComponent,
+    ListDetailsSectionComponent,
     SkeletonLoaderComponent,
     ShellLayoutComponent,
     ShellHeaderComponent,

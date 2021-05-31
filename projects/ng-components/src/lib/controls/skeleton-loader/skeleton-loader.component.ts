@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SkeletonLoaderComponent implements OnInit {
   @Input() count = 5;
-  @Input() type = 'small-tile'; // 'large-tile', 'table-rows'
+  @Input() type = 'tiles'; // 'large-tile', 'table'
   constructor() { }
 
   ngOnInit(): void {
