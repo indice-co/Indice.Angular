@@ -25,6 +25,7 @@ import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.com
 import { AuthRenewComponent } from './pages/auth/auth-renew/auth-renew.component';
 import { AddressPipe } from './pipes/address.pipe';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
+import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
     ListTileComponent,
     ListDetailsSectionComponent,
     SkeletonLoaderComponent,
+    CollapsiblePanelComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
