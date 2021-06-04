@@ -10,11 +10,9 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "ng-auth": [
-        "dist/ng-auth/ng-auth",
         "dist/ng-auth"
       ],
       "ng-components": [
-        "dist/ng-components/ng-components",
         "dist/ng-components"
       ]
     },
