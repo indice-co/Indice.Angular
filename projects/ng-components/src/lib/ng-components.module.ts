@@ -88,7 +88,8 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     PageNotFoundComponent,
     UnauthorizedComponent,
     AddressPipe,
-    DurationFormatPipe
+    DurationFormatPipe,
+    CollapsiblePanelComponent
   ]
 })
 export class IndiceComponentsModule { }

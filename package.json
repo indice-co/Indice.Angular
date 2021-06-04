@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "build-auth": "ng build ng-auth --prod --configuration=production ",
-    "build-components": "ng build ng-components --prod --configuration=production ",
+    "build-components": "ng build ng-components --configuration=production ",
     "postbuild-components": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
     "build-demo-app": "ng build demo-app --configuration=production ",
     "test": "ng test",
