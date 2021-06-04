@@ -1,7 +1,9 @@
 {
   "name": "indice-ng-lib",
-  "workspaces": ["./projects/*"],
-  "version": "0.0.6",
+  "workspaces": [
+    "./projects/*"
+  ],
+  "version": "0.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
