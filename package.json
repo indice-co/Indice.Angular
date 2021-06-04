@@ -4,7 +4,7 @@
     "ng-components",
     "ng-auth"
   ],
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
