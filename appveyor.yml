@@ -21,13 +21,15 @@ test_script:
   - npm --version
 #  - ng test --watch false --single-run true
 after_test:
-  - npm run build-components
-  - ng build ng-components --configuration=production -op %appveyor_build_folder%\package-dist
-#  - ng build --prod --environment=stage --build-optimizer=false --aot -op %appveyor_build_folder%\web-dist
+   - npm run build-components
+#  - ng build ng-components --configuration=production --output-path=%appveyor_build_folder%\package-dist
+#  - ts-node ./projects/ng-components/scripts/css-bundle.ts
  
 artifacts:
-- path: package-dist
-  name: pack
+- path: dist/ng-auth
+  name: ng-auth
+- path: dist/ng-components
+  name: ng-components
 
 #deploy:
 #- provider: Environment
