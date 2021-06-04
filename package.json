@@ -1,5 +1,9 @@
 {
   "name": "indice-ng-lib",
+  "workspaces": [
+    "./projects/ng-components",
+    "./projects/ng-auth"
+  ],
   "version": "0.0.5",
   "scripts": {
     "ng": "ng",
