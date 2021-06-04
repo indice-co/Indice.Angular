@@ -1,7 +1,6 @@
 ![alt text](icon/icon-64.png "Indice logo")
 # Indice.Angular 
-Indice extensions for Angular 2+  
-----------
+Indice extensions for Angular 2+ 
 
 # To export a new component
 1. Declare component in NgModule declarations
@@ -15,7 +14,7 @@ Indice extensions for Angular 2+
 3. `npm run build-components`
 4. Navigate to dist\ng-components.
 5. `npm publish`
-# ng-auth
+## ng-auth
 1. Navigate to projects\ng-components\package.json and change the version number.
 2. `npm install`
 3. `npm run build-auth`
