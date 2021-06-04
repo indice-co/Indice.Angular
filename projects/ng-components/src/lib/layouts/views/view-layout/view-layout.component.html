@@ -1,41 +1,36 @@
 <header *ngIf="header" class="view-layout-paddings">
 
   <div class="view-layout-title-container">
-    <div class="flex-1 justify-start items-center">
-      <i *ngIf="icon"
-         [class]="icon + ' text-xl text-white font-thin mr-1'"
+    <div class="view-layout-title-container-inner">
+      <i *ngIf="icon" [class]="icon + ' title-icon'"
          aria-hidden="true"></i>
-      <h1 [class]="busy ? 'animate-pulse inline text-xl text-gray-200' : 'inline text-xl text-white'">
+      <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">
         {{title}}
       </h1>
     </div>
-    <div *ngIf="metaItems && metaItems.length > 0"
-         class="flex flex-2 space-x-2">
+    <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
       <ng-container *ngFor="let meta of metaItems">
-        <div class="mt-2 flex items-center text-xs text-gray-500">
-          <i *ngIf="meta.icon"
-             [class]="meta.icon + ' text-sm text-gray-400 mr-1 sm:mr-2'"
-             aria-hidden="true"></i>
+        <div class="meta-container-inner">
+          <i *ngIf="meta.icon" [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
           {{meta.text}}
         </div>
       </ng-container>
     </div>
   </div>
 
-  <div class="hidden md:flex justify-between items-center">
-    <div class="flex-1 justify-start">
-      <i *ngIf="icon"
-         [class]="icon + ' text-2xl text-white font-thin mr-2 mt-1'"
+  <div class="view-layout-title-container-sm">
+    <div class="view-layout-title-container-sm-inner">
+      <i *ngIf="icon" [class]="icon + ' title-icon-sm'"
          aria-hidden="true"></i>
-      <h1 [class]="busy ? 'animate-pulse inline text-3xl text-gray-200' : 'inline text-3xl text-white'">
+      <h1 [class]="busy ? 'view-layout-title-busy-sm' : 'view-layout-title-sm'">
         {{title}}
       </h1>
       <div *ngIf="metaItems && metaItems.length > 0"
-           class="flex flex-wrap sm:flex-row space-x-2 sm:space-x-4">
+           class="meta-container-sm">
         <ng-container *ngFor="let meta of metaItems">
-          <div class="mt-2 flex items-center text-xs text-gray-500">
+          <div class="meta-container-sm-inner">
             <i *ngIf="meta.icon"
-               [class]="meta.icon + ' text-sm text-gray-400 mr-1 sm:mr-2'"
+               [class]="meta.icon + ' meta-icon-sm'"
                aria-hidden="true"></i>
             {{meta.text}}
           </div>
