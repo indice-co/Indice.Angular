@@ -1,8 +1,5 @@
 {
   "name": "indice-ng-lib",
-  "workspaces": [
-    "./projects/*"
-  ],
   "version": "0.0.7",
   "scripts": {
     "ng": "ng",
@@ -10,7 +7,6 @@
     "build": "ng build --prod",
     "prebuild-auth": "npm version patch" ,
     "build-auth": "ng build ng-auth --configuration=production ",
-    "prebuild-components": "npm version patch" ,
     "build-components": "ng build ng-components --configuration=production ",
     "postbuild-components": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
     "test": "ng test",

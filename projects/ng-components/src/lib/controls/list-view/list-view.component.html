@@ -31,24 +31,24 @@
   <!-- *ngSwitchCase="'table'" -->
   <ng-container *ngSwitchDefault>
     <lib-skeleton-loader *ngIf="!items" [count]="5" [type]="'table'"></lib-skeleton-loader>
-    <div class="flex flex-col border border-gray-200" *ngIf="items">
-      <div class="overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
+    <div class="list-view-container" *ngIf="items">
+      <div class="list-view-container-inner">
+        <table class="list-view-table">
+          <thead class="list-view-thead">
             <tr>
               <ng-container *ngIf="detailsSectionSupported">
-                <th class="px-2 py-3 w-6 text-left text-xs font-medium text-gray-500 uppercase"></th>
+                <th class="list-view-th-details"></th>
               </ng-container>
-              <th *ngFor="let col of columns" scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th *ngFor="let col of columns" scope="col" class="list-view-th">
                 {{col.title}}
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
+          <tbody class="list-view-tbody">
             <ng-container *ngFor="let item of items;let i=index">
-              <tr class="hover:bg-gray-50 hover:py-6">
+              <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
-                  <td class="px-2 py-2 whitespace-nowrap items-center">
+                  <td class="list-view-td-details">
                     <button (click)="toggleDetails(item)" type="button" class="inline-flex items-center p-1 shadow-sm text-white bg-gray-200 hover:bg-gray-300">
                       <!-- Heroicon name: solid/plus -->
                       <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -57,13 +57,13 @@
                     </button>
                   </td>
                 </ng-container>
-                <td *ngFor="let col of columns" class="px-6 py-4 whitespace-nowrap">
+                <td *ngFor="let col of columns" class="list-view-td">
                   <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                 </td>
               </tr>
               <ng-container *ngIf="detailsSectionSupported">
                 <tr *ngIf="item.detailsExpanded">
-                  <td [colSpan]="columns.length + 1" class="px-6 py-4 whitespace-nowrap">
+                  <td [colSpan]="columns.length + 1" class="list-view-td">
                     <ng-template [ngTemplateOutlet]="detailsTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                   </td>
                 </tr>

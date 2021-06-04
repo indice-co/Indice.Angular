@@ -1,0 +1,29 @@
+@layer components {
+  .pager-container {
+    @apply flex items-center justify-between mb-2 sm:mb-4;
+  }
+
+  .pager-container-inner {
+    @apply sm:flex-1 sm:flex sm:items-center sm:justify-between;
+  }
+
+  .pager-icon-button {
+    @apply inline-flex relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+  }
+
+  .pager-pages-container {
+    @apply relative z-0 inline-flex rounded-sm;
+  }
+
+  .pager-button {
+    @apply relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+  }
+
+  .pager-arrow-button-left {
+    @apply inline-flex relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+  }
+
+  .pager-arrow-button-right {
+    @apply inline-flex relative mr-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+  }
+}

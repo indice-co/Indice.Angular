@@ -16,7 +16,7 @@
   </div>
   <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
   <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
-    <div class="w-screen max-w-md">
+    <div class="side-pane-container-inner">
       <div class="side-pane">
         <router-outlet name="rightpane" (activate)="onSidePaneActivated($event)" (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
       </div>

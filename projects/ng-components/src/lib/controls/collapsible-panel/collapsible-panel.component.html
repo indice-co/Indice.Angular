@@ -1,13 +1,13 @@
-<div class="bg-white border border-gray-200 mb-2">
-  <div class="shadow-box">
-    <div class="relative border-b border-gray-200">
-      <button type="button" class="w-full px-8 py-6 text-left" (click)="visible = !visible">
-        <div class="flex items-center justify-between">
+<div class="collapsible-panel-container">
+  <div class="collapsible-panel-container-shadow">
+    <div class="collapsible-panel-container-inner">
+      <button type="button" class="collapsible-panel-button" (click)="visible = !visible">
+        <div class="collapsible-panel-button-content-container">
           <span>{{ title }} </span>
           <span class="ico-plus"></span>
         </div>
       </button>
-      <div class="relative overflow-hidden transition-all duration-700" *ngIf="visible">
+      <div class="collapsible-panel-content-container" *ngIf="visible">
         <ng-content></ng-content>
       </div>
     </div>

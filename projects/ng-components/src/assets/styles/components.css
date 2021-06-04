@@ -1,0 +1,84 @@
+@layer components {
+
+  .md-visible {
+    @apply hidden md:block;
+  }
+
+  /*menu left + body*/
+
+  .cards-deck-1 {
+    @apply mt-5 grid grid-cols-1 gap-0 sm:grid-cols-1 lg:grid-cols-1;
+  }
+
+  .cards-deck-2 {
+    @apply mt-5 grid grid-cols-1 gap-5 sm:grid-cols-1 lg:grid-cols-2;
+  }
+
+  .cards-deck-3 {
+    @apply mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .cards-deck-4 {
+    @apply mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .card {
+    @apply relative border border-gray-200 bg-white shadow-sm rounded-sm overflow-hidden;
+  }
+
+  .card-body {
+    @apply pt-2 px-4 pb-12 sm:pt-6 sm:px-6;
+  }
+
+  .card-img-top {
+    @apply object-cover w-full h-48;
+  }
+
+  .card-header {
+    @apply inset-x-0 bg-gray-50 px-4 py-4 sm:px-6 border-b border-gray-200;
+  }
+
+
+  .card-footer {
+    @apply absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6 border-t border-gray-200;
+  }
+
+
+  .btn-outline {
+    @apply focus:outline-none bg-transparent text-gray-700 text-sm hover:text-gray-800 px-2.5 py-1.5 border border-gray-500 hover:border-gray-600 rounded-sm;
+  }
+
+
+  .btn-view-header {
+    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-white transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-900;
+  }
+
+  .selected-view-indicator {
+    @apply absolute top-0 right-0 block ml-2 h-1.5 w-1.5 rounded-full ring-1 ring-white bg-blue-300;
+  }
+
+  .form-header {
+    @apply px-4 py-5 sm:px-6 bg-gray-50;
+  }
+
+  .form-title {
+    @apply text-lg leading-6 font-medium text-gray-900;
+  }
+
+  .form-subtitle {
+    @apply mt-1 max-w-2xl text-sm text-gray-500;
+  }
+
+  .field-label {
+    @apply block text-xs text-gray-700;
+  }
+
+  .field-info {
+    @apply mt-2 text-xs text-gray-300;
+  }
+
+  .form-actions {
+    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6;
+  }
+}
+

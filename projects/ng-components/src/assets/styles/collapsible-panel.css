@@ -1,0 +1,25 @@
+@layer components {
+  .collapsible-panel-container {
+    @apply bg-white border border-gray-200 mb-2;
+  }
+
+  .collapsible-panel-container-shadow {
+    @apply shadow-sm;
+  }
+
+  .collapsible-panel-container-inner {
+    @apply relative border-b border-gray-200;
+  }
+
+  .collapsible-panel-button {
+    @apply w-full px-8 py-6 text-left;
+  }
+
+  .collapsible-panel-button-content-container {
+    @apply flex items-center justify-between;
+  }
+
+  .collapsible-panel-content-container {
+    @apply relative overflow-hidden transition-all duration-700;
+  }
+}

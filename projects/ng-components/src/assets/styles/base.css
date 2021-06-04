@@ -1,0 +1,33 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  a {
+    @apply text-gray-600;
+  }
+
+  select {
+    @apply max-w-lg block focus:ring-gray-300 ring-opacity-25 focus:border-gray-300 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-200 rounded-sm;
+  }
+
+  input[type=text] {
+    @apply focus:ring-gray-500 focus:border-gray-300 ring-opacity-25 flex-1 block w-full rounded-none sm:text-sm border-gray-200;
+  }
+
+  textarea {
+    @apply shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-sm;
+  }
+}

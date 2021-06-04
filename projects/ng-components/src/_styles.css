@@ -1,1 +1,21 @@
-@import './assets/styles/component-styles.css';
+@import './assets/styles/base.css';
+@import './assets/styles/components.css';
+@import './assets/styles/nav-links.css';
+
+@import './assets/styles/shell-layout.css';
+@import './assets/styles/view-layout.css';
+@import './assets/styles/model-view-layout.css';
+
+@import './assets/styles/pager.css';
+@import './assets/styles/drop-down-menu.css';
+@import './assets/styles/collapsible-panel.css';
+@import './assets/styles/list-view.css';
+
+
+button:active {
+  transform: translateY(2px);
+}
+
+a:active {
+  transform: translateY(2px);
+}
