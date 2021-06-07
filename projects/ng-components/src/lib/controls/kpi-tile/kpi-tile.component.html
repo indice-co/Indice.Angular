@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body">
     <div class="kpi-tile-title-container">
-      <a href="#" class="kpi-tile-action" (click)="emitTileAction($event)">Τοποθεσιες</a>
+      <a href="#" class="kpi-tile-action" (click)="emitTileAction($event)">{{title || '-'}}</a>
     </div>
     <p class="kpi-tile-value">{{kpi || '-'}}</p>
     <div class="card-footer">
