@@ -26,6 +26,7 @@ import { AuthRenewComponent } from './pages/auth/auth-renew/auth-renew.component
 import { AddressPipe } from './pipes/address.pipe';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
+import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     ListDetailsSectionComponent,
     SkeletonLoaderComponent,
     CollapsiblePanelComponent,
+    KpiTileComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -73,6 +75,7 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    KpiTileComponent,
     SkeletonLoaderComponent,
     ShellLayoutComponent,
     ShellHeaderComponent,

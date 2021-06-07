@@ -6,6 +6,7 @@
 @import './assets/styles/view-layout.css';
 @import './assets/styles/model-view-layout.css';
 
+@import './assets/styles/cards.css';
 @import './assets/styles/pager.css';
 @import './assets/styles/drop-down-menu.css';
 @import './assets/styles/collapsible-panel.css';
