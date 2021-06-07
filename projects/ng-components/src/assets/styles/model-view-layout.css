@@ -20,7 +20,7 @@
   }
 
   .details-view-aside-header-container-inner {
-    @apply flex flex-col justify-stretch bg-gray-50 border-b;
+    @apply flex flex-col justify-self-stretch bg-gray-50 border-b;
   }
 
   .details-view-menu-container {
