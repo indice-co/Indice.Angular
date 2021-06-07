@@ -46,7 +46,7 @@ export class ListViewComponent implements OnChanges {
   @ContentChildren(ListColumnComponent, { read: ListColumnComponent })
   set cols(refs: QueryList<ListColumnComponent>) {
     this.columns = refs?.toArray();
-    if(this.columns && this.columns.length > 0) {
+    if (this.columns && this.columns.length > 0) {
       this.tableViewSupported = true;
     }
   }

@@ -33,7 +33,7 @@ export class PagerComponent implements OnInit, OnChanges {
   // tslint:disable-next-line:no-input-rename
   @Input('sort') sort: string | null = null;
   // tslint:disable-next-line:no-input-rename
-  @Input('sort-dir') sortdir: string | null = '-';
+  @Input('sort-dir') sortdir: string | null = 'desc';
   @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output() sortdirChanged: EventEmitter<string> = new EventEmitter<string>();
   public sortdirIcon = Icons.SortDesc;
@@ -92,12 +92,12 @@ export class PagerComponent implements OnInit, OnChanges {
 
   public toggleSortdir(): void {
     console.log('toggleSortdir');
-    let sortdir = '-'
-    if (this.sortdir == '-') {
-      sortdir = '+';
+    let sortdir = 'desc';
+    if (this.sortdir === 'desc') {
+      sortdir = 'asc';
       this.sortdirIcon = Icons.SortAsc;
     } else {
-      sortdir = '-';
+      sortdir = 'desc';
       this.sortdirIcon = Icons.SortDesc;
     }
     this.sortdirChanged.emit(sortdir);

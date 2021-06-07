@@ -17,6 +17,7 @@ export class KpiTileComponent implements OnInit {
   }
 
   public emitTileAction($event: any): void {
+    $event.stopPropagation();
     this.tileAction.emit($event);
   }
 
