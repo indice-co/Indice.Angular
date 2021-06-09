@@ -1,10 +1,11 @@
 <lib-view-layout [title]="title">
   <main class="details-view-container">
-    <div class="details-view-container-inner">
-      <aside class="details-view-aside">
-        <section aria-labelledby="menu" class="details-view-aside-header-section">
-          <div class="details-view-aside-header-container">
-            <div class="details-view-aside-header-container-inner">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+      <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-4 md:col-span-3">
+        <section aria-labelledby="menu"
+                 class="min-w-full">
+          <div class="bg-white shadow rounded-sm">
+            <div class="flex flex-col justify-stretch bg-gray-50 border-b">
               <ng-content></ng-content>
             </div>
             <!-- menu items -->
@@ -12,16 +13,21 @@
               <nav class="details-view-menu-nav">
                 <div class="details-view-menu-item">
                   <ng-container *ngFor="let section of primary">
-                    <a href="#" [routerLinkActive]="['view-nav-link-active']" [routerLink]="section.link" class="view-nav-link">
+                    <a href="#"
+                       [routerLinkActive]="['view-nav-link-active']"
+                       [routerLink]="section.link"
+                       class="view-nav-link">
                       {{section.text}}
                     </a>
                   </ng-container>
                 </div>
-
-                <div class="details-view-menu-item-far">
+                <div class="mt-auto pt-10 space-y-1">
                   <ng-container *ngFor="let section of secondary">
-                    <a href="#" [routerLinkActive]="['view-nav-link-active']" [routerLinkActiveOptions]="{ exact: true }"
-                       [routerLink]="section.link" class="view-nav-link">
+                    <a href="#"
+                       [routerLinkActive]="['view-nav-link-active']"
+                       [routerLinkActiveOptions]="{ exact: true }"
+                       [routerLink]="section.link"
+                       class="view-nav-link">
                       {{section.text}}
                     </a>
                   </ng-container>
@@ -31,10 +37,19 @@
           </div>
         </section>
       </aside>
-
-      <div class="details-view-container">
+      <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-8 md:col-span-9">
         <router-outlet></router-outlet>
       </div>
     </div>
   </main>
-
+  <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'"
+       aria-hidden="true"></div>
+  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
+    <div class="w-screen max-w-md">
+      <div class="side-pane">
+        <router-outlet name="inner-model-rightpane"
+                       (activate)="onSidePaneActivated($event)"
+                       (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
+      </div>
+    </div>
+  </div>

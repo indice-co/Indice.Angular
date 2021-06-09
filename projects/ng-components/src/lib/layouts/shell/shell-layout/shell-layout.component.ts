@@ -2,7 +2,7 @@ import { SHELL_CONFIG } from './../../../tokens';
 import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivationStart, NavigationStart, Router, ActivatedRoute } from '@angular/router';
+import { ActivationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
