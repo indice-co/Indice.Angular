@@ -16,9 +16,11 @@ export class KpiTileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public emitTileAction($event: any): void {
+  public emitTileAction($event: any): boolean {
+    $event.preventDefault();
     $event.stopPropagation();
     this.tileAction.emit($event);
+    return false;
   }
 
 }
