@@ -1,3 +1,4 @@
+import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -42,6 +43,7 @@ import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
     SkeletonLoaderComponent,
     CollapsiblePanelComponent,
     KpiTileComponent,
+    SidePaneComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -92,7 +94,8 @@ import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
     UnauthorizedComponent,
     AddressPipe,
     DurationFormatPipe,
-    CollapsiblePanelComponent
+    CollapsiblePanelComponent,
+    SidePaneComponent
   ]
 })
 export class IndiceComponentsModule { }

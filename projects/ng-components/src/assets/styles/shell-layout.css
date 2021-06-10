@@ -53,6 +53,18 @@
     @apply absolute inset-y-0 right-0 pl-10 max-w-full flex;
   }
 
+  .side-pane-container-25 {
+    @apply absolute inset-y-0 right-0 pl-10 w-1/4 flex;
+  }
+
+  .side-pane-container-50 {
+    @apply absolute inset-y-0 right-0 pl-10 w-2/4 flex;
+  }
+
+  .side-pane-container-75 {
+    @apply absolute inset-y-0 right-0 pl-10 w-3/4 flex;
+  }
+
   .side-pane-container-inner {
     @apply w-screen max-w-md;
   }
