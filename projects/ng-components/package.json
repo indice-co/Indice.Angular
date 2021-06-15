@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.1.68",
+  "version": "0.1.75",
   "description": "Indice common components for Angular v12",
   "repository": {
     "type": "git",
