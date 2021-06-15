@@ -92,7 +92,9 @@ export interface IAddress {
 
 export interface IShellConfig {
   showHeader: boolean;
+  customHeaderComponentPath?: string;
   showFooter: boolean;
+  customFooterComponentPath?: string;
   fluid: boolean;
 }
 

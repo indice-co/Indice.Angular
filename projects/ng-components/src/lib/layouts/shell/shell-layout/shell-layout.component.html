@@ -1,7 +1,10 @@
 <div class="shell-container">
   <div class="shell-header-container" *ngIf="activeConfig.showHeader">
     <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
-      <lib-shell-header></lib-shell-header>
+      <ng-container *ngIf="activeConfig.customHeaderComponentPath" >
+        <ng-template appHeaderHost></ng-template>
+      </ng-container>
+      <lib-shell-header *ngIf="!activeConfig.customHeaderComponentPath"></lib-shell-header>
     </div>
   </div>
   <main [class]="activeConfig.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
