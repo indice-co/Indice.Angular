@@ -1,17 +1,16 @@
 <lib-view-layout [title]="title">
-  <main class="details-view-container">
-    <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
-      <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-4 md:col-span-3">
-        <section aria-labelledby="menu"
-                 class="min-w-full">
-          <div class="bg-white shadow rounded-sm">
-            <div class="flex flex-col justify-stretch bg-gray-50 border-b">
+  <main class="model-view-container">
+    <div class="model-view-container-inner">
+      <aside class="model-view-aside">
+        <section aria-labelledby="menu" class="details-view-aside-header-section">
+          <div class="model-view-aside-header-container">
+            <div class="model-view-aside-header-container-inner">
               <ng-content></ng-content>
             </div>
             <!-- menu items -->
-            <div class="details-view-menu-container">
-              <nav class="details-view-menu-nav">
-                <div class="details-view-menu-item">
+            <div class="model-view-menu-container">
+              <nav class="model-view-menu-nav">
+                <div class="model-view-menu-item">
                   <ng-container *ngFor="let section of primary">
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
@@ -21,7 +20,7 @@
                     </a>
                   </ng-container>
                 </div>
-                <div class="mt-auto pt-10 space-y-1">
+                <div class="model-view-menu-item-far">
                   <ng-container *ngFor="let section of secondary">
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
@@ -37,7 +36,7 @@
           </div>
         </section>
       </aside>
-      <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-8 md:col-span-9">
+      <div class="model-view-details-container">
         <router-outlet></router-outlet>
       </div>
     </div>
