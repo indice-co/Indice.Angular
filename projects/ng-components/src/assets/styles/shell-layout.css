@@ -5,7 +5,7 @@
   }
 
   .shell-header-container {
-    @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-32;
+    @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-32 z-50;
   }
 
   .shell-header-container-inner {
@@ -112,7 +112,7 @@
   }
 
   .mobile-menu-container {
-    @apply border-b border-gray-700 md:hidden z-50;
+    @apply border-b h-full w-full sm:opacity-75 border-gray-700 md:hidden z-50;
   }
 
   .mobile-menu-link-container {
