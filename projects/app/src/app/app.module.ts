@@ -19,7 +19,7 @@ class ShellConfig implements IShellConfig {
   showFooter = true;
   showHeader = true;
   customHeaderComponent = HeaderComponent;
-  //customFooterComponent = HeaderComponent;
+  // customFooterComponent = HeaderComponent;
 }
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ class ShellConfig implements IShellConfig {
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     { provide: AUTH_SETTINGS, useFactory: () => environment.auth_settings },
-    { provide: SHELL_CONFIG, useFactory: () => new ShellConfig },
+    { provide: SHELL_CONFIG, useFactory: () => new ShellConfig() },
     { provide: APP_LINKS, useFactory: () => new AppLinks() },
   ],
   bootstrap: [AppComponent]
