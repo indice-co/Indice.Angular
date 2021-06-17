@@ -13,4 +13,18 @@
     </div>
   </div>
 </div>
+<lib-side-pane #formPane>
+  <router-outlet name="formRightPane" (activate)="formPane.onSidePaneActivated($event)" (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
+</lib-side-pane>
+
+<!-- <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
+  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
+    <div class="w-screen max-w-md">
+      <div class="side-pane">
+        <router-outlet name="formRightPane"
+            (activate)="onSidePaneActivated($event)"
+            (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
+      </div>
+  </div>
+</div> -->
 

@@ -28,6 +28,12 @@ export class ExternalNavLink extends NavLink {
   }
 }
 
+export class FragmentNavLink extends NavLink {
+  constructor(text: string, path: string, icon?: string) {
+    super(text, path, true, true, icon);
+  }
+}
+
 export class ViewAction {
   public type: string;
   public key: string | null;
@@ -90,9 +96,14 @@ export interface IAddress {
   postalCode?: string | null;
 }
 
+export interface IHeaderComponent {
+}
+
 export interface IShellConfig {
   showHeader: boolean;
+  customHeaderComponent?: any;
   showFooter: boolean;
+  customFooterComponent?: any;
   fluid: boolean;
 }
 

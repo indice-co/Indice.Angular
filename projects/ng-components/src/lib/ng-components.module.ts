@@ -1,3 +1,4 @@
+import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -26,11 +27,14 @@ import { AuthRenewComponent } from './pages/auth/auth-renew/auth-renew.component
 import { AddressPipe } from './pipes/address.pipe';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
+import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
+import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
 
 @NgModule({
   declarations: [
     // diectives
     ClickOutsideDirective,
+    DynamicComponentHostDirective,
     // controls
     DropDownMenuComponent,
     PagerComponent,
@@ -40,6 +44,8 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     ListDetailsSectionComponent,
     SkeletonLoaderComponent,
     CollapsiblePanelComponent,
+    KpiTileComponent,
+    SidePaneComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -73,6 +79,7 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    KpiTileComponent,
     SkeletonLoaderComponent,
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -89,7 +96,8 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
     UnauthorizedComponent,
     AddressPipe,
     DurationFormatPipe,
-    CollapsiblePanelComponent
+    CollapsiblePanelComponent,
+    SidePaneComponent
   ]
 })
 export class IndiceComponentsModule { }

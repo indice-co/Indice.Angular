@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { User } from 'oidc-client';
 import { NavigationStart, Router, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { IAppLinks } from '../../../types';
+import { IAppLinks, NavLink } from '../../../types';
 import { AuthService } from '@indice/ng-auth';
 import { APP_LINKS } from '../../../tokens';
 
@@ -12,6 +12,12 @@ import { APP_LINKS } from '../../../tokens';
   templateUrl: './shell-header.component.html'
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
+  // tslint:disable-next-line:no-input-rename
+  @Input('section-links') sectionLinksPath = 'main';
+  // tslint:disable-next-line:no-input-rename
+  @Input('profile-menu') profileMenuVisible = true;
+  @Input() border = true;
+  public sectionLinks: NavLink[] = [];
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
   private routerSub$: any;
@@ -22,7 +28,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(AuthService) private authService: AuthService,
               @Inject(Router) private router: Router,
-              @Inject(APP_LINKS) public links: IAppLinks) {
+              @Inject(APP_LINKS) public links: any) {
   }
 
   ngOnDestroy(): void {
@@ -39,6 +45,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.sectionLinks = this.links[this.sectionLinksPath] as NavLink[];
     this.routerSub$ = this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(event => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
@@ -67,4 +74,9 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public onClickOutside($event: any) {
     this.userMenuExpanded = false;
   }
+
+  public signin(): void {
+    this.authService.startAuthentication();
+  }
 }
+

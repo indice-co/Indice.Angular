@@ -14,6 +14,7 @@ export * from './lib/controls/list-view/list-tile.component';
 export * from './lib/controls/list-view/list-details-section.component';
 export * from './lib/controls/skeleton-loader/skeleton-loader.component';
 export * from './lib/controls/collapsible-panel/collapsible-panel.component';
+export * from './lib/controls/kpi-tile/kpi-tile.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';

@@ -1,35 +1,26 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="flex items-center justify-between mb-2 sm:mb-4">
-  <!--<div class="flex-1 px-4 flex justify-between sm:hidden">
-    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-      Previous
-    </a>
-    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-      Next
-    </a>
-  </div>-->
-  <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div class="pager-container">
+  <div class="pager-container-inner">
     <div class="inline-flex" *ngIf="sortOptions && sortOptions.length > 0">
       <lib-drop-down-menu [options]="sortOptions" [selected]="sort" (selectedChanged)="sortOptionChanged($event)"></lib-drop-down-menu>
-      <button (click)="toggleSortdir()" class="inline-flex relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+      <button (click)="toggleSortdir()" class="pager-icon-button">
         <span class="sr-only">sort direction</span>
         <span class="inline-block relative">
           <i [class]="sortdirIcon"></i>
         </span>
       </button>
     </div>
-    <div class="relative z-0 inline-flex rounded-sm">
+    <div class="pager-pages-container">
       <lib-drop-down-menu [options]="pageSizeOptions" [selected]="pageSize" (selectedChanged)="pageSizeOptionChanged($event)"></lib-drop-down-menu>
       <div class="mx-2">
         <button [disabled]="!canPreviousPage"  (click)="previousPage()"
-                class="relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                class="pager-arrow-button-left">
           <span class="sr-only">Previous</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
           </svg>
         </button>
         <button [disabled]="!canNextPage"  (click)="nextPage()"
-                class="relative mr-2 inline-flex items-center px-2 py-2 rounded-r-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                class="pager-arrow-button-right">
           <span class="sr-only">Next</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />

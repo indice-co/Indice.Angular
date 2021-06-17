@@ -1,0 +1,41 @@
+@layer components {
+  .list-view-container {
+    @apply flex flex-col border border-gray-200;
+  }
+
+  .list-view-container-inner {
+    @apply overflow-hidden;
+  }
+
+  .list-view-table {
+    @apply min-w-full divide-y divide-gray-200;
+  }
+
+  .list-view-thead {
+    @apply bg-gray-50;
+  }
+
+  .list-view-th-details {
+    @apply px-2 py-3 w-6 text-left text-xs font-medium text-gray-500 uppercase;
+  }
+
+  .list-view-th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+
+  .list-view-tbody {
+    @apply bg-white divide-y divide-gray-200;
+  }
+
+  .list-view-tr {
+    @apply hover:bg-gray-50;
+  }
+
+  .list-view-td-details {
+    @apply px-2 py-2 whitespace-nowrap items-center;
+  }
+
+  .list-view-td {
+    @apply px-6 py-4 whitespace-nowrap;
+  }
+}
