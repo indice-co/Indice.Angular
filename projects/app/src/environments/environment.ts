@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_base_url: '',
+  api_docs: '',
+  auth_settings : {
+    authority: 'http://localhost:8080',
+    client_id: 'sample-app',
+    filterProtocolClaims: false,
+    loadUserInfo: true,
+    post_logout_redirect_uri: 'http://localhost:4200',
+    redirect_uri: 'http://localhost:4200/auth-callback',
+    response_type: 'code',
+    scope: 'dummy',
+    //silent_redirect_uri: 'http://localhost:4200/auth-renew'
+  }
 };
 
 /*
