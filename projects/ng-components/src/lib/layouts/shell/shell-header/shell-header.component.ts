@@ -73,17 +73,19 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.userMenuExpanded = false;
   }
 
-  public signin(): void {
+  public signin(event: any | null | undefined): void {
+    if (event) {
+      event.preventDefault();
+    }
     this.authService.startAuthentication();
   }
 
-    // tslint:disable-next-line:typedef
-    private setCurrentUser(user: any) {
-      this.user = user;
-      if (this.user && this.user.profile) {
-        this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`;
-        console.log('load user', this.avatarName);
-      }
+  private setCurrentUser(user: any): void {
+    this.user = user;
+    if (this.user && this.user.profile) {
+      this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`;
+      console.log('load user', this.avatarName);
     }
+  }
 }
 
