@@ -10,6 +10,7 @@ import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, Indi
 import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '@indice/ng-components';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { HeaderComponent } from './layout/header/header.component';
 
 import { AppLinks } from './app.links';
 
@@ -17,6 +18,8 @@ class ShellConfig implements IShellConfig {
   fluid = false;
   showFooter = true;
   showHeader = true;
+  customHeaderComponent = HeaderComponent;
+  //customFooterComponent = HeaderComponent;
 }
 @NgModule({
   declarations: [
