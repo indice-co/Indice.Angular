@@ -1,5 +1,5 @@
 const pathLib = require('path');
-const  scssBundler = require('scss-bundle');
+const scssBundler = require('scss-bundle');
 const fs = require('fs-extra');
 
 

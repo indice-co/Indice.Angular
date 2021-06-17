@@ -28,11 +28,13 @@ import { AddressPipe } from './pipes/address.pipe';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
+import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
 
 @NgModule({
   declarations: [
     // diectives
     ClickOutsideDirective,
+    DynamicComponentHostDirective,
     // controls
     DropDownMenuComponent,
     PagerComponent,
