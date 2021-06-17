@@ -20,3 +20,10 @@ Indice extensions for Angular 2+
 3. `npm run build-auth`
 4. Navigate to dist\ng-auth.
 5. `npm publish`
+
+## Using sample project to develop
+### Getting Started
+1. `npm install` on repo root folder
+2. Open new terminal and run `npm run start-mock-server`
+3. Open new terminal and run `npm run start-app`
+4. Voila! Changes on libraries reflect on sample project
