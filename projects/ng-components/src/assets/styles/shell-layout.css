@@ -63,7 +63,7 @@
   }
 
   .shell-header-paddings {
-    @apply sm:px-6 lg:px-8;
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .shell-header-border {
@@ -71,11 +71,19 @@
   }
 
   .shell-header-menu-container {
-    @apply flex items-center justify-between h-16 px-4 sm:px-0;
+    @apply flex items-center justify-between h-16;
+  }
+
+  .shell-header-md-visible {
+    @apply hidden sm:ml-6 sm:block;
   }
 
   .shell-header-link-container {
-    @apply ml-10 flex items-baseline space-x-4;
+    @apply hidden sm:ml-6 sm:block ml-10 flex-grow justify-start flex items-center space-x-4;
+  }
+
+  .shell-header-links-no-grow-container {
+    @apply flex flex-grow-0 flex-shrink-0 items-center;
   }
 
   .shell-header-menu-rounded-button {
@@ -88,8 +96,13 @@
 
   .shell-header-profile-dropdown-button {
     @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
-    focus:ring-offset-blue-800 focus:ring-blue-400;
+    focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
   }
+
+  .shell-header-profile-dropdown {
+    @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+  }
+
 
   .shell-header-avatar {
     @apply inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800;
@@ -99,9 +112,6 @@
     @apply text-sm font-medium leading-none text-blue-300;
   }
 
-  .shell-header-profile-dropdown {
-    @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
-  }
 
   .mobile-menu-button-container {
     @apply -mr-2 flex md:hidden;
