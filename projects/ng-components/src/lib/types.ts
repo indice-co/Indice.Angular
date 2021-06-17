@@ -96,9 +96,6 @@ export interface IAddress {
   postalCode?: string | null;
 }
 
-export interface IHeaderComponent {
-}
-
 export interface IShellConfig {
   showHeader: boolean;
   customHeaderComponent?: any;
