@@ -1,22 +1,21 @@
 import { SHELL_CONFIG } from './../../../tokens';
 import { IShellConfig, DefaultShellConfig } from './../../../types';
-import { Component, OnInit, OnDestroy, Inject, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, ViewContainerRef, QueryList } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { ComponentLoaderService } from '../../../services/component-loader.service';
-import { HeaderHostDirective } from '../../../directives/header-host.directive';
-import { exception } from 'console';
+import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'lib-shell-layout',
   templateUrl: './shell-layout.component.html'
 })
-export class ShellLayoutComponent implements OnInit, OnDestroy {
-  @ViewChild(HeaderHostDirective, { static: true })
-  headerHost: HeaderHostDirective | null = null;
+export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChildren(DynamicComponentHostDirective)
+  dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
   public showRightPaneSM = false;
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
@@ -47,12 +46,13 @@ export class ShellLayoutComponent implements OnInit, OnDestroy {
           }
         }
       });
-    let viewContainerRef;
-    if (this.headerHost) {
-      viewContainerRef = this.headerHost.viewContainerRef;
-    }
-    if (viewContainerRef) {
-      this.loadComponent(viewContainerRef).subscribe();
+
+  }
+
+  ngAfterViewInit(): void {
+    if(this.dynamicComponentHosts && this.dynamicComponentHosts.length > 0){
+      this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Header'));
+      this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Footer'));
     }
   }
 
@@ -76,21 +76,12 @@ export class ShellLayoutComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  private loadComponent(vcr: ViewContainerRef) {
-    vcr.clear();
-    return this.componentLoaderService.forChild(vcr, {
-      loadChildren: this.importComponent()
-    });
-  }
-
-  private importComponent() {
-    if (this.activeConfig.customHeaderComponentPath != undefined) {
-      let importPath: string = this.activeConfig.customHeaderComponentPath;
-      return () =>
-        import(importPath).then(
-          m => m.HeaderComponent
-        );
+  private loadCustomComponent(host: DynamicComponentHostDirective | undefined){
+    if(host){
+      let viewContainerRef = host.viewContainerRef;
+      if (viewContainerRef) {
+        this.componentLoaderService.loadComponent(viewContainerRef, this.activeConfig.customHeaderComponent);
+      }
     }
-    throw exception("Custom header component path not found");
   }
 }

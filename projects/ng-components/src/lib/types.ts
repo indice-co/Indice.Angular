@@ -96,11 +96,14 @@ export interface IAddress {
   postalCode?: string | null;
 }
 
+export interface IHeaderComponent {
+}
+
 export interface IShellConfig {
   showHeader: boolean;
-  customHeaderComponentPath?: string;
+  customHeaderComponent?: any;
   showFooter: boolean;
-  customFooterComponentPath?: string;
+  customFooterComponent?: any;
   fluid: boolean;
 }
 
