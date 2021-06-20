@@ -7,15 +7,15 @@ export const environment = {
   api_base_url: '',
   api_docs: '',
   auth_settings : {
-    authority: 'http://localhost:8080',
-    client_id: 'sample-app',
-    filterProtocolClaims: false,
+    authority: 'https://indice-idsrv.azurewebsites.net',
+    client_id: 'indice-ng-sample-app',
+    filterProtocolClaims: true,
     loadUserInfo: true,
-    post_logout_redirect_uri: 'http://localhost:4200',
-    redirect_uri: 'http://localhost:4200/auth-callback',
+    post_logout_redirect_uri: 'http://locahost:4200/logged-out',
+    redirect_uri: 'http://locahost:4200/auth-callback',
     response_type: 'code',
-    scope: 'dummy',
-    //silent_redirect_uri: 'http://localhost:4200/auth-renew'
+    scope: 'openid profile email role offline_access identity identity:clients identity:users',
+    silent_redirect_uri : 'http://locahost:4200/auth-renew'
   }
 };
 
