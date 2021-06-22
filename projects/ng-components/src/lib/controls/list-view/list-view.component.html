@@ -49,11 +49,9 @@
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
                   <td class="list-view-td-details">
-                    <button (click)="toggleDetails(item)" type="button" class="inline-flex items-center p-1 shadow-sm text-white bg-gray-200 hover:bg-gray-300">
+                    <button (click)="toggleDetails(item)" type="button" class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->
-                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                      </svg>
+                      <i [class]="item.detailsExpanded ? collapseIcon : expandIcon"></i>
                     </button>
                   </td>
                 </ng-container>

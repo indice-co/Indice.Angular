@@ -38,4 +38,11 @@
   .list-view-td {
     @apply px-6 py-4 whitespace-nowrap;
   }
+
+  .details-button {
+    @apply inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md bg-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-200;
+  }
+
+  .expand-collapse-button {
+    @apply inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md bg-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-gray-200;  }
 }
