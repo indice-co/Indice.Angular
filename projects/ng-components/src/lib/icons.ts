@@ -24,4 +24,6 @@ export class Icons {
 
   public static SortAsc = 'ms-Icon ms-Icon--Ascending';
   public static SortDesc = 'ms-Icon ms-Icon--Descending';
+  
+  public static Details = ' ms-Icon ms-Icon--AccountActivity'
 }
