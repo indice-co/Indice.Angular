@@ -3,12 +3,15 @@ import { MenuOption } from '../../types';
 import { ListTileComponent } from './list-tile.component';
 import { ListColumnComponent } from './list-column.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
+import { Icons } from '../../icons';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
+  public expandIcon = Icons.Expand;
+  public collapseIcon = Icons.Collapse;
   // tslint:disable-next-line:no-input-rename
   @Input('show-pager') showPager = true;
   // DATA SOURCE!

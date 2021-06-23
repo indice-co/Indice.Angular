@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RouterViewAction, ViewAction } from '../../../types';
 
 @Component({
   selector: 'lib-form-layout',
@@ -6,8 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FormLayoutComponent implements OnInit {
   @Input() title: string | null = null;
+  @Input() actions: ViewAction[] | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('sub-title') subTitle: string | null = null;
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   public showRightPaneSM = false;
   constructor() { }
 
@@ -15,13 +19,15 @@ export class FormLayoutComponent implements OnInit {
   }
 
   public onSidePaneActivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = true;
   }
 
   public onSidePaneDeactivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = false;
+  }
+
+  public emitActionClick(action: ViewAction): void {
+    this.onAction.emit(action);
   }
 
 
