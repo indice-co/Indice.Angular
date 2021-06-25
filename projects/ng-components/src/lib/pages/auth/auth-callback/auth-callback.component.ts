@@ -1,6 +1,6 @@
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@indice/ng-auth';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthService } from '@indice/ng-auth';
 export class AuthCallbackComponent implements OnInit {
   public status = 'παρακαλώ περιμένετε...';
 
-  constructor(@Inject(AuthService) private authService: AuthService, private router: Router) { }
+  constructor(@Inject(AuthService) private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const self = this;
@@ -22,16 +22,24 @@ export class AuthCallbackComponent implements OnInit {
           self.router.navigate(['/unauthorized']);
           return;
         }
+        let navigationUrl = '/dashboard';
+        if (this.route.data) {
+          this.route.data.subscribe(data => {
+            if(data['navigationUrl'] != undefined){
+              navigationUrl = data['navigationUrl'];
+            }
+          })
+        }
 
         // did you want to go somewhere?
         const user = self.authService.currentUser();
         if (user && user.state && user.state.url) {
           // TODO: should parse this at some point :)
           console.log('AuthCallbackComponent user state', user.state);
-          self.router.navigateByUrl('/dashboard');
+          self.router.navigateByUrl(navigationUrl);
           return;
         } else {
-          self.router.navigateByUrl('/dashboard');
+          self.router.navigateByUrl(navigationUrl);
           return;
         }
 
