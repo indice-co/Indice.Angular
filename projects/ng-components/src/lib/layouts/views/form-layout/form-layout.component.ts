@@ -30,5 +30,13 @@ export class FormLayoutComponent implements OnInit {
     this.onAction.emit(action);
   }
 
+  // public routerLinkActionClick(action: RouterViewAction | any): void {
+  //   console.log('routerLinkActionClick', action);
+  //   if (action.outlet) {
+  //     this.router$.navigate(['', { outlets: { rightpane: action.link } }]);
+  //   } else {
+  //     this.router$.navigate([action.link]);
+  //   }
+  // }
 
 }
