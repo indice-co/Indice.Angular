@@ -1,3 +1,5 @@
+import { TenantHeaderInterceptor } from './tenant/tenant-header.interceptor';
+import { TenantService } from './tenant/tenant-service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthHttpInterceptor } from './auth-http-interceptor';
@@ -13,7 +15,7 @@ export class IndiceAuthModule {
   static forRoot() {
     return {
       ngModule: IndiceAuthModule,
-      providers: [AuthService, AuthGuardService, AuthHttpInterceptor]
+      providers: [AuthService, AuthGuardService, AuthHttpInterceptor, TenantService, TenantHeaderInterceptor]
     };
  }
 }

@@ -7,7 +7,6 @@
     "start-app": "ng serve app",
     "start-mock-server": "node mock-server.js",
     "build": "ng build --prod",
-    "prebuild-auth": "npm version patch",
     "build-auth": "ng build ng-auth --configuration=production ",
     "build-components": "ng build ng-components --configuration=production ",
     "postbuild-components": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
