@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '@indice/ng-components';
+import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '../../../../dist/ng-auth';
+import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '../../../../dist/ng-components';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { HeaderComponent } from './layout/header/header.component';

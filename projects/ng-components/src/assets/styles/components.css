@@ -21,7 +21,7 @@
   }
 
   .form-header {
-    @apply px-4 py-5 sm:px-6 bg-gray-50;
+    @apply px-4 py-5 sm:px-6 bg-gray-50 sm:flex sm:items-center sm:justify-between;
   }
 
   .form-title {

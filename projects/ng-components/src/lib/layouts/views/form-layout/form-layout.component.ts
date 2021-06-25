@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RouterViewAction, ViewAction } from '../../../types';
 
 @Component({
@@ -13,7 +14,8 @@ export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   public showRightPaneSM = false;
-  constructor() { }
+
+  constructor(private router$: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,5 +32,13 @@ export class FormLayoutComponent implements OnInit {
     this.onAction.emit(action);
   }
 
+  public routerLinkActionClick(action: RouterViewAction | any): void {
+    console.log('routerLinkActionClick', action);
+    if (action.outlet) {
+      this.router$.navigate(['', { outlets: { rightpane: action.link } }]);
+    } else {
+      this.router$.navigate([action.link]);
+    }
+  }
 
 }
