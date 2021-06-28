@@ -109,3 +109,17 @@ export class DefaultShellConfig implements IShellConfig {
   showFooter = true;
   fluid = false;
 }
+
+export enum SCREEN_SIZE {
+  XS,
+  SM,
+  MD,
+  LG,
+  XL
+}
+
+export interface IScreenSize {
+  id: SCREEN_SIZE;
+  name: string;
+  css: string;
+}

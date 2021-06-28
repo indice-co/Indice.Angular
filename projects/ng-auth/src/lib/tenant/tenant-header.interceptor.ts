@@ -10,7 +10,6 @@ export class TenantHeaderInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(req);
         let clonedRequest = req;
         // First check if request is going to our api or an external
         if (req.urlWithParams.toLowerCase().startsWith(this.tenantPrefixUrl.toLowerCase())) {

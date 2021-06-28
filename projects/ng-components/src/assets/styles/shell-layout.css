@@ -34,34 +34,6 @@
   }
 
 
-  .side-pane-overlay {
-    @apply absolute bg-gray-500 bg-opacity-25 inset-0;
-  }
-
-  .side-pane-container {
-    @apply absolute inset-y-0 right-0 pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-25 {
-    @apply absolute inset-y-0 right-0 pl-10 w-1/4 flex;
-  }
-
-  .side-pane-container-50 {
-    @apply absolute inset-y-0 right-0 pl-10 w-2/4 flex;
-  }
-
-  .side-pane-container-75 {
-    @apply absolute inset-y-0 right-0 pl-10 w-3/4 flex;
-  }
-
-  .side-pane-container-inner {
-    @apply w-screen max-w-md;
-  }
-
-  .side-pane {
-    @apply min-h-screen min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
-  }
-
   .shell-header-paddings {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
   }

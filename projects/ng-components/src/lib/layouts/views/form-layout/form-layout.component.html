@@ -1,12 +1,14 @@
-<div class="bg-white shadow-sm border border-gray-200 rounded-sm">
+<div class="form-layout-container">
   <div class="form-header">
-    <h3 class="form-title">
-      {{title}}
-    </h3>
-    <p class="form-subtitle">
-      {{subTitle}}
-    </p>
-    <div class="flex items-center justify-end">
+    <div class="form-header-inner">
+      <h3 class="form-title">
+        {{ title }}
+      </h3>
+      <p class="form-subtitle">
+        {{ subTitle }}
+      </p>
+    </div>
+    <div class="form-header-actions">
       <ng-container *ngFor="let action of actions"
                     [ngSwitch]="action.type">
         <ng-container *ngSwitchCase="'router-link'">
@@ -17,8 +19,6 @@
             <i [class]="action.icon"></i>
           </button>
         </ng-container>
-
-        <!---->
         <ng-container *ngSwitchDefault>
           <button type="button"
                   class="ml-1 btn-view-header"
@@ -29,8 +29,8 @@
       </ng-container>
     </div>
   </div>
-  <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-    <div class="flex flex-col pt-4">
+  <div class="form-content-container">
+    <div class="form-content-container-inner">
       <ng-content></ng-content>
     </div>
   </div>
