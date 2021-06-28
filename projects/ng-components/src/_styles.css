@@ -5,7 +5,9 @@
 @import './assets/styles/shell-layout.css';
 @import './assets/styles/view-layout.css';
 @import './assets/styles/model-view-layout.css';
+@import './assets/styles/form-layout.css';
 
+@import './assets/styles/side-pane.css';
 @import './assets/styles/cards.css';
 @import './assets/styles/pager.css';
 @import './assets/styles/drop-down-menu.css';

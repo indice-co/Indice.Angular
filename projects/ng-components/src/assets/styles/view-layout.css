@@ -1,17 +1,12 @@
 @layer components {
 
   .view-container {
-    @apply sm:px-0;
-  }
-
-  .view-container {
-    @apply mt-2 flex flex-col;
+    @apply mt-8 sm:mt-5 flex flex-col;
   }
 
   .view-container-fluid {
     @apply sm:px-0;
   }
-
 
   .view-layout-paddings {
     @apply py-6 sm:py-10;

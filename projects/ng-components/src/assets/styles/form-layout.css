@@ -1,0 +1,46 @@
+@layer components {
+  .form-layout-container {
+    @apply bg-white shadow-sm border border-gray-200 rounded-sm;
+  }
+
+  .form-header {
+    @apply px-4 py-5 sm:px-6 bg-gray-50 sm:flex sm:items-center sm:justify-between;
+  }
+
+  .form-header-inner {
+    @apply flex-1 min-w-0;
+  }
+
+  .form-title {
+    @apply text-lg leading-6 font-medium text-gray-900;
+  }
+
+  .form-subtitle {
+    @apply mt-1 max-w-2xl text-sm text-gray-500;
+  }
+
+  .form-header-actions {
+    @apply mt-4 flex md:mt-0 md:ml-4;
+  }
+
+  .form-content-container {
+    @apply border-t border-gray-200 px-4 py-5 sm:p-0;
+  }
+
+  .form-content-container-inner {
+    @apply flex flex-col pt-4;
+  }
+
+
+  .field-label {
+    @apply block text-xs text-gray-700;
+  }
+
+  .field-info {
+    @apply mt-2 text-xs text-gray-300;
+  }
+
+  .form-actions {
+    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6;
+  }
+}
