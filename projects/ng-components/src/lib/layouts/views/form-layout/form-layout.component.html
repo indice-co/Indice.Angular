@@ -28,10 +28,10 @@
         </ng-container>
       </ng-container>
     </div>
-    <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-      <div class="flex flex-col pt-4">
-        <ng-content></ng-content>
-      </div>
+  </div>
+  <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+    <div class="flex flex-col pt-4">
+      <ng-content></ng-content>
     </div>
   </div>
   <lib-side-pane #formPane>
@@ -39,14 +39,4 @@
                    (activate)="formPane.onSidePaneActivated($event)"
                    (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
   </lib-side-pane>
-
-  <!-- <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
-  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
-    <div class="w-screen max-w-md">
-      <div class="side-pane">
-        <router-outlet name="formRightPane"
-            (activate)="onSidePaneActivated($event)"
-            (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
-      </div>
-  </div>
-</div> -->
+</div>

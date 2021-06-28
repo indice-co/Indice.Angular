@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterViewAction, ViewAction } from '../../../types';
 
 @Component({
@@ -35,7 +35,8 @@ export class FormLayoutComponent implements OnInit {
   public routerLinkActionClick(action: RouterViewAction | any): void {
     console.log('routerLinkActionClick', action);
     if (action.outlet) {
-      this.router$.navigate(['', { outlets: { rightpane: action.link } }]);
+      const actionOutlet: string = action.outlet;
+      this.router$.navigate([{ outlets: { actionOutlet: action.link } }]);
     } else {
       this.router$.navigate([action.link]);
     }
