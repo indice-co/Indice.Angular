@@ -35,7 +35,7 @@
     </div>
     <div class="flex flex-wrap -mx-1">
       <div *ngFor="let blankday of blankDays" style="width: 14.28%" class="text-center border p-1 border-transparent text-sm opacity-50">{{blankday}}1</div>
-      <div *ngFor="let date of calendarDays" style="width: 14.28%" class="px-1 mb-1">
+      <div *ngFor="let date of calendarDates" style="width: 14.28%" class="px-1 mb-1">
         <div (click)="selectDateValue(date)" class="cursor-pointer text-center hover:text-white text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
           [class]="date.selected  ? 'bg-gray-700 text-white' : 'text-gray-800 hover:bg-gray-800'">{{date.day}}</div>
       </div>

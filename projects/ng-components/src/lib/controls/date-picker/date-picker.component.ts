@@ -32,7 +32,7 @@ export class DatepickerComponent implements OnInit {
 
   public month = -1;
   public year = -1;
-  public calendarDays: any[] = [];
+  public calendarDates: any[] = [];
   public blankDays: any[] = [];
 
   public compareDates(date1: Date | undefined | null, day: number): boolean {
@@ -80,16 +80,15 @@ export class DatepickerComponent implements OnInit {
       daysArray.push({day: i, today: this.compareDates(today, i), selected: this.compareDates(this.value, i)});
     }
     this.blankDays = blankdaysArray;
-    this.calendarDays = daysArray;
+    this.calendarDates = daysArray;
   }
 
   private updateDays(): void {
     const today = new Date();
-    this.calendarDays.forEach(d => {
+    this.calendarDates.forEach(d => {
       d.today = this.compareDates(today, d);
       d.selected = this.compareDates(this.value, d);;
     });
-    console.log('udpate days', this.calendarDays);
   }
 
   constructor() { }

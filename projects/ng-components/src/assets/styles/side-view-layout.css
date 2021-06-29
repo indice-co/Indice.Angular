@@ -1,0 +1,37 @@
+@layer components {
+  .side-view-layout-container {
+    @apply w-full h-full overflow-y-hidden;
+  }
+
+  .side-view-layout-container-inner {
+    @apply bg-gray-900 px-4 py-5 border-b border-gray-200 sm:px-6;
+  }
+
+  .side-view-layout-header-container {
+    @apply -ml-4 -mt-2 flex text-white items-center justify-between flex-wrap sm:flex-nowrap;
+  }
+
+  .side-view-layout-header-margins {
+    @apply ml-4 mt-2;
+  }
+
+  .side-view-layout-header-title {
+    @apply text-lg leading-6 font-medium;
+  }
+
+  .side-view-layout-header-close-button-container {
+    @apply ml-4 mt-2 flex-shrink-0;
+  }
+
+  .side-view-layout-header-close-button {
+    @apply rounded-sm text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+  }
+
+  .side-view-layout-header-close-button-icon {
+    @apply h-6 w-6;
+  }
+
+  .side-view-layout-content-container {
+    @apply relative flex-1 bg-white;
+  }
+}
