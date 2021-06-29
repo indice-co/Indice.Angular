@@ -1,3 +1,4 @@
+import { DatepickerComponent } from './controls/date-picker/date-picker.component';
 import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
 import { CommonModule } from '@angular/common';
@@ -46,6 +47,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     CollapsiblePanelComponent,
     KpiTileComponent,
     SidePaneComponent,
+    DatepickerComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -97,7 +99,8 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     AddressPipe,
     DurationFormatPipe,
     CollapsiblePanelComponent,
-    SidePaneComponent
+    SidePaneComponent,
+    DatepickerComponent
   ]
 })
 export class IndiceComponentsModule { }
