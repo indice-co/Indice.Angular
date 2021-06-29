@@ -9,14 +9,20 @@
       </p>
     </div>
     <div class="form-header-actions">
-      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
+      <ng-container *ngFor="let action of actions"
+                    [ngSwitch]="action.type">
         <ng-container *ngSwitchCase="'router-link'">
-          <button type="button" href="#" class="ml-1 btn-view-header" (click)="routerLinkActionClick(action)">
+          <button type="button"
+                  href="#"
+                  class="ml-1 btn-view-header"
+                  (click)="routerLinkActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
         </ng-container>
         <ng-container *ngSwitchDefault>
-          <button type="button" class="ml-1 btn-view-header" (click)="emitActionClick(action)">
+          <button type="button"
+                  class="ml-1 btn-view-header"
+                  (click)="emitActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
         </ng-container>
@@ -28,7 +34,9 @@
       <ng-content></ng-content>
     </div>
   </div>
+  <lib-side-pane #formPane>
+    <router-outlet name="formRightPane"
+                   (activate)="formPane.onSidePaneActivated($event)"
+                   (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
+  </lib-side-pane>
 </div>
-<lib-side-pane #formPane>
-  <router-outlet name="formRightPane" (activate)="formPane.onSidePaneActivated($event)" (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
-</lib-side-pane>
