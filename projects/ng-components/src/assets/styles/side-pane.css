@@ -44,6 +44,6 @@
   }
 
   .side-pane {
-    @apply min-h-screen min-w-screen flex flex-col bg-white shadow-xl overflow-y-hidden;
+    @apply h-screen w-screen flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
 }
