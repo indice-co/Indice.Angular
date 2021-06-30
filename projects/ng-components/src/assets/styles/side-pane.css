@@ -22,7 +22,6 @@
   }
 
 
-
   .side-pane-container-fixed {
     @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
   }
@@ -43,7 +42,8 @@
     @apply w-screen max-w-md overflow-y-auto;
   }
 
+
   .side-pane {
-    @apply h-screen w-screen flex flex-col bg-white shadow-xl overflow-y-hidden;
+    @apply flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
 }
