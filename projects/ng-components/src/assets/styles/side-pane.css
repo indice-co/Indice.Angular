@@ -42,7 +42,6 @@
     @apply w-screen max-w-md overflow-y-auto;
   }
 
-
   .side-pane {
     @apply flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
