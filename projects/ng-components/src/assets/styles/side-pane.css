@@ -2,7 +2,7 @@
 
 
   .side-pane-overlay {
-    @apply absolute h-screen w-screen flex bg-gray-500 bg-opacity-25 inset-0;
+    @apply absolute bg-gray-500 bg-opacity-25 inset-0;
   }
 
   .side-pane-container {
@@ -39,10 +39,10 @@
   }
 
   .side-pane-container-inner {
-    @apply w-screen max-w-md overflow-y-auto;
+    @apply w-screen max-w-md;
   }
 
   .side-pane {
-    @apply flex flex-col bg-white shadow-xl overflow-y-hidden;
+    @apply min-h-screen min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
 }
