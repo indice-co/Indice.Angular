@@ -10,6 +10,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
   @Input() options: MenuOption[] = [];
   // tslint:disable-next-line:no-input-rename
   @Input('selected') selectedValue: any | null = null;
+  @Input() multiple = false;
 
   private selectedOption$: MenuOption | null = null;
   public get selectedOption(): MenuOption | null {
@@ -34,7 +35,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.options && this.options.length > 0 && this.selectedValue) {
-      this.selectedOption$ = this.options.filter(o => o.value == this.selectedValue)[0];
+      this.selectedOption$ = this.options.filter(o => o.value === this.selectedValue)[0];
     }
   }
 
@@ -42,7 +43,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
   }
 
   public isSelected(option: MenuOption): boolean {
-    return option != null && this.selectedValue != null && option.value == this.selectedValue;
+    return option != null && this.selectedValue != null && option.value === this.selectedValue;
   }
 
   public onClickOutside($event: any): void {

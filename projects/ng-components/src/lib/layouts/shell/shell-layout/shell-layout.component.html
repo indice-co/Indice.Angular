@@ -1,4 +1,4 @@
-<div class="shell-container">
+<div [class]="activeSidePane ? 'shell-container' : 'shell-container active-side-pane'">
   <div class="shell-header-container" *ngIf="activeConfig.showHeader">
     <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
       <ng-container *ngIf="activeConfig.customHeaderComponent" >

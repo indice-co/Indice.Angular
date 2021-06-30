@@ -1,7 +1,8 @@
 @layer components {
 
+
   .side-pane-overlay {
-    @apply absolute bg-gray-500 bg-opacity-25 inset-0;
+    @apply absolute min-h-screen min-w-screen flex bg-gray-500 bg-opacity-25 inset-0;
   }
 
   .side-pane-container {
@@ -20,6 +21,8 @@
     @apply absolute inset-y-0 right-0 sm:pl-10 max-w-full flex;
   }
 
+
+
   .side-pane-container-fixed {
     @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
   }
@@ -37,10 +40,10 @@
   }
 
   .side-pane-container-inner {
-    @apply w-screen max-w-md;
+    @apply w-screen max-w-md overflow-y-auto;
   }
 
   .side-pane {
-    @apply min-h-screen min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
+    @apply min-h-screen min-w-screen flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
 }

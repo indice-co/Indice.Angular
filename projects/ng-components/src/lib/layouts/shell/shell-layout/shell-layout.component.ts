@@ -19,7 +19,10 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   public showRightPaneSM = false;
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
-  constructor(private router: Router, private location: Location, @Inject(SHELL_CONFIG) private config: IShellConfig | null, private componentLoaderService: ComponentLoaderService) {
+  public activeSidePane = false;
+  constructor(private router: Router, private location: Location,
+              @Inject(SHELL_CONFIG) private config: IShellConfig | null,
+              private componentLoaderService: ComponentLoaderService) {
     if (!config) {
       config = new DefaultShellConfig();
     }
@@ -32,6 +35,8 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe((e) => {
         console.log('ShellLayoutComponent ActivationStart', e);
         if ((e as ActivationStart)?.snapshot) {
+          this.activeSidePane = (e as ActivationStart)?.snapshot.outlet !== null;
+          console.log('side pane activation detected: ', this.activeSidePane);
           console.log('ShellLayoutComponent ActivationStart snapshot', (e as ActivationStart)?.snapshot);
           if ((e as ActivationStart)?.snapshot?.data) {
             console.log('ShellLayoutComponent ActivationStart snapshot data', (e as ActivationStart)?.snapshot.data);
@@ -63,12 +68,14 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public onSidePaneActivated($event: any): void {
-    console.log('onSidePaneActivated', $event);
+    console.log('ShellLayoutComponent: onSidePaneActivated', $event);
+    this.activeSidePane = true;
     this.showRightPaneSM = true;
   }
 
   public onSidePaneDeactivated($event: any): void {
-    console.log('onSidePaneActivated', $event);
+    console.log('ShellLayoutComponent: onSidePaneActivated', $event);
+    this.activeSidePane = false;
     this.showRightPaneSM = false;
   }
 
@@ -76,9 +83,9 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.location.back();
   }
 
-  private loadCustomComponent(host: DynamicComponentHostDirective | undefined){
-    if(host){
-      let viewContainerRef = host.viewContainerRef;
+  private loadCustomComponent(host: DynamicComponentHostDirective | undefined): void{
+    if (host){
+      const viewContainerRef = host.viewContainerRef;
       if (viewContainerRef) {
         this.componentLoaderService.loadComponent(viewContainerRef, this.activeConfig.customHeaderComponent);
       }
