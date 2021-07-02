@@ -13,7 +13,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "build:prod": "cross-env NODE_ENV=production ng build --prod",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "publish-components": "ng build ng-components --configuration=production && cd dist/ng-components && npm publish"
   },
   "private": false,
   "dependencies": {
