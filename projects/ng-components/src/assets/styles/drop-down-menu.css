@@ -25,11 +25,11 @@
   }
 
   .dropdown-li {
-    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100;
+    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 min-w-max;
   }
 
   .dropdown-li-selected {
-    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9;
+    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 min-w-max;
   }
 
   .dropdown-li-text {
