@@ -6,11 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '../../../../dist/ng-auth';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '../../../../dist/ng-components';
+import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
+import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '@indice/ng-components';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { HeaderComponent } from './layout/header/header.component';
+// import { HeaderComponent } from './layout/header/header.component';
 
 import { AppLinks } from './app.links';
 
@@ -18,14 +18,14 @@ class ShellConfig implements IShellConfig {
   fluid = false;
   showFooter = true;
   showHeader = true;
-  customHeaderComponent = HeaderComponent;
+  // customHeaderComponent = HeaderComponent;
   // customFooterComponent = HeaderComponent;
 }
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeaderComponent
+    // HeaderComponent
   ],
   imports: [
     BrowserModule,

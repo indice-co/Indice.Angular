@@ -6,7 +6,7 @@
   }
 
   .side-pane-container {
-    @apply absolute inset-y-0 right-0 sm:pl-10 max-w-full flex;
+    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
   }
 
   .side-pane-container-25 {
@@ -43,6 +43,6 @@
   }
 
   .side-pane {
-    @apply min-h-screen min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
+    @apply min-h-full min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
 }

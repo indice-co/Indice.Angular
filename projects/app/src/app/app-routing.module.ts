@@ -20,7 +20,7 @@ const routes: Routes = [
 
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', pathMatch: 'prefix', component: DashboardComponent, canActivate: [AuthGuardService] },
+  { path: 'dashboard', pathMatch: 'prefix', component: DashboardComponent },
 
   // not found
   { path: '**', component: PageNotFoundComponent, data: { shell: { fluid: true, showHeader: false, showFooter: false } } }

@@ -22,7 +22,7 @@
             </div>
             <input id="search"
                    #search
-                   class="search-input"
+                   class="form-search-input"
                    [placeholder]="searchPlaceholder"
                    type="search"
                    name="search"
@@ -30,7 +30,7 @@
           </div>
           <button type="button"
                   href="#"
-                  class="btn-view-header rounded-l-none"
+                  class="btn-form-view-header rounded-l-none"
                   (click)="searchActionClick(action, search.value)">
             <i [class]="action.icon"></i>
           </button>
@@ -38,14 +38,14 @@
         <ng-container *ngSwitchCase="'router-link'">
           <button type="button"
                   href="#"
-                  class="ml-1 btn-view-header"
+                  class="ml-1 btn-form-view-header"
                   (click)="routerLinkActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
         </ng-container>
         <ng-container *ngSwitchDefault>
           <button type="button"
-                  class="ml-1 btn-view-header"
+                  class="ml-1 btn-form-view-header"
                   (click)="emitActionClick(action)">
             <i [class]="action.icon"></i>
           </button>

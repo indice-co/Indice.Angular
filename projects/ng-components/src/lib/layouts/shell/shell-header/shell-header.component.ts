@@ -22,8 +22,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public sectionLinks: NavLink[] = [];
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
-  protected routeSubject : Observable<Event>;
-  protected userSubject : BehaviorSubject<any>;
+  protected routeSubject: Observable<Event>;
+  protected userSubject: BehaviorSubject<any>;
   protected routerSub$: Subscription | null = null;
   protected userSub$: Subscription | null = null;
   protected statusSub$: Subscription | null = null;

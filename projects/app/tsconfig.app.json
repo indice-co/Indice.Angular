@@ -9,10 +9,10 @@
         "node_modules/@angular/*"
       ],
       "@indice/ng-auth": [
-        "projects/ng-auth/src/public-api.ts"
+        "../../dist/ng-auth"
       ],
       "@indice/ng-components": [
-        "projects/ng-components/src/public-api.ts"
+        "../../dist/ng-components"
       ]
     }
   },

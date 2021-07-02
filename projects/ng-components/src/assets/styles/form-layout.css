@@ -31,6 +31,9 @@
     @apply flex flex-col pt-4;
   }
 
+  .form-header-search-input {
+    @apply block w-60 bg-gray-50 rounded-sm text-sm text-gray-900 placeholder-gray-500 outline-none;
+  }
 
   .field-label {
     @apply block text-xs text-gray-700;
@@ -41,6 +44,6 @@
   }
 
   .form-actions {
-    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6;
+    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6 flex justify-end;
   }
 }

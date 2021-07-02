@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api_base_url: '',
+  api_base_url: 'https://indice-idsrv.azurewebsites.net',
   api_docs: '',
   auth_settings : {
     authority: 'https://indice-idsrv.azurewebsites.net',
@@ -14,7 +14,7 @@ export const environment = {
     post_logout_redirect_uri: 'http://localhost:4200/logged-out',
     redirect_uri: 'http://localhost:4200/auth-callback',
     response_type: 'code',
-    scope: 'openid profile email role offline_access identity identity:clients identity:users',
+    scope: 'openid profile email phone role identity identity:clients identity:users',
     silent_redirect_uri : 'http://localhost:4200/auth-renew'
   }
 };

@@ -32,6 +32,6 @@
   }
 
   .side-view-layout-content-container {
-    @apply relative flex-1 bg-white;
+    @apply relative flex-1 bg-white overflow-y-auto;
   }
 }
