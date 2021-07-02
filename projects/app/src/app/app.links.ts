@@ -5,13 +5,15 @@ import { ExternalNavLink, IAppLinks, NavLink } from '@indice/ng-components';
 export class AppLinks implements IAppLinks {
   // tslint:disable-next-line:variable-name
   constructor() {
-    
+
   }
   public: NavLink[] = [];
   profileActions: NavLink[] = [];
 
   public main: NavLink[] = [
     new NavLink('Αρχική', '/', true),
+    new NavLink('@indice/ng-auth', '/ng-auth', true),
+    new NavLink('@indice/ng-components', '/ng-components', true),
   ];
   public profile: NavLink[] = [
     new NavLink('Προφίλ', '/profile', true),

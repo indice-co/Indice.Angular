@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
     ];
 
     this.tiles.push(
-      {text: 'Shell', count: 1 , path: ''},
-      {text: 'View Layouts', count: 4 , path: ''},
+      {text: 'Shell', count: 2 , path: 'samples/shell-layout'},
+      {text: 'View Layouts', count: 4 , path: 'samples/view-layouts'},
       {text: 'Common pages', count: 4 , path: ''},
       {text: 'Controls', count: 8, path: ''},
       {text: 'Directives', count: 2, path: ''},
@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public navigate(path: string): void {
+    this.router.navigateByUrl(path);
   }
 
 }
