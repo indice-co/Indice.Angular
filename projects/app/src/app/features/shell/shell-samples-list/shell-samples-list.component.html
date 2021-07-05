@@ -15,5 +15,15 @@
         </div>
       </ng-template>
     </lib-list-tile>
+    <lib-list-column title="Title" [full-width]="true">
+      <ng-template let-item>
+        {{item.title}}
+      </ng-template>
+    </lib-list-column>
+    <lib-list-column title="Description">
+      <ng-template let-item>
+        {{item.description}}
+      </ng-template>
+    </lib-list-column>
   </lib-list-view>
 </lib-view-layout>

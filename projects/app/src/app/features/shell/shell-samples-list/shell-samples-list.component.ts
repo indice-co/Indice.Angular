@@ -1,6 +1,6 @@
-import { IResultSet } from './../../../../../../ng-components/src/lib/types';
+import { IResultSet, SwitchViewAction } from './../../../../../../ng-components/src/lib/types';
 import { Component, OnInit } from '@angular/core';
-import { BaseListComponent, Icons, RouterViewAction, ViewAction } from '@indice/ng-components';
+import { BaseListComponent, Icons, RouterViewAction, ViewAction, ListViewType } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { delay } from 'rxjs/operators';
@@ -32,12 +32,14 @@ export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel
 
   constructor(private route: ActivatedRoute, private router: Router) {
     super(route, router);
-    this.view = 'tiles';
+    this.view = ListViewType.Tiles;
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     this.actions = [];
+    this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView,'switch to tiles view'));
+    this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView,'switch to table (grid) view'));
     this.actions.push(new RouterViewAction('ms-Icon ms-Icon--Info', 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
   }
 
