@@ -133,6 +133,7 @@ export abstract class BaseListComponent<T> implements OnInit {
   }
 
   public searchChanged(searchText: string | null): void {
+    this.refresh();
     this.search = searchText;
     this.setRouteParams();
   }
