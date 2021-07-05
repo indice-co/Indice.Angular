@@ -1,4 +1,4 @@
-<lib-view-layout title="Shell layout samples" [meta-items]="metaItems">
+<lib-view-layout title="Shell layout samples" [busy]="!items" [actions]="actions" [meta-items]="metaItems">
   <lib-list-view [items]="items" [view]="view" [show-pager]="false">
     <lib-list-tile>
       <ng-template let-item>

@@ -20,12 +20,7 @@
       <lib-shell-footer *ngIf="!activeConfig.customFooterComponent"></lib-shell-footer>
     </div>
   </div>
-  <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
-  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
-    <div class="side-pane-container-inner">
-      <div class="side-pane">
-        <router-outlet name="rightpane" (activate)="onSidePaneActivated($event)" (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
-      </div>
-    </div>
-  </div>
+  <lib-side-pane #rightPane>
+    <router-outlet name="rightpane" (activate)="rightPane.onSidePaneActivated($event)" (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
+  </lib-side-pane>
 </div>

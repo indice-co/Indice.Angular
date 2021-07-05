@@ -1,23 +1,69 @@
-<div class="side-view-layout-container">
-  <div class="side-view-layout-container-inner">
-    <div class="side-view-layout-header-container">
+<!-- <div class="side-view-layout-size-box">
+  <div class="side-view-layout-container">
+    <div class="side-view-layout-container-inner">
       <div class="side-view-layout-header-margins">
-        <h3 class="side-view-layout-header-title">
-          {{title}}
-        </h3>
-      </div>
-      <div class="side-view-layout-header-close-button-container">
-        <button (click)="closeSidePane()" class="side-view-layout-header-close-button">
-          <span class="sr-only">Close panel</span>
-          <!-- Heroicon name: outline/x -->
-          <svg class="side-view-layout-header-close-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div class="side-view-layout-header-container">
+          <h2 class="side-view-layout-header-title">
+            {{title}}
+          </h2>
+        </div>
+        <div class="side-view-layout-header-close-button-container">
+          <button (click)="closeSidePane()" class="side-view-layout-header-close-button">
+            <span class="sr-only">Close panel</span>
+            <svg class="side-view-layout-header-close-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+    <div class="side-view-layout-content-container">
+        <ng-content></ng-content>
+    </div>
   </div>
-  <div class="side-view-layout-content-container">
-      <ng-content></ng-content>
+  <div class="side-view-layout-actions-container">
+    <button type="button" class="side-view-layout-action-button">
+      Cancel
+    </button>
+    <button type="submit" class="side-view-layout-action-button-default">
+      Save
+    </button>
+  </div>
+</div> -->
+
+<div class="side-view-layout-size-box">
+  <div class="side-view-layout-container">
+    <div class="side-view-layout-container-inner">
+      <div class="side-view-layout-header-margins">
+        <div class="side-view-layout-header-container">
+          <h2 class="side-view-layout-header-title" id="slide-over-title">
+            {{title}}
+          </h2>
+          <div class="side-view-layout-close-button-container">
+            <button (click)="emitClose()" class="side-view-layout-close-button">
+              <span class="sr-only">Close panel</span>
+              <!-- Heroicon name: outline/x -->
+              <svg class="side-view-layout-close-button-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="side-view-layout-content-container">
+        <!-- Replace with your content -->
+        <ng-content></ng-content>
+        <!-- /End replace -->
+      </div>
+    </div>
+    <div *ngIf="showActions" class="side-view-layout-actions-container">
+      <button (click)="emitCancel()" type="button" class="side-view-layout-action-button">
+        Ακύρωση
+      </button>
+      <button (click)="emitOK()" class="side-view-layout-action-button-default">
+        Αποθήκευση
+      </button>
+    </div>
   </div>
 </div>
+

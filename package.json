@@ -8,13 +8,13 @@
     "start-mock-server": "node mock-server.js",
     "build": "ng build --prod",
     "build-auth": "ng build ng-auth --configuration=production ",
-    "build-components": "ng build ng-components --configuration=production ",
+    "build-components": "ng build ng-components --configuration=production",
     "postbuild-components": "ts-node ./projects/ng-components/scripts/css-bundle.ts",
     "test": "ng test",
     "lint": "ng lint",
     "build:prod": "cross-env NODE_ENV=production ng build --prod",
     "e2e": "ng e2e",
-    "publish-components": "ng build ng-components --configuration=production && cd dist/ng-components && npm publish"
+    "publish-components": "cd projects/ng-components && npm verison patch && cd.. && cd.. && ng build ng-components --configuration=production && cd dist/ng-components && npm publish"
   },
   "private": false,
   "dependencies": {
@@ -28,7 +28,7 @@
     "@angular/platform-server": "12.0.1",
     "@angular/router": "^12.0.1",
     "@indice/ng-auth": "^0.1.6",
-    "@indice/ng-components": "^0.1.105",
+    "@indice/ng-components": "^0.1.140",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",

@@ -1,6 +1,6 @@
 import { IResultSet } from './../../../../../../ng-components/src/lib/types';
 import { Component, OnInit } from '@angular/core';
-import { BaseListComponent } from '@indice/ng-components';
+import { BaseListComponent, Icons, RouterViewAction, ViewAction } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { delay } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export const ShellLayoutsListSamples = [
   new SampleViewModel(
     'Fluid Shell layout ',
     'Layout for all model views in our application, contains a left pane navigation component with placehodlers for form components',
-    undefined, '')
+    undefined, 'fluid')
 ];
 
 @Component({
@@ -37,6 +37,8 @@ export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.actions = [];
+    this.actions.push(new RouterViewAction('ms-Icon ms-Icon--Info', 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
   }
 
 }

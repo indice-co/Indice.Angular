@@ -17,6 +17,10 @@
 @import './assets/styles/date-picker.component.css';
 
 
+.modal-active {
+  overflow: hidden;
+}
+
 button:active {
   transform: translateY(2px);
 }

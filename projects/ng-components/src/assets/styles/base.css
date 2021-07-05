@@ -30,4 +30,5 @@
   textarea {
     @apply shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-sm;
   }
+
 }

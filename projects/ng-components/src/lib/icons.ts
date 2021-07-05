@@ -1,10 +1,12 @@
 export class Icons {
+  // https://uifabricicons.azurewebsites.net/
   public static Dashboard = `ms-Icon ms-Icon--HomeGroup `;
   public static Locations = `ms-Icon ms-Icon--MapPin `;
   public static ChargePoints = `ms-Icon ms-Icon--ChatBot `;
   public static Transations = `ms-Icon ms-Icon--PaymentCard `;
   public static Badges = `ms-Icon ms-Icon--IDBadge `;
 
+  public static Info = `ms-Icon ms-Icon--Info`;
   public static Refresh = `ms-Icon ms-Icon--Refresh`;
   public static Search = `ms-Icon ms-Icon--Search`;
   public static Add = `ms-Icon ms-Icon--Add`;
@@ -28,6 +30,6 @@ export class Icons {
 
   public static SortAsc = 'ms-Icon ms-Icon--Ascending';
   public static SortDesc = 'ms-Icon ms-Icon--Descending';
-  
+
   public static Details = ' ms-Icon ms-Icon--AccountActivity'
 }

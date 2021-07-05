@@ -1,6 +1,7 @@
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'lib-side-pane',
@@ -9,9 +10,9 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 export class SidePaneComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('visible') showPane = false;
-  public constainerStyle = 'side-pane-container-50';
+  public constainerStyle = 'side-pane-container';
   private routeSub$: Subscription | undefined;
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, @Inject(DOCUMENT) private document: any,) { }
 
   ngOnDestroy(): void {
     if (this.routeSub$) {
@@ -23,10 +24,11 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   }
 
   public onSidePaneActivated(component: any): void  {
+    console.log('SidePaneComponent:onSidePaneActivated lala');
+    this.document.body.classList.add('modal-active');
     let sizeStyleSuffix = '-50';
     let positionStyleSuffix = '';
     const data = this.route.snapshot.data;
-    console.log('SidePaneComponent:onSidePaneActivated', this.route.snapshot.data);
     if (data) {
       if (data.fixed) {
         positionStyleSuffix = '-fixed';
@@ -45,6 +47,7 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   }
 
   public onSidePaneDeactivated($event: any): void  {
+    this.document.body.classList.remove('modal-active');
     this.showPane = false;
   }
 

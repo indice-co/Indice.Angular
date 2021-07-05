@@ -1,7 +1,7 @@
 import { SHELL_CONFIG } from './../../../tokens';
 import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, ViewContainerRef, QueryList } from '@angular/core';
-import { Location } from '@angular/common';
+import { DOCUMENT, Location } from '@angular/common';
 import { ActivationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,8 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public activeSidePane = false;
-  constructor(private router: Router, private location: Location,
+  constructor(@Inject(DOCUMENT) private document: any,
+              private router: Router, private location: Location,
               @Inject(SHELL_CONFIG) private config: IShellConfig | null,
               private componentLoaderService: ComponentLoaderService) {
     if (!config) {

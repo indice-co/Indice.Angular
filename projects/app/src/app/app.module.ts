@@ -15,6 +15,8 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
+import { SampleInfoComponent } from './components/sample-info/sample-info.component';
+import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 
 class ShellConfig implements IShellConfig {
   fluid = false;
@@ -27,7 +29,9 @@ class ShellConfig implements IShellConfig {
     DashboardComponent,
     ShellSamplesListComponent,
     ViewLayoutsListComponent,
-    CustomHeaderSampleComponent
+    CustomHeaderSampleComponent,
+    FluidShellSampleComponent,
+    SampleInfoComponent
   ],
   imports: [
     BrowserModule,
