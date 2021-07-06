@@ -7,11 +7,10 @@ import { Location } from '@angular/common';
 })
 export class SideViewLayoutComponent implements OnInit {
   @Input() title: string | null = 'Πληροφορίες';
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-actions') showActions = false;
-  @Output() close = new EventEmitter<any>();
-  @Output() cancel = new EventEmitter<any>();
-  @Output() ok = new EventEmitter<any>();
+  @Input() showActions = true;
+  // @Output() close = new EventEmitter<any>();
+  @Output() cancel: EventEmitter<boolean> = new EventEmitter();
+  @Output() ok: EventEmitter<boolean>  = new EventEmitter();
 
   constructor(private location: Location) { }
 
@@ -23,15 +22,17 @@ export class SideViewLayoutComponent implements OnInit {
   }
 
   public emitClose(): void {
+    this.cancel.emit(false);
     this.closeSidePane();
   }
 
   public emitCancel(): void {
+    this.cancel.emit(false);
     this.closeSidePane();
   }
 
   public emitOK(): void {
-    this.ok.emit();
+    this.ok.emit(true);
   }
 
 }

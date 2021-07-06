@@ -40,7 +40,7 @@
                 <th class="list-view-th-details"></th>
               </ng-container>
               <ng-container *ngFor="let col of columns">
-                <th  scope="col" [class]="col.fullWidth ? 'list-view-th-full' : 'list-view-th'">
+                <th  scope="col" [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
                   {{col.title}}
                 </th>
               </ng-container>
@@ -57,7 +57,7 @@
                     </button>
                   </td>
                 </ng-container>
-                <td *ngFor="let col of columns" [class]="col.fullWidth ? 'list-view-td-full' : 'list-view-td'">
+                <td *ngFor="let col of columns" [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
                   <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                 </td>
               </tr>

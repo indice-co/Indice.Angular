@@ -28,8 +28,6 @@
     "@angular/platform-browser-dynamic": "12.0.1",
     "@angular/platform-server": "12.0.1",
     "@angular/router": "^12.0.1",
-    "@indice/ng-auth": "^0.1.6",
-    "@indice/ng-components": "^0.1.140",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",

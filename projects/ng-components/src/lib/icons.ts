@@ -6,7 +6,7 @@ export class Icons {
   public static Transations = `ms-Icon ms-Icon--PaymentCard `;
   public static Badges = `ms-Icon ms-Icon--IDBadge `;
 
-  public static Info = `ms-Icon ms-Icon--Info`;
+  public static Information = `ms-Icon ms-Icon--Info`;
   public static Refresh = `ms-Icon ms-Icon--Refresh`;
   public static Search = `ms-Icon ms-Icon--Search`;
   public static Add = `ms-Icon ms-Icon--Add`;

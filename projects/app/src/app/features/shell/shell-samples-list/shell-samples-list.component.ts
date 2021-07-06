@@ -25,21 +25,22 @@ export const ShellLayoutsListSamples = [
 })
 export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;
-
-  loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
-    return of({count: ShellLayoutsListSamples.length, items: ShellLayoutsListSamples }).pipe(delay(2000));
-  }
+  public full = true;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     super(route, router);
     this.view = ListViewType.Tiles;
   }
 
+  loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
+    return of({count: ShellLayoutsListSamples.length, items: ShellLayoutsListSamples }).pipe(delay(1200));
+  }
+
   ngOnInit(): void {
     super.ngOnInit();
     this.actions = [];
-    this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView,'switch to tiles view'));
-    this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView,'switch to table (grid) view'));
+    this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView, 'switch to tiles view'));
+    this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView, 'switch to table (grid) view'));
     this.actions.push(new RouterViewAction('ms-Icon ms-Icon--Info', 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
   }
 

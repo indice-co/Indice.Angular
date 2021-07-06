@@ -29,6 +29,9 @@ export class ListViewComponent implements OnChanges {
   @Output() detailsOpened: EventEmitter<{item: any, open: boolean}> = new EventEmitter<{item: any, open: boolean}>();
 
   public tableViewSupported = false;
+  private multipleFullWidth = false;
+  public fullWidthTHClass = 'list-view-th-full';
+  public fullWidthTDClass = 'list-view-td-full';
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
 
@@ -52,6 +55,9 @@ export class ListViewComponent implements OnChanges {
     if (this.columns && this.columns.length > 0) {
       this.tableViewSupported = true;
     }
+    this.multipleFullWidth = this.columns.filter(c => c.fullWidth).length > 1;
+    this.fullWidthTHClass = this.multipleFullWidth ? 'list-view-th-half' : 'list-view-th-full';
+    this.fullWidthTDClass = this.multipleFullWidth ? 'list-view-td-half' : 'list-view-td-full';
   }
 
   public tilesDeckClass = 'cards-deck-4';
@@ -79,16 +85,9 @@ export class ListViewComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
     const tilesCountChange = changes['tiles-count'] || changes.tilesCount ;
     if (tilesCountChange) {
       this.setTilesDeckClass(tilesCountChange.currentValue);
-    }
-    const itemsChange = changes.items;
-    if (itemsChange && itemsChange.currentValue) {
-      // this.detailsState = new Array(itemsChange.currentValue.length);
-    } else {
-      // this.detailsState = [];
     }
   }
 

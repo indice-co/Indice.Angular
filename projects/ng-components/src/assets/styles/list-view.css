@@ -27,6 +27,10 @@
     @apply w-full px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
   }
 
+  .list-view-th-half {
+    @apply w-full sm:w-1/2 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+  }
+
   .list-view-tbody {
     @apply bg-white divide-y divide-gray-200;
   }
@@ -45,6 +49,10 @@
 
   .list-view-td-full {
     @apply w-full px-6 py-4 whitespace-nowrap;
+  }
+
+  .list-view-td-half {
+    @apply w-full sm:w-1/2 px-6 py-4 whitespace-nowrap;
   }
 
   .details-button {

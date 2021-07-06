@@ -19,7 +19,6 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   public showRightPaneSM = false;
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
-  public activeSidePane = false;
   constructor(@Inject(DOCUMENT) private document: any,
               private router: Router, private location: Location,
               @Inject(SHELL_CONFIG) private config: IShellConfig | null,
@@ -34,20 +33,22 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     this.routerSub$ = this.router.events
       .pipe(filter(event => event instanceof ActivationStart))
       .subscribe((e) => {
-        console.log('ShellLayoutComponent ActivationStart', e);
+        // console.log('ShellLayoutComponent ActivationStart', e);
         if ((e as ActivationStart)?.snapshot) {
-          this.activeSidePane = (e as ActivationStart)?.snapshot.outlet !== null;
-          console.log('side pane activation detected: ', this.activeSidePane);
-          console.log('ShellLayoutComponent ActivationStart snapshot', (e as ActivationStart)?.snapshot);
+          // console.log('ShellLayoutComponent ActivationStart snapshot', (e as ActivationStart)?.snapshot);
           if ((e as ActivationStart)?.snapshot?.data) {
-            console.log('ShellLayoutComponent ActivationStart snapshot data', (e as ActivationStart)?.snapshot.data);
+            // console.log('ShellLayoutComponent ActivationStart snapshot data', (e as ActivationStart)?.snapshot.data);
             if ((e as ActivationStart)?.snapshot?.data.shell) {
-              console.log('ShellLayoutComponent ActivationStart snapshot data shell params', (e as ActivationStart)?.snapshot.data.shell);
+              // console.log('ShellLayoutComponent ActivationStart snapshot data shell params',
+              // (e as ActivationStart)?.snapshot.data.shell);
               this.activeConfig = (e as ActivationStart)?.snapshot.data.shell as IShellConfig;
-              console.log('ShellLayoutComponent activeConfig from route: ', this.activeConfig);
+              // console.log('ShellLayoutComponent activeConfig from route: ', this.activeConfig);
+              if (this.activeConfig.customHeaderComponent) {
+                this.initCustomComponents();
+              }
             } else {
               this.activeConfig = this.config ? this.config : new DefaultShellConfig();
-              console.log('ShellLayoutComponent default activeConfig: ', this.activeConfig);
+              // console.log('ShellLayoutComponent default activeConfig: ', this.activeConfig);
             }
           }
         }
@@ -56,9 +57,14 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.initCustomComponents();
+  }
+
+  private initCustomComponents(): void {
     if(this.dynamicComponentHosts && this.dynamicComponentHosts.length > 0){
       this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Header'));
-      this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Footer'));
+      // since you're not using it...
+      // this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Footer'));
     }
   }
 
@@ -68,26 +74,10 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  public onSidePaneActivated($event: any): void {
-    console.log('ShellLayoutComponent: onSidePaneActivated', $event);
-    this.activeSidePane = true;
-    this.showRightPaneSM = true;
-  }
-
-  public onSidePaneDeactivated($event: any): void {
-    console.log('ShellLayoutComponent: onSidePaneActivated', $event);
-    this.activeSidePane = false;
-    this.showRightPaneSM = false;
-  }
-
-  public closeSidePane(): void {
-    this.location.back();
-  }
-
   private loadCustomComponent(host: DynamicComponentHostDirective | undefined): void{
     if (host){
       const viewContainerRef = host.viewContainerRef;
-      if (viewContainerRef) {
+      if (viewContainerRef && this.activeConfig.customHeaderComponent) {
         this.componentLoaderService.loadComponent(viewContainerRef, this.activeConfig.customHeaderComponent);
       }
     }

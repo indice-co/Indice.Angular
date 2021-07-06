@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SampleInfoComponent implements OnInit {
 
+  public showActions = true;
   constructor() { }
 
   ngOnInit(): void {

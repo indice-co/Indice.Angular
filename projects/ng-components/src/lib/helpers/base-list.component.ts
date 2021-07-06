@@ -1,11 +1,11 @@
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction } from '../types';
 import { Icons } from '../icons';
 
 @Component({ template: '' })
-export abstract class BaseListComponent<T> implements OnInit {
+export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public items: T[] | null | undefined = null;
   public view: string = ListViewType.Tiles;
   public title: string | null = null;
@@ -20,8 +20,14 @@ export abstract class BaseListComponent<T> implements OnInit {
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
+  private routeSub$: Subscription | undefined;
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
+  }
+  ngOnDestroy(): void {
+    if(this.routeSub$) {
+      this.routeSub$.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
@@ -38,7 +44,7 @@ export abstract class BaseListComponent<T> implements OnInit {
     ];
 
     console.log('base list params init');
-    this.route$.queryParams.subscribe(params => {
+    this.routeSub$ = this.route$.queryParams.subscribe(params => {
       console.log('base list params', params);
       if (params.view) { this.view = params.view; }
       if (params.page) { this.page = +params.page; }
@@ -69,7 +75,7 @@ export abstract class BaseListComponent<T> implements OnInit {
 
   public actionHandler($event: ViewAction): void {
     console.log('BaseListComponent actionHandler', $event);
-    if($event.key === 'refresh') {
+    if ($event.key === 'refresh') {
       this.refresh();
     }
   }
