@@ -139,7 +139,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public searchChanged(searchText: string | null): void {
-    this.refresh();
+    this.page = 1;
     this.search = searchText;
     this.setRouteParams();
   }
