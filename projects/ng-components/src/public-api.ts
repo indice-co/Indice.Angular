@@ -16,6 +16,8 @@ export * from './lib/controls/skeleton-loader/skeleton-loader.component';
 export * from './lib/controls/collapsible-panel/collapsible-panel.component';
 export * from './lib/controls/kpi-tile/kpi-tile.component';
 export * from './lib/controls/date-picker/date-picker.component';
+export * from './lib/controls/toaster/toaster-container.component';
+export * from './lib/controls/toaster/toaster.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
@@ -45,5 +47,9 @@ export * from './lib/tokens';
 export * from './lib/types';
 export * from './lib/icons';
 export * from './lib/helpers/base-list.component';
+
+// services
+export * from './lib/services/component-loader.service';
+export * from './lib/services/toaster.service';
 
 export * from './lib/ng-components.module';

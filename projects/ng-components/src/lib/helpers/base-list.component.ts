@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction } from '../types';
+import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
 @Component({ template: '' })
@@ -24,8 +24,9 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
   }
+
   ngOnDestroy(): void {
-    if(this.routeSub$) {
+    if (this.routeSub$) {
       this.routeSub$.unsubscribe();
     }
   }
@@ -43,20 +44,44 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       { key: 'count', icon: Icons.ItemsCount, text: 'παρακαλώ περιμένετε...' }
     ];
 
-    console.log('base list params init');
-    this.routeSub$ = this.route$.queryParams.subscribe(params => {
-      console.log('base list params', params);
-      if (params.view) { this.view = params.view; }
-      if (params.page) { this.page = +params.page; }
-      if (params.pagesize) { this.pageSize = +params.pagesize; }
-      if (params.search) { this.search = params.search; }
-      if (params.sort) { this.sort = params.sort; }
-      if (params.dir) { this.sortdir = params.dir; }
-      this.load();
+    // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
+    // until i come up with a solution...
+
+    this.routeSub$ = this.route$.queryParamMap.subscribe(params => {
+      if (params.keys.length === 0) {
+        return;
+      }
+
+      // changing the view mode does not require reloading...
+      this.view = params.get('view') || ListViewType.Tiles;
+      console.log('route changes ', this.view);
+      
+      // const page = +(params.get('page') || 1);
+      // if (page !== this.page) {
+      //   this.page = page;
+      // }
+
+      // const size = +(params.get('pagesize') || 20);
+      // if (this.pageSize !== size) {
+      //   this.pageSize = size;
+      // }
+
+      // if (params.get('search') !== this.search) {
+      //   this.search = params.get('search');
+      // }
+
+      // if (params.get('sort') !== this.sort) {
+      //   this.sort = params.get('sort');
+      // }
+
+      // if (params.get('sortdir') !== this.sortdir) {
+      //   this.sortdir = params.get('sortdir');
+      // }
+
     });
+
     // just to sync params in query
     this.setRouteParams(true);
-    // and load data :)
     this.load();
   }
 
@@ -80,12 +105,8 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     }
   }
 
-  public setView(view: string): void {
-    this.view = view;
-    this.setRouteParams();
-  }
-
   private load(): void {
+    console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
     this.loadItems().subscribe(result => {
@@ -104,49 +125,63 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
   public abstract loadItems(): Observable<IResultSet<T> | null | undefined>;
 
+  public clear(): void {
+    this.count = 0;
+    this.page = 1;
+    this.items = null;
+    this.search = null;
+    this.setRouteParams();
+    this.load();
+  }
+
   public refresh(): void {
     this.count = 0;
     this.page = 1;
     this.items = null;
     this.search = null;
-    // https://stackoverflow.com/questions/46213737/angular-append-query-parameters-to-url
     this.setRouteParams();
+    this.load();
   }
 
   public pageChanged(page: number): void {
-    this.page = page;
-    this.setRouteParams();
+    if(this.page !== page) {
+      this.page = page;
+      this.setRouteParams();
+      this.load();
+    }
   }
 
   public pageSizeChanged(pageSize: number): void {
-    this.pageSize = pageSize;
-    this.page = 1;
-    this.setRouteParams();
+    if(this.pageSize !== pageSize) {
+      this.pageSize = pageSize;
+      this.page = 1;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public sortChanged(sort: string): void {
     console.log('base-list sortChanged', sort);
-    this.page = 1;
-    this.sort = sort;
-    this.setRouteParams();
+    if (this.sort !== sort) {
+      this.page = 1;
+      this.sort = sort;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public sortdirChanged(sortdir: string): void {
-    console.log('base-list sortdirChanged', sortdir);
-    this.page = 1;
-    this.sortdir = sortdir;
-    this.setRouteParams();
+    if (this.sortdir !== sortdir) {
+      this.page = 1;
+      this.sortdir = sortdir;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public searchChanged(searchText: string | null): void {
-    this.refresh();
     this.search = searchText;
     this.setRouteParams();
+    this.refresh();
   }
-}
-
-export class ListViewType {
-  public static Tiles = 'tiles';
-  public static Table = 'table';
-  public static Map = 'map';
 }

@@ -14,6 +14,8 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
+import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
+import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid : false,
@@ -41,6 +43,7 @@ const routes: Routes = [
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+  // SHELL LAYOUTS SAMPLES !!!
   { path: 'samples/shell-layout', pathMatch: 'full', component: ShellSamplesListComponent },
   { path: 'samples/shell-layout/info', pathMatch: 'full', component: SampleInfoComponent, outlet: 'rightpane' },
   {
@@ -51,6 +54,10 @@ const routes: Routes = [
     path: 'samples/shell-layout/fluid', pathMatch: 'full', component: FluidShellSampleComponent,
     data : { shell : fluidShellConfig }
   },
+  // CONTROLS !!!
+  { path: 'samples/controls', pathMatch: 'full', component: ControlsSamplesListComponent },
+  { path: 'samples/controls/toaster', pathMatch: 'full', component: ToasterSampleComponent },
+  // VIEW LAYOUTS!
   { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent },
 
   // not found

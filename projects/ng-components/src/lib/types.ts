@@ -50,6 +50,12 @@ export class ViewAction {
   }
 }
 
+export class ListViewType {
+  public static Tiles = 'tiles';
+  public static Table = 'table';
+  public static Map = 'map';
+}
+
 export class RouterViewAction extends ViewAction {
   public outlet: string | null = null;
   public link: string | null = null;
@@ -123,3 +129,15 @@ export interface IScreenSize {
   name: string;
   css: string;
 }
+
+export type ToastType = 'info' | 'success' | 'error' | 'warning';
+
+export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
+
+export interface Toast {
+  type: ToastType;
+  title: string;
+  body: string;
+  delay: number;
+}
+

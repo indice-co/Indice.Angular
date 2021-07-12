@@ -1,5 +1,5 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { MenuOption } from '../../types';
+import { MenuOption, ListViewType } from '../../types';
 import { ListTileComponent } from './list-tile.component';
 import { ListColumnComponent } from './list-column.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
@@ -35,7 +35,7 @@ export class ListViewComponent implements OnChanges {
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
 
-  @Input() view = 'table';
+  @Input() view = ListViewType.Table;
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename

@@ -25,7 +25,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     return next.handle(authRequest).pipe(finalize(() => {
     }), catchError((err: any) => {
         console.log(' error caught in interceptor : ', err);
-      // return the error to the method that called it
+        // return the error to the method that called it
         if (err && err.status && (err.status === 401 || err.status === 403)) {
         this.router.navigate(['/forbidden']);
       }

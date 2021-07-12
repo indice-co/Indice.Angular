@@ -1,3 +1,6 @@
+import { ToasterService } from './services/toaster.service';
+import { ToasterComponent } from './controls/toaster/toaster.component';
+import { ToasterContainerComponent } from './controls/toaster/toaster-container.component';
 import { DatepickerComponent } from './controls/date-picker/date-picker.component';
 import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
@@ -48,6 +51,9 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     KpiTileComponent,
     SidePaneComponent,
     DatepickerComponent,
+    // Toaster
+    ToasterContainerComponent,
+    ToasterComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -100,7 +106,17 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     DurationFormatPipe,
     CollapsiblePanelComponent,
     SidePaneComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    ToasterContainerComponent,
+    ToasterComponent
   ]
 })
-export class IndiceComponentsModule { }
+export class IndiceComponentsModule {
+  // tslint:disable-next-line:typedef
+  static forRoot() {
+    return {
+      ngModule: IndiceComponentsModule,
+      providers: [ToasterService]
+    };
+ }
+}

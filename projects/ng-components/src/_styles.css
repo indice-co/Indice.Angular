@@ -28,3 +28,64 @@ button:active {
 a:active {
   transform: translateY(2px);
 }
+
+
+/* toaster */
+
+.toast {
+  position: fixed;
+  right: 0;
+  width: 300px;
+  height: 80px;
+  padding: .75rem 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  animation: move 2s both;
+}
+
+.toast-info {
+  color: rgb(36, 122, 192);
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.toast-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.toast-error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.toast-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.close {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.toast-heading {
+  margin-top: 10px;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

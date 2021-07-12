@@ -1,3 +1,5 @@
+import { IShellConfig } from './../../../ng-components/src/lib/types';
+import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +10,7 @@ import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
 import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, IShellConfig } from '@indice/ng-components';
+
 import { AppLinks } from './app.links';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
@@ -17,6 +19,8 @@ import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-l
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
 import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
+import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
+import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 
 class ShellConfig implements IShellConfig {
   fluid = false;
@@ -31,17 +35,20 @@ class ShellConfig implements IShellConfig {
     ViewLayoutsListComponent,
     CustomHeaderSampleComponent,
     FluidShellSampleComponent,
-    SampleInfoComponent
+    SampleInfoComponent,
+    ControlsSamplesListComponent,
+    ToasterSampleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     IndiceAuthModule.forRoot(),
-    IndiceComponentsModule,
+    IndiceComponentsModule.forRoot(),
   ],
   providers: [
     AuthService,
     AuthGuardService,
+    ToasterService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     { provide: AUTH_SETTINGS, useFactory: () => environment.auth_settings },
     { provide: SHELL_CONFIG, useFactory: () => new ShellConfig() },

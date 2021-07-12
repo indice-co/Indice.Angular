@@ -7,6 +7,7 @@
   [sort-options]="sortOptions"
   [sort]="sort"
   [sort-dir]="sortdir"
+  [view]="view"
   (pageChanged)="pageChanged($event)"
   (pageSizeChanged)="pageSizeChanged($event)"
   (sortChanged)="sortChanged($event)"
@@ -28,7 +29,7 @@
     </lib-list-tile>
     <lib-list-column title="Title" [full-width]="true">
       <ng-template let-item>
-        {{item.title}}
+        <a [routerLink]="item.path">{{item.title}}</a>
       </ng-template>
     </lib-list-column>
     <lib-list-column title="Description">

@@ -9,7 +9,7 @@ export class FluidShellSampleComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
