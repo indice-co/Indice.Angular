@@ -180,6 +180,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public searchChanged(searchText: string | null): void {
+<<<<<<< HEAD
+=======
+    this.page = 1;
+>>>>>>> f4459b4abfd4abc1135b071e1b447b4d8fa3157b
     this.search = searchText;
     this.setRouteParams();
     this.refresh();
