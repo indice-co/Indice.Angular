@@ -1,7 +1,7 @@
 <div aria-live="assertive"
-     class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start toast"
-     [style.marginTop.%]="i*4">
-  <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
+     [ngClass]="closed ? 'toast-closed': 'toast'"
+     [ngStyle]="isMobile ? { 'margin-bottom.px': i * 85 } : {'margin-top.px': i * 85 }">
+  <div class="toast-container">
     <!--
       Notification panel, dynamically insert this into the live region when it needs to be displayed
 
@@ -12,11 +12,11 @@
         From: "opacity-100"
         To: "opacity-0"
     -->
-    <div class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
-      <div class="p-4">
-        <div class="flex items-start"
+    <div class="toast-pill">
+      <div class="toast-context-padding">
+        <div class="toast-context"
              [ngSwitch]="toast?.type">
-          <div class="flex-shrink-0"
+          <div class="toast-icon"
                *ngSwitchCase="'info'">
             <svg class="h-5 w-5 text-blue-400"
                  xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
                     clip-rule="evenodd" />
             </svg>
           </div>
-          <div class="flex-shrink-0"
+          <div class="toast-icon"
                *ngSwitchCase="'success'">
             <svg class="h-5 w-5 text-green-400"
                  xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <div class="flex-shrink-0"
+          <div class="toast-icon"
                *ngSwitchCase="'error'">
             <svg class="h-5 w-5 text-red-400"
                  xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@
                     clip-rule="evenodd" />
             </svg>
           </div>
-          <div class="flex-shrink-0"
+          <div class="toast-icon"
                *ngSwitchCase="'warning'">
             <svg class="h-5 w-5 text-yellow-400"
                  xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@
                     clip-rule="evenodd" />
             </svg>
           </div>
-          <div class="flex-shrink-0"
+          <div class="toast-icon"
                *ngSwitchDefault>
             <svg class="h-5 w-5 text-green-400"
                  xmlns="http://www.w3.org/2000/svg"
@@ -89,9 +89,9 @@
               {{toast?.body}}
             </p>
           </div>
-          <div class="ml-4 flex-shrink-0 flex">
-            <button class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    (click)="remove.emit(i)">
+          <div class="toast-close-icon">
+            <button class="toast-close-button"
+                    (click)="closeToast(i)">
               <span class="sr-only">Close</span>
               <!-- Heroicon name: solid/x -->
               <svg class="h-5 w-5"
