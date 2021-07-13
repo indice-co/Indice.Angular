@@ -15,7 +15,11 @@
 
 
   .btn-form-view-header {
-    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-white transition-colors duration-150 rounded-md hover:shadow-sm bg-gray-700 hover:bg-gray-900;
+    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-gray-700 transition-colors duration-150 rounded-sm hover:shadow-sm hover:bg-gray-50;
+  }
+
+  .btn-form-view-header-search {
+    @apply rounded-l-none text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-gray-700 transition-colors duration-150 rounded-sm hover:shadow-sm hover:bg-gray-50;
   }
 
   .selected-view-indicator {
