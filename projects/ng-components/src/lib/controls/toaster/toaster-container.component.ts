@@ -10,7 +10,7 @@ export class ToasterContainerComponent implements OnInit {
 
   toasts: Toast[] = [];
 
-  constructor(private toaster: ToasterService) {}
+  constructor(private toaster: ToasterService) { }
 
   ngOnInit(): void {
     this.toaster.toast$
@@ -21,8 +21,7 @@ export class ToasterContainerComponent implements OnInit {
   }
 
   remove(index: number): void {
-    this.toasts = this.toasts.filter((v, i) => i !== index);
-    this.toasts.splice(index, 1);
+    this.toasts = this.toasts.slice(0, index).concat(this.toasts.slice(index + 1));
   }
 
 }

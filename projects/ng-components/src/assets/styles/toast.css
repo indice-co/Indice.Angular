@@ -1,0 +1,62 @@
+@layer components {
+  .toast {
+    @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start;
+    animation: move 400ms ease-in;
+  }
+  .toast-closed {
+    @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start;
+    animation: close 100ms ease-out;
+  }
+
+  .toast-container {
+    @apply w-full flex flex-col items-center space-y-4 sm:items-end;
+  }
+
+  .toast-pill {
+    @apply max-w-sm w-full bg-white shadow-lg rounded-sm pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden;
+  }
+
+  .toast-context-padding {
+    @apply p-4;
+  }
+
+  .toast-context {
+    @apply flex items-start;
+  }
+
+  .toast-icon {
+    @apply flex-shrink-0;
+  }
+
+  .toast-close-icon {
+    @apply ml-4 flex-shrink-0 flex;
+  }
+
+  .toast-close-button {
+    @apply bg-white rounded-sm inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+
+  @keyframes move {
+    from {
+      opacity: 0;
+      --tw-translate-y: 0.5rem;
+      transform: translateY(0.5rem);
+    }
+
+    to {
+      --tw-translate-y: 0;
+      transform: translateY(0);
+      opacity: 100;
+    }
+  }
+
+  @keyframes close {
+    from {
+      opacity: 100;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+}

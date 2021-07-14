@@ -27,7 +27,7 @@
       <button (click)="emitCancel()" type="button" class="side-view-layout-action-button">
         Ακύρωση
       </button>
-      <button (click)="emitOK()" class="side-view-layout-action-button-default">
+      <button (click)="emitOK()" class="side-view-layout-action-button-default" [disabled]="disabled">
         Αποθήκευση
       </button>
     </div>
