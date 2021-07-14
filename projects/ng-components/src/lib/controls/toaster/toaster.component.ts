@@ -21,6 +21,6 @@ export class ToasterComponent implements OnInit {
 
   public closeToast(index: number) {
     this.closed = true;
-    setTimeout(() => this.remove.emit(index), 150);
+    setTimeout(() => this.remove.emit(index), 100);
   }
 }

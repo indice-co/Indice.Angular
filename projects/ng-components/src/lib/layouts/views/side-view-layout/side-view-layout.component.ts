@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 export class SideViewLayoutComponent implements OnInit {
   @Input() title: string | null = 'Πληροφορίες';
   @Input() showActions = true;
+  @Input() disabled = false;
   // @Output() close = new EventEmitter<any>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
   @Output() ok: EventEmitter<boolean>  = new EventEmitter();
