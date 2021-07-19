@@ -1,3 +1,4 @@
+import { AvatarInitialsComponent } from './controls/avatar-initials/avatar-initials.component';
 import { ToasterService } from './services/toaster.service';
 import { ToasterComponent } from './controls/toaster/toaster.component';
 import { ToasterContainerComponent } from './controls/toaster/toaster-container.component';
@@ -51,6 +52,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     KpiTileComponent,
     SidePaneComponent,
     DatepickerComponent,
+    AvatarInitialsComponent,
     // Toaster
     ToasterContainerComponent,
     ToasterComponent,
@@ -108,7 +110,8 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     SidePaneComponent,
     DatepickerComponent,
     ToasterContainerComponent,
-    ToasterComponent
+    ToasterComponent,
+    AvatarInitialsComponent
   ]
 })
 export class IndiceComponentsModule {

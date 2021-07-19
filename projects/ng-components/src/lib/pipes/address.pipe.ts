@@ -8,7 +8,7 @@ import { IAddress } from '../types';
 export class AddressPipe implements PipeTransform {
 
     transform(value: IAddress | undefined): string {
-        if (value === undefined){
+        if (value === undefined || null || '') {
             return '';
         }
         // tslint:disable-next-line:no-non-null-assertion

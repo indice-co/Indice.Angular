@@ -9,9 +9,9 @@ import { RouterViewAction, ViewAction } from '../../../types';
   templateUrl: './form-layout.component.html'
 })
 export class FormLayoutComponent implements OnInit {
-  @Input() title: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;
+  @Input() title: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
   @Input() actions: ViewAction[] | null = null;

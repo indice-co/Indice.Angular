@@ -1,0 +1,6 @@
+<div [ngClass]="isDetails ? 'inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-500': 'shell-header-avatar'">
+    <!-- <div class="initials">
+        {{ initials }}
+    </div> -->
+    <span [ngClass]="isDetails ? 'text-xl font-medium leading-none text-white': 'shell-header-avatar-name'">{{ initials }}</span>
+</div>
