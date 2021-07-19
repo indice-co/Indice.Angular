@@ -1,4 +1,8 @@
 @layer components {
+  .card-deck-busy{
+    @apply animate-pulse;
+  }
+  
   .cards-deck-1 {
     @apply grid grid-cols-1 gap-0 sm:grid-cols-1 lg:grid-cols-1;
   }

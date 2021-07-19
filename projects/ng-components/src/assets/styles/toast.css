@@ -3,6 +3,7 @@
     @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start;
     animation: move 400ms ease-in;
   }
+
   .toast-closed {
     @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start;
     animation: close 100ms ease-out;
@@ -34,6 +35,15 @@
 
   .toast-close-button {
     @apply bg-white rounded-sm inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+  }
+
+  .toast-title {
+    @apply mb-1 text-sm font-medium text-gray-900;
+  }
+
+  .toast-body {
+    @apply text-sm text-gray-500 whitespace-normal;
+    word-break: break-word;
   }
 
   @keyframes move {
