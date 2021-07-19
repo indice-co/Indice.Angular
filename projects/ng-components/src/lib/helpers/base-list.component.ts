@@ -56,9 +56,9 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.view = params.get('view') || ListViewType.Tiles;
       console.log('route changes ', this.view);
 
-      if (params.get('search') !== this.search) {
-        this.searchChanged(params.get('search'));
-      }
+      // if (params.get('search') !== this.search) {
+      //   this.searchChanged(params.get('search'));
+      // }
 
       // const page = +(params.get('page') || 1);
       // if (page !== this.page) {
@@ -142,7 +142,6 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     this.count = 0;
     this.page = 1;
     this.items = null;
-    this.search = null;
     this.setRouteParams();
     this.load();
   }

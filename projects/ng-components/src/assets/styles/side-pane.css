@@ -1,7 +1,7 @@
 @layer components {
 
   .side-pane-outer-container {
-    @apply fixed inset-0 overflow-hidden;
+    @apply fixed inset-0 overflow-hidden z-50;
   }
 
   .side-pane-overlay {
