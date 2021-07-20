@@ -18,6 +18,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input('display-format') displayFormat: string | undefined = 'dd/MM/yyyy';
   @Input() placeholder: string | undefined = '';
   @Input() value: Date | undefined | null = null;
+  @Input() min: Date | undefined | null = null;
   @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
   @ViewChild('dateInput') dateInput: ElementRef | undefined;
   public showCalendar = false;

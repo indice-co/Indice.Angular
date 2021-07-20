@@ -21,6 +21,7 @@ export class FormLayoutComponent implements OnInit {
   @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   public showRightPaneSM = false;
 
   constructor(private router$: Router) { }
@@ -33,6 +34,7 @@ export class FormLayoutComponent implements OnInit {
   }
 
   public onSidePaneDeactivated($event: any): void  {
+    this.onComplete.emit(true);
     this.showRightPaneSM = false;
   }
 
