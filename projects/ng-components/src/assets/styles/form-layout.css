@@ -36,11 +36,11 @@
   }
 
   .field-label {
-    @apply block text-xs text-gray-700;
+    @apply block text-sm text-gray-700 py-2;
   }
 
   .field-info {
-    @apply mt-2 text-xs text-gray-300;
+    @apply mt-2 text-xs text-gray-400 py-2;
   }
 
   .form-actions {
