@@ -141,3 +141,10 @@ export interface Toast {
   delay: number;
 }
 
+export enum SidePaneSize {
+   Default = '',
+   Small25 = '25%',
+   Medium50 = '50%',
+   Large75 = '75%'
+}
+
