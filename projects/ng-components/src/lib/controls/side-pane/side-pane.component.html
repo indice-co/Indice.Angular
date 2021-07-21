@@ -1,7 +1,7 @@
 <div *ngIf="showPane" class="side-pane-outer-container" aria-labelledby="slide-over" role="dialog" aria-modal="true">
   <div [class]="showPane ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
-  <div [class]="showPane ? constainerStyle : 'hidden'">
-    <div class="side-pane-box-size">
+  <div [class]="showPane ? 'side-pane-container' : 'hidden'">
+    <div [class]="sizeContainerStyle">
       <div class="side-pane">
         <ng-content></ng-content>
       </div>

@@ -27,6 +27,7 @@ class ShellConfig implements IShellConfig {
   showFooter = true;
   showHeader = true;
 }
+
 @NgModule({
   declarations: [
     AppComponent,

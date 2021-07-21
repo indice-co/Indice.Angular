@@ -10,7 +10,7 @@ import { DOCUMENT } from '@angular/common';
 export class SidePaneComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('visible') showPane = false;
-  public constainerStyle = 'side-pane-container';
+  public sizeContainerStyle = 'side-pane-box-size';
   private routeSub$: Subscription | undefined;
   constructor(private route: ActivatedRoute, @Inject(DOCUMENT) private document: any,) { }
 
@@ -24,15 +24,10 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   }
 
   public onSidePaneActivated(component: any): void  {
-    console.log('SidePaneComponent:onSidePaneActivated lala');
     this.document.body.classList.add('modal-active');
     let sizeStyleSuffix = '-50';
-    let positionStyleSuffix = '';
     const data = this.route.snapshot.data;
     if (data) {
-      if (data.fixed) {
-        positionStyleSuffix = '-fixed';
-      }
       if (data.paneSize === '25%') {
         sizeStyleSuffix = '-25';
       } else if (data.paneSize === '50%') {
@@ -40,8 +35,8 @@ export class SidePaneComponent implements OnInit, OnDestroy {
       } else if (data.paneSize === '75%') {
         sizeStyleSuffix = '-75';
       }
-      this.constainerStyle = `side-pane-container${positionStyleSuffix}${sizeStyleSuffix}`;
-      console.log('SidePaneComponent:activateRoute.data calculated container style: ', this.constainerStyle);
+      this.sizeContainerStyle = `side-pane-box-size${sizeStyleSuffix}`;
+      console.log('SidePaneComponent:activateRoute.data calculated container style: ', this.sizeContainerStyle);
     }
     this.showPane = true;
   }
