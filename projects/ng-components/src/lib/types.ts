@@ -130,7 +130,12 @@ export interface IScreenSize {
   css: string;
 }
 
-export type ToastType = 'info' | 'success' | 'error' | 'warning';
+export enum ToastType {
+  Info = 'info',
+  Success = 'success',
+  Error = 'error',
+  Warning = 'warning'
+}
 
 export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
 

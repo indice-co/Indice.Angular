@@ -1,6 +1,6 @@
 @layer components {
   .toast {
-    @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start;
+    @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start z-50;
     animation: move 400ms ease-in;
   }
 
@@ -10,7 +10,7 @@
   }
 
   .toast-container {
-    @apply w-full flex flex-col items-center space-y-4 sm:items-end;
+    @apply w-full flex flex-col items-center space-y-4 sm:items-end z-50;
   }
 
   .toast-pill {
