@@ -12,35 +12,6 @@
     @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
   }
 
-  .side-pane-container-25 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-50 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-75 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-
-  .side-pane-container-fixed {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-fixed-25 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-fixed-50 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-fixed-75 {
-    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex;
-  }
-
   .side-pane-container-inner {
     @apply w-screen max-w-md;
   }
@@ -50,7 +21,7 @@
   }
 
   .side-pane-box-size-25 {
-    @apply w-screen max-w-2xl;
+    @apply w-screen max-w-xl;
   }
 
   .side-pane-box-size-50 {
