@@ -1,4 +1,4 @@
-import { SidePaneSize } from './../../types';
+import { SidePaneOverlayType, SidePaneSize } from './../../types';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit, OnDestroy, Inject } from '@angular/core';
@@ -12,6 +12,7 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('visible') showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
+  public overlayStyle = 'side-pane-overlay';
   private routeSub$: Subscription | undefined;
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
 
@@ -28,13 +29,24 @@ export class SidePaneComponent implements OnInit, OnDestroy {
     this.document.body.classList.add('modal-active');
     let sizeStyleSuffix = '';
     const state = this.router.getCurrentNavigation()?.extras.state;
-    if (state && state.paneSize) {
-      if (state.paneSize === SidePaneSize.Small25) {
-        sizeStyleSuffix = '-25';
-      } else if (state.paneSize === SidePaneSize.Medium50) {
-        sizeStyleSuffix = '-50';
-      } else if (state.paneSize === SidePaneSize.Large75) {
-        sizeStyleSuffix = '-75';
+    if (state) {
+      if (state.paneSize) {
+        if (state.paneSize === SidePaneSize.Small25) {
+          sizeStyleSuffix = '-25';
+        } else if (state.paneSize === SidePaneSize.Medium50) {
+          sizeStyleSuffix = '-50';
+        } else if (state.paneSize === SidePaneSize.Large75) {
+          sizeStyleSuffix = '-75';
+        }
+      }
+      if (state.paneOverlay) {
+        if (state.paneOverlay === SidePaneOverlayType.None)  {
+          this.overlayStyle = 'side-pane-overlay-opacity-0';
+        } else if (state.paneOverlay === SidePaneOverlayType.Dark) {
+          this.overlayStyle = 'side-pane-overlay-opacity-50';
+        } else {
+          this.overlayStyle = 'side-pane-overlay';
+        }
       }
     }
     this.sizeContainerStyle = `side-pane-box-size${sizeStyleSuffix}`;

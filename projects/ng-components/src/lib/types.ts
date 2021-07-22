@@ -153,3 +153,10 @@ export enum SidePaneSize {
    Large75 = '75%'
 }
 
+export enum SidePaneOverlayType {
+  Default = '',
+  None = '-opacity-0',
+  Light = '',
+  Dark = '-opacity-50'
+}
+
