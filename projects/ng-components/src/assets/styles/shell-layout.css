@@ -76,15 +76,6 @@
   }
 
 
-  .shell-header-avatar {
-    @apply inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800;
-  }
-
-  .shell-header-avatar-name {
-    @apply text-sm font-medium leading-none text-blue-300;
-  }
-
-
   .mobile-menu-button-container {
     @apply -mr-2 flex md:hidden;
   }

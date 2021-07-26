@@ -8,7 +8,7 @@ export class AvatarInitialsComponent implements OnInit {
   @Input()
   public name: string | null | undefined;
   @Input()
-  public isDetails: boolean = false;
+  public large = false;
   public initials?: string;
   public circleColor!: string;
   private colors = [
@@ -29,14 +29,14 @@ export class AvatarInitialsComponent implements OnInit {
 
   private createInititals(): void {
     if (this.name) {
-      let initials = "";
+      let initials = '';
       for (let i = 0; i < this.name.length; i++) {
         if (this.name.charAt(i) === ' ') {
           continue;
         }
         if (this.name.charAt(i) === this.name.charAt(i).toUpperCase()) {
           initials += this.name.charAt(i);
-          if (initials.length == 2) {
+          if (initials.length === 2) {
             break;
           }
         }

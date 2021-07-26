@@ -10,7 +10,7 @@ export class ListViewEmptyStateComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('sub-title') subTitle = 'Αλλάξτε τα κριτήρια αναζήτησης σας ή ξεκινήστε προσθέτοντας μια νέα εγγραφή';
   // tslint:disable-next-line:no-input-rename
-  @Input('new-item-label')  = 'Νέα εγγραφή';
+  @Input('new-item-label') newItemLabel = 'Νέα εγγραφή';
   constructor() { }
 
   ngOnInit(): void {
