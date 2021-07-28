@@ -13,13 +13,9 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   @Input('visible') showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
-  private routeSub$: Subscription | undefined;
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
 
   ngOnDestroy(): void {
-    if (this.routeSub$) {
-      this.routeSub$.unsubscribe();
-    }
   }
 
   ngOnInit(): void  {
@@ -50,7 +46,9 @@ export class SidePaneComponent implements OnInit, OnDestroy {
       }
     }
     this.sizeContainerStyle = `side-pane-box-size${sizeStyleSuffix}`;
-    console.log('SidePaneComponent:activateRoute.data calculated container style: ', this.sizeContainerStyle);
+    console.log('SidePaneComponent:activateRoute.data',
+      'calculated container style: ', this.sizeContainerStyle,
+      'overlay type: ', this.overlayStyle);
     this.showPane = true;
   }
 

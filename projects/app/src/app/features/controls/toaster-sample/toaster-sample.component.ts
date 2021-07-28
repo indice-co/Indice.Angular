@@ -14,7 +14,7 @@ export class ToasterSampleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showInfo(type: ToastType): void {
+  showInfo(type: any): void {
     this.toaster.show(type, 'title', 'my message!!!', 3000);
   }
 }

@@ -34,6 +34,7 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
+import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empty-state.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    ListViewEmptyStateComponent,
     SkeletonLoaderComponent,
     CollapsiblePanelComponent,
     KpiTileComponent,
@@ -89,6 +91,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    ListViewEmptyStateComponent,
     KpiTileComponent,
     SkeletonLoaderComponent,
     ShellLayoutComponent,

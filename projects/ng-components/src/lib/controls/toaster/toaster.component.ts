@@ -19,7 +19,7 @@ export class ToasterComponent implements OnInit {
     window.screen.width > 640 ? this.isMobile = false : this.isMobile = true;
   }
 
-  public closeToast(index: number) {
+  public closeToast(index: number): void {
     this.closed = true;
     setTimeout(() => this.remove.emit(index), 100);
   }
