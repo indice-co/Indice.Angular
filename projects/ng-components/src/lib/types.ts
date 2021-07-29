@@ -7,6 +7,7 @@ export interface IAppLinks {
   brand: NavLink[];
 }
 
+
 export class NavLink {
   constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string) {
     this.text = text;
@@ -103,6 +104,8 @@ export interface IAddress {
 }
 
 export interface IShellConfig {
+  appLogo: string;
+  appLogoAlt: string;
   showHeader: boolean;
   customHeaderComponent?: any;
   showFooter: boolean;
@@ -111,6 +114,8 @@ export interface IShellConfig {
 }
 
 export class DefaultShellConfig implements IShellConfig {
+  appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
+  appLogoAlt = 'your app name here';
   showHeader = true;
   showFooter = true;
   fluid = false;

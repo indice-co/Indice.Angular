@@ -4,7 +4,7 @@ import { Event, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { AuthService } from '@indice/ng-auth';
-import { APP_LINKS } from '../../../tokens';
+import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { BehaviorSubject, Observable, Subject, SubscriptionLike } from 'rxjs';
 import { Subscription } from 'rxjs';
 
@@ -32,6 +32,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(AuthService) protected authService: AuthService,
               @Inject(Router) protected router: Router,
+              @Inject(SHELL_CONFIG) public config: any,
               @Inject(APP_LINKS) public links: any) {
                 this.routeSubject = this.router.events.pipe(filter(event => event instanceof NavigationStart));
                 this.userSubject = this.authService.userStatus;
