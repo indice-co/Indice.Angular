@@ -25,7 +25,7 @@
   }
 
   .view-layout-title-container-sm-inner {
-    @apply flex-1 justify-start;
+    @apply flex-1 justify-start items-center;
   }
 
   .title-icon {
