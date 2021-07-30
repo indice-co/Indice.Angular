@@ -9,6 +9,16 @@ export class SideViewLayoutComponent implements OnInit {
   @Input() title: string | null = 'Πληροφορίες';
   @Input() showActions = true;
   @Input() disabled = false;
+  // tslint:disable-next-line:no-input-rename
+  @Input('ok-label') okLabel = 'Αποθήκευση';
+  // tslint:disable-next-line:no-input-rename
+  @Input('ok-show') okShow = true;
+  // tslint:disable-next-line:no-input-rename
+  @Input('ok-close-dialog') closeOnOk = true;
+  // tslint:disable-next-line:no-input-rename
+  @Input('cancel-label') cancelLabel = 'Ακύρωση';
+  // tslint:disable-next-line:no-input-rename
+  @Input('cancel-show') cancelShow = true;
   // @Output() close = new EventEmitter<any>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
   @Output() ok: EventEmitter<boolean>  = new EventEmitter();
@@ -34,6 +44,9 @@ export class SideViewLayoutComponent implements OnInit {
 
   public emitOK(): void {
     this.ok.emit(true);
+    if(this.closeOnOk) {
+      this.closeSidePane();
+    }
   }
 
 }
