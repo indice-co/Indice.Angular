@@ -77,7 +77,7 @@
   }
 
   .meta-text {
-    @apply text-white text-xs mt-2;
+    @apply text-white text-xs mt-1;
   }
 
   .search-container {
