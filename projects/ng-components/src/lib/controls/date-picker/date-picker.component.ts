@@ -15,10 +15,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() readonly: boolean = true;
+  @Input() disabled: boolean = false;
   @Input('display-format') displayFormat: string | undefined = 'dd/MM/yyyy';
   @Input() placeholder: string | undefined = '';
   @Input() value: Date | undefined | null = null;
-  @Input() min: Date | undefined | null = null;
   @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
   @ViewChild('dateInput') dateInput: ElementRef | undefined;
   public showCalendar = false;
@@ -47,7 +47,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   private onTouched$: any | undefined = undefined;
 
   public compareDates(date1: Date | undefined | null, day: number): boolean {
-    if (!date1) {
+    if(!date1) {
       return false;
     }
     const d = new Date(this.year, this.month, day);
@@ -58,11 +58,11 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     let selectedDate = new Date(this.year, this.month, date.day);
     this.value = selectedDate;
     this.valueChange.emit(this.value);
-    if (this.onChange$) {
+    if(this.onChange$) {
       this.onChange$(this.value);
     }
     this.updateDays();
-    if (this.onTouched$) {
+    if(this.onTouched$) {
       this.onTouched$();
     }
     this.showCalendar = false;
@@ -77,7 +77,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.year = this.year - 1;
       this.calcDays();
     }
-    if (this.onTouched$) {
+    if(this.onTouched$) {
       this.onTouched$();
     }
   }
@@ -91,7 +91,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.year = this.year + 1;
       this.calcDays();
     }
-    if (this.onTouched$) {
+    if(this.onTouched$) {
       this.onTouched$();
     }
   }
@@ -109,7 +109,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     const daysArray = [];
     const today = new Date();
     for (var i = 1; i <= daysInMonth; i++) {
-      daysArray.push({ day: i, today: this.compareDates(today, i), selected: this.compareDates(this.value, i) });
+      daysArray.push({day: i, today: this.compareDates(today, i), selected: this.compareDates(this.value, i)});
     }
     this.blankDays = blankdaysArray;
     this.calendarDates = daysArray;
@@ -126,7 +126,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   constructor() { }
 
   writeValue(obj: any): void {
-    if (obj) {
+    if(obj) {
       this.value = new Date(obj);
       this.month = this.value.getMonth();
       this.year = this.value.getFullYear();
@@ -142,7 +142,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   public onBlur(event: any): void {
-    if (this.onTouched$) {
+    if(this.onTouched$) {
       this.onTouched$();
     }
   }

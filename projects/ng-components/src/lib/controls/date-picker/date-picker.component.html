@@ -3,10 +3,10 @@
   <input type="text" #dateInput [readonly]="readonly" name="dateInput"
     (blur)="onBlur($event)"
     id="dateInput" [value]="value | date: displayFormat"  class="w-full focus:ring-0 focus:outline-none rounded-none sm:text-sm border-gray-300  focus:border-0"
-    [placeholder]="placeholder" >
+    [placeholder]="placeholder">
 
   <button class="relative inline-flex items-center px-2 py-2 border border-gray-300 text-sm font-medium rounded-r-sm text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
-    (click)="showCalendar = !showCalendar"><i class="ms-Icon ms-Icon--DateTime2"></i>
+    (click)="openCalendar()"><i class="ms-Icon ms-Icon--DateTime2"></i>
   </button>
 
   <div *ngIf="showCalendar" class="bg-gray-100 mt-10 rounded-sm shadow-md p-4 absolute left-0 z-50 w-full" style="height:18rem;min-width:15rem;">
