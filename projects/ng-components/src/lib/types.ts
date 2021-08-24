@@ -103,6 +103,7 @@ export interface IAddress {
   city?: string | null;
   region?: string | null;
   postalCode?: string | null;
+  country?: string | null;
 }
 
 export interface IShellConfig {
