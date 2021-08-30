@@ -33,7 +33,7 @@ export class SideViewLayoutComponent implements OnInit {
 
   public closeSidePane(): void {
     if (this.returnPath) {
-      this.router.navigateByUrl(this.returnPath);
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => this.router.navigateByUrl(this.returnPath || '/'));
     } else {
       this.location.back();
     }
