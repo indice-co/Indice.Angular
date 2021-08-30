@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 
@@ -9,6 +10,8 @@ export class SideViewLayoutComponent implements OnInit {
   @Input() title: string | null = 'Πληροφορίες';
   @Input() showActions = true;
   @Input() disabled = false;
+  // tslint:disable-next-line:no-input-rename
+  @Input('return-path') returnPath: string | undefined;
   // tslint:disable-next-line:no-input-rename
   @Input('ok-label') okLabel = 'Αποθήκευση';
   // tslint:disable-next-line:no-input-rename
@@ -23,13 +26,17 @@ export class SideViewLayoutComponent implements OnInit {
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
   @Output() ok: EventEmitter<boolean>  = new EventEmitter();
 
-  constructor(private location: Location) { }
+  constructor(private location: Location, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   public closeSidePane(): void {
-    this.location.back();
+    if (this.returnPath) {
+      this.router.navigateByUrl(this.returnPath);
+    } else {
+      this.location.back();
+    }
   }
 
   public emitClose(): void {
