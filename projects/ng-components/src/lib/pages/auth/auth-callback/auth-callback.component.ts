@@ -36,7 +36,7 @@ export class AuthCallbackComponent implements OnInit {
         if (user && user.state && user.state.url) {
           // TODO: should parse this at some point :)
           console.log('AuthCallbackComponent user state', user.state);
-          self.router.navigateByUrl(navigationUrl);
+          self.router.navigateByUrl(user.state.url);
           return;
         } else {
           self.router.navigateByUrl(navigationUrl);
