@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const obs = this.authService.isLoggedIn();
     obs.subscribe((result: any) => {
       if (!result) {
-        this.authService.startAuthentication({ url: route.url.map( u => u.path), query: route.queryParams });
+        this.authService.startAuthentication({ url: state.url });
       }
     });
     return obs;
@@ -24,7 +24,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const obs = this.authService.isLoggedIn();
     obs.subscribe((result: any) => {
       if (!result) {
-        this.authService.startAuthentication({ url: route.url.map( u => u.path), query: route.queryParams });
+        this.authService.startAuthentication({ url: state.url });
       }
     });
     return obs;
