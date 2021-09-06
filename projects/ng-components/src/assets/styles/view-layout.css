@@ -77,7 +77,10 @@
   }
 
   .meta-text {
-    @apply text-white text-xs mt-2;
+    @apply text-white text-xs;
+    margin-top: 2px;
+    margin-left: 2px;
+    margin-right: 4px;
   }
 
   .search-container {
