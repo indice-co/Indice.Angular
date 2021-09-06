@@ -33,7 +33,7 @@
 
   <!-- *ngSwitchCase="'table'" -->
   <ng-container *ngSwitchDefault>
-    <lib-skeleton-loader *ngIf="!items" [count]="5" [type]="'table'"></lib-skeleton-loader>
+    <lib-skeleton-loader *ngIf="(items == null || undefined) || items?.length == 0" [count]="5" [type]="'table'"></lib-skeleton-loader>
     <div class="list-view-container" *ngIf="items && items.length > 0">
       <div class="list-view-container-inner">
         <table class="list-view-table">
@@ -76,7 +76,7 @@
         </table>
       </div>
     </div>
-    <ng-container *ngIf="items && items.length == 0">
+    <ng-container *ngIf="(items == null || undefined) || items?.length == 0">
       <lib-list-view-empty-state></lib-list-view-empty-state>
     </ng-container>
   </ng-container>
