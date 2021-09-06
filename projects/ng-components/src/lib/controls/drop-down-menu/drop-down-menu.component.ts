@@ -22,6 +22,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
     this.expanded = false;
   }
 
+  @Output() selectedChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
 
   private expanded$ = false;
@@ -52,6 +53,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
 
   public selectOption(option: MenuOption): void {
     this.selectedOption = option;
+    this.selectedChange.emit(option.value);
     this.selectedChanged.emit(option.value);
   }
 
