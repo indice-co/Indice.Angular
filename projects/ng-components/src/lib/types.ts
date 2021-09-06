@@ -86,16 +86,18 @@ export class HeaderMetaItem {
 }
 
 export class MenuOption {
-  constructor(text: string, value: any, description?: string, data?: any) {
+  constructor(text: string, value: any, description?: string, data?: any, icon?: string) {
     this.text = text;
     this.value = value;
     this.description = description;
     this.data = data;
+    this.icon = icon;
   }
   public text: string;
   public value: any;
   public description: string | undefined;
   public data: any | undefined;
+  public icon: string | undefined;
 }
 
 export interface IAddress {
