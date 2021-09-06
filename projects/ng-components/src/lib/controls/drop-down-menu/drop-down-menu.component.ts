@@ -35,7 +35,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges  {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.options && this.options.length > 0 && this.selectedValue) {
+    if (this.options && this.options.length > 0 && this.selectedValue !== null && this.selectedValue !== undefined) {
       this.selectedOption$ = this.options.filter(o => o.value === this.selectedValue)[0];
     }
   }
