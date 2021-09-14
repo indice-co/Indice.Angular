@@ -8,7 +8,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerComponent),  // replace name as appropriate
+      useExisting: forwardRef(() => DatepickerComponent),
       multi: true
     }
   ]
@@ -22,6 +22,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
   @ViewChild('dateInput') dateInput: ElementRef | undefined;
   public showCalendar = false;
+  public showYears = false;
   public monthNames = [
     'Ιανουάριος',
     'Φεβρουάριος',
@@ -41,31 +42,67 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   public month: number = -1;
   public year: number = -1;
   public calendarDates: any[] = [];
+  public calendarYears: any[] = [];
+  public showCalendarYears: any[] = [];
   public blankDays: any[] = [];
+  public calendarYearPage = 1;
+  private yearsPerPage = 30;
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;
 
-  public compareDates(date1: Date | undefined | null, day: number): boolean {
-    if(!date1) {
+  ngOnInit(): void {
+    let today = new Date();
+    this.month = today.getMonth();
+    this.year = today.getFullYear();
+    this.calendarDates = [{ day: this.value, today: this.value, selected: this.value }];
+    this.calendarYears = [{ year: this.value?.getFullYear(), today: this.value, selected: this.value }];
+    const yearsArray = [];
+    for (let i = 1950; i <= today.getFullYear() + 2; i++) {
+      yearsArray.push({ year: i, today: this.compareDates(today, null, i), selected: i == this.value?.getFullYear() });
+    }
+    this.calendarYears = yearsArray;
+    this.showCalendarYears = this.paginate(this.calendarYears, 1);
+    this.calcDays();
+  }
+
+  public compareDates(date1: Date | undefined | null, day: number | null | undefined, year: number | null | undefined): boolean {
+    if (!date1) {
       return false;
     }
-    const d = new Date(this.year, this.month, day);
+    const d = new Date(year ?? this.year, this.month, day ?? this.value?.getDay());
     return date1.toDateString() === d.toDateString();
   };
 
   public selectDateValue(date: any): void {
-    let selectedDate = new Date(this.year, this.month, date.day);
+    // This should be in UTC
+    let selectedDate = new Date(this.year, this.month, date.day, 3, 0, 0, 0);
     this.value = selectedDate;
     this.valueChange.emit(this.value);
-    if(this.onChange$) {
+    if (this.onChange$) {
       this.onChange$(this.value);
     }
     this.updateDays();
-    if(this.onTouched$) {
+    if (this.onTouched$) {
       this.onTouched$();
     }
     this.showCalendar = false;
+  }
+
+  public selectYearValue(year: any): void {
+    let selectedDate = new Date(year.year, 1, 1, 2, 0, 0, 0);
+    this.year = year.year;
+    this.value = selectedDate;
+    this.valueChange.emit(this.value);
+    if (this.onChange$) {
+      this.onChange$(this.value);
+    }
+    this.updateDays();
+    if (this.onTouched$) {
+      this.onTouched$();
+    }
+    this.showYears = false;
+    this.showCalendar = true;
   }
 
   public previousMonth(): void {
@@ -77,7 +114,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.year = this.year - 1;
       this.calcDays();
     }
-    if(this.onTouched$) {
+    if (this.onTouched$) {
       this.onTouched$();
     }
   }
@@ -91,14 +128,33 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.year = this.year + 1;
       this.calcDays();
     }
-    if(this.onTouched$) {
+    if (this.onTouched$) {
+      this.onTouched$();
+    }
+  }
+
+  public previousYear(): void {
+    this.showCalendarYears = this.paginate(
+      this.calendarYears,
+      this.calendarYearPage > 1 ? --this.calendarYearPage : 1);
+    this.calcDays();
+    if (this.onTouched$) {
+      this.onTouched$();
+    }
+  }
+
+  public nextYear(): void {
+    this.showCalendarYears = this.paginate(
+      this.calendarYears,
+      this.calendarYearPage <= this.calendarYears.length / this.yearsPerPage ? ++this.calendarYearPage : this.calendarYearPage);
+    this.calcDays();
+    if (this.onTouched$) {
       this.onTouched$();
     }
   }
 
   public calcDays(): void {
     const daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
-
     // find where to start calendar day of week
     const dayOfWeek = new Date(this.year, this.month).getDay();
     const blankdaysArray = [];
@@ -109,8 +165,13 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     const daysArray = [];
     const today = new Date();
     for (var i = 1; i <= daysInMonth; i++) {
-      daysArray.push({day: i, today: this.compareDates(today, i), selected: this.compareDates(this.value, i)});
+      daysArray.push({ day: i, today: this.compareDates(today, i, null), selected: this.compareDates(this.value, i, null) });
     }
+    const yearsArray = [];
+    for (let i = 1950; i <= today.getFullYear() + 2; i++) {
+      yearsArray.push({ year: i, today: this.compareDates(today, null, i), selected: i == this.year });
+    }
+    this.calendarYears = yearsArray;
     this.blankDays = blankdaysArray;
     this.calendarDates = daysArray;
   }
@@ -118,15 +179,15 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   private updateDays(): void {
     const today = new Date();
     this.calendarDates.forEach(d => {
-      d.today = this.compareDates(today, d);
-      d.selected = this.compareDates(this.value, d);;
+      d.today = this.compareDates(today, d, this.year);
+      d.selected = this.compareDates(this.value, d, this.year);
     });
   }
 
   constructor() { }
 
   writeValue(obj: any): void {
-    if(obj) {
+    if (obj) {
       this.value = new Date(obj);
       this.month = this.value.getMonth();
       this.year = this.value.getFullYear();
@@ -142,15 +203,23 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   public onBlur(event: any): void {
-    if(this.onTouched$) {
+    if (this.onTouched$) {
       this.onTouched$();
     }
   }
 
-  ngOnInit(): void {
-    let today = new Date();
-    this.month = today.getMonth();
-    this.year = today.getFullYear();
+  public paginate(array: any[], page_number: number): any[] {
+    return array.slice((page_number - 1) * this.yearsPerPage, page_number * this.yearsPerPage);
+  }
+
+  public openYears() {
+    this.showYears = !this.showYears;
+    this.showCalendarYears = this.paginate(this.calendarYears, 1);
+    this.calcDays();
+  }
+
+  public openCalendar() {
+    this.showCalendar = !this.showCalendar
     this.calcDays();
   }
 
