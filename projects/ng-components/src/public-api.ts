@@ -20,6 +20,7 @@ export * from './lib/controls/date-picker/date-picker.component';
 export * from './lib/controls/toaster/toaster-container.component';
 export * from './lib/controls/toaster/toaster.component';
 export * from './lib/controls/avatar-initials/avatar-initials.component';
+export * from './lib/controls/toggle/toggle.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
