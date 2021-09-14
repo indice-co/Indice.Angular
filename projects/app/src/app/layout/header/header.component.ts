@@ -24,7 +24,7 @@ export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnD
     super.ngOnInit();
     // Subscribe to the same subject (userSubject here)
     this.headerUserSub$ = this.userSubject.subscribe((event: any) => {
-      console.log('HeaderComponent user subscription');
+      //console.log('HeaderComponent user subscription');
     });
     const observable = new Observable(subscriber => {
       subscriber.next(1);
@@ -37,8 +37,8 @@ export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnD
     });
     // Or add a subscription to existing Subscription(userSub$ here)
     this.userSub$?.add(observable.subscribe(num => {
-      console.log('HeaderComponent add subscription to ShellHeaderComponent user subscription');
-      console.log(num);
+    //   console.log('HeaderComponent add subscription to ShellHeaderComponent user subscription');
+    //   console.log(num);
     }
     ));
 

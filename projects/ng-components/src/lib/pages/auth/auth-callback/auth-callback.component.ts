@@ -34,8 +34,7 @@ export class AuthCallbackComponent implements OnInit {
         // did you want to go somewhere?
         const user = self.authService.currentUser();
         if (user && user.state && user.state.url) {
-          // TODO: should parse this at some point :)
-          console.log('AuthCallbackComponent user state', user.state);
+          //console.log('AuthCallbackComponent user state', user.state);
           self.router.navigateByUrl(user.state.url);
           return;
         } else {

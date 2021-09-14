@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 
 /** Bundles all SCSS files into a single file */
 async function bundleScss(): Promise<void> {
-  console.log('running bundleScss');
+  //console.log('running bundleScss');
   const bundler = new scssBundler.Bundler();
   const sourcePath = './projects/ng-components/src/_styles.css';
   const { found, bundledContent, imports } = await bundler.bundle(sourcePath, ['./src/**/*.css', './src/**/*.scss']);

@@ -60,11 +60,11 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.authService.loadUser().then(user => {
       this.setCurrentUser(user);
     }, error => {
-        console.log(error);
+        //console.log(error);
     });
     // Detect user changes and display / or not user info accordingly...
     this.userSub$ = this.userSubject.subscribe((user: any) => {
-      console.log('ShellHeaderComponent user subscription');
+      //console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
     });
   }
@@ -85,7 +85,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.user = user;
     if (this.user && this.user.profile) {
       this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`;
-      console.log('load user', this.avatarName);
+      //console.log('load user', this.avatarName);
     }
   }
 }

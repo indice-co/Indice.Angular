@@ -54,7 +54,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
       // changing the view mode does not require reloading...
       this.view = params.get('view') || ListViewType.Tiles;
-      console.log('route changes ', this.view);
+      //console.log('route changes ', this.view);
 
       // if (params.get('search') !== this.search) {
       //   this.searchChanged(params.get('search'));
@@ -103,14 +103,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public actionHandler($event: ViewAction): void {
-    console.log('BaseListComponent actionHandler', $event);
+    //console.log('BaseListComponent actionHandler', $event);
     if ($event.key === 'refresh') {
       this.refresh();
     }
   }
 
   private load(): void {
-    console.log('BaseListComponent LOAD');
+    //console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
     this.loadItems().subscribe(result => {
@@ -164,7 +164,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public sortChanged(sort: string): void {
-    console.log('base-list sortChanged', sort);
+    //console.log('base-list sortChanged', sort);
     if (this.sort !== sort) {
       this.page = 1;
       this.sort = sort;

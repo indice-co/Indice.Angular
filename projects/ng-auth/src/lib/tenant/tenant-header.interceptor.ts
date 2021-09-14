@@ -14,7 +14,7 @@ export class TenantHeaderInterceptor implements HttpInterceptor {
         // First check if request is going to our api or an external
         if (req.urlWithParams.toLowerCase().startsWith(this.tenantPrefixUrl.toLowerCase())) {
             this.tenantStore.getTenant().subscribe((tenant: any) => {
-                console.log(tenant);
+                //console.log(tenant);
                 if (tenant !== null || tenant !== '') {
                     // Clone the request to add the new header
                     clonedRequest = req.clone({ headers: req.headers.append('X-Tenant-Id', `${tenant}`) });

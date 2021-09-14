@@ -50,7 +50,7 @@ export class ScreenSizeDirective implements AfterViewInit {
       const isVisible = window.getComputedStyle(el).display !== 'none';
       return isVisible;
     });
-    console.log('detectScreenSize', this.currentSize);
+    //console.log('detectScreenSize', this.currentSize);
   }
 
   private updateElementVisibility(target: string): void {

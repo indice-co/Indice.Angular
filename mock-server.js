@@ -8,7 +8,7 @@ let server = new OAuth2Server();
     'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
 ].forEach(function (sig) {
     process.on(sig, function () {
-        console.log("Caught interrupt signal");
+        //console.log("Caught interrupt signal");
         // Stop the server
         StopServer().then(() => process.exit());
     });
@@ -62,7 +62,7 @@ async function StartServer(server) {
     await server.issuer.keys.generateRSA();
     // Start the server
     await server.start(8080, 'localhost');
-    console.log('Issuer URL:', server.issuer.url); // -> http://localhost:8080
+    //console.log('Issuer URL:', server.issuer.url); // -> http://localhost:8080
 }
 
 async function StopServer() {
