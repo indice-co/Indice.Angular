@@ -46,9 +46,6 @@ export class SidePaneComponent implements OnInit, OnDestroy {
       }
     }
     this.sizeContainerStyle = `side-pane-box-size${sizeStyleSuffix}`;
-    //console.log('SidePaneComponent:activateRoute.data',
-      'calculated container style: ', this.sizeContainerStyle,
-      'overlay type: ', this.overlayStyle);
     this.showPane = true;
   }
 
