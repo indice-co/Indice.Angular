@@ -23,6 +23,10 @@ import { ControlsSamplesListComponent } from './features/controls/controls-sampl
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 
 class ShellConfig implements IShellConfig {
+  appLogo!: string;
+  appLogoAlt!: string;
+  customHeaderComponent?: any;
+  customFooterComponent?: any;
   fluid = false;
   showFooter = true;
   showHeader = true;

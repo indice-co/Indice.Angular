@@ -17,7 +17,7 @@ export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnD
               @Inject(Router) router: Router,
               @Inject(APP_LINKS) links: any,
               private cdRef: ChangeDetectorRef) {
-    super(authService, router, links);
+    super(authService, router,null, links);
   }
 
   ngOnInit(): void {
