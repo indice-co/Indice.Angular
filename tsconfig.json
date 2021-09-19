@@ -15,12 +15,12 @@
       "ng-components": [
         "dist/ng-components"
       ],
-      // "@indice/ng-auth": [
-      //   "projects/ng-auth/src/public-api.ts"
-      // ],
-      // "@indice/ng-components": [
-      //   "projects/ng-components/src/public-api.ts"
-      // ]
+      "@indice/ng-auth": [
+        "projects/ng-auth/src/public-api.ts"
+      ],
+      "@indice/ng-components": [
+        "projects/ng-components/src/public-api.ts"
+      ]
     },
     "sourceMap": true,
     "declaration": false,

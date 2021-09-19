@@ -1,5 +1,10 @@
 import { IShellConfig } from './../../../ng-components/src/lib/types';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
+import {
+  APP_LINKS,
+  IndiceComponentsModule,
+  SHELL_CONFIG,
+  ToasterService,
+} from '@indice/ng-components';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +14,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
+import {
+  AuthGuardService,
+  AuthHttpInterceptor,
+  AuthService,
+  AUTH_SETTINGS,
+  IndiceAuthModule,
+} from '@indice/ng-auth';
 
 import { AppLinks } from './app.links';
 
@@ -26,6 +37,8 @@ class ShellConfig implements IShellConfig {
   fluid = false;
   showFooter = true;
   showHeader = true;
+  appLogo = '';
+  appLogoAlt = '';
 }
 
 @NgModule({
@@ -38,7 +51,7 @@ class ShellConfig implements IShellConfig {
     FluidShellSampleComponent,
     SampleInfoComponent,
     ControlsSamplesListComponent,
-    ToasterSampleComponent
+    ToasterSampleComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +68,6 @@ class ShellConfig implements IShellConfig {
     { provide: SHELL_CONFIG, useFactory: () => new ShellConfig() },
     { provide: APP_LINKS, useFactory: () => new AppLinks() },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,10 @@
-import { Component, ChangeDetectorRef, Inject, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  Inject,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@indice/ng-auth';
 import { ShellHeaderComponent } from '@indice/ng-components';
@@ -9,15 +15,20 @@ import { Observable, Subscription } from 'rxjs';
   selector: 'app-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent
+  extends ShellHeaderComponent
+  implements OnInit, OnDestroy
+{
   private headerUserSub$: Subscription | null = null;
   // private userSub$: Subscription | null = null;
 
-  constructor(@Inject(AuthService) authService: any,
-              @Inject(Router) router: Router,
-              @Inject(APP_LINKS) links: any,
-              private cdRef: ChangeDetectorRef) {
-    super(authService, router, links);
+  constructor(
+    @Inject(AuthService) authService: any,
+    @Inject(Router) router: Router,
+    @Inject(APP_LINKS) links: any,
+    private cdRef: ChangeDetectorRef
+  ) {
+    super(authService, router, undefined, links);
   }
 
   ngOnInit(): void {
@@ -26,7 +37,7 @@ export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnD
     this.headerUserSub$ = this.userSubject.subscribe((event: any) => {
       //console.log('HeaderComponent user subscription');
     });
-    const observable = new Observable(subscriber => {
+    const observable = new Observable((subscriber) => {
       subscriber.next(1);
       subscriber.next(2);
       subscriber.next(3);
@@ -36,12 +47,12 @@ export class HeaderComponent extends ShellHeaderComponent implements OnInit, OnD
       }, 1000);
     });
     // Or add a subscription to existing Subscription(userSub$ here)
-    this.userSub$?.add(observable.subscribe(num => {
-    //   console.log('HeaderComponent add subscription to ShellHeaderComponent user subscription');
-    //   console.log(num);
-    }
-    ));
-
+    this.userSub$?.add(
+      observable.subscribe((num) => {
+        //   console.log('HeaderComponent add subscription to ShellHeaderComponent user subscription');
+        //   console.log(num);
+      })
+    );
   }
 
   ngOnDestroy(): void {
