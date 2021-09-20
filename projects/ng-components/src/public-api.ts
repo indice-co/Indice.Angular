@@ -52,7 +52,10 @@ export * from './lib/icons';
 export * from './lib/helpers/base-list.component';
 
 // services
-export * from './lib/services/component-loader.service';
+export * from './lib/services/component-loader/component-loader.factory';
+export * from './lib/services/modal-service/modal-service';
+export { ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE, CloseInterceptorFn } from './lib/services/modal-service/modal-options.class';
+export * from './lib/services/modal-service/modal.class';
 export * from './lib/services/toaster.service';
 
 export * from './lib/ng-components.module';

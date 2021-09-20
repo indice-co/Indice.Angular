@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
       {text: 'View Layouts', count: 4 , path: 'samples/view-layouts'},
       {text: 'Common pages', count: 4 , path: ''},
       {text: 'Controls', count: 8, path: 'samples/controls'},
+      {text: 'Modal playground', count: NaN , path: 'samples/modal-playground'},
       {text: 'Directives', count: 2, path: ''},
       {text: 'Pipes', count: 2 , path: ''},
       {text: 'Services', count: 3 , path: ''},

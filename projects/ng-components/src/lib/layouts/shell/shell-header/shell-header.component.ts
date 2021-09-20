@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'lib-shell-header',
-  templateUrl: './shell-header.component.html'
+  templateUrl: './shell-header.component.html',
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
@@ -30,12 +30,14 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public user: User | null = null;
   public avatarName: string | null = null;
 
-  constructor(@Inject(AuthService) protected authService: AuthService,
-              @Inject(Router) protected router: Router,
-              @Inject(SHELL_CONFIG) public config: any,
-              @Inject(APP_LINKS) public links: any) {
-                this.routeSubject = this.router.events.pipe(filter(event => event instanceof NavigationStart));
-                this.userSubject = this.authService.userStatus;
+  constructor(
+    @Inject(AuthService) protected authService: AuthService,
+    @Inject(Router) protected router: Router,
+    @Inject(SHELL_CONFIG) public config: any,
+    @Inject(APP_LINKS) public links: any
+  ) {
+    this.routeSubject = this.router.events.pipe(filter((event) => event instanceof NavigationStart));
+    this.userSubject = this.authService.userStatus;
   }
 
   ngOnDestroy(): void {
@@ -53,15 +55,19 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sectionLinks = this.links[this.sectionLinksPath] as NavLink[];
-    this.routerSub$ = this.routeSubject.subscribe(event => {
+    this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
     });
-    this.authService.loadUser().then(user => {
-      this.setCurrentUser(user);
-    }, error => {
+    this.authService.loadUser().then(
+      (user) => {
+        console.log(user);
+        this.setCurrentUser(user);
+      },
+      (error) => {
         //console.log(error);
-    });
+      }
+    );
     // Detect user changes and display / or not user info accordingly...
     this.userSub$ = this.userSubject.subscribe((user: any) => {
       //console.log('ShellHeaderComponent user subscription');
@@ -89,4 +95,3 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 }
-

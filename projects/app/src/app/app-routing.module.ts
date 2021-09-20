@@ -6,8 +6,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from '@indice/ng-auth';
 import {
-  AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent,
-  PageNotFoundComponent, UnauthorizedComponent
+  AuthCallbackComponent,
+  AuthRenewComponent,
+  ErrorComponent,
+  LoggedOutComponent,
+  PageNotFoundComponent,
+  UnauthorizedComponent,
 } from '@indice/ng-components';
 
 import { DashboardComponent } from './features/dashboard/dashboard.component';
@@ -16,6 +20,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
+import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -48,28 +53,62 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   // SHELL LAYOUTS SAMPLES !!!
-  { path: 'samples/shell-layout', pathMatch: 'full', component: ShellSamplesListComponent },
-  { path: 'samples/shell-layout/info', pathMatch: 'full', component: SampleInfoComponent, outlet: 'rightpane' },
   {
-    path: 'samples/shell-layout/custom-header', pathMatch: 'full', component: CustomHeaderSampleComponent,
-    data : { shell : customHeaderShellConfig }
+    path: 'samples/shell-layout',
+    pathMatch: 'full',
+    component: ShellSamplesListComponent,
   },
   {
-    path: 'samples/shell-layout/fluid', pathMatch: 'full', component: FluidShellSampleComponent,
-    data : { shell : fluidShellConfig }
+    path: 'samples/shell-layout/info',
+    pathMatch: 'full',
+    component: SampleInfoComponent,
+    outlet: 'rightpane',
+  },
+  {
+    path: 'samples/shell-layout/custom-header',
+    pathMatch: 'full',
+    component: CustomHeaderSampleComponent,
+    data: { shell: customHeaderShellConfig },
+  },
+  {
+    path: 'samples/shell-layout/fluid',
+    pathMatch: 'full',
+    component: FluidShellSampleComponent,
+    data: { shell: fluidShellConfig },
   },
   // CONTROLS !!!
-  { path: 'samples/controls', pathMatch: 'full', component: ControlsSamplesListComponent },
-  { path: 'samples/controls/toaster', pathMatch: 'full', component: ToasterSampleComponent },
+  {
+    path: 'samples/controls',
+    pathMatch: 'full',
+    component: ControlsSamplesListComponent,
+  },
+  {
+    path: 'samples/controls/toaster',
+    pathMatch: 'full',
+    component: ToasterSampleComponent,
+  },
   // VIEW LAYOUTS!
-  { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent },
+  {
+    path: 'samples/view-layouts',
+    pathMatch: 'full',
+    component: ViewLayoutsListComponent,
+  },
+  {
+    path: 'samples/modal-playground',
+    pathMatch: 'full',
+    component: ModalPlayGroundComponent,
+  },
 
   // not found
-  { path: '**', component: PageNotFoundComponent, data: { shell: { fluid: true, showHeader: false, showFooter: false } } }
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+    data: { shell: { fluid: true, showHeader: false, showFooter: false } },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
