@@ -20,6 +20,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
+import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -91,6 +92,11 @@ const routes: Routes = [
     path: 'samples/view-layouts',
     pathMatch: 'full',
     component: ViewLayoutsListComponent,
+  },
+  {
+    path: 'samples/modal-playground',
+    pathMatch: 'full',
+    component: ModalPlayGroundComponent,
   },
 
   // not found
