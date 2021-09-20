@@ -23,7 +23,7 @@ import { ControlsSamplesListComponent } from './features/controls/controls-sampl
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SampleModalComponent } from './components/sample-modals/sample-modal.component';
-import { ModalPlayGroundComponent } from "./features/modal-play-ground/modal-playground.componet";
+import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 
 class ShellConfig implements IShellConfig {
   appLogo!: string;
@@ -33,8 +33,6 @@ class ShellConfig implements IShellConfig {
   fluid = false;
   showFooter = true;
   showHeader = true;
-  appLogo = '';
-  appLogoAlt = '';
   //customHeaderComponent = HeaderComponent;
 }
 
@@ -51,7 +49,7 @@ class ShellConfig implements IShellConfig {
     ToasterSampleComponent,
     HeaderComponent,
     SampleModalComponent,
-    ModalPlayGroundComponent
+    ModalPlayGroundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, IndiceAuthModule.forRoot(), IndiceComponentsModule.forRoot()],
   providers: [
