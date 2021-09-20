@@ -22,13 +22,11 @@ export class HeaderComponent
   private headerUserSub$: Subscription | null = null;
   // private userSub$: Subscription | null = null;
 
-  constructor(
-    @Inject(AuthService) authService: any,
-    @Inject(Router) router: Router,
-    @Inject(APP_LINKS) links: any,
-    private cdRef: ChangeDetectorRef
-  ) {
-    super(authService, router, undefined, links);
+  constructor(@Inject(AuthService) authService: any,
+              @Inject(Router) router: Router,
+              @Inject(APP_LINKS) links: any,
+              private cdRef: ChangeDetectorRef) {
+    super(authService, router,null, links);
   }
 
   ngOnInit(): void {

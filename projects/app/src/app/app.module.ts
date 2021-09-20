@@ -1,5 +1,5 @@
 import { IShellConfig } from './../../../ng-components/src/lib/types';
-import { APP_LINKS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
+import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService, ModalService } from '../../../ng-components/src/public-api';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +26,10 @@ import { SampleModalComponent } from './components/sample-modals/sample-modal.co
 import { ModalPlayGroundComponent } from "./features/modal-play-ground/modal-playground.componet";
 
 class ShellConfig implements IShellConfig {
+  appLogo!: string;
+  appLogoAlt!: string;
+  customHeaderComponent?: any;
+  customFooterComponent?: any;
   fluid = false;
   showFooter = true;
   showHeader = true;

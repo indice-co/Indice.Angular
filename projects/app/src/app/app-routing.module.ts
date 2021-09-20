@@ -28,16 +28,16 @@ const customHeaderShellConfig: IShellConfig = {
   showHeader: true,
   customHeaderComponent: HeaderComponent,
   appLogo: '',
-  appLogoAlt: '',
-};
+  appLogoAlt: ''
+}
 
 const fluidShellConfig: IShellConfig = {
   fluid: true,
   showFooter: true,
   showHeader: true,
   appLogo: '',
-  appLogoAlt: '',
-};
+  appLogoAlt: ''
+}
 
 const routes: Routes = [
   // auth
