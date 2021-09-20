@@ -1,8 +1,10 @@
-<div [class]="activeSidePane ? 'shell-container' : 'shell-container active-side-pane'">
-  <div class="shell-header-container" *ngIf="activeConfig.showHeader">
+<div class="shell-container active-side-pane">
+  <div class="shell-header-container"
+       *ngIf="activeConfig.showHeader">
     <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
-      <ng-container *ngIf="activeConfig.customHeaderComponent" >
-        <ng-template appDynamicComponentHost hostName="Header"></ng-template>
+      <ng-container *ngIf="activeConfig.customHeaderComponent">
+        <ng-template appDynamicComponentHost
+                     hostName="Header"></ng-template>
       </ng-container>
       <lib-shell-header *ngIf="!activeConfig.customHeaderComponent"></lib-shell-header>
     </div>
@@ -12,16 +14,20 @@
       <router-outlet></router-outlet>
     </div>
   </main>
-  <div class="shell-footer-container" *ngIf="activeConfig.showFooter">
+  <div class="shell-footer-container"
+       *ngIf="activeConfig.showFooter">
     <div [class]="activeConfig.fluid ? 'shell-footer-container-inner-fluid' : 'shell-footer-container-inner'">
-      <ng-container *ngIf="activeConfig.customFooterComponent" >
-        <ng-template appDynamicComponentHost hostName="Footer"></ng-template>
+      <ng-container *ngIf="activeConfig.customFooterComponent">
+        <ng-template appDynamicComponentHost
+                     hostName="Footer"></ng-template>
       </ng-container>
       <lib-shell-footer *ngIf="!activeConfig.customFooterComponent"></lib-shell-footer>
     </div>
   </div>
   <lib-side-pane #rightPane>
-    <router-outlet name="rightpane" (activate)="rightPane.onSidePaneActivated($event)" (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
+    <router-outlet name="rightpane"
+                   (activate)="rightPane.onSidePaneActivated($event)"
+                   (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
   </lib-side-pane>
   <lib-toaster-container></lib-toaster-container>
 </div>

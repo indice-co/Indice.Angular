@@ -117,13 +117,17 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.count = result ? result.count : 0;
       this.items = result?.items;
       this.updateHeaderMeta();
+    }, err => {
+      this.count = 0;
+      this.items = null;
+      this.updateHeaderMeta();
     });
   }
 
   private updateHeaderMeta(): void {
     const count = this.metaItems?.filter(m => m.key === 'count')[0];
     if (count) {
-      count.text = `${this.count} αποτελέσματα`;
+      this.count === 1 ? count.text = `${this.count} αποτέλεσμα` : count.text = `${this.count} αποτελέσματα`;
     }
   }
 
@@ -147,7 +151,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public pageChanged(page: number): void {
-    if(this.page !== page) {
+    if (this.page !== page) {
       this.page = page;
       this.setRouteParams();
       this.load();
@@ -155,7 +159,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public pageSizeChanged(pageSize: number): void {
-    if(this.pageSize !== pageSize) {
+    if (this.pageSize !== pageSize) {
       this.pageSize = pageSize;
       this.page = 1;
       this.setRouteParams();
