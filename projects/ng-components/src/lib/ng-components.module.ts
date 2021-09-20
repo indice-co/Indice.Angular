@@ -35,6 +35,7 @@ import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsi
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
 import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empty-state.component';
+import { ToggleComponent } from './controls/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empt
     SidePaneComponent,
     DatepickerComponent,
     AvatarInitialsComponent,
+    ToggleComponent,
     // Toaster
     ToasterContainerComponent,
     ToasterComponent,
@@ -114,7 +116,8 @@ import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empt
     DatepickerComponent,
     ToasterContainerComponent,
     ToasterComponent,
-    AvatarInitialsComponent
+    AvatarInitialsComponent,
+    ToggleComponent
   ]
 })
 export class IndiceComponentsModule {

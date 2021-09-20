@@ -1,5 +1,5 @@
 import { IShellConfig } from './../../../ng-components/src/lib/types';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
+import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService } from '../../../ng-components/src/public-api';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +23,10 @@ import { ControlsSamplesListComponent } from './features/controls/controls-sampl
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 
 class ShellConfig implements IShellConfig {
+  appLogo!: string;
+  appLogoAlt!: string;
+  customHeaderComponent?: any;
+  customFooterComponent?: any;
   fluid = false;
   showFooter = true;
   showHeader = true;

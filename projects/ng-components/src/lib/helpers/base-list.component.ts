@@ -54,7 +54,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
       // changing the view mode does not require reloading...
       this.view = params.get('view') || ListViewType.Tiles;
-      console.log('route changes ', this.view);
+      //console.log('route changes ', this.view);
 
       // if (params.get('search') !== this.search) {
       //   this.searchChanged(params.get('search'));
@@ -103,19 +103,23 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public actionHandler($event: ViewAction): void {
-    console.log('BaseListComponent actionHandler', $event);
+    //console.log('BaseListComponent actionHandler', $event);
     if ($event.key === 'refresh') {
       this.refresh();
     }
   }
 
   private load(): void {
-    console.log('BaseListComponent LOAD');
+    //console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
     this.loadItems().subscribe(result => {
       this.count = result ? result.count : 0;
       this.items = result?.items;
+      this.updateHeaderMeta();
+    }, err => {
+      this.count = 0;
+      this.items = null;
       this.updateHeaderMeta();
     });
   }
@@ -123,7 +127,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   private updateHeaderMeta(): void {
     const count = this.metaItems?.filter(m => m.key === 'count')[0];
     if (count) {
-      count.text = `${this.count} αποτελέσματα`;
+      this.count === 1 ? count.text = `${this.count} αποτέλεσμα` : count.text = `${this.count} αποτελέσματα`;
     }
   }
 
@@ -147,7 +151,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public pageChanged(page: number): void {
-    if(this.page !== page) {
+    if (this.page !== page) {
       this.page = page;
       this.setRouteParams();
       this.load();
@@ -155,7 +159,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public pageSizeChanged(pageSize: number): void {
-    if(this.pageSize !== pageSize) {
+    if (this.pageSize !== pageSize) {
       this.pageSize = pageSize;
       this.page = 1;
       this.setRouteParams();
@@ -164,7 +168,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public sortChanged(sort: string): void {
-    console.log('base-list sortChanged', sort);
+    //console.log('base-list sortChanged', sort);
     if (this.sort !== sort) {
       this.page = 1;
       this.sort = sort;

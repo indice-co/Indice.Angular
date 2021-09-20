@@ -57,7 +57,7 @@ export class PagerComponent implements OnInit, OnChanges {
     }
     this.canPreviousPage = this.page > 1;
     this.canNextPage = this.page < this.pages.length;
-    console.log('calcPages', this.page, this.canPreviousPage, this.canNextPage);
+    //console.log('calcPages', this.page, this.canPreviousPage, this.canNextPage);
   }
 
   public nextPage(): void {
@@ -91,7 +91,7 @@ export class PagerComponent implements OnInit, OnChanges {
   }
 
   public toggleSortdir(): void {
-    console.log('toggleSortdir');
+    //console.log('toggleSortdir');
     let sortdir = 'desc';
     if (this.sortdir === 'desc') {
       sortdir = 'asc';

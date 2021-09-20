@@ -77,7 +77,7 @@ export class AuthService {
     // https://github.com/IdentityModel/oidc-client-js/issues/100 (data property)
     return this.manager.signinRedirect({ data })
       .catch(error => {
-        console.log(error);
+        //console.log(error);
       });
   }
 
@@ -103,7 +103,7 @@ export class AuthService {
           this.user = renewUser;
           this.silentRenewInProgress = false;
         }, (error) => {
-          console.log('silentRenew failed', error);
+          //console.log('silentRenew failed', error);
           throwError(error);
         });
       }
@@ -118,7 +118,7 @@ export class AuthService {
     try {
       return this.manager.signoutRedirect();
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 
@@ -131,7 +131,7 @@ export class AuthService {
     return this.manager.signoutRedirectCallback().then(user => {
       this.user = null;
     }, error => {
-      console.log('completeSignout failed', error);
+      //console.log('completeSignout failed', error);
     });
   }
 

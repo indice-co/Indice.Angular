@@ -18,16 +18,20 @@ import { ControlsSamplesListComponent } from './features/controls/controls-sampl
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 
 const customHeaderShellConfig: IShellConfig = {
-  fluid : false,
-  showFooter : false,
-  showHeader : true,
-  customHeaderComponent : HeaderComponent
+  fluid: false,
+  showFooter: false,
+  showHeader: true,
+  customHeaderComponent: HeaderComponent,
+  appLogo: '',
+  appLogoAlt: ''
 }
 
 const fluidShellConfig: IShellConfig = {
-  fluid : true,
-  showFooter : true,
-  showHeader : true
+  fluid: true,
+  showFooter: true,
+  showHeader: true,
+  appLogo: '',
+  appLogoAlt: ''
 }
 
 const routes: Routes = [
