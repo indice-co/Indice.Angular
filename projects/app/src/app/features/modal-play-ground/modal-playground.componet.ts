@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BaseListComponent, IResultSet, ListViewType, ModalService } from '@indice/ng-components';
-import { Modal } from 'projects/ng-components/src/lib/services/modal-service/modal.class';
+import { BaseListComponent, IResultSet, ListViewType, Modal, ModalService } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { SampleModalWithResultComponent } from '../../components/sample-modals/sample-modal-with-result.component';

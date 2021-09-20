@@ -1,13 +1,13 @@
 import { DOCUMENT } from '@angular/common';
 import { ComponentRef, Inject, Injectable, OnDestroy, Optional, Renderer2, RendererFactory2, TemplateRef } from '@angular/core';
-import { ComponentLoaderFactory } from '@indice/ng-components';
-import { noop, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ComponentLoader } from '../component-loader/component-loader.class';
 import { animationTime, cssClassNames } from './modal-styles.class';
 import { ModalBackdropComponent } from './modal-backdrop-component';
 import { ModalContainerComponent } from './modal-container-component';
 import { modalConfigDefaults, ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE } from './modal-options.class';
 import { Modal } from './modal.class';
+import { ComponentLoaderFactory } from '../component-loader/component-loader.factory';
 
 /**
  * A service for using modals.
@@ -31,8 +31,8 @@ export class ModalService implements OnDestroy {
   constructor(
     private clf: ComponentLoaderFactory,
     rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: Document,
-    @Optional() @Inject(MODAL_CONFIG_DEFAULT_OVERRIDE) private modalDefaultOption: ModalOptions
+    @Inject(DOCUMENT) private document: any,
+    @Optional() @Inject(MODAL_CONFIG_DEFAULT_OVERRIDE) modalDefaultOption: ModalOptions
   ) {
     this.backdropLoader = this.clf.createLoader<ModalBackdropComponent>();
     this.defaultConfig = { ...modalConfigDefaults, ...modalDefaultOption };
@@ -81,7 +81,7 @@ export class ModalService implements OnDestroy {
         this.hideModal(id, result);
         this.removeLoaders(id);
       },
-      //Bug 
+      //Bug
       //Should use combined config but for the moment is not possible to pass it this parameter.
       //If config is an instance variable then every newly opened modal will override the config
       //resulting in opened modals to get a new configuration

@@ -1,6 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ModalService } from '@indice/ng-components';
-import { Modal } from 'projects/ng-components/src/lib/services/modal-service/modal.class';
+import { Component, TemplateRef } from '@angular/core';
+import { Modal, ModalService } from '@indice/ng-components';
 
 @Component({
   selector: 'lib-sample-modal',
