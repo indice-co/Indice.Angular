@@ -171,4 +171,3 @@ export enum SidePaneOverlayType {
   Light = '',
   Dark = '-opacity-50'
 }
-

@@ -18,7 +18,9 @@
 @import './assets/styles/toast.css';
 @import './assets/styles/avatar-initials.css';
 @import './assets/styles/toggle.css';
+@import './assets/styles/modal.css';
 
+@import './assets/styles/indice-ng-icons-inline.css';
 
 .modal-active {
   overflow: hidden;
