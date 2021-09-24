@@ -13,7 +13,8 @@
 
         <div class="shell-header-link-container">
           <ng-container *ngFor="let link of sectionLinks">
-            <a [attr.href]="link.path"
+            <a href="#"
+               [routerLink]="[link.path]"
                [attr.target]="link.external ? '_blank' : '_self'"
                [routerLinkActive]="['nav-link-active']"
                [routerLinkActiveOptions]="{ exact: link.exact }"
