@@ -10,7 +10,6 @@ export class TenantService {
       // console.log('TenantService created: ', this.instanceId);
     }
 
-
     public storeTenant(tenant: string): void {
         // console.log('TenantService storing tenant: ', tenant, this.instanceId);
         this.subject.next(tenant);

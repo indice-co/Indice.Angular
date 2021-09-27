@@ -16,6 +16,4 @@ export class AuthRenewComponent implements OnInit {
         this.router.navigate(['/unauthorized']);
     });
   }
-
-
 }
