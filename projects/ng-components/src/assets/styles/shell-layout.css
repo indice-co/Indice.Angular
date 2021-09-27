@@ -77,7 +77,7 @@
 
 
   .mobile-menu-button-container {
-    @apply -mr-2 flex md:hidden;
+    @apply -mr-2 flex sm:hidden;
   }
 
   .mobile-menu-button {
