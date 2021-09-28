@@ -14,6 +14,7 @@ export class AppLinks implements IAppLinks {
     new NavLink('Αρχική', '/', true),
     new NavLink('@indice/ng-auth', '/ng-auth', true),
     new NavLink('@indice/ng-components', '/ng-components', true),
+    new ExternalNavLink('Ιδιωτικό Απόρρητο', 'https://www.indice.gr'),
   ];
   public profile: NavLink[] = [
     new NavLink('Προφίλ', '/profile', true),

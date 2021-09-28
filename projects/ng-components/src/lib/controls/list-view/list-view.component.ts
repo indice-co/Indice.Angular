@@ -12,10 +12,10 @@ import { Icons } from '../../icons';
 export class ListViewComponent implements OnChanges {
   public expandIcon = Icons.Expand;
   public collapseIcon = Icons.Collapse;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-pager') showPager = true;
   // DATA SOURCE!
   @Input() items: any[] | null | undefined;
+  // tslint:disable-next-line:no-input-rename
+  @Input('show-pager') showPager = true;
 
   // PAGING - pass through for pager component
   @Input() count: number | null = null;
@@ -26,7 +26,7 @@ export class ListViewComponent implements OnChanges {
   @Input('page-size-options') pageSizeOptions: MenuOption[] = [];
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Output() detailsOpened: EventEmitter<{item: any, open: boolean}> = new EventEmitter<{item: any, open: boolean}>();
+  @Output() detailsOpened: EventEmitter<{ item: any, open: boolean }> = new EventEmitter<{ item: any, open: boolean }>();
 
   public tableViewSupported = false;
   private multipleFullWidth = false;
@@ -35,7 +35,10 @@ export class ListViewComponent implements OnChanges {
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
 
-  @Input() view = ListViewType.Table;
+  // DETAILS SECTION
+  // Check if details section and button should be displayed according to the count of the value given
+  @Input('details-section-property-count') detailsSectionPropertyCount: string | null = null;
+
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
@@ -46,6 +49,8 @@ export class ListViewComponent implements OnChanges {
   @Input('sort-dir') sortdir: string | null = '-';
   @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output() sortdirChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  @Input() view = ListViewType.Table;
 
   // COLUMNS
   public columns: any[] = [];
@@ -65,7 +70,7 @@ export class ListViewComponent implements OnChanges {
   @Input('tiles-count') tilesCount = 4;
 
   public tileTemplate: any | null | undefined = null;
-  @ContentChild(ListTileComponent, {read: ListTileComponent})
+  @ContentChild(ListTileComponent, { read: ListTileComponent })
   set tiles(ref: ListTileComponent) {
     this.tileTemplate = ref;
     if (this.tileTemplate) {
@@ -74,7 +79,7 @@ export class ListViewComponent implements OnChanges {
   }
 
   public detailsTemplate: any | null | undefined = null;
-  @ContentChild(ListDetailsSectionComponent, {read: ListDetailsSectionComponent})
+  @ContentChild(ListDetailsSectionComponent, { read: ListDetailsSectionComponent })
   set details(ref: ListDetailsSectionComponent) {
     this.detailsTemplate = ref;
     if (this.detailsTemplate) {
@@ -85,14 +90,14 @@ export class ListViewComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const tilesCountChange = changes['tiles-count'] || changes.tilesCount ;
+    const tilesCountChange = changes['tiles-count'] || changes.tilesCount;
     if (tilesCountChange) {
       this.setTilesDeckClass(tilesCountChange.currentValue);
     }
   }
 
   // events
-  public emitPageChanged($event: number): void  {
+  public emitPageChanged($event: number): void {
     this.pageChanged.emit($event);
   }
 
@@ -114,7 +119,7 @@ export class ListViewComponent implements OnChanges {
 
   // helpers
   private setTilesDeckClass(tiles: number): void {
-    if ( tiles >= 1 && tiles <= 4 ) {
+    if (tiles >= 1 && tiles <= 4) {
       this.tilesDeckClass = `cards-deck-${tiles}`;
     } else {
       this.tilesDeckClass = 'cards-deck-3';

@@ -4,13 +4,21 @@
       <div class="shell-header-menu-container">
         <div class="shell-header-links-no-grow-container">
           <div>
-            <a href="#" [routerLink]="['/']"><img class="h-8 w-8" [src]="config.appLogo" [alt]="config.appLogoAlt"/></a>
+            <a href="#"
+               [routerLink]="['/']"><img class="h-8 w-8"
+                   [src]="config.appLogo"
+                   [alt]="config.appLogoAlt" /></a>
           </div>
         </div>
 
         <div class="shell-header-link-container">
           <ng-container *ngFor="let link of sectionLinks">
-            <a href="#" [routerLinkActive]="['nav-link-active']" [routerLinkActiveOptions]="{ exact: link.exact }" [routerLink]="[link.path]" class="nav-link">
+            <a href="#"
+               [routerLink]="[link.path]"
+               [attr.target]="link.external ? '_blank' : '_self'"
+               [routerLinkActive]="['nav-link-active']"
+               [routerLinkActiveOptions]="{ exact: link.exact }"
+               class="nav-link">
               {{ link.text }}
             </a>
           </ng-container>
@@ -20,37 +28,62 @@
           <div class="shell-header-links-no-grow-container">
 
             <ng-container *ngFor="let link of links.profileActions">
-              <a class="shell-header-menu-rounded-button" (clickOutside)="onClickOutside($event)" href="#" [routerLink]="[link.path]">
+              <a class="shell-header-menu-rounded-button"
+                 (clickOutside)="onClickOutside($event)"
+                 [attr.href]="link.path"
+                 [attr.target]="link.external ? '_blank' : '_self'">
                 <span class="sr-only">{{ link.text }}</span>
-                <i *ngIf="link.icon" [class]="link.icon"></i>
+                <i *ngIf="link.icon"
+                   [class]="link.icon"></i>
               </a>
             </ng-container>
 
             <!-- Profile dropdown -->
-            <div class="ml-2 relative" (clickOutside)="onClickOutside($event)" *ngIf="profileMenuVisible">
+            <div class="ml-2 relative"
+                 (clickOutside)="onClickOutside($event)"
+                 *ngIf="profileMenuVisible">
               <div>
-                <button type="button" *ngIf="user" (click)="userMenuExpanded = !userMenuExpanded" class="shell-header-profile-dropdown-button"
-                  id="user-menu"  aria-expanded="false" aria-haspopup="true">
+                <button type="button"
+                        *ngIf="user"
+                        (click)="userMenuExpanded = !userMenuExpanded"
+                        class="shell-header-profile-dropdown-button"
+                        id="user-menu"
+                        aria-expanded="false"
+                        aria-haspopup="true">
                   <span class="sr-only">Open user menu</span>
                   <span class="avatar-container">
                     <span class="avatar-text">{{this.avatarName}}</span>
                   </span>
                 </button>
 
-                <button type="button" *ngIf="!user" (click)="signin(null)" class="shell-header-profile-dropdown-button" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                <button type="button"
+                        *ngIf="!user"
+                        (click)="signin(null)"
+                        class="shell-header-profile-dropdown-button"
+                        id="user-menu"
+                        aria-expanded="false"
+                        aria-haspopup="true">
                   <span class="sr-only">sign in</span>
                   <span class="avatar-container">
                     <span class="avatar-text"><i class="ms-Icon ms-Icon--Signin"></i></span>
                   </span>
                 </button>
 
-                <div *ngIf="userMenuExpanded" class="shell-header-profile-dropdown" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                    <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
-                    <ng-container *ngFor="let link of links.profile">
-                      <a href="#" [routerLinkActive]="['nav-link-profile-active']"  [routerLinkActiveOptions]="{ exact: link.exact }" [routerLink]="[link.path]" class="nav-link-profile">
-                        {{ link.text }}
-                      </a>
-                    </ng-container>
+                <div *ngIf="userMenuExpanded"
+                     class="shell-header-profile-dropdown"
+                     role="menu"
+                     aria-orientation="vertical"
+                     aria-labelledby="user-menu">
+                  <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
+                  <ng-container *ngFor="let link of links.profile">
+                    <a [attr.href]="link.path"
+                       [attr.target]="link.external ? '_blank' : '_self'"
+                       [routerLinkActive]="['nav-link-profile-active']"
+                       [routerLinkActiveOptions]="{ exact: link.exact }"
+                       class="nav-link-profile">
+                      {{ link.text }}
+                    </a>
+                  </ng-container>
                 </div>
 
               </div>
@@ -60,15 +93,35 @@
 
         <div class="mobile-menu-button-container">
           <!-- Mobile menu button -->
-          <button  type="button" (click)="mobileMenuExpanded = !mobileMenuExpanded" class="mobile-menu-button" aria-controls="mobile-menu" [attr.aria-expanded]="mobileMenuExpanded">
+          <button type="button"
+                  (click)="mobileMenuExpanded = !mobileMenuExpanded"
+                  class="mobile-menu-button"
+                  aria-controls="mobile-menu"
+                  [attr.aria-expanded]="mobileMenuExpanded">
             <span class="sr-only">Open main menu</span>
             <!--Heroicon name: outline/menu  Menu open: "hidden", Menu closed: "block"-->
-            <svg  class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            <svg class="block h-6 w-6"
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 aria-hidden="true">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
             </svg>
             <!--Heroicon name: outline/x Menu open: "block", Menu closed: "hidden"-->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            <svg class="hidden h-6 w-6"
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 aria-hidden="true">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
@@ -77,20 +130,29 @@
     </div>
   </div>
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="mobile-menu-container" *ngIf="mobileMenuExpanded" id="mobile-menu">
+  <div class="mobile-menu-container"
+       *ngIf="mobileMenuExpanded"
+       id="mobile-menu">
     <div class="mobile-menu-link-container">
       <ng-container *ngFor="let link of sectionLinks">
-        <a  href="#" [routerLinkActive]="['nav-link-mobile-active']" [routerLinkActiveOptions]="{ exact: link.exact }" [routerLink]="[link.path]" class="nav-link-mobile">
+        <a [attr.href]="link.path"
+           [attr.target]="link.external ? '_blank' : '_self'"
+           [routerLinkActive]="['nav-link-mobile-active']"
+           [routerLinkActiveOptions]="{ exact: link.exact }"
+           class="nav-link-mobile">
           {{ link.text }}
         </a>
       </ng-container>
       <ng-container *ngIf="!user">
-        <a  href="#" (click)="signin($event)" class="nav-link-mobile">
+        <a href="#"
+           (click)="signin($event)"
+           class="nav-link-mobile">
           <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
         </a>
       </ng-container>
     </div>
-    <div class="mobile-menu-user-info-container" *ngIf="user">
+    <div class="mobile-menu-user-info-container"
+         *ngIf="user">
       <div class="mobile-menu-user-info-container-inner">
         <div class="flex-shrink-0">
           <span class="mobile-menu-avatar-container">
@@ -104,14 +166,26 @@
         <button class="mobile-menu-rounded-button">
           <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
-          <svg  class="mobile-menu-rounded-button-icon-style" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true" >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+          <svg class="mobile-menu-rounded-button-icon-style"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+               stroke="currentColor"
+               aria-hidden="true">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
           </svg>
         </button>
       </div>
       <div class="mobile-menu-link-container">
         <ng-container *ngFor="let link of links.profile">
-          <a href="#" [routerLinkActive]="['nav-link-mobile-active']" [routerLinkActiveOptions]="{ exact: link.exact }" [routerLink]="[link.path]" class="nav-link-mobile">
+          <a [attr.href]="link.path"
+             [attr.target]="link.external ? '_blank' : '_self'"
+             [routerLinkActive]="['nav-link-mobile-active']"
+             [routerLinkActiveOptions]="{ exact: link.exact }"
+             class="nav-link-mobile">
             {{ link.text }}
           </a>
         </ng-container>

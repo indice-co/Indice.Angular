@@ -19,7 +19,7 @@ export class TenantHeaderInterceptor implements HttpInterceptor {
                     // Clone the request to add the new header
                     clonedRequest = req.clone({ headers: req.headers.append('X-Tenant-Id', `${tenant}`) });
                 }
-            });
+            }).unsubscribe();
         }
         // Pass the cloned request instead of the original request to the next handle
         return next.handle(clonedRequest);

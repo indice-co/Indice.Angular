@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { User } from 'oidc-client';
-import { Event, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { Event, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { AuthService } from '@indice/ng-auth';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
-import { BehaviorSubject, Observable, Subject, SubscriptionLike } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 @Component({

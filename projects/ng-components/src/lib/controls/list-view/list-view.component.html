@@ -1,28 +1,30 @@
 <div class="px-2">
 
-  <lib-pager
-            *ngIf="showPager && items && items.length > 0"
-            [page]="page"
-            [page-size]="pageSize"
-            [count]="count"
-            [sort-options]="sortOptions"
-            [sort]="sort"
-            [sort-dir]="sortdir"
-            (pageChanged)="emitPageChanged($event)"
-            (pageSizeChanged)="emitPageSizeChanged($event)"
-            (sortChanged)="emitSortChanged($event)"
-            (sortdirChanged)="emitSortdirChanged($event)">
+  <lib-pager *ngIf="showPager && items && items.length > 0"
+             [page]="page"
+             [page-size]="pageSize"
+             [count]="count"
+             [sort-options]="sortOptions"
+             [sort]="sort"
+             [sort-dir]="sortdir"
+             (pageChanged)="emitPageChanged($event)"
+             (pageSizeChanged)="emitPageSizeChanged($event)"
+             (sortChanged)="emitSortChanged($event)"
+             (sortdirChanged)="emitSortdirChanged($event)">
   </lib-pager>
 </div>
 
 <ng-container [ngSwitch]="view">
   <ng-container *ngSwitchCase="'tiles'">
     <div [class]="tilesDeckClass">
-      <lib-skeleton-loader *ngIf="!items" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="!items"
+                           [count]="5"
+                           [type]="'tiles'"></lib-skeleton-loader>
       <ng-container *ngIf="items && items.length > 0">
         <ng-container *ngFor="let item of items">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
-          <ng-template [ngTemplateOutlet]="tileTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+          <ng-template [ngTemplateOutlet]="tileTemplate.template"
+                       [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
         </ng-container>
       </ng-container>
       <ng-container *ngIf="items && items.length == 0">
@@ -33,8 +35,11 @@
 
   <!-- *ngSwitchCase="'table'" -->
   <ng-container *ngSwitchDefault>
-    <lib-skeleton-loader *ngIf="(items == null || undefined) || items?.length == 0" [count]="5" [type]="'table'"></lib-skeleton-loader>
-    <div class="list-view-container" *ngIf="items && items.length > 0">
+    <lib-skeleton-loader *ngIf="(items == null || undefined) || items?.length == 0"
+                         [count]="5"
+                         [type]="'table'"></lib-skeleton-loader>
+    <div class="list-view-container"
+         *ngIf="items && items.length > 0">
       <div class="list-view-container-inner">
         <table class="list-view-table">
           <thead class="list-view-thead">
@@ -43,7 +48,8 @@
                 <th class="list-view-th-details"></th>
               </ng-container>
               <ng-container *ngFor="let col of columns">
-                <th  scope="col" [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
+                <th scope="col"
+                    [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
                   {{col.title}}
                 </th>
               </ng-container>
@@ -53,21 +59,31 @@
             <ng-container *ngFor="let item of items;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
-                  <td class="list-view-td-details">
-                    <button (click)="toggleDetails(item)" type="button" class="expand-collapse-button">
+                  <td class="list-view-td-details"
+                      *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
+                    <button (click)="toggleDetails(item)"
+                            type="button"
+                            class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->
                       <i [class]="item.detailsExpanded ? collapseIcon : expandIcon"></i>
                     </button>
                   </td>
+                  <ng-template #hiddenDetailsButton>
+                    <td class="list-view-td-details"></td>
+                  </ng-template>
                 </ng-container>
-                <td *ngFor="let col of columns" [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
-                  <ng-template [ngTemplateOutlet]="col.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+                <td *ngFor="let col of columns"
+                    [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
+                  <ng-template [ngTemplateOutlet]="col.template"
+                               [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                 </td>
               </tr>
               <ng-container *ngIf="detailsSectionSupported">
                 <tr *ngIf="item.detailsExpanded">
-                  <td [colSpan]="columns.length + 1" class="list-view-td">
-                    <ng-template [ngTemplateOutlet]="detailsTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+                  <td [colSpan]="columns.length + 1"
+                      class="list-view-td">
+                    <ng-template [ngTemplateOutlet]="detailsTemplate.template"
+                                 [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                   </td>
                 </tr>
               </ng-container>

@@ -24,8 +24,8 @@ export class NavLink {
 }
 
 export class ExternalNavLink extends NavLink {
-  constructor(text: string, path: string, icon?: string) {
-    super(text, path, true, true, icon);
+  constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
+    super(text, path, true, openInNewTab, icon);
   }
 }
 
