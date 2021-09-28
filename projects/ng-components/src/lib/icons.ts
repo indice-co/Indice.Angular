@@ -12,6 +12,7 @@ export class Icons {
   public static Add = `ms-Icon ms-Icon--Add`;
   public static SendEmail = `ms-Icon ms-Icon--NewMail`;
   public static Filter = `ms-Icon ms-Icon--Filter`;
+  public static Export = `ms-Icon ms-Icon--ExcelDocument`;
 
   public static TilesView = `ms-Icon ms-Icon--AppIconDefault`;
   public static TableView = `ms-Icon ms-Icon--Table`;
