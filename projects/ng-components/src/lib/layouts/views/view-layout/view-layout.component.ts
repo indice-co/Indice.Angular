@@ -23,9 +23,7 @@ export class ViewLayoutComponent implements OnInit {
   @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
   @Input() view: string | null = null;
   // tslint:disable-next-line:no-input-rename
-  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
-    // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
-  ];
+  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   // tslint:disable-next-line:no-output-on-prefix
@@ -33,8 +31,7 @@ export class ViewLayoutComponent implements OnInit {
 
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public emitActionClick(action: ViewAction): void {
     this.onAction.emit(action);
@@ -74,5 +71,4 @@ export class ViewLayoutComponent implements OnInit {
       this.router$.navigate([], { queryParams: { view: action.param }, queryParamsHandling: 'merge', skipLocationChange: false });
     }
   }
-
 }
