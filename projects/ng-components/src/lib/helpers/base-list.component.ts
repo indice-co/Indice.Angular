@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
@@ -31,14 +31,21 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.actions = [
+  public getViewActions(): Observable<ViewAction[]> {
+    const actions = [
       new ViewAction('search', null, null, Icons.Search, 'αναζήτηση'),
       new ViewAction('refresh', null, null, Icons.Refresh, 'ανανέωση στοιχείων')
     ];
     if (this.newItemLink) {
-      this.actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'προσθήκη νέας εγγραφής;'));
+      actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'προσθήκη νέας εγγραφής;'));
     }
+    return of(actions);
+  }
+
+  ngOnInit(): void {
+    this.getViewActions().subscribe(actions => {
+      this.actions = actions || [];
+    });
 
     this.metaItems = [
       { key: 'count', icon: Icons.ItemsCount, text: 'παρακαλώ περιμένετε...' }
@@ -54,7 +61,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
       // changing the view mode does not require reloading...
       this.view = params.get('view') || ListViewType.Tiles;
-      //console.log('route changes ', this.view);
+      // console.log('route changes ', this.view);
 
       // if (params.get('search') !== this.search) {
       //   this.searchChanged(params.get('search'));
@@ -103,14 +110,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public actionHandler($event: ViewAction): void {
-    //console.log('BaseListComponent actionHandler', $event);
+    // console.log('BaseListComponent actionHandler', $event);
     if ($event.key === 'refresh') {
       this.refresh();
     }
   }
 
   private load(): void {
-    //console.log('BaseListComponent LOAD');
+    // console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
     this.loadItems().subscribe(result => {
