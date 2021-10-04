@@ -31,6 +31,7 @@
           <button type="button"
                   href="#"
                   class="btn-form-view-header-search"
+                  [title]="action.tooltip"
                   (click)="searchActionClick(action, search.value)">
             <i [class]="action.icon"></i>
           </button>
@@ -39,6 +40,7 @@
           <button type="button"
                   href="#"
                   class="ml-1 btn-form-view-header"
+                  [title]="action.tooltip"
                   (click)="routerLinkActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
@@ -46,6 +48,7 @@
         <ng-container *ngSwitchDefault>
           <button type="button"
                   class="ml-1 btn-form-view-header"
+                  [title]="action.tooltip"
                   (click)="emitActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
