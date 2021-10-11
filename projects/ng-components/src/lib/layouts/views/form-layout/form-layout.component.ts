@@ -22,20 +22,14 @@ export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
   @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-  public showRightPaneSM = false;
 
   constructor(private router$: Router) { }
 
   ngOnInit(): void {
   }
 
-  public onSidePaneActivated($event: any): void  {
-    this.showRightPaneSM = true;
-  }
-
   public onSidePaneDeactivated($event: any): void  {
     this.onComplete.emit(true);
-    this.showRightPaneSM = false;
   }
 
   public emitActionClick(action: ViewAction): void {

@@ -61,7 +61,7 @@
       <ng-content></ng-content>
     </div>
   </div>
-  <lib-side-pane #formPane>
+  <lib-side-pane #formPane (onComplete)="onSidePaneDeactivated($event)">
     <router-outlet name="formRightPane"
                    (activate)="formPane.onSidePaneActivated($event)"
                    (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>

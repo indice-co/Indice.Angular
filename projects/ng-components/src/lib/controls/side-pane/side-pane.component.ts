@@ -1,6 +1,6 @@
 import { SidePaneOverlayType, SidePaneSize } from './../../types';
 import { Router } from '@angular/router';
-import { Component, Input, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Inject, EventEmitter, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -12,6 +12,8 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   @Input('visible') showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
+  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
 
   ngOnDestroy(): void {
@@ -48,9 +50,10 @@ export class SidePaneComponent implements OnInit, OnDestroy {
     this.showPane = true;
   }
 
-  public onSidePaneDeactivated($event: any): void  {
+  public onSidePaneDeactivated($event: any): void  {  
     this.document.body.classList.remove('modal-active');
     this.showPane = false;
+    this.onComplete.emit(true);
   }
 
 }
