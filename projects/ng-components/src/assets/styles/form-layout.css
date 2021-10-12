@@ -36,7 +36,7 @@
   }
 
   .field-label {
-    @apply block text-sm text-gray-700 py-2;
+    @apply block text-sm py-2 font-medium text-gray-500;
   }
 
   .field-info {
