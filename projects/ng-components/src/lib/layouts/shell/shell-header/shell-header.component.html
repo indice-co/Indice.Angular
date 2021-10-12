@@ -43,7 +43,11 @@
             <div class="ml-2 relative"
                  (clickOutside)="onClickOutside($event)"
                  *ngIf="profileMenuVisible">
-              <div>
+              <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">
+                <div *ngIf="user && showUserNameOnHeader"
+                     class="shell-header-profile-userName">
+                  {{ user.profile.name }}
+                </div>
                 <button type="button"
                         *ngIf="user"
                         (click)="userMenuExpanded = !userMenuExpanded"
@@ -71,7 +75,7 @@
                 </button>
 
                 <div *ngIf="userMenuExpanded"
-                     class="shell-header-profile-dropdown"
+                     [ngClass]="showUserNameOnHeader ? 'shell-header-profile-dropdown-with-username' : 'shell-header-profile-dropdown'"
                      role="menu"
                      aria-orientation="vertical"
                      aria-labelledby="user-menu">

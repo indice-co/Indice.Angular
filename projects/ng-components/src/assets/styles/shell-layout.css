@@ -66,6 +66,14 @@
     @apply h-6 w-6;
   }
 
+  .shell-header-profile {
+    @apply flex gap-3 items-center;
+  }
+
+  .shell-header-profile .shell-header-profile-userName {
+    @apply text-white text-xs;
+  }
+
   .shell-header-profile-dropdown-button {
     @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
     focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
@@ -73,6 +81,10 @@
 
   .shell-header-profile-dropdown {
     @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+  }
+
+  .shell-header-profile-dropdown-with-username {
+    @apply z-50 origin-top-right absolute right-0 mt-24 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
 

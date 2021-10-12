@@ -18,6 +18,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   @Input('section-links') sectionLinksPath = 'main';
   // tslint:disable-next-line:no-input-rename
   @Input('profile-menu') profileMenuVisible = true;
+  @Input('show-userName') showUserNameOnHeader = false;
   @Input() border = true;
   public sectionLinks: NavLink[] = [];
   public mobileMenuExpanded = false;
@@ -41,6 +42,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log(this.showUserNameOnHeader);
+    
     if (this.routerSub$) {
       this.routerSub$.unsubscribe();
     }

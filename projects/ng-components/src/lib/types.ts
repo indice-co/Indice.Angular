@@ -114,6 +114,7 @@ export interface IShellConfig {
   appLogo: string;
   appLogoAlt: string;
   showHeader: boolean;
+  showUserNameOnHeader: boolean;
   customHeaderComponent?: any;
   showFooter: boolean;
   customFooterComponent?: any;
@@ -124,6 +125,7 @@ export class DefaultShellConfig implements IShellConfig {
   appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
   appLogoAlt = 'your app name here';
   showHeader = true;
+  showUserNameOnHeader = false;
   showFooter = true;
   fluid = false;
 }
