@@ -103,6 +103,7 @@ export class AuthService {
         this.renewToken().then(renewUser => {
           this.user = renewUser;
           this.silentRenewInProgress = false;
+          this.clearState();
         }, (error) => {
           //console.log('silentRenew failed', error);
           throwError(error);
