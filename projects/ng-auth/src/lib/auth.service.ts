@@ -74,6 +74,7 @@ export class AuthService {
   // If signinRedirect is given a parameter that has a state property,
   // the value of that property will be reconstructed later on the User object.
   startAuthentication(data?: any): Promise<void> {
+    this.clearState();
     // https://github.com/IdentityModel/oidc-client-js/issues/100 (data property)
     return this.manager.signinRedirect({ data })
       .catch(error => {
@@ -130,6 +131,7 @@ export class AuthService {
   completeSignout(): Promise<void> {
     return this.manager.signoutRedirectCallback().then(user => {
       this.user = null;
+      this.clearState();
     }, error => {
       //console.log('completeSignout failed', error);
     });

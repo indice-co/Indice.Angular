@@ -16,20 +16,27 @@ export class AuthHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authRequest = null;
-    if (request.url.indexOf('i18n') >= 0 ) {
+    if (request.url.indexOf('i18n') >= 0) {
       authRequest = request;
     } else {
-      authRequest = request.clone({ headers: request.headers.set('Authorization', this.authService.getAuthorizationHeaderValue()),
-      params: request.params });
+      authRequest = request.clone({
+        headers: request.headers.set('Authorization', this.authService.getAuthorizationHeaderValue()),
+        params: request.params
+      });
     }
     return next.handle(authRequest).pipe(finalize(() => {
     }), catchError((err: any) => {
-        // console.log(' error caught in interceptor : ', err);
-        // return the error to the method that called it
-        if (err && err.status && (err.status === 401 || err.status === 403)) {
-        this.router.navigate(['/forbidden']);
+      // console.log(' error caught in interceptor : ', err);
+      // return the error to the method that called it
+      if (err && err.status && (err.status === 401 || err.status === 403)) {
+        if (err.status === 401) {
+          this.authService.removeUser();
+          this.authService.startAuthentication();
+        } else {
+          this.router.navigate(['/forbidden']);
+        }
       }
-        throw(err);
+      throw (err);
     }));
   }
 }

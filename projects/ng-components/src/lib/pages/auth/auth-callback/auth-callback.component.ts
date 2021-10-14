@@ -19,10 +19,11 @@ export class AuthCallbackComponent implements OnInit {
       self.authService.isLoggedIn().subscribe((result: any) => {
         // i'm sorry!
         if (!result) {
+          self.authService.clearState();
           self.router.navigate(['/unauthorized']);
           return;
         }
-        let navigationUrl = '/dashboard';
+        let navigationUrl = '/';
         if (this.route.data) {
           this.route.data.subscribe(data => {
             if(data['navigationUrl'] != undefined){

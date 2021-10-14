@@ -14,8 +14,11 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const obs = this.authService.isLoggedIn();
     obs.subscribe((result: any) => {
       if (!result) {
+        this.authService.clearState();
         this.authService.startAuthentication({ url: state.url });
       }
+    }, err => {
+      this.authService.clearState();
     });
     return obs;
   }
@@ -24,8 +27,11 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const obs = this.authService.isLoggedIn();
     obs.subscribe((result: any) => {
       if (!result) {
+        this.authService.clearState();
         this.authService.startAuthentication({ url: state.url });
       }
+    }, err => {
+      this.authService.clearState();
     });
     return obs;
   }
