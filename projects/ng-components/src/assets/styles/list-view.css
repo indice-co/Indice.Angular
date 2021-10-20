@@ -48,11 +48,11 @@
   }
 
   .list-view-td-full {
-    @apply w-full px-6 py-4 whitespace-normal break-all;
+    @apply w-full px-6 py-4 whitespace-normal break-words;
   }
 
   .list-view-td-half {
-    @apply w-full sm:w-1/2 px-6 py-4 whitespace-normal break-all;
+    @apply w-full sm:w-1/2 px-6 py-4 whitespace-normal break-words;
   }
 
   .details-button {
