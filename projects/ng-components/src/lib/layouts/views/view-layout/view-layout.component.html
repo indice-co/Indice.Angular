@@ -65,7 +65,7 @@
               </svg>-->
             </div>
             <input id="search" #search class="search-input" [placeholder]="searchPlaceholder"
-                   type="search" name="search" (input)="searchActionType(search.value)">
+                   type="search" name="search" (input)="searchActionType(search.value)" (onsearch)="handleClear($event)">
           </div>
           <button type="button"  href="#" class="btn-view-header rounded-l-none" [title]="action.tooltip" (click)="searchActionClick(action, search.value)">
             <i [class]="action.icon"></i>
