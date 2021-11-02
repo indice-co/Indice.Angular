@@ -64,6 +64,12 @@ export class ViewLayoutComponent implements OnInit {
     });
   }
 
+  public handleClear(event: any): void {
+    console.log('handle clear!!!');
+    event.stopPropagation();
+    this.onSearch.emit(event.target?.value);
+  }
+
   public switchViewActionClick(action: SwitchViewAction | any): void {
     // console.log('switchViewActionClick', action);
     this.view = action.param;
