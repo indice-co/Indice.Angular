@@ -175,7 +175,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public sortChanged(sort: string): void {
-    //console.log('base-list sortChanged', sort);
+    // console.log('base-list sortChanged', sort);
     if (this.sort !== sort) {
       this.page = 1;
       this.sort = sort;

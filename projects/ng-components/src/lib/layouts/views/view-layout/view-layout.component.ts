@@ -20,7 +20,7 @@ export class ViewLayoutComponent implements OnInit {
   @Input() actions: ViewAction[] | null = null;
   @Input() busy = false;
   // tslint:disable-next-line:no-input-rename
-  @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
+  @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση';
   @Input() view: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
@@ -38,7 +38,7 @@ export class ViewLayoutComponent implements OnInit {
   }
 
   public routerLinkActionClick(action: RouterViewAction | any): void {
-    //console.log('routerLinkActionClick', action);
+    // console.log('routerLinkActionClick', action);
     if (action.outlet) {
       this.router$.navigate(['', { outlets: { rightpane: action.link } }]);
     } else {
@@ -65,7 +65,7 @@ export class ViewLayoutComponent implements OnInit {
   }
 
   public switchViewActionClick(action: SwitchViewAction | any): void {
-    //console.log('switchViewActionClick', action);
+    // console.log('switchViewActionClick', action);
     this.view = action.param;
     if (action && action.param) {
       this.router$.navigate([], { queryParams: { view: action.param }, queryParamsHandling: 'merge', skipLocationChange: false });

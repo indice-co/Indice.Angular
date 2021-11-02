@@ -93,7 +93,7 @@
   }
 
   .mobile-menu-button {
-    @apply bg-gray-800 inline-flex items-center justify-center p-2 rounded-sm text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
+    @apply inline-flex items-center justify-center p-2 rounded-sm text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
   }
 
   .mobile-menu-container {
