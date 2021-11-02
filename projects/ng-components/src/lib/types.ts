@@ -55,6 +55,7 @@ export class ListViewType {
   public static Tiles = 'tiles';
   public static Table = 'table';
   public static Map = 'map';
+  public static Gallery = 'gallery';
 }
 
 export class RouterViewAction extends ViewAction {

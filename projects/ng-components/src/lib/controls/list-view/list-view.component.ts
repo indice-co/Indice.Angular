@@ -120,9 +120,12 @@ export class ListViewComponent implements OnChanges {
   // helpers
   private setTilesDeckClass(tiles: number): void {
     if (tiles >= 1 && tiles <= 4) {
-      this.tilesDeckClass = `cards-deck-${tiles}`;
+      this.tilesDeckClass = this.view !== ListViewType.Gallery ? `cards-deck-${tiles}` : `gallery-deck-${tiles}`
     } else {
-      this.tilesDeckClass = 'cards-deck-3';
+      this.tilesDeckClass = 
+      this.view !== ListViewType.Gallery 
+      ? 'cards-deck-3'
+      : this.items && this.items.length == 0 ? 'gallery-deck' : 'gallery-deck-3'
     }
   }
 
