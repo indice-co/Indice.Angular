@@ -115,7 +115,7 @@ export interface IShellConfig {
   appLogo: string;
   appLogoAlt: string;
   showHeader: boolean;
-  showUserNameOnHeader: boolean;
+  showUserNameOnHeader?: boolean;
   customHeaderComponent?: any;
   showFooter: boolean;
   customFooterComponent?: any;
