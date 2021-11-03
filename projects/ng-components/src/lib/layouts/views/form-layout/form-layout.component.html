@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="form-content-container">
-    <div class="form-content-container-inner">
+    <div [ngClass]="{'form-content-container-inner': actions}">
       <ng-content></ng-content>
     </div>
   </div>

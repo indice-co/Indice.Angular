@@ -102,7 +102,7 @@
               <ng-container *ngIf="detailsSectionSupported">
                 <tr *ngIf="item.detailsExpanded">
                   <td [colSpan]="columns.length + 1"
-                      class="list-view-td">
+                      class="list-view-td bg-gray-100">
                     <ng-template [ngTemplateOutlet]="detailsTemplate.template"
                                  [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                   </td>
