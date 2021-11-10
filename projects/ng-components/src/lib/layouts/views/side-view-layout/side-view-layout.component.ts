@@ -22,9 +22,11 @@ export class SideViewLayoutComponent implements OnInit {
   @Input('cancel-label') cancelLabel = 'Ακύρωση';
   // tslint:disable-next-line:no-input-rename
   @Input('cancel-show') cancelShow = true;
+  // tslint:disable-next-line:no-input-rename
+  @Input('force-location-back') forceLocationBack = false;
   // @Output() close = new EventEmitter<any>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
-  @Output() ok: EventEmitter<boolean>  = new EventEmitter();
+  @Output() ok: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private location: Location, private router: Router) { }
 
@@ -33,9 +35,13 @@ export class SideViewLayoutComponent implements OnInit {
 
   public closeSidePane(): void {
     if (this.returnPath) {
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => this.router.navigateByUrl(this.returnPath || '/'));
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigateByUrl(this.returnPath || '/'));
     } else {
-      this.location.back();
+      if (this.router.url.split('/(')[0] && !this.forceLocationBack) {
+        this.router.navigateByUrl(this.router.url.split('/(')[0]);
+      } else {
+        this.location.back();
+      }
     }
   }
 
@@ -51,7 +57,7 @@ export class SideViewLayoutComponent implements OnInit {
 
   public emitOK(): void {
     this.ok.emit(true);
-    if(this.closeOnOk) {
+    if (this.closeOnOk) {
       this.closeSidePane();
     }
   }
