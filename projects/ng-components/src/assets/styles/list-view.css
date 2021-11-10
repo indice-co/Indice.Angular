@@ -48,7 +48,7 @@
   }
 
   .list-view-td-full {
-    @apply w-full px-6 py-4 whitespace-normal break-words;
+    @apply w-full px-6 py-4 break-all;
   }
 
   .list-view-td-half {
