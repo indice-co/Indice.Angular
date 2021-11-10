@@ -125,7 +125,7 @@ export class ListViewComponent implements OnChanges {
       this.tilesDeckClass = 
       this.view !== ListViewType.Gallery 
       ? 'cards-deck-3'
-      : this.items && this.items.length == 0 ? 'gallery-deck' : 'gallery-deck-3'
+      : this.items && this.items.length !== 0 ? 'gallery-deck-3' : 'gallery-deck'
     }
   }
 
