@@ -7,15 +7,15 @@ import { AuthService } from '@indice/ng-auth';
   templateUrl: './logged-out.component.html'
 })
 export class LoggedOutComponent implements OnInit {
-  status = 'working on it, please give me a sec...';
-  finished = false;
   constructor(@Inject(AuthService) private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.authService.completeSignout().then(() => {
+  public status = 'working on it, please give me a sec...';
+  public finished = false;
+
+  public ngOnInit(): void {
+    this.authService.removeUser().subscribe(() => {
       this.status = 'Thank you!';
       this.finished = true;
     });
   }
-
 }

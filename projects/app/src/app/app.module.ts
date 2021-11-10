@@ -1,4 +1,4 @@
-import { IShellConfig } from './../../../ng-components/src/lib/types';
+import { DefaultShellConfig, IShellConfig } from './../../../ng-components/src/lib/types';
 import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService, ModalService } from '../../../ng-components/src/public-api';
 
 import { NgModule } from '@angular/core';
@@ -25,17 +25,6 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SampleModalComponent } from './components/sample-modals/sample-modal.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 
-class ShellConfig implements IShellConfig {
-  appLogo!: string;
-  appLogoAlt!: string;
-  customHeaderComponent?: any;
-  customFooterComponent?: any;
-  fluid = false;
-  showFooter = true;
-  showHeader = true;
-  //customHeaderComponent = HeaderComponent;
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +48,7 @@ class ShellConfig implements IShellConfig {
     ModalService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     { provide: AUTH_SETTINGS, useFactory: () => environment.auth_settings },
-    { provide: SHELL_CONFIG, useFactory: () => new ShellConfig() },
+    { provide: SHELL_CONFIG, useFactory: () => new DefaultShellConfig() },
     { provide: APP_LINKS, useFactory: () => new AppLinks() },
   ],
   bootstrap: [AppComponent],

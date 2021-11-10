@@ -24,7 +24,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
   protected routeSubject: Observable<Event>;
-  protected userSubject: BehaviorSubject<any>;
+  protected userSubject: Observable<User | null>;
   protected routerSub$: Subscription | null = null;
   protected userSub$: Subscription | null = null;
   protected statusSub$: Subscription | null = null;
@@ -38,12 +38,12 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     @Inject(APP_LINKS) public links: any
   ) {
     this.routeSubject = this.router.events.pipe(filter((event) => event instanceof NavigationStart));
-    this.userSubject = this.authService.userStatus;
+    this.userSubject = this.authService.user$;
   }
 
   ngOnDestroy(): void {
     console.log(this.showUserNameOnHeader);
-    
+
     if (this.routerSub$) {
       this.routerSub$.unsubscribe();
     }
@@ -62,14 +62,12 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
     });
-    this.authService.loadUser().then(
-      (user) => {
-        console.log(user);
-        this.setCurrentUser(user);
-      },
-      (error) => {
-        //console.log(error);
-      }
+    this.authService.loadUser().subscribe((user) => {
+      console.log(user);
+      this.setCurrentUser(user);
+    }, (error) => {
+      //console.log(error);
+    }
     );
     // Detect user changes and display / or not user info accordingly...
     this.userSub$ = this.userSubject.subscribe((user: any) => {
@@ -87,7 +85,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     if (event) {
       event.preventDefault();
     }
-    this.authService.startAuthentication();
+    this.authService.signinRedirect();
   }
 
   private setCurrentUser(user: any): void {

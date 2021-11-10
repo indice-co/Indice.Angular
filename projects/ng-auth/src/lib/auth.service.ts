@@ -1,144 +1,154 @@
-import { Inject, Injectable, EventEmitter } from '@angular/core';
-import { UserManager, UserManagerSettings, User, Profile } from 'oidc-client';
-import { Observable, from, throwError, interval, BehaviorSubject } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+
+import { Profile, SignoutResponse, User, UserManager } from 'oidc-client';
+import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
 import { IAuthSettings } from './types';
 
-// https://www.scottbrady91.com/Angular/SPA-Authentiction-using-OpenID-Connect-Angular-CLI-and-oidc-client
+/** https://github.com/IdentityModel/oidc-client-js/wiki */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userManager: UserManager;
+  private user: User = null as any;
+  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
-  public manager: UserManager;
-  userLoadededEvent: EventEmitter<User | null> = new EventEmitter<User | null>();
-  public userStatus: BehaviorSubject<any> = new BehaviorSubject(null);
-  private user: User | null = null;
-  private silentRenewSub: any = null;
-  private silentRenewInProgress = false;
-
-  constructor(@Inject(AUTH_SETTINGS) private authSettings: IAuthSettings) {
-    this.manager = new UserManager(authSettings);
-    this.monitorTokenExpiration();
-    this.manager.getUser().then(user => {
-      this.user = user;
-      this.userLoadededEvent.emit(user);
-    });
-    this.manager.events.addUserLoaded((user) => {
-      this.user = user;
-    });
+  constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
+    this.userManager = new UserManager(authSettings);
+    this.loadUser().subscribe();
+    this.userManager.events.addUserLoaded((user: User) => this.user = user);
+    this.userManager.events.addAccessTokenExpiring(() => this.signinSilent().subscribe((user: User) => this.user = user, (error: any) => throwError(error)));
+    this.userManager.events.addUserSignedOut(() => this.removeUser());
   }
 
-  async loadUser(): Promise<User | null> {
-    return await this.manager.getUser().then(user => {
-      this.user = user;
+  public user$ = this.userSubject.asObservable();
+
+  public loadUser(): Observable<User | null> {
+    return from(this.userManager.getUser()).pipe(map((user: User | null) => {
+      if (user) {
+        this.user = user;
+        this.userSubject.next(user);
+        this.userSubject.complete();
+      }
       return user;
-    });
+    }));
   }
 
-  async removeUser(): Promise<void> {
-    // console.log('auth service remove user');
-    const _ = await this.manager.removeUser();
-    return await this.clearState();
+  public isLoggedIn(): Observable<boolean> {
+    return from(this.userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
   }
 
-  currentUser(): User | null {
+  public getUserProfile(): Profile | undefined {
+    return this.user?.profile || undefined;
+  }
+
+  public getEmail(): string | undefined {
+    return this.getUserProfile()?.email;
+  }
+
+  public getSubjectId(): string | undefined {
+    return this.getUserProfile()?.sub;
+  }
+
+  public getFullName(): string | undefined {
+    const userProfile = this.getUserProfile();
+    if (userProfile?.given_name && userProfile?.family_name) {
+      return `${userProfile.given_name} ${userProfile.family_name}`;
+    }
+    return undefined;
+  }
+
+  public getUserName(): string | undefined {
+    return this.getUserProfile()?.name;
+  }
+
+  public getDisplayName(): string {
+    return this.getFullName() || this.getEmail() || this.getUserName() || '';
+  }
+
+  public getCurrentUser(): User {
     return this.user;
   }
 
-  isLoggedIn(): Observable<boolean> {
-    return from(this.manager.getUser()).pipe(map<User | null, boolean>((user: User | null, index: number) => {
-        if (user) {
-          return !user.expired;
-        } else {
-          return false;
-        }
-      }));
+  public isAdmin(): boolean {
+    return this.getUserProfile()?.admin === true || this.hasRole('Administrator');
   }
 
-  getProfile(): Profile | null {
-    return this.user ? this.user.profile : null;
-  }
-
-  getAuthorizationHeaderValue(): string {
-    if (this.user != null && this.user !== undefined) {
+  public getAuthorizationHeaderValue(): string {
+    if (this.user) {
       return `${this.user.token_type} ${this.user.access_token}`;
-    } else {
-      // console.log('getAuthorizationHeaderValue returned null');
-      return '';
     }
+    return '';
   }
 
-  // https://github.com/IdentityModel/oidc-client-js/issues/339
-  // If signinRedirect is given a parameter that has a state property,
-  // the value of that property will be reconstructed later on the User object.
-  startAuthentication(data?: any): Promise<void> {
-    this.clearState();
-    // https://github.com/IdentityModel/oidc-client-js/issues/100 (data property)
-    return this.manager.signinRedirect({ data })
-      .catch(error => {
-        //console.log(error);
-      });
+  public signoutRedirect(): void {
+    this.userManager.signoutRedirect();
   }
 
-  completeAuthentication(): Promise<void> {
-    const p = this.manager.signinRedirectCallback().then(user => {
-      this.user = user;
-      this.userStatus.next(user);
-    }, error => {
+  public removeUser(): Observable<void> {
+    this.userManager.clearStaleState();
+    return from(this.userManager.removeUser());
+  }
+
+  public signoutRedirectCallback(): Observable<SignoutResponse> {
+    return from(this.userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
+      this.user = null as any;
+      this.userSubject.next(null);
+      this.userSubject.complete();
+      return response;
+    }, (error: any) => {
       throwError(error);
-    });
-    return p;
+    }));
   }
 
-  private monitorTokenExpiration(): void {
-    if (this.silentRenewInProgress) {
-      return;
-    }
-    const monitor = interval(20000);
-    this.silentRenewSub = monitor.subscribe( i => {
-      if (this.user && this.user.expires_in <= 500) {
-        this.silentRenewInProgress = true;
-        this.renewToken().then(renewUser => {
-          this.user = renewUser;
-          this.silentRenewInProgress = false;
-          this.clearState();
-        }, (error) => {
-          //console.log('silentRenew failed', error);
-          throwError(error);
-        });
+  public signinRedirect(location?: string | undefined): void {
+    this.userManager
+      .signinRedirect({ data: { url: location || '' } })
+      .catch((error: any) => { });
+  }
+
+  public signinRedirectCallback(): Observable<User> {
+    return from(this.userManager.signinRedirectCallback()).pipe(map((user: User) => {
+      this.user = user;
+      this.userSubject.next(this.user);
+      this.userSubject.complete();
+      return user;
+    }, (error: any) => {
+      throwError(error);
+      return null;
+    }));
+  }
+
+  public signinSilent(): Observable<User> {
+    return from(this.userManager.signinSilent()).pipe(map((user: User) => {
+      this.userSubject.next(user);
+      this.userSubject.complete();
+      return user;
+    }));
+  }
+
+  public signinSilentCallback(): Observable<User | undefined> {
+    return from(this.userManager.signinSilentCallback()).pipe(map((user: User | undefined) => {
+      if (user) {
+        this.user = user;
       }
-    });
+      this.userSubject.next(this.user);
+      this.userSubject.complete();
+      return user;
+    }, (error: any) => {
+      throwError(error);
+      return null;
+    }));
   }
 
-  public renewToken(): Promise<User> {
-    return this.manager.signinSilent();
-  }
-
-  async startSignout(): Promise<void> {
-    try {
-      return this.manager.signoutRedirect();
-    } catch (error) {
-      //console.log(error);
+  private hasRole(roleName: string): boolean {
+    const roleClaim = this.getUserProfile()?.role as string;
+    if (roleClaim && Array.isArray(roleClaim)) {
+      const roles = Array.from(roleClaim);
+      return roles.indexOf(roleName) !== -1;
     }
-  }
-
-  clearState(): Promise<void> {
-    // console.log('clearing stale state');
-    return this.manager.clearStaleState();
-  }
-
-  completeSignout(): Promise<void> {
-    return this.manager.signoutRedirectCallback().then(user => {
-      this.user = null;
-      this.clearState();
-    }, error => {
-      //console.log('completeSignout failed', error);
-    });
-  }
-
-  getClientSettings(): UserManagerSettings {
-    return this.authSettings;
+    return roleClaim === roleName;
   }
 }
