@@ -37,8 +37,10 @@ export class SideViewLayoutComponent implements OnInit {
     if (this.returnPath) {
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigateByUrl(this.returnPath || '/'));
     } else {
-      if (this.router.url.split('/(')[0] && !this.forceLocationBack) {
+      if ((this.router.url.split('/(')[0] !== this.router.url) && !this.forceLocationBack) {
         this.router.navigateByUrl(this.router.url.split('/(')[0]);
+      } else if ((this.router.url.split('(')[0] !== this.router.url) && !this.forceLocationBack) {
+        this.router.navigateByUrl(this.router.url.split('(')[0]);
       } else {
         this.location.back();
       }

@@ -15,7 +15,7 @@ export class AuthCallbackComponent implements OnInit {
   public ngOnInit(): void {
     this.authService.signinRedirectCallback().subscribe((user) => {
       if (user) {
-        this.router.navigateByUrl(user.state.url || '/');
+        this.router.navigateByUrl(user.state?.url || '/');
       }
     });
   }
