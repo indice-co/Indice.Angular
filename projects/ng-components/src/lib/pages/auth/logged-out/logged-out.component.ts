@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '@indice/ng-auth';
+import { Component, Inject, OnInit } from '@angular/core';
+
 
 @Component({
   // tslint:disable-next-line:component-selector

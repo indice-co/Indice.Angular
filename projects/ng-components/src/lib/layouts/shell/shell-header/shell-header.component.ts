@@ -1,11 +1,11 @@
+import { AuthService } from '@indice/ng-auth';
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { User } from 'oidc-client';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavLink } from '../../../types';
-import { AuthService } from '@indice/ng-auth';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, isObservable, observable, Observable, of } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,13 +18,13 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   @Input('section-links') sectionLinksPath = 'main';
   // tslint:disable-next-line:no-input-rename
   @Input('profile-menu') profileMenuVisible = true;
+  // tslint:disable-next-line:no-input-rename
   @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
   @Input() border = true;
   public sectionLinks: NavLink[] = [];
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
   protected routeSubject: Observable<Event>;
-  protected userSubject: Observable<User | null>;
   protected routerSub$: Subscription | null = null;
   protected userSub$: Subscription | null = null;
   protected statusSub$: Subscription | null = null;
@@ -38,7 +38,6 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     @Inject(APP_LINKS) public links: any
   ) {
     this.routeSubject = this.router.events.pipe(filter((event) => event instanceof NavigationStart));
-    this.userSubject = this.authService.user$;
   }
 
   ngOnDestroy(): void {
@@ -65,13 +64,13 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.authService.loadUser().subscribe((user) => {
       console.log(user);
       this.setCurrentUser(user);
-    }, (error) => {
-      //console.log(error);
+    }, error => {
+      console.error(error);
     }
     );
     // Detect user changes and display / or not user info accordingly...
-    this.userSub$ = this.userSubject.subscribe((user: any) => {
-      //console.log('ShellHeaderComponent user subscription');
+    this.userSub$ = this.authService.user$.subscribe((user: any) => {
+      // console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
     });
   }
@@ -91,8 +90,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   private setCurrentUser(user: any): void {
     this.user = user;
     if (this.user && this.user.profile) {
-      this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`;
-      //console.log('load user', this.avatarName);
+      this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`.toUpperCase();
+      // console.log('load user', this.avatarName);
     }
   }
 }
