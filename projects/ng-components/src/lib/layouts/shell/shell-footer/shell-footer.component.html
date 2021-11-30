@@ -6,7 +6,7 @@
           <img class="shell-footer-logo-h" src="/assets/images/branding/indice.png" alt="INDICE logo" />
           <nav class="mt-4">
             <ul class="space-y-2">
-              <ng-container *ngFor="let link of links.brand">
+              <ng-container *ngFor="let link of links.brand | async">
                 <li>
                   <a [href]="link.path" class="shell-footer-link">{{ link.text }}</a>
                 </li>
@@ -18,7 +18,7 @@
           <h5 class="shell-footer-section-title">Legal</h5>
           <nav class="mt-4">
             <ul class="grid lg:grid-cols-2">
-              <ng-container *ngFor="let link of links.legal">
+              <ng-container *ngFor="let link of links.legal | async">
                 <li class="mb-2">
                   <a [href]="link.path" class="shell-footer-link">{{ link.text }}</a>
                 </li>

@@ -13,7 +13,7 @@
         </div>
 
         <div class="shell-header-link-container">
-          <ng-container *ngFor="let link of sectionLinks">
+          <ng-container *ngFor="let link of sectionLinks | async">
             <a href="#"
                [routerLink]="[link.path]"
                [attr.target]="link.external ? '_blank' : '_self'"
@@ -28,7 +28,7 @@
         <div class="shell-header-md-visible">
           <div class="shell-header-links-no-grow-container">
 
-            <ng-container *ngFor="let link of links.profileActions">
+            <ng-container *ngFor="let link of links.profileActions | async">
               <a class="shell-header-menu-rounded-button"
                  (clickOutside)="onClickOutside($event)"
                  [attr.href]="link.path"
@@ -80,7 +80,7 @@
                      aria-orientation="vertical"
                      aria-labelledby="user-menu">
                   <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
-                  <ng-container *ngFor="let link of links.profile">
+                  <ng-container *ngFor="let link of links.profile | async">
                     <a [attr.href]="link.path"
                        [attr.target]="link.external ? '_blank' : '_self'"
                        [routerLinkActive]="['nav-link-profile-active']"
@@ -139,7 +139,7 @@
        *ngIf="mobileMenuExpanded"
        id="mobile-menu">
     <div class="mobile-menu-link-container">
-      <ng-container *ngFor="let link of sectionLinks">
+      <ng-container *ngFor="let link of sectionLinks | async">
         <a [attr.href]="link.path"
            [attr.target]="link.external ? '_blank' : '_self'"
            [routerLinkActive]="['nav-link-mobile-active']"
@@ -185,7 +185,7 @@
         </button>
       </div>
       <div class="mobile-menu-link-container">
-        <ng-container *ngFor="let link of links.profile">
+        <ng-container *ngFor="let link of links.profile | async">
           <a [attr.href]="link.path"
              [attr.target]="link.external ? '_blank' : '_self'"
              [routerLinkActive]="['nav-link-mobile-active']"

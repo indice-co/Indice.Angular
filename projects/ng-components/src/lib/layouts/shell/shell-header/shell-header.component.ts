@@ -21,7 +21,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
   @Input() border = true;
-  public sectionLinks: NavLink[] = [];
+  public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
   protected routeSubject: Observable<Event>;
@@ -56,7 +56,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sectionLinks = this.links[this.sectionLinksPath] as NavLink[];
+    this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
     this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
