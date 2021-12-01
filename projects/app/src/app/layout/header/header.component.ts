@@ -1,3 +1,5 @@
+import { APP_LINKS, IAppLinks, ShellHeaderComponent } from '@indice/ng-components';
+import { AuthService } from '@indice/ng-auth';
 import {
   Component,
   ChangeDetectorRef,
@@ -6,9 +8,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@indice/ng-auth';
-import { ShellHeaderComponent } from '@indice/ng-components';
-import { APP_LINKS } from '@indice/ng-components';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -24,16 +23,16 @@ export class HeaderComponent
 
   constructor(@Inject(AuthService) authService: any,
               @Inject(Router) router: Router,
-              @Inject(APP_LINKS) links: any,
+              @Inject(APP_LINKS) links: IAppLinks,
               private cdRef: ChangeDetectorRef) {
-    super(authService, router,null, links);
+    super(authService, router, null, links);
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     // Subscribe to the same subject (userSubject here)
-    this.headerUserSub$ = this.userSubject.subscribe((event: any) => {
-      //console.log('HeaderComponent user subscription');
+    this.headerUserSub$ = this.authService.user$.subscribe((event: any) => {
+      // console.log('HeaderComponent user subscription');
     });
     const observable = new Observable((subscriber) => {
       subscriber.next(1);

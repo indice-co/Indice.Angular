@@ -1,10 +1,12 @@
+import { Observable } from 'rxjs';
+
 export interface IAppLinks {
-  public: NavLink[];
-  main: NavLink[];
-  profile: NavLink[];
-  profileActions: NavLink[];
-  legal: NavLink[];
-  brand: NavLink[];
+  public: Observable<NavLink[]>;
+  main: Observable<NavLink[]>;
+  profile: Observable<NavLink[]>;
+  profileActions: Observable<NavLink[]>;
+  legal: Observable<NavLink[]>;
+  brand: Observable<NavLink[]>;
 }
 
 
