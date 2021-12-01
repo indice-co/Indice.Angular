@@ -24,10 +24,10 @@
       </div>
     </div>
     <div *ngIf="showActions" class="side-view-layout-actions-container">
-      <button *ngIf="cancelShow" (click)="emitCancel()" type="button" class="side-view-layout-action-button">
+      <button *ngIf="cancelShow" (click)="emitCancel()" type="button" class="side-view-layout-action-button-cancel">
         {{cancelLabel}}
       </button>
-      <button *ngIf="okShow" (click)="emitOK()" class="side-view-layout-action-button-default" [disabled]="disabled">
+      <button *ngIf="okShow" (click)="emitOK()" class="side-view-layout-action-button-submit" [disabled]="disabled">
         {{okLabel}}
       </button>
     </div>
