@@ -8,6 +8,10 @@
     @apply focus:outline-none bg-transparent text-gray-700 text-sm hover:text-gray-800 px-2.5 py-1.5 border border-gray-500 hover:border-gray-600 rounded-sm;
   }
 
+  .btn-outline:disabled {
+    @apply focus:outline-none bg-transparent text-gray-400 text-sm px-2.5 py-1.5 border border-gray-300 rounded-sm;
+  }
+
 
   .btn-view-header {
     @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-white transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-900;
