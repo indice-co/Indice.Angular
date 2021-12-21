@@ -9,7 +9,7 @@
   }
 
   .btn-outline:disabled {
-    @apply focus:outline-none bg-transparent text-gray-400 text-sm px-2.5 py-1.5 border border-gray-300 rounded-sm;
+    @apply focus:outline-none bg-transparent text-gray-400 text-sm px-2.5 py-1.5 border border-gray-300 rounded-sm cursor-not-allowed;
   }
 
 
