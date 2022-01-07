@@ -1,34 +1,34 @@
-<div class="shell-container active-side-pane">
-  <div class="shell-header-container"
-       *ngIf="activeConfig.showHeader">
-    <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
+<div *ngIf="loaded" [style.display]="!loaded ? 'none':'block'" class="shell-container active-side-pane">
+  <div class="shell-header-container" *ngIf="activeConfig.showHeader">
+      <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
+
       <ng-container *ngIf="activeConfig.customHeaderComponent">
-        <div appDynamicComponentHost
-             hostName="Header"></div>
+        <div appDynamicComponentHost ="Header"></div>
       </ng-container>
-      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent"
-                        [show-userName]="activeConfig.showUserNameOnHeader"></lib-shell-header>
+
+      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent" [show-userName]="activeConfig.showUserNameOnHeader"></lib-shell-header>
     </div>
   </div>
+
   <main [class]="activeConfig.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
     <div [class]="activeConfig.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
       <router-outlet></router-outlet>
     </div>
   </main>
-  <div class="shell-footer-container"
-       *ngIf="activeConfig.showFooter">
+
+  <div class="shell-footer-container" *ngIf="activeConfig.showFooter">
     <div [class]="activeConfig.fluid ? 'shell-footer-container-inner-fluid' : 'shell-footer-container-inner'">
       <ng-container *ngIf="activeConfig.customFooterComponent">
-        <div appDynamicComponentHost
-             hostName="Footer"></div>
+        <div appDynamicComponentHost hostName="Footer"></div>
       </ng-container>
       <lib-shell-footer *ngIf="!activeConfig.customFooterComponent"></lib-shell-footer>
     </div>
   </div>
+
   <lib-side-pane #rightPane>
-    <router-outlet name="rightpane"
-                   (activate)="rightPane.onSidePaneActivated($event)"
-                   (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
+    <router-outlet name="rightpane" (activate)="rightPane.onSidePaneActivated($event)" (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
   </lib-side-pane>
+
   <lib-toaster-container></lib-toaster-container>
+
 </div>

@@ -19,6 +19,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
   public showRightPaneSM = false;
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
+  public loaded = false;
   constructor(
     @Inject(DOCUMENT) private document: any,
     private router: Router,
@@ -58,6 +59,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initCustomComponents();
+    this.loaded = true;
   }
 
   private initCustomComponents(): void {
