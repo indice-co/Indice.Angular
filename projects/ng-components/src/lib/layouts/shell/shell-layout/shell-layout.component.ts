@@ -1,10 +1,10 @@
 import { SHELL_CONFIG } from './../../../tokens';
 import { IShellConfig, DefaultShellConfig } from './../../../types';
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, ViewContainerRef, QueryList, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked } from '@angular/core';
 import { DOCUMENT, Location } from '@angular/common';
 import { ActivationStart, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 
@@ -13,7 +13,7 @@ import { ComponentLoaderFactory } from '../../../services/component-loader/compo
   selector: 'lib-shell-layout',
   templateUrl: './shell-layout.component.html',
 })
-export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective)
   dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
   public showRightPaneSM = false;
@@ -31,6 +31,10 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
       config = new DefaultShellConfig();
     }
     this.activeConfig = config;
+  }
+
+  ngAfterViewChecked(): void {
+    setTimeout(() => { this.loaded = true; }, 200);
   }
 
   ngOnInit(): void {
@@ -59,7 +63,6 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initCustomComponents();
-    this.loaded = true;
   }
 
   private initCustomComponents(): void {
