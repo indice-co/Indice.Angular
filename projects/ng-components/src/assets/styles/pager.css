@@ -1,6 +1,6 @@
 @layer components {
   .pager-container {
-    @apply flex items-center justify-between mb-2 sm:mb-4;
+    @apply flex items-center justify-between mb-2;
   }
 
   .pager-container-inner {
@@ -12,7 +12,7 @@
   }
 
   .pager-pages-container {
-    @apply relative z-0 inline-flex rounded-sm;
+    @apply relative z-30 inline-flex rounded-sm;
   }
 
   .pager-button {
@@ -20,10 +20,10 @@
   }
 
   .pager-arrow-button-left {
-    @apply inline-flex relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply hidden sm:inline-flex relative ml-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
   }
 
   .pager-arrow-button-right {
-    @apply inline-flex relative mr-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply hidden sm:inline-flex relative mr-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
   }
 }

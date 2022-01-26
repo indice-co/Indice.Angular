@@ -2,7 +2,7 @@
   <div class="pager-container-inner">
     <div class="inline-flex" *ngIf="sortOptions && sortOptions.length > 0">
       <lib-drop-down-menu [options]="sortOptions" [selected]="sort" (selectedChanged)="sortOptionChanged($event)"></lib-drop-down-menu>
-      <button (click)="toggleSortdir()" class="pager-icon-button">
+      <button (click)="toggleSortdir()" [disabled]="!sort" class="pager-icon-button">
         <span class="sr-only">sort direction</span>
         <span class="inline-block relative">
           <i [class]="sortdirIcon"></i>

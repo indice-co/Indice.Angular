@@ -5,7 +5,7 @@
         <div class="shell-header-links-no-grow-container">
           <div>
             <a href="#"
-               [routerLink]="['/']"><img class="h-8 w-8" style="width:2rem; height: 2rem;" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
+               [routerLink]="['/']"><img class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
           </div>
         </div>
 
@@ -78,11 +78,11 @@
                      aria-labelledby="user-menu">
                   <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
                   <ng-container *ngFor="let link of links.profile | async">
-                    <a [attr.href]="link.path"
-                       [attr.target]="link.external ? '_blank' : '_self'"
-                       [routerLinkActive]="['nav-link-profile-active']"
-                       [routerLinkActiveOptions]="{ exact: link.exact }"
-                       class="nav-link-profile">
+                    <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-profile">
+                      {{ link.text }}
+                    </a>
+                    <a *ngIf="!link.external" [routerLink]="link.path" [routerLinkActive]="['nav-link-profile-active']"
+                       [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-profile">
                       {{ link.text }}
                     </a>
                   </ng-container>
@@ -137,24 +137,20 @@
        id="mobile-menu">
     <div class="mobile-menu-link-container">
       <ng-container *ngFor="let link of sectionLinks | async">
-        <a [attr.href]="link.path"
-           [attr.target]="link.external ? '_blank' : '_self'"
-           [routerLinkActive]="['nav-link-mobile-active']"
-           [routerLinkActiveOptions]="{ exact: link.exact }"
-           class="nav-link-mobile">
+        <a *ngIf="link.external"  [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-mobile">
           {{ link.text }}
         </a>
+        <a *ngIf="!link.external"  [routerLink]="link.path" [routerLinkActive]="['nav-link-mobile-active']" [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-mobile">
+          {{ link.text }}
+          </a>
       </ng-container>
       <ng-container *ngIf="!user">
-        <a href="#"
-           (click)="signin($event)"
-           class="nav-link-mobile">
+        <a href="#" (click)="signin($event)" class="nav-link-mobile">
           <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
         </a>
       </ng-container>
     </div>
-    <div class="mobile-menu-user-info-container"
-         *ngIf="user">
+    <div class="mobile-menu-user-info-container" *ngIf="user">
       <div class="mobile-menu-user-info-container-inner">
         <div class="flex-shrink-0">
           <span class="mobile-menu-avatar-container">
@@ -183,8 +179,10 @@
       </div>
       <div class="mobile-menu-link-container">
         <ng-container *ngFor="let link of links.profile | async">
-          <a [attr.href]="link.path"
-             [attr.target]="link.external ? '_blank' : '_self'"
+          <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-mobile">
+            {{ link.text }}
+          </a>
+          <a [routerLink]="link.path"
              [routerLinkActive]="['nav-link-mobile-active']"
              [routerLinkActiveOptions]="{ exact: link.exact }"
              class="nav-link-mobile">

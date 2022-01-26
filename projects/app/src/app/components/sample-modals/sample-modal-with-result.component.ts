@@ -11,7 +11,7 @@ export class SampleModalWithResultComponent {
   public title = 'A title';
   constructor(public modalRef: Modal) {}
 
-  public answer(result: boolean) {
+  public answer(result: boolean): void {
     this.modalRef.hide(result);
   }
 }
