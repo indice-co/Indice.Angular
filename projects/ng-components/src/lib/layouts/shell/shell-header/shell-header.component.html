@@ -78,10 +78,10 @@
                      aria-labelledby="user-menu">
                   <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
                   <ng-container *ngFor="let link of links.profile | async">
-                    <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-profile">
+                    <!-- <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-profile">
                       {{ link.text }}
-                    </a>
-                    <a *ngIf="!link.external" [routerLink]="link.path" [routerLinkActive]="['nav-link-profile-active']"
+                    </a> -->
+                    <a [routerLink]="link.path" [routerLinkActive]="['nav-link-profile-active']"
                        [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-profile">
                       {{ link.text }}
                     </a>
