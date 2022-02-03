@@ -1,5 +1,5 @@
 <button type="button"
-        [ngClass]="value ? 'enabled' : 'disabled'"
+        [ngClass]="value ? (disabled ? 'on disabled' : 'on') : 'off'"
         class="toggle-button"
         role="switch"
         aria-checked="false"
