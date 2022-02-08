@@ -32,15 +32,17 @@ export class ViewLayoutComponent implements OnInit {
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 
   ngOnInit(): void {
-    fromEvent(this.searchInput$?.nativeElement, 'keyup').pipe(
-      map((event: any) => {
-        return event.target.value; // Get input value.
-      }),
-      filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
-      // If character length greater than minimumSearchCharacters setting.
-      debounceTime(1000), // Time in milliseconds between key events.
-      distinctUntilChanged() // If previous query is different from current.
-    ).subscribe();
+    if (this.searchInput$?.nativeElement){
+      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+        map((event: any) => {
+          return event.target.value; // Get input value.
+        }),
+        filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
+        // If character length greater than minimumSearchCharacters setting.
+        debounceTime(1000), // Time in milliseconds between key events.
+        distinctUntilChanged() // If previous query is different from current.
+      ).subscribe();
+    }
   }
 
   public emitActionClick(action: ViewAction): void {

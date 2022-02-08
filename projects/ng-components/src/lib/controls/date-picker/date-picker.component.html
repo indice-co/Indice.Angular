@@ -1,4 +1,5 @@
-<div class="relative flex">
+<div class="relative flex"
+     (clickOutside)="closeCalendar()">
 
   <input type="text"
          #dateInput
@@ -6,12 +7,14 @@
          name="dateInput"
          (blur)="onBlur($event)"
          id="dateInput"
+         (focus)="showCalendar = false"
          [value]="value | date: displayFormat"
          class="w-full focus:ring-0 focus:outline-none rounded-none sm:text-sm border-gray-300  focus:border-0"
          [ngClass]="{'cursor-not-allowed': disabled}"
          [placeholder]="disabled ? '' : placeholder">
 
-  <button class="relative inline-flex items-center px-2 py-2 border border-gray-300 text-sm font-medium rounded-r-sm text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+  <button type="button"
+          class="relative inline-flex items-center px-2 py-2 border border-gray-300 text-sm font-medium rounded-r-sm text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
           [disabled]="disabled"
           (click)="openCalendar()"
           [ngClass]="{'cursor-not-allowed': disabled}">
@@ -20,13 +23,18 @@
 
   <div *ngIf="showCalendar"
        class="bg-gray-100 mt-10 rounded-sm shadow-md p-4 absolute left-0 z-50 w-full"
-       style="height:18rem;min-width:16rem;">
+       style="height:18rem;min-width:16rem;"
+       name="calendar">
     <div class="flex justify-between items-center mb-2">
       <div>
-        <button class="text-lg font-bold text-gray-800"
-                (click)="openYears()">{{monthNames[month]}}</button>
-        <button class="ml-1 text-lg text-gray-600 font-normal"
-                (click)="openYears()">{{year}}</button>
+        <button type="button"
+                (click)="openYears()">
+          <span class="text-lg font-bold text-gray-800">
+            {{monthNames[month]}}
+          </span>
+          <span class="ml-1 text-lg text-gray-600 font-normal">
+            {{year}}</span>
+        </button>
       </div>
       <div *ngIf="!showYears; else showYearsPickerTmpl">
         <button type="button"
@@ -59,7 +67,7 @@
       <ng-template #showYearsPickerTmpl>
         <div>
           <button type="button"
-                  class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25"
+                  class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25 w-1/2"
                   (click)="previousYear();">
             <svg class="h-6 w-6 text-gray-500 inline-flex"
                  fill="none"
@@ -72,7 +80,7 @@
             </svg>
           </button>
           <button type="button"
-                  class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25"
+                  class="transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25 w-1/2"
                   (click)="nextYear()">
             <svg class="h-6 w-6 text-gray-500 inline-flex"
                  fill="none"
@@ -96,28 +104,28 @@
     </div>
 
     <ng-template #showCalYearsTmpl>
-      <div class="flex flex-wrap -mx-1">
+      <div class="flex flex-wrap -mx-1 items-center">
         <div *ngFor="let year of showCalendarYears"
              style="width: 18.28%"
              class="px-1 mb-1">
           <div (click)="selectYearValue(year)"
-               class="cursor-pointer text-center hover:text-white text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
-               [class]="year.selected  ? 'bg-gray-700 text-white' : 'text-gray-800 hover:bg-gray-800'">{{year.year}}</div>
+               class="cursor-pointer text-center hover:text-blue-600 text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
+               [class]="year.selected  ? 'bg-gray-700 text-blue-600 font-medium' : 'text-gray-800 hover:bg-gray-800'">{{year.year}}</div>
         </div>
       </div>
     </ng-template>
 
-    <div class="flex flex-wrap -mx-1"
+    <div class="flex flex-wrap -mx-1 items-center"
          *ngIf="!showYears">
       <div *ngFor="let blankday of blankDays"
            style="width: 14.28%"
-           class="text-center border p-1 border-transparent text-sm opacity-50">{{blankday}}1</div>
+           class="text-center border p-1 border-transparent text-sm opacity-50">{{blankday}}</div>
       <div *ngFor="let date of calendarDates"
            style="width: 14.28%"
            class="px-1 mb-1">
         <div (click)="selectDateValue(date)"
-             class="cursor-pointer text-center hover:text-white text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
-             [class]="date.selected  ? 'bg-gray-700 text-white' : 'text-gray-800 hover:bg-gray-800'">{{date.day}}</div>
+             class="cursor-pointer text-center hover:text-blue-600 text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100"
+             [class]="date.selected  ? 'bg-gray-700 text-blue-600 font-medium' : 'text-gray-800 hover:bg-gray-800'">{{date.day}}</div>
       </div>
     </div>
   </div>

@@ -26,9 +26,20 @@ export class FormLayoutComponent implements OnInit {
   constructor(private router$: Router) { }
 
   ngOnInit(): void {
+    if (this.searchInput$?.nativeElement){
+      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+        map((event: any) => {
+          return event.target.value; // Get input value.
+        }),
+        filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
+        // If character length greater than minimumSearchCharacters setting.
+        debounceTime(1000), // Time in milliseconds between key events.
+        distinctUntilChanged() // If previous query is different from current.
+      ).subscribe();
+    }
   }
 
-  public onSidePaneDeactivated($event: any): void  {
+  public onSidePaneDeactivated($event: any): void {
     this.onComplete.emit(true);
   }
 
@@ -41,17 +52,7 @@ export class FormLayoutComponent implements OnInit {
   }
 
   searchActionType(text: string): void {
-    fromEvent(this.searchInput$?.nativeElement, 'keyup').pipe(
-      map((event: any) => {
-        return event.target.value; // Get input value.
-      }),
-      filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
-      // If character length greater than minimumSearchCharacters setting.
-      debounceTime(1000), // Time in milliseconds between key events.
-      distinctUntilChanged() // If previous query is different from current.
-    ).subscribe(_ => {
-      this.onSearch.emit(this.searchInput$?.nativeElement.value);
-    });
+    this.onSearch.emit(this.searchInput$?.nativeElement.value);
   }
 
   public routerLinkActionClick(action: RouterViewAction | any, relative: boolean = false): void {

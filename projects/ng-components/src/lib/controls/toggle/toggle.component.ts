@@ -23,6 +23,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
   private onTouched$: any | undefined = undefined;
 
   constructor() { }
+  
   writeValue(obj: any): void {
     if(obj) {
       this.value = obj || false;
