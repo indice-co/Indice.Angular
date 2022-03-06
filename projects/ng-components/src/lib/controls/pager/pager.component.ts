@@ -8,6 +8,8 @@ import { MenuOption } from '../../types';
   templateUrl: './pager.component.html'
 })
 export class PagerComponent implements OnInit, OnChanges {
+  // BUSY STATE
+  @Input() busy = false;
   // PAGING
   @Input() count: number | null = null;
   @Input() page = 1;
@@ -57,7 +59,6 @@ export class PagerComponent implements OnInit, OnChanges {
     }
     this.canPreviousPage = this.page > 1;
     this.canNextPage = this.page < this.pages.length;
-    //console.log('calcPages', this.page, this.canPreviousPage, this.canNextPage);
   }
 
   public nextPage(): void {
@@ -91,7 +92,6 @@ export class PagerComponent implements OnInit, OnChanges {
   }
 
   public toggleSortdir(): void {
-    //console.log('toggleSortdir');
     let sortdir = 'desc';
     if (this.sortdir === 'desc') {
       sortdir = 'asc';

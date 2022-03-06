@@ -19,7 +19,8 @@ export class AuthService {
     this.userManager = new UserManager(authSettings);
     this.loadUser().subscribe();
     this.userManager.events.addUserLoaded((user: User) => this.user = user);
-    this.userManager.events.addAccessTokenExpiring(() => this.signinSilent().subscribe((user: User) => this.user = user, (error: any) => throwError(error)));
+    this.userManager.events.addAccessTokenExpiring(() => this.signinSilent()
+      .subscribe((user: User) => this.user = user, (error: any) => throwError(error)));
     this.userManager.events.addUserSignedOut(() => this.removeUser());
   }
 
@@ -79,6 +80,13 @@ export class AuthService {
   public getAuthorizationHeaderValue(): string {
     if (this.user) {
       return `${this.user.token_type} ${this.user.access_token}`;
+    }
+    return '';
+  }
+
+  public getAccessTokenValue(): string {
+    if (this.user) {
+      return `${this.user.access_token}`;
     }
     return '';
   }

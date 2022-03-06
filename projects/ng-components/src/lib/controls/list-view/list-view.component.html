@@ -1,12 +1,13 @@
 <div class="px-2">
 
-  <lib-pager *ngIf="showPager && items && items.length > 0"
+  <lib-pager *ngIf="showPager"
              [page]="page"
              [page-size]="pageSize"
              [count]="count"
              [sort-options]="sortOptions"
              [sort]="sort"
              [sort-dir]="sortdir"
+             [busy]="busy"
              (pageChanged)="emitPageChanged($event)"
              (pageSizeChanged)="emitPageSizeChanged($event)"
              (sortChanged)="emitSortChanged($event)"
@@ -14,7 +15,7 @@
   </lib-pager>
 </div>
 
-<ng-container *ngIf="(items == null || undefined) || items?.length == 0">
+<ng-container *ngIf="!busy && items && items.length === 0">
   <div class="cards-deck-1">
     <lib-list-view-empty-state></lib-list-view-empty-state>
   </div>
@@ -25,7 +26,7 @@
   <ng-container *ngSwitchCase="'tiles'">
     <div [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="!items" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
 
       <ng-container *ngIf="items && items.length > 0">
         <ng-container *ngFor="let item of items">
@@ -43,9 +44,9 @@
   <ng-container *ngSwitchCase="'gallery'">
     <ul role="list" [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="!items" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
 
-      <ng-container *ngIf="items && items.length > 0">
+      <ng-container *ngIf="!busy && items && items.length > 0">
         <ng-container *ngFor="let item of items">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
           <ng-template [ngTemplateOutlet]="tileTemplate.template"
@@ -58,10 +59,7 @@
   <!-- *ngSwitchCase="'table'" -->
   <ng-container *ngSwitchDefault>
 
-    <lib-skeleton-loader *ngIf="(items == null || undefined) || items?.length == 0" [count]="5" [type]="'table'"></lib-skeleton-loader>
-
-    <div class="list-view-container"
-         *ngIf="items && items.length > 0">
+    <div class="list-view-container">
       <div class="list-view-container-inner">
         <table class="list-view-table">
           <thead class="list-view-thead">
@@ -77,7 +75,40 @@
               </ng-container>
             </tr>
           </thead>
-          <tbody class="list-view-tbody">
+          <tbody class="list-view-tbody" *ngIf="busy">
+            <ng-container *ngFor="let item of loaderItems;let i=index">
+              <tr class="list-view-tr">
+                <ng-container *ngIf="detailsSectionSupported">
+                  <td class="list-view-td-details"
+                      *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
+                    <button disabled
+                            type="button"
+                            class="expand-collapse-button">
+                      <!-- Heroicon name: solid/plus -->
+                      <i [class]="item.detailsExpanded ? collapseIcon : expandIcon"></i>
+                    </button>
+                  </td>
+                  <ng-template #hiddenDetailsButton>
+                    <td class="list-view-td-details"></td>
+                  </ng-template>
+                </ng-container>
+                <td *ngFor="let col of columns"
+                    [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
+                    <div class="w-full animate-pulse h-8 bg-gray-200 rounded"></div>
+                </td>
+              </tr>
+              <ng-container *ngIf="detailsSectionSupported">
+                <tr *ngIf="item.detailsExpanded">
+                  <td [colSpan]="columns.length + 1"
+                      class="list-view-td bg-gray-100">
+                    <ng-template [ngTemplateOutlet]="detailsTemplate.template"
+                                 [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+          <tbody class="list-view-tbody" *ngIf="!busy">
             <ng-container *ngFor="let item of items;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">

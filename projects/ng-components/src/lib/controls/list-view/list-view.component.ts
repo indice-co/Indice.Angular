@@ -10,6 +10,8 @@ import { Icons } from '../../icons';
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
+  // BUSY STATE
+  @Input() busy = false;
   public expandIcon = Icons.Expand;
   public collapseIcon = Icons.Collapse;
   // DATA SOURCE!
@@ -34,6 +36,7 @@ export class ListViewComponent implements OnChanges {
   public fullWidthTDClass = 'list-view-td-full';
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
+  public loaderItems: any[] = [];
 
   // DETAILS SECTION
   // Check if details section and button should be displayed according to the count of the value given
@@ -87,7 +90,11 @@ export class ListViewComponent implements OnChanges {
     }
   }
 
-  constructor() { }
+  constructor() {
+    for(let i = 0; i < 5; i++) {
+      this.loaderItems.push({});
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     const tilesCountChange = changes['tiles-count'] || changes.tilesCount;
@@ -120,18 +127,18 @@ export class ListViewComponent implements OnChanges {
   // helpers
   private setTilesDeckClass(tiles: number): void {
     if (tiles >= 1 && tiles <= 4) {
-      this.tilesDeckClass = 
-        this.view !== ListViewType.Gallery 
-        ? `cards-deck-${tiles}` 
-        : this.items && this.items.length > 0 
-          ? `gallery-deck-${tiles}` 
+      this.tilesDeckClass =
+        this.view !== ListViewType.Gallery
+        ? `cards-deck-${tiles}`
+        : this.items && this.items.length > 0
+          ? `gallery-deck-${tiles}`
           : 'gallery-deck'
     } else {
-      this.tilesDeckClass = 
-        this.view !== ListViewType.Gallery 
+      this.tilesDeckClass =
+        this.view !== ListViewType.Gallery
         ? 'cards-deck-3'
-        : this.items && this.items.length > 0 
-          ? 'gallery-deck-3' 
+        : this.items && this.items.length > 0
+          ? 'gallery-deck-3'
           : 'gallery-deck'
     }
   }
