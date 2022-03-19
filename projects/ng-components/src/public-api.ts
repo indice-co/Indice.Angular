@@ -21,6 +21,7 @@ export * from './lib/controls/toaster/toaster-container.component';
 export * from './lib/controls/toaster/toaster.component';
 export * from './lib/controls/avatar-initials/avatar-initials.component';
 export * from './lib/controls/toggle/toggle.component';
+export * from './lib/controls/side-pane/side-pane.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
