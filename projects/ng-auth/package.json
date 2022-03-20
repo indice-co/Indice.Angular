@@ -1,7 +1,7 @@
 {
   "name": "@indice/ng-auth",
   "description": "Indice extensions for Angular 12 using oidc-client",
-  "version": "0.1.22",
+  "version": "0.1.24",
   "private": false,
   "keywords": [
     "node",

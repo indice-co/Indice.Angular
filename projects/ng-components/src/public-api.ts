@@ -1,7 +1,4 @@
-/*
- * Public API Surface of @indice/ng-components
- */
-
+// Public API Surface of @indice/ng-components
 // directives
 export * from './lib/directives/click-outside.directive';
 

@@ -1,7 +1,8 @@
 import { Injectable, InjectionToken, StaticProvider } from '@angular/core';
 
 /**
- * Modals option can be passed to a specific modal from {@link ModalService.show} or set globbaly using the injection token {@link MODAL_CONFIG_DEFAULT_OVERRIDE}.
+ * Modals option can be passed to a specific modal from {@link ModalService.show} or
+ * set globbaly using the injection token {@link MODAL_CONFIG_DEFAULT_OVERRIDE}.
  * @remarks
  * Modal specific options are merged with global options.
  * @see {@link modalConfigDefaults} for defaults.
@@ -40,7 +41,7 @@ export class ModalOptions<T = Record<string, unknown>> {
    */
   animated?: boolean;
   /**
-   * Modal initial data. 
+   * Modal initial data.
    * @remarks
    * This data must be known properties of content component.
    */

@@ -40,14 +40,14 @@ export class ListViewComponent implements OnChanges {
 
   // DETAILS SECTION
   // Check if details section and button should be displayed according to the count of the value given
+  // tslint:disable-next-line:no-input-rename
   @Input('details-section-property-count') detailsSectionPropertyCount: string | null = null;
 
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
   @Input('sort-options') sortOptions: MenuOption[] = [];
-  // tslint:disable-next-line:no-input-rename
-  @Input('sort') sort: string | null = null;
+    @Input() sort: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('sort-dir') sortdir: string | null = '-';
   @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
@@ -91,7 +91,7 @@ export class ListViewComponent implements OnChanges {
   }
 
   constructor() {
-    for(let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       this.loaderItems.push({});
     }
   }
@@ -132,14 +132,14 @@ export class ListViewComponent implements OnChanges {
         ? `cards-deck-${tiles}`
         : this.items && this.items.length > 0
           ? `gallery-deck-${tiles}`
-          : 'gallery-deck'
+          : 'gallery-deck';
     } else {
       this.tilesDeckClass =
         this.view !== ListViewType.Gallery
         ? 'cards-deck-3'
         : this.items && this.items.length > 0
           ? 'gallery-deck-3'
-          : 'gallery-deck'
+          : 'gallery-deck';
     }
   }
 
