@@ -13,16 +13,17 @@
   }
 
   .view-layout-title-container {
-    @apply md:hidden flex flex-row justify-start;
-  }
-
-  .view-layout-title-container-inner {
-    @apply flex-1 justify-start items-center;
+    @apply flex flex-row justify-start ;
   }
 
   .view-layout-title-container-sm {
-    @apply hidden md:flex justify-between items-center;
+    @apply lg:flex lg:items-center lg:justify-between;
   }
+
+  .view-layout-title-container-inner {
+    @apply flex-1 min-w-0;
+  }
+
 
   .view-layout-title-container-sm-inner {
     @apply flex-1 justify-start items-center;
@@ -53,11 +54,11 @@
   }
 
   .meta-container {
-    @apply flex space-x-2 items-center;
+    @apply mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6;
   }
 
   .meta-container-inner {
-    @apply mt-2 flex items-center justify-end text-xs text-white;
+    @apply mt-2 flex items-center text-sm text-gray-500;
   }
 
   .meta-icon {

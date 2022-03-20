@@ -1,25 +1,20 @@
-<header *ngIf="header"
-        class="view-layout-paddings">
+<header *ngIf="header" class="view-layout-paddings">
 
-  <div class="view-layout-title-container-sm md:view-layout-title-container">
+  <div class="view-layout-title-container">
+
     <div class="view-layout-title-container-inner">
-      <i *ngIf="icon"
-         [class]="icon + ' title-icon'"
-         aria-hidden="true"></i>
-      <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">
-        {{title}}
-      </h1>
-    </div>
-    <div *ngIf="metaItems && metaItems.length > 0"
-         class="meta-container">
-      <ng-container *ngFor="let meta of metaItems">
-        <div class="meta-container-inner">
-          <i *ngIf="meta.icon"
-             [class]="meta.icon + ' meta-icon'"
-             aria-hidden="true"></i>
-          <span class="meta-text">{{meta.text}}</span>
-        </div>
-      </ng-container>
+      <div class="flex items-center">
+        <i *ngIf="icon" [class]="icon + ' title-icon'" aria-hidden="true"></i>
+        <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title}}</h1>
+      </div>
+      <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
+        <ng-container *ngFor="let meta of metaItems">
+          <div class="mt-2 flex items-center text-sm text-gray-500" class1="meta-container-inner">
+            <i *ngIf="meta.icon" [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
+            <span class="meta-text">{{meta.text}}</span>
+          </div>
+        </ng-container>
+      </div>
     </div>
 
     <div class="flex items-center justify-end">
