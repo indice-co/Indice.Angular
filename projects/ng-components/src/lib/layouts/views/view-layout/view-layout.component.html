@@ -9,7 +9,7 @@
       </div>
       <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
         <ng-container *ngFor="let meta of metaItems">
-          <div class="mt-2 flex items-center text-sm text-gray-500" class1="meta-container-inner">
+          <div class="meta-item-container">
             <i *ngIf="meta.icon" [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
             <span class="meta-text">{{meta.text}}</span>
           </div>
