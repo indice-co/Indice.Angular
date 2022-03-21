@@ -20,15 +20,15 @@
   }
 
   .list-view-th {
-    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+    @apply px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
   }
 
   .list-view-th-full {
-    @apply w-full px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-normal break-words;
+    @apply w-full px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-normal break-words;
   }
 
   .list-view-th-half {
-    @apply w-full sm:w-1/2 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-normal break-words;
+    @apply w-full sm:w-1/2 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-normal break-words;
   }
 
   .list-view-tbody {
@@ -44,15 +44,15 @@
   }
 
   .list-view-td {
-    @apply px-6 py-4 whitespace-nowrap;
+    @apply px-4 py-4 whitespace-nowrap;
   }
 
   .list-view-td-full {
-    @apply w-full px-6 py-4 break-all;
+    @apply w-full px-4 py-4 break-all;
   }
 
   .list-view-td-half {
-    @apply w-full sm:w-1/2 px-6 py-4 whitespace-normal break-words;
+    @apply w-full sm:w-1/2 px-4 py-4 whitespace-normal break-words;
   }
 
   .details-button {
