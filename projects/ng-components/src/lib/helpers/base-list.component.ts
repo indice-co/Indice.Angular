@@ -1,11 +1,11 @@
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription, of } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction } from '../types';
+import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
 @Component({ template: '' })
-export abstract class BaseListComponent<T> implements OnInit {
+export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public items: T[] | null | undefined = null;
   public view: string = ListViewType.Tiles;
   public title: string | null = null;
@@ -20,37 +20,79 @@ export abstract class BaseListComponent<T> implements OnInit {
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
+  private routeSub$: Subscription | undefined;
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
   }
 
-  ngOnInit(): void {
-    this.actions = [
+  ngOnDestroy(): void {
+    if (this.routeSub$) {
+      this.routeSub$.unsubscribe();
+    }
+  }
+
+  public getViewActions(): Observable<ViewAction[]> {
+    const actions = [
       new ViewAction('search', null, null, Icons.Search, 'αναζήτηση'),
       new ViewAction('refresh', null, null, Icons.Refresh, 'ανανέωση στοιχείων')
     ];
     if (this.newItemLink) {
-      this.actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'προσθήκη νέας εγγραφής;'));
+      actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'προσθήκη νέας εγγραφής;'));
     }
+    return of(actions);
+  }
+
+  ngOnInit(): void {
+    this.getViewActions().subscribe(actions => {
+      this.actions = actions || [];
+    });
 
     this.metaItems = [
       { key: 'count', icon: Icons.ItemsCount, text: 'παρακαλώ περιμένετε...' }
     ];
 
-    console.log('base list params init');
-    this.route$.queryParams.subscribe(params => {
-      console.log('base list params', params);
-      if (params.view) { this.view = params.view; }
-      if (params.page) { this.page = +params.page; }
-      if (params.pagesize) { this.pageSize = +params.pagesize; }
-      if (params.search) { this.search = params.search; }
-      if (params.sort) { this.sort = params.sort; }
-      if (params.dir) { this.sortdir = params.dir; }
-      this.load();
+    // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
+    // until i come up with a solution...
+
+    this.routeSub$ = this.route$.queryParamMap.subscribe(params => {
+      if (params.keys.length === 0) {
+        return;
+      }
+
+      // changing the view mode does not require reloading...
+      this.view = params.get('view') || ListViewType.Tiles;
+      // console.log('route changes ', this.view);
+
+      // if (params.get('search') !== this.search) {
+      //   this.searchChanged(params.get('search'));
+      // }
+
+      // const page = +(params.get('page') || 1);
+      // if (page !== this.page) {
+      //   this.page = page;
+      // }
+
+      // const size = +(params.get('pagesize') || 20);
+      // if (this.pageSize !== size) {
+      //   this.pageSize = size;
+      // }
+
+      // if (params.get('search') !== this.search) {
+      //   this.search = params.get('search');
+      // }
+
+      // if (params.get('sort') !== this.sort) {
+      //   this.sort = params.get('sort');
+      // }
+
+      // if (params.get('sortdir') !== this.sortdir) {
+      //   this.sortdir = params.get('sortdir');
+      // }
+
     });
+
     // just to sync params in query
     this.setRouteParams(true);
-    // and load data :)
     this.load();
   }
 
@@ -68,23 +110,23 @@ export abstract class BaseListComponent<T> implements OnInit {
   }
 
   public actionHandler($event: ViewAction): void {
-    console.log('BaseListComponent actionHandler', $event);
-    if($event.key === 'refresh') {
+    // console.log('BaseListComponent actionHandler', $event);
+    if ($event.key === 'refresh') {
       this.refresh();
     }
   }
 
-  public setView(view: string): void {
-    this.view = view;
-    this.setRouteParams();
-  }
-
   private load(): void {
+    // console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
     this.loadItems().subscribe(result => {
       this.count = result ? result.count : 0;
       this.items = result?.items;
+      this.updateHeaderMeta();
+    }, err => {
+      this.count = 0;
+      this.items = null;
       this.updateHeaderMeta();
     });
   }
@@ -92,54 +134,71 @@ export abstract class BaseListComponent<T> implements OnInit {
   private updateHeaderMeta(): void {
     const count = this.metaItems?.filter(m => m.key === 'count')[0];
     if (count) {
-      count.text = `${this.count} αποτελέσματα`;
+      this.count === 1 ? count.text = `${this.count} αποτέλεσμα` : count.text = `${this.count} αποτελέσματα`;
     }
   }
 
   public abstract loadItems(): Observable<IResultSet<T> | null | undefined>;
 
-  public refresh(): void {
+  public clear(): void {
     this.count = 0;
     this.page = 1;
     this.items = null;
     this.search = null;
-    // https://stackoverflow.com/questions/46213737/angular-append-query-parameters-to-url
     this.setRouteParams();
+    this.load();
+  }
+
+  public refresh(): void {
+    this.count = 0;
+    this.page = 1;
+    this.items = null;
+    this.setRouteParams();
+    this.load();
   }
 
   public pageChanged(page: number): void {
-    this.page = page;
-    this.setRouteParams();
+    if (this.page !== page) {
+      this.page = page;
+      this.setRouteParams();
+      this.load();
+    }
   }
 
   public pageSizeChanged(pageSize: number): void {
-    this.pageSize = pageSize;
-    this.page = 1;
-    this.setRouteParams();
+    if (this.pageSize !== pageSize) {
+      this.pageSize = pageSize;
+      this.page = 1;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public sortChanged(sort: string): void {
-    console.log('base-list sortChanged', sort);
-    this.page = 1;
-    this.sort = sort;
-    this.setRouteParams();
+    // console.log('base-list sortChanged', sort);
+    if (this.sort !== sort) {
+      this.page = 1;
+      this.sort = sort;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public sortdirChanged(sortdir: string): void {
-    console.log('base-list sortdirChanged', sortdir);
-    this.page = 1;
-    this.sortdir = sortdir;
-    this.setRouteParams();
+    if (this.sortdir !== sortdir) {
+      this.page = 1;
+      this.sortdir = sortdir;
+      this.setRouteParams();
+      this.refresh();
+    }
   }
 
   public searchChanged(searchText: string | null): void {
+    this.count = 0;
+    this.page = 1;
+    this.items = null;
     this.search = searchText;
     this.setRouteParams();
+    this.load();
   }
-}
-
-export class ListViewType {
-  public static Tiles = 'tiles';
-  public static Table = 'table';
-  public static Map = 'map';
 }

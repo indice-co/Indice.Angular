@@ -1,18 +1,23 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { MenuOption } from '../../types';
+import { MenuOption, ListViewType } from '../../types';
 import { ListTileComponent } from './list-tile.component';
 import { ListColumnComponent } from './list-column.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
+import { Icons } from '../../icons';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-pager') showPager = true;
+  // BUSY STATE
+  @Input() busy = false;
+  public expandIcon = Icons.Expand;
+  public collapseIcon = Icons.Collapse;
   // DATA SOURCE!
   @Input() items: any[] | null | undefined;
+  // tslint:disable-next-line:no-input-rename
+  @Input('show-pager') showPager = true;
 
   // PAGING - pass through for pager component
   @Input() count: number | null = null;
@@ -23,23 +28,32 @@ export class ListViewComponent implements OnChanges {
   @Input('page-size-options') pageSizeOptions: MenuOption[] = [];
   @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Output() detailsOpened: EventEmitter<{item: any, open: boolean}> = new EventEmitter<{item: any, open: boolean}>();
+  @Output() detailsOpened: EventEmitter<{ item: any, open: boolean }> = new EventEmitter<{ item: any, open: boolean }>();
 
   public tableViewSupported = false;
+  private multipleFullWidth = false;
+  public fullWidthTHClass = 'list-view-th-full';
+  public fullWidthTDClass = 'list-view-td-full';
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
+  public loaderItems: any[] = [];
 
-  @Input() view = 'table';
+  // DETAILS SECTION
+  // Check if details section and button should be displayed according to the count of the value given
+  // tslint:disable-next-line:no-input-rename
+  @Input('details-section-property-count') detailsSectionPropertyCount: string | null = null;
+
 
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
   @Input('sort-options') sortOptions: MenuOption[] = [];
-  // tslint:disable-next-line:no-input-rename
-  @Input('sort') sort: string | null = null;
+    @Input() sort: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('sort-dir') sortdir: string | null = '-';
   @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output() sortdirChanged: EventEmitter<string> = new EventEmitter<string>();
+
+  @Input() view = ListViewType.Table;
 
   // COLUMNS
   public columns: any[] = [];
@@ -49,6 +63,9 @@ export class ListViewComponent implements OnChanges {
     if (this.columns && this.columns.length > 0) {
       this.tableViewSupported = true;
     }
+    this.multipleFullWidth = this.columns.filter(c => c.fullWidth).length > 1;
+    this.fullWidthTHClass = this.multipleFullWidth ? 'list-view-th-half' : 'list-view-th-full';
+    this.fullWidthTDClass = this.multipleFullWidth ? 'list-view-td-half' : 'list-view-td-full';
   }
 
   public tilesDeckClass = 'cards-deck-4';
@@ -56,7 +73,7 @@ export class ListViewComponent implements OnChanges {
   @Input('tiles-count') tilesCount = 4;
 
   public tileTemplate: any | null | undefined = null;
-  @ContentChild(ListTileComponent, {read: ListTileComponent})
+  @ContentChild(ListTileComponent, { read: ListTileComponent })
   set tiles(ref: ListTileComponent) {
     this.tileTemplate = ref;
     if (this.tileTemplate) {
@@ -65,7 +82,7 @@ export class ListViewComponent implements OnChanges {
   }
 
   public detailsTemplate: any | null | undefined = null;
-  @ContentChild(ListDetailsSectionComponent, {read: ListDetailsSectionComponent})
+  @ContentChild(ListDetailsSectionComponent, { read: ListDetailsSectionComponent })
   set details(ref: ListDetailsSectionComponent) {
     this.detailsTemplate = ref;
     if (this.detailsTemplate) {
@@ -73,24 +90,21 @@ export class ListViewComponent implements OnChanges {
     }
   }
 
-  constructor() { }
+  constructor() {
+    for (let i = 0; i < 5; i++) {
+      this.loaderItems.push({});
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
-    const tilesCountChange = changes['tiles-count'] || changes.tilesCount ;
+    const tilesCountChange = changes['tiles-count'] || changes.tilesCount;
     if (tilesCountChange) {
       this.setTilesDeckClass(tilesCountChange.currentValue);
-    }
-    const itemsChange = changes.items;
-    if (itemsChange && itemsChange.currentValue) {
-      // this.detailsState = new Array(itemsChange.currentValue.length);
-    } else {
-      // this.detailsState = [];
     }
   }
 
   // events
-  public emitPageChanged($event: number): void  {
+  public emitPageChanged($event: number): void {
     this.pageChanged.emit($event);
   }
 
@@ -112,10 +126,20 @@ export class ListViewComponent implements OnChanges {
 
   // helpers
   private setTilesDeckClass(tiles: number): void {
-    if ( tiles >= 1 && tiles <= 4 ) {
-      this.tilesDeckClass = `cards-deck-${tiles}`;
+    if (tiles >= 1 && tiles <= 4) {
+      this.tilesDeckClass =
+        this.view !== ListViewType.Gallery
+        ? `cards-deck-${tiles}`
+        : this.items && this.items.length > 0
+          ? `gallery-deck-${tiles}`
+          : 'gallery-deck';
     } else {
-      this.tilesDeckClass = 'cards-deck-3';
+      this.tilesDeckClass =
+        this.view !== ListViewType.Gallery
+        ? 'cards-deck-3'
+        : this.items && this.items.length > 0
+          ? 'gallery-deck-3'
+          : 'gallery-deck';
     }
   }
 

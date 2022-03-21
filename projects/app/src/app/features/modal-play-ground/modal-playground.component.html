@@ -1,0 +1,38 @@
+<lib-view-layout title="Modal playground">
+  <lib-list-view [items]="items" [view]="view" [show-pager]="false">
+    <lib-list-tile>
+      <ng-template let-item>
+        <div class="card">
+          <div class="card-header">
+            {{ item.title }}
+          </div>
+          <div class="card-body">
+            <p style="height: 200px">{{ item.description }}</p>
+          </div>
+          <div class="card-footer">
+            <ng-container *ngIf="item.title === 'From component'">
+              <button type="button" (click)="this.openModalFromComponent()" class="btn-info">Open modal</button>
+            </ng-container>
+            <ng-container *ngIf="item.title === 'From templateRef'">
+              <button type="button" (click)="this.openModalFromTemplate(template)" class="btn-info">Open modal</button>
+              <ng-template #template>
+                <div class="modal-header">
+                  <div class="modal-body">This is a modal from a ng-template</div>
+                  <div>Data: {{ someData }}</div>
+                  <button type="button" class="btn-info" (click)="templateModalRef?.hide()">Close me</button>
+                </div>
+              </ng-template>
+            </ng-container>
+            <ng-container *ngIf="item.title === 'From component with result'">
+              <button type="button" (click)="this.openModalWithResult()" class="btn-info">Open modal</button>
+              <pre *ngIf="this.result">Result: {{ this.result.result }}</pre>
+            </ng-container>
+            <ng-container *ngIf="item.title === 'From component with initial data'">
+              <button type="button" (click)="this.openModalFromComponentWithInitialData()" class="btn-info">Open modal</button>
+            </ng-container>
+          </div>
+        </div>
+      </ng-template>
+    </lib-list-tile>
+  </lib-list-view>
+</lib-view-layout>

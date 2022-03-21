@@ -1,0 +1,46 @@
+@layer components {
+
+  .side-pane-outer-container {
+    @apply fixed inset-0 overflow-hidden z-40;
+  }
+
+  .side-pane-overlay {
+    @apply absolute bg-gray-500 bg-opacity-25 inset-0;
+  }
+
+  .side-pane-overlay-opacity-0 {
+    @apply absolute bg-gray-500 bg-opacity-0 inset-0;
+  }
+
+  .side-pane-overlay-opacity-50 {
+    @apply absolute bg-gray-500 bg-opacity-50 inset-0;
+  }
+
+  .side-pane-container {
+    @apply fixed inset-y-0 right-0 sm:pl-10 max-w-full flex transition-all duration-200 ease-in-out;
+  }
+
+  .side-pane-container-inner {
+    @apply w-screen max-w-md;
+  }
+
+  .side-pane-box-size {
+    @apply w-screen max-w-2xl;
+  }
+
+  .side-pane-box-size-25 {
+    @apply w-screen max-w-xl;
+  }
+
+  .side-pane-box-size-50 {
+    @apply w-screen max-w-3xl;
+  }
+
+  .side-pane-box-size-75 {
+    @apply w-screen max-w-4xl;
+  }
+
+  .side-pane {
+    @apply flex flex-col bg-white shadow-xl overflow-y-hidden;
+  }
+}

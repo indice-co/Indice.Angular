@@ -2,20 +2,18 @@ const pathLib = require('path');
 const scssBundler = require('scss-bundle');
 const fs = require('fs-extra');
 
-
 /** Bundles all SCSS files into a single file */
 async function bundleScss(): Promise<void> {
   console.log('running bundleScss');
+  const isolatedStyles = ['modal.css'];
   const bundler = new scssBundler.Bundler();
   const sourcePath = './projects/ng-components/src/_styles.css';
   const { found, bundledContent, imports } = await bundler.bundle(sourcePath, ['./src/**/*.css', './src/**/*.scss']);
-
   if (imports) {
+    console.log('running bundleScss - imports found');
     const cwd = process.cwd();
 
-    const filesNotFound = imports
-      .filter((x: any) => !x.found)
-      .map((x: any) => pathLib.relative(cwd, x.filePath));
+    const filesNotFound = imports.filter((x: any) => !x.found).map((x: any) => pathLib.relative(cwd, x.filePath));
 
     if (filesNotFound.length) {
       console.error(`SCSS imports failed \n\n${filesNotFound.join('\n - ')}\n`);
@@ -25,6 +23,10 @@ async function bundleScss(): Promise<void> {
 
   if (found) {
     await fs.writeFile('./dist/ng-components/_styles.css', bundledContent);
+    isolatedStyles.forEach((f) => {
+      fs.copy(`./projects/ng-components/src/assets/styles/${f}`, `./dist/ng-components/${f}`);
+    });
+    console.log('running bundleScss - finidshed file');
   }
 }
 

@@ -21,15 +21,15 @@
   }
 
   .dropdown-ul {
-    @apply absolute z-10 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-x-hidden;
   }
 
   .dropdown-li {
-    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100;
+    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 hover:bg-gray-100 min-w-max;
   }
 
   .dropdown-li-selected {
-    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9;
+    @apply text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 min-w-max;
   }
 
   .dropdown-li-text {

@@ -27,7 +27,20 @@
     @apply focus:ring-gray-500 focus:border-gray-300 ring-opacity-25 flex-1 block w-full rounded-none sm:text-sm border-gray-200;
   }
 
+  input[type=password] {
+    @apply focus:ring-gray-500 focus:border-gray-300 ring-opacity-25 flex-1 block w-full rounded-none sm:text-sm border-gray-200;
+  }
+
+  input[type=email] {
+    @apply focus:ring-gray-500 focus:border-gray-300 ring-opacity-25 flex-1 block w-full rounded-none sm:text-sm border-gray-200;
+  }
+
+  input[type=number] {
+    @apply focus:ring-gray-500 focus:border-gray-300 ring-opacity-25 flex-1 block w-full rounded-none sm:text-sm border-gray-200;
+  }
+
   textarea {
     @apply shadow-sm focus:ring-gray-500 focus:border-gray-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-sm;
   }
+
 }

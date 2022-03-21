@@ -25,11 +25,11 @@
   }
 
   .view-nav-link {
-    @apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 group rounded-none py-2 px-4 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+    @apply text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-none py-2 px-4 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
   }
 
   .view-nav-link-active {
-    @apply bg-gray-50 border-gray-600 text-gray-900 group border-l-4 py-2 px-3 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+    @apply bg-gray-50 border-gray-600 text-gray-900 border-l-4 py-2 px-3 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
   }
 
 }

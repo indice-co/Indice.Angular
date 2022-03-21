@@ -1,0 +1,24 @@
+<div class="">
+  <div class="pt-5 pb-5 sm:pt-0">
+    <dl class="space-y-8 sm:space-y-6">
+      <div>
+        <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
+          <h4>{{ title }}</h4>
+          <p>
+            You can open modals inside other modals! The second can have its own configuration. Like backdrop: static which prevents closing
+            the modal if clickind outside of the modal container!
+          </p>
+        </dd>
+      </div>
+      <button (click)="this.openModal(template)" class="btn-info">Open modal a second modal!</button>
+      <button class="btn-info" (click)="this.modalRef.hide()">Close modal</button>
+      <ng-template #template>
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">{{ title }}</h4>
+          <div class="modal-body">This is a modal.</div>
+          <button type="button" class="btn-info" (click)="secondModalRef?.hide(true)">I am the only way to close me!</button>
+        </div>
+      </ng-template>
+    </dl>
+  </div>
+</div>

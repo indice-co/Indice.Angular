@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { HeaderMetaItem } from '../../../types';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -13,19 +14,22 @@ export class ModelViewLayoutComponent implements OnInit {
   @Input('primary-links') primary: { text: string, link: string }[] | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('secondary-links') secondary: { text: string, link: string }[] | null = null;
-
+  // tslint:disable-next-line:no-input-rename
+  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
+    // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
+  ];
   constructor( private location: Location) { }
 
   ngOnInit(): void {
   }
 
   public onSidePaneActivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
+    //console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = true;
   }
 
   public onSidePaneDeactivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
+    //console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = false;
   }
 

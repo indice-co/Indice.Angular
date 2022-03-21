@@ -1,3 +1,8 @@
+import { AvatarInitialsComponent } from './controls/avatar-initials/avatar-initials.component';
+import { ToasterService } from './services/toaster.service';
+import { ToasterComponent } from './controls/toaster/toaster.component';
+import { ToasterContainerComponent } from './controls/toaster/toaster-container.component';
+import { DatepickerComponent } from './controls/date-picker/date-picker.component';
 import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { ListDetailsSectionComponent } from './controls/list-view/list-details-section.component';
 import { CommonModule } from '@angular/common';
@@ -29,6 +34,8 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
+import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empty-state.component';
+import { ToggleComponent } from './controls/toggle/toggle.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +49,17 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    ListViewEmptyStateComponent,
     SkeletonLoaderComponent,
     CollapsiblePanelComponent,
     KpiTileComponent,
     SidePaneComponent,
+    DatepickerComponent,
+    AvatarInitialsComponent,
+    ToggleComponent,
+    // Toaster
+    ToasterContainerComponent,
+    ToasterComponent,
     // shell layout
     ShellLayoutComponent,
     ShellHeaderComponent,
@@ -79,6 +93,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     ListColumnComponent,
     ListTileComponent,
     ListDetailsSectionComponent,
+    ListViewEmptyStateComponent,
     KpiTileComponent,
     SkeletonLoaderComponent,
     ShellLayoutComponent,
@@ -97,7 +112,20 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
     AddressPipe,
     DurationFormatPipe,
     CollapsiblePanelComponent,
-    SidePaneComponent
+    SidePaneComponent,
+    DatepickerComponent,
+    ToasterContainerComponent,
+    ToasterComponent,
+    AvatarInitialsComponent,
+    ToggleComponent
   ]
 })
-export class IndiceComponentsModule { }
+export class IndiceComponentsModule {
+  // tslint:disable-next-line:typedef
+  static forRoot() {
+    return {
+      ngModule: IndiceComponentsModule,
+      providers: [ToasterService]
+    };
+ }
+}

@@ -1,8 +1,11 @@
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthHttpInterceptor } from './auth-http-interceptor';
+import { RouterModule } from '@angular/router';
+
 import { AuthGuardService } from './auth-guard.service';
+import { AuthHttpInterceptor } from './auth-http-interceptor';
 import { AuthService } from './auth.service';
+import { TenantHeaderInterceptor } from './tenant/tenant-header.interceptor';
+import { TenantService } from './tenant/tenant-service';
 
 @NgModule({
   declarations: [],
@@ -13,7 +16,13 @@ export class IndiceAuthModule {
   static forRoot() {
     return {
       ngModule: IndiceAuthModule,
-      providers: [AuthService, AuthGuardService, AuthHttpInterceptor]
+      providers: [
+        AuthGuardService,
+        AuthHttpInterceptor,
+        AuthService,
+        TenantHeaderInterceptor,
+        TenantService
+      ]
     };
- }
+  }
 }

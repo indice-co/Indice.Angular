@@ -4,18 +4,23 @@
 
 export const environment = {
   production: false,
-  api_base_url: '',
+  api_base_url: 'https://indice-idsrv.azurewebsites.net',
   api_docs: '',
   auth_settings : {
-    authority: 'http://localhost:8080',
-    client_id: 'sample-app',
-    filterProtocolClaims: false,
+    accessTokenExpiringNotificationTime: 60,
+    authority: 'https://indice-idsrv.azurewebsites.net',
+    automaticSilentRenew: true,
+    client_id: 'indice-ng-sample-app',
+    filterProtocolClaims: true,
     loadUserInfo: true,
-    post_logout_redirect_uri: 'http://localhost:4200',
+    monitorSession: true,
+    post_logout_redirect_uri: 'http://localhost:4200/logged-out',
     redirect_uri: 'http://localhost:4200/auth-callback',
     response_type: 'code',
-    scope: 'dummy',
-    //silent_redirect_uri: 'http://localhost:4200/auth-renew'
+    revokeAccessTokenOnSignout: true,
+    scope: 'openid profile role email phone',
+    silent_redirect_uri: 'http://localhost:4200/auth-renew',
+    useRefreshToken: true
   }
 };
 

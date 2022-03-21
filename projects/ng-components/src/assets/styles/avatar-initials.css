@@ -1,0 +1,37 @@
+@layer components {
+
+  .avatar-container {
+    @apply inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800;
+  }
+
+  .avatar-container-large {
+    @apply inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-500;
+  }
+
+  .avatar-text {
+    @apply text-sm font-medium leading-none text-blue-300;
+  }
+
+  .avatar-text-large {
+    @apply text-xl font-medium leading-none text-white;
+  }
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.circle .initials {
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 19px;
+  letter-spacing: 0.2625px;
+}

@@ -1,10 +1,14 @@
 @layer components {
 
+  .app-logo {
+    @apply h-8 w-8;
+  }
+
   .shell-container {
     @apply antialiased font-sans bg-gray-100;
   }
 
-  .shell-header-container {
+    .shell-header-container {
     @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-32 z-50;
   }
 
@@ -17,12 +21,12 @@
   }
 
   .shell-content-container {
-    @apply -mt-24 sm:-mt-32;
+    @apply -mt-24 sm:-mt-32 ;
   }
 
   .shell-content-container-no-header {
     /* overide this style in your app  */
-    @apply mx-auto;
+    @apply mx-auto ;
   }
 
   .shell-content-container-inner {
@@ -30,37 +34,9 @@
   }
 
   .shell-content-container-inner-fluid {
-    @apply w-full mx-auto min-h-screen;
+    @apply w-full mx-auto min-h-screen ;
   }
 
-
-  .side-pane-overlay {
-    @apply absolute bg-gray-500 bg-opacity-25 inset-0;
-  }
-
-  .side-pane-container {
-    @apply absolute inset-y-0 right-0 pl-10 max-w-full flex;
-  }
-
-  .side-pane-container-25 {
-    @apply absolute inset-y-0 right-0 pl-10 w-1/4 flex;
-  }
-
-  .side-pane-container-50 {
-    @apply absolute inset-y-0 right-0 pl-10 w-2/4 flex;
-  }
-
-  .side-pane-container-75 {
-    @apply absolute inset-y-0 right-0 pl-10 w-3/4 flex;
-  }
-
-  .side-pane-container-inner {
-    @apply w-screen max-w-md;
-  }
-
-  .side-pane {
-    @apply min-h-screen min-w-full flex flex-col bg-white shadow-xl overflow-y-hidden;
-  }
 
   .shell-header-paddings {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
@@ -94,6 +70,14 @@
     @apply h-6 w-6;
   }
 
+  .shell-header-profile {
+    @apply flex gap-3 items-center;
+  }
+
+  .shell-header-profile .shell-header-profile-userName {
+    @apply text-white text-xs;
+  }
+
   .shell-header-profile-dropdown-button {
     @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
     focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
@@ -103,22 +87,17 @@
     @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
-
-  .shell-header-avatar {
-    @apply inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800;
-  }
-
-  .shell-header-avatar-name {
-    @apply text-sm font-medium leading-none text-blue-300;
+  .shell-header-profile-dropdown-with-username {
+    @apply z-50 origin-top-right absolute right-0 mt-24 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
 
   .mobile-menu-button-container {
-    @apply -mr-2 flex md:hidden;
+    @apply -mr-2 flex sm:hidden;
   }
 
   .mobile-menu-button {
-    @apply bg-gray-800 inline-flex items-center justify-center p-2 rounded-sm text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
+    @apply inline-flex items-center justify-center p-2 rounded-sm text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
   }
 
   .mobile-menu-container {
@@ -165,6 +144,7 @@
     @apply mt-3 px-2 space-y-1;
   }
 
+
   .shell-footer-container {
     @apply bg-gradient-to-r from-gray-800 to-gray-900 mt-10 pt-6;
   }
@@ -181,14 +161,17 @@
     @apply text-gray-300;
   }
 
+  .shell-footer-paddings {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
   .shell-footer-component-container-inner {
-    @apply max-w-screen-xl mx-auto;
+    @apply w-full mx-auto;
   }
 
   .shell-footer-logo-h {
     @apply h-12;
   }
-
 
   .shell-footer-sections-container {
     @apply grid grid-cols-8 md:grid-cols-9  lg:grid-cols-8  divide-gray-700 divide-y-2 md:divide-x-2 md:divide-y-0 md:-mx-8;
@@ -209,6 +192,7 @@
   .shell-footer-section-links {
     @apply col-span-8 md:col-span-3 lg:col-span-2 md:px-8 py-4 md:py-0;
   }
+
 
   .shell-footer-section-links ul {
     @apply grid lg:grid-cols-2;
@@ -232,7 +216,7 @@
   }
 
   .shell-footer-link {
-    @apply font-normal text-base hover:text-gray-100;
+    @apply text-sm text-gray-400 hover:underline transition duration-150 ease-in-out;
   }
 
   .shell-footer-copyright {

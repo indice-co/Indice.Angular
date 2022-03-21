@@ -1,5 +1,5 @@
-<div class="bg-white shadow-sm border border-gray-200 rounded-sm">
-  <div class="form-header">
+<div class="form-layout-container">
+  <div class="form-header" *ngIf="title || subTitle || actions">
     <div class="form-header-inner">
       <h3 class="form-title">
         {{ title }}
@@ -9,11 +9,9 @@
       </p>
     </div>
     <div class="form-header-actions">
-      <ng-container *ngFor="let action of actions"
-                    [ngSwitch]="action.type">
+      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
         <ng-container *ngSwitchCase="'search'">
-          <label for="search"
-                 class="sr-only">Search</label>
+          <label for="search" class="sr-only">Search</label>
           <div class="search-container">
             <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
               <!--<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -22,7 +20,7 @@
             </div>
             <input id="search"
                    #search
-                   class="search-input"
+                   class="form-search-input"
                    [placeholder]="searchPlaceholder"
                    type="search"
                    name="search"
@@ -30,7 +28,8 @@
           </div>
           <button type="button"
                   href="#"
-                  class="btn-view-header rounded-l-none"
+                  class="btn-form-view-header-search"
+                  [title]="action.tooltip"
                   (click)="searchActionClick(action, search.value)">
             <i [class]="action.icon"></i>
           </button>
@@ -38,14 +37,16 @@
         <ng-container *ngSwitchCase="'router-link'">
           <button type="button"
                   href="#"
-                  class="ml-1 btn-view-header"
+                  class="ml-1 btn-form-view-header"
+                  [title]="action.tooltip"
                   (click)="routerLinkActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
         </ng-container>
         <ng-container *ngSwitchDefault>
           <button type="button"
-                  class="ml-1 btn-view-header"
+                  class="ml-1 btn-form-view-header"
+                  [title]="action.tooltip"
                   (click)="emitActionClick(action)">
             <i [class]="action.icon"></i>
           </button>
@@ -53,24 +54,14 @@
       </ng-container>
     </div>
   </div>
-  <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-    <div class="flex flex-col pt-4">
+  <div class="form-content-container">
+    <div [ngClass]="{'form-content-container-inner': actions}">
       <ng-content></ng-content>
     </div>
   </div>
+  <lib-side-pane #formPane (onComplete)="onSidePaneDeactivated($event)">
+    <router-outlet name="formRightPane"
+                   (activate)="formPane.onSidePaneActivated($event)"
+                   (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
+  </lib-side-pane>
 </div>
-<lib-side-pane #formPane>
-  <router-outlet name="formRightPane" (activate)="formPane.onSidePaneActivated($event)" (deactivate)="formPane.onSidePaneDeactivated($event)"></router-outlet>
-</lib-side-pane>
-
-<!-- <div [class]="showRightPaneSM ? 'side-pane-overlay' : 'hidden'" aria-hidden="true"></div>
-  <div [class]="showRightPaneSM ? 'side-pane-container' : 'hidden'">
-    <div class="w-screen max-w-md">
-      <div class="side-pane">
-        <router-outlet name="formRightPane"
-            (activate)="onSidePaneActivated($event)"
-            (deactivate)="onSidePaneDeactivated($event)"></router-outlet>
-      </div>
-  </div>
-</div> -->
-

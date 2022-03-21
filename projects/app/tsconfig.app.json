@@ -5,22 +5,11 @@
     "outDir": "../../out-tsc/app",
     "types": [],
     "paths": {
-      "@angular/*": [
-        "node_modules/@angular/*"
-      ],
-      "@indice/ng-auth": [
-        "projects/ng-auth/src/public-api.ts"
-      ],
-      "@indice/ng-components": [
-        "projects/ng-components/src/public-api.ts"
-      ]
+      "@angular/*": ["node_modules/@angular/*"],
+      "@indice/ng-auth": ["projects/ng-auth/src/public-api.ts"],
+      "@indice/ng-components": ["projects/ng-components/src/public-api.ts"]
     }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"]
 }

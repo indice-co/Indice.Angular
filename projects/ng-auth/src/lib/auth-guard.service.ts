@@ -1,32 +1,30 @@
-import { Inject, Injectable } from '@angular/core';
-import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Inject, Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, RouterStateSnapshot, UrlTree } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardService implements CanActivate, CanActivateChild {
+export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
   constructor(@Inject(AuthService) private authService: AuthService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    const obs = this.authService.isLoggedIn();
-    obs.subscribe((result: any) => {
-      if (!result) {
-        this.authService.startAuthentication({ url: route.url.map( u => u.path), query: route.queryParams });
+  public canActivate(route: ActivatedRouteSnapshot | undefined, state: RouterStateSnapshot | undefined): Observable<boolean> | Promise<boolean> | boolean {
+    const observable = this.authService.isLoggedIn();
+    observable.subscribe((isLoggedIn: boolean) => {
+      if (!isLoggedIn) {
+        this.authService.signinRedirect(state?.url || undefined);
       }
     });
-    return obs;
+    return observable;
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    const obs = this.authService.isLoggedIn();
-    obs.subscribe((result: any) => {
-      if (!result) {
-        this.authService.startAuthentication({ url: route.url.map( u => u.path), query: route.queryParams });
-      }
-    });
-    return obs;
+  public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    return this.canActivate(undefined, undefined);
+  }
+
+  public canLoad(): Observable<boolean> | Promise<boolean> | boolean {
+    return this.canActivate(undefined, undefined);
   }
 }

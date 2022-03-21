@@ -1,0 +1,19 @@
+<lib-view-layout title="View layouts" [meta-items]="metaItems">
+  <lib-list-view [items]="items" [view]="view" [show-pager]="false">
+    <lib-list-tile>
+      <ng-template let-item>
+        <div class="card">
+          <div class="card-header">
+            {{ item.title }}
+          </div>
+          <div class="card-body py-5">
+            <p class="overflow-ellipsis overflow-hidden">{{ item.description}}</p>
+          </div>
+          <div class="card-footer">
+            <a [routerLink]="item.path">View sample</a>
+          </div>
+        </div>
+      </ng-template>
+    </lib-list-tile>
+  </lib-list-view>
+</lib-view-layout>

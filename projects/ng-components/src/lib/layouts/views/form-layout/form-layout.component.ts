@@ -9,9 +9,9 @@ import { RouterViewAction, ViewAction } from '../../../types';
   templateUrl: './form-layout.component.html'
 })
 export class FormLayoutComponent implements OnInit {
-  @Input() title: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;
+  @Input() title: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
   @Input() actions: ViewAction[] | null = null;
@@ -21,20 +21,26 @@ export class FormLayoutComponent implements OnInit {
   @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   // tslint:disable-next-line:no-output-on-prefix
   @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
-  public showRightPaneSM = false;
-  constructor() { }
+  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(private router$: Router) { }
 
   ngOnInit(): void {
+    if (this.searchInput$?.nativeElement){
+      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+        map((event: any) => {
+          return event.target.value; // Get input value.
+        }),
+        filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
+        // If character length greater than minimumSearchCharacters setting.
+        debounceTime(1000), // Time in milliseconds between key events.
+        distinctUntilChanged() // If previous query is different from current.
+      ).subscribe();
+    }
   }
 
-  public onSidePaneActivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
-    this.showRightPaneSM = true;
-  }
-
-  public onSidePaneDeactivated($event: any): void  {
-    console.log('onSidePaneActivated', $event);
-    this.showRightPaneSM = false;
+  public onSidePaneDeactivated($event: any): void {
+    this.onComplete.emit(true);
   }
 
   public emitActionClick(action: ViewAction): void {
@@ -46,17 +52,7 @@ export class FormLayoutComponent implements OnInit {
   }
 
   searchActionType(text: string): void {
-    fromEvent(this.searchInput$?.nativeElement, 'keyup').pipe(
-      map((event: any) => {
-        return event.target.value; // Get input value.
-      }),
-      filter(inputValue => inputValue.length >= 3 || inputValue.length === 0),
-      // If character length greater than minimumSearchCharacters setting.
-      debounceTime(1000), // Time in milliseconds between key events.
-      distinctUntilChanged() // If previous query is different from current.
-    ).subscribe(_ => {
-      this.onSearch.emit(this.searchInput$?.nativeElement.value);
-    });
+    this.onSearch.emit(this.searchInput$?.nativeElement.value);
   }
 
   public routerLinkActionClick(action: RouterViewAction | any, relative: boolean = false): void {

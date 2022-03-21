@@ -4,11 +4,12 @@
     @apply hidden md:block;
   }
 
-  /*menu left + body*/
-
-
   .btn-outline {
     @apply focus:outline-none bg-transparent text-gray-700 text-sm hover:text-gray-800 px-2.5 py-1.5 border border-gray-500 hover:border-gray-600 rounded-sm;
+  }
+
+  .btn-outline:disabled {
+    @apply focus:outline-none bg-transparent text-gray-400 text-sm px-2.5 py-1.5 border border-gray-300 rounded-sm cursor-not-allowed;
   }
 
 
@@ -16,32 +17,18 @@
     @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-white transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-900;
   }
 
+
+  .btn-form-view-header {
+    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-gray-700 transition-colors duration-150 rounded-sm hover:shadow-sm hover:bg-gray-50;
+  }
+
+  .btn-form-view-header-search {
+    @apply rounded-l-none text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-gray-700 transition-colors duration-150 rounded-sm hover:shadow-sm hover:bg-gray-50;
+  }
+
   .selected-view-indicator {
     @apply absolute top-0 right-0 block ml-2 h-1.5 w-1.5 rounded-full ring-1 ring-white bg-blue-300;
   }
 
-  .form-header {
-    @apply px-4 py-5 sm:px-6 bg-gray-50;
-  }
-
-  .form-title {
-    @apply text-lg leading-6 font-medium text-gray-900;
-  }
-
-  .form-subtitle {
-    @apply mt-1 max-w-2xl text-sm text-gray-500;
-  }
-
-  .field-label {
-    @apply block text-xs text-gray-700;
-  }
-
-  .field-info {
-    @apply mt-2 text-xs text-gray-300;
-  }
-
-  .form-actions {
-    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6;
-  }
 }
 

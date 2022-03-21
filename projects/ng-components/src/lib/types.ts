@@ -1,11 +1,14 @@
+import { Observable } from 'rxjs';
+
 export interface IAppLinks {
-  public: NavLink[];
-  main: NavLink[];
-  profile: NavLink[];
-  profileActions: NavLink[];
-  legal: NavLink[];
-  brand: NavLink[];
+  public: Observable<NavLink[]>;
+  main: Observable<NavLink[]>;
+  profile: Observable<NavLink[]>;
+  profileActions: Observable<NavLink[]>;
+  legal: Observable<NavLink[]>;
+  brand: Observable<NavLink[]>;
 }
+
 
 export class NavLink {
   constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string) {
@@ -23,8 +26,8 @@ export class NavLink {
 }
 
 export class ExternalNavLink extends NavLink {
-  constructor(text: string, path: string, icon?: string) {
-    super(text, path, true, true, icon);
+  constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
+    super(text, path, true, openInNewTab, icon);
   }
 }
 
@@ -48,6 +51,13 @@ export class ViewAction {
     this.icon = icon;
     this.tooltip = tooltip;
   }
+}
+
+export class ListViewType {
+  public static Tiles = 'tiles';
+  public static Table = 'table';
+  public static Map = 'map';
+  public static Gallery = 'gallery';
 }
 
 export class RouterViewAction extends ViewAction {
@@ -79,12 +89,18 @@ export class HeaderMetaItem {
 }
 
 export class MenuOption {
-  constructor(text: string, value: any) {
+  constructor(text: string, value: any, description?: string, data?: any, icon?: string) {
     this.text = text;
     this.value = value;
+    this.description = description;
+    this.data = data;
+    this.icon = icon;
   }
   public text: string;
   public value: any;
+  public description: string | undefined;
+  public data: any | undefined;
+  public icon: string | undefined;
 }
 
 export interface IAddress {
@@ -94,13 +110,14 @@ export interface IAddress {
   city?: string | null;
   region?: string | null;
   postalCode?: string | null;
-}
-
-export interface IHeaderComponent {
+  country?: string | null;
 }
 
 export interface IShellConfig {
+  appLogo: string;
+  appLogoAlt: string;
   showHeader: boolean;
+  showUserNameOnHeader?: boolean;
   customHeaderComponent?: any;
   showFooter: boolean;
   customFooterComponent?: any;
@@ -108,7 +125,54 @@ export interface IShellConfig {
 }
 
 export class DefaultShellConfig implements IShellConfig {
+  appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
+  appLogoAlt = 'your app name here';
   showHeader = true;
+  showUserNameOnHeader = false;
   showFooter = true;
   fluid = false;
+}
+
+export enum SCREEN_SIZE {
+  XS,
+  SM,
+  MD,
+  LG,
+  XL
+}
+
+export interface IScreenSize {
+  id: SCREEN_SIZE;
+  name: string;
+  css: string;
+}
+
+export enum ToastType {
+  Info = 'info',
+  Success = 'success',
+  Error = 'error',
+  Warning = 'warning'
+}
+
+export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
+
+export interface Toast {
+  type: ToastType;
+  title: string;
+  body: string;
+  delay: number;
+}
+
+export enum SidePaneSize {
+   Default = '',
+   Small25 = '25%',
+   Medium50 = '50%',
+   Large75 = '75%'
+}
+
+export enum SidePaneOverlayType {
+  Default = '',
+  None = '-opacity-0',
+  Light = '',
+  Dark = '-opacity-50'
 }

@@ -1,0 +1,15 @@
+<button type="button"
+        [ngClass]="value ? (disabled ? 'on disabled' : 'on') : 'off'"
+        class="toggle-button"
+        role="switch"
+        aria-checked="false"
+        aria-labelledby="isPrivate"
+        (click)="changeValue()"
+        (blur)="onBlur($event)"
+        value="{{value}}"
+        [disabled]="disabled"
+        [title]="disabled ? 'Το αρχείο πρέπει να είναι ιδωτικό' : 'Ιδιωτικό'">
+    <span aria-hidden="true"
+          [ngClass]="value ? 'enabled-anim' : 'disabled-anim'"
+          class="toggle-span"></span>
+</button>
