@@ -9,11 +9,9 @@
       </p>
     </div>
     <div class="form-header-actions">
-      <ng-container *ngFor="let action of actions"
-                    [ngSwitch]="action.type">
+      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
         <ng-container *ngSwitchCase="'search'">
-          <label for="search"
-                 class="sr-only">Search</label>
+          <label for="search" class="sr-only">Search</label>
           <div class="search-container">
             <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
               <!--<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

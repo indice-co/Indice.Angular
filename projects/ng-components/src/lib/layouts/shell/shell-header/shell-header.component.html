@@ -76,11 +76,7 @@
                      role="menu"
                      aria-orientation="vertical"
                      aria-labelledby="user-menu">
-                  <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Αποσύνδεση</a> -->
                   <ng-container *ngFor="let link of links.profile | async">
-                    <!-- <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-profile">
-                      {{ link.text }}
-                    </a> -->
                     <a [routerLink]="link.path" [routerLinkActive]="['nav-link-profile-active']"
                        [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-profile">
                       {{ link.text }}
@@ -132,9 +128,7 @@
     </div>
   </div>
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="mobile-menu-container"
-       *ngIf="mobileMenuExpanded"
-       id="mobile-menu">
+  <div class="mobile-menu-container" *ngIf="mobileMenuExpanded" id="mobile-menu">
     <div class="mobile-menu-link-container">
       <ng-container *ngFor="let link of sectionLinks | async">
         <a *ngIf="link.external"  [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-mobile">
@@ -189,7 +183,6 @@
             {{ link.text }}
           </a>
         </ng-container>
-        <!-- <a href="#" class="block px-3 py-2 rounded-sm text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Αποσύνδεση</a> -->
       </div>
     </div>
   </div>
