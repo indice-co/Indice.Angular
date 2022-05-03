@@ -1,11 +1,10 @@
 <div *ngIf="loaded" [style.display]="!loaded ? 'none':'block'" class="shell-container active-side-pane">
-  <div class="shell-header-container" *ngIf="activeConfig.showHeader">
-      <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
 
+  <div class="shell-header-container" *ngIf="activeConfig.showHeader">
+    <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
       <ng-container *ngIf="activeConfig.customHeaderComponent">
         <div appDynamicComponentHost ="Header"></div>
       </ng-container>
-
       <lib-shell-header *ngIf="!activeConfig.customHeaderComponent" [show-userName]="activeConfig.showUserNameOnHeader"></lib-shell-header>
     </div>
   </div>

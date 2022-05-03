@@ -57,6 +57,7 @@ const routes: Routes = [
     path: 'samples/shell-layout',
     pathMatch: 'full',
     component: ShellSamplesListComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'samples/shell-layout/info',

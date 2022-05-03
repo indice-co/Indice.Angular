@@ -8,8 +8,8 @@
     @apply antialiased font-sans bg-gray-100;
   }
 
-    .shell-header-container {
-    @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-32 z-50;
+  .shell-header-container {
+    @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-28 z-50;
   }
 
   .shell-header-container-inner {
@@ -21,7 +21,7 @@
   }
 
   .shell-content-container {
-    @apply -mt-24 sm:-mt-32 ;
+    @apply mx-auto -mt-28;
   }
 
   .shell-content-container-no-header {

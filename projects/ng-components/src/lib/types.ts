@@ -23,18 +23,21 @@ export class NavLink {
   public exact: boolean;
   public external: boolean;
   public icon: string | undefined;
+  public type = 'router';
 }
 
 export class ExternalNavLink extends NavLink {
   constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
     super(text, path, true, openInNewTab, icon);
   }
+  public type = 'external';
 }
 
 export class FragmentNavLink extends NavLink {
   constructor(text: string, path: string, icon?: string) {
     super(text, path, true, true, icon);
   }
+  public type = 'fragment';
 }
 
 export class ViewAction {

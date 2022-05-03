@@ -55,6 +55,10 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  public scroll(el: HTMLElement): void {
+    el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   ngOnInit(): void {
     this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
     this.routerSub$ = this.routeSubject.subscribe((event) => {

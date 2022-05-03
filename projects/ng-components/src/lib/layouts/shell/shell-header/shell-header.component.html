@@ -4,21 +4,38 @@
       <div class="shell-header-menu-container">
         <div class="shell-header-links-no-grow-container">
           <div>
-            <a href="#"
-               [routerLink]="['/']"><img class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
+            <a href="#" [routerLink]="['/']"><img class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
           </div>
         </div>
 
         <div class="shell-header-link-container">
           <ng-container *ngFor="let link of sectionLinks | async">
-            <a href="#"
-               [routerLink]="[link.path]"
-               [attr.target]="link.external ? '_blank' : '_self'"
-               [routerLinkActive]="['nav-link-active']"
-               [routerLinkActiveOptions]="{ exact: link.exact }"
-               class="nav-link">
-              {{ link.text }}
-            </a>
+            <ng-container [ngSwitch]="link.type">
+              <a *ngSwitchCase="'router'"
+                href="#"
+                [routerLink]="[link.path]"
+                [attr.target]="link.external ? '_blank' : '_self'"
+                [routerLinkActive]="['nav-link-active']"
+                [routerLinkActiveOptions]="{ exact: link.exact }"
+                class="nav-link">
+                {{ link.text }}
+              </a>
+              <a *ngSwitchCase="'external'"
+                [href]="link.path"
+                [attr.target]="link.external ? '_blank' : '_self'"
+                class="nav-link">
+                {{ link.text }}
+              </a>
+              <a *ngSwitchCase="'fragment'"
+                href="#"
+                [routerLink]="['/']"
+                [fragment]="link.path"
+                [routerLinkActive]="['nav-link-active']"
+                [routerLinkActiveOptions]="{ exact: link.exact }"
+                class="nav-link">
+                {{ link.text }}
+              </a>
+            </ng-container>
           </ng-container>
         </div>
 

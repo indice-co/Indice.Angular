@@ -5,15 +5,15 @@
   }
 
   .view-container-fluid {
-    @apply sm:px-0;
+    @apply sm:px-0 ;
   }
 
   .view-layout-paddings {
-    @apply py-6 sm:py-10;
+    @apply pt-6 pb-4 sm:py-6;
   }
 
   .view-layout-title-container {
-    @apply flex flex-row justify-start ;
+    @apply flex text-white flex-row justify-start ;
   }
 
   .view-layout-title-container-inner {
