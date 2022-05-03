@@ -58,6 +58,10 @@
     @apply hidden sm:ml-6 sm:block ml-10 flex-grow justify-start flex items-center space-x-4;
   }
 
+  .shell-header-link-container-inner {
+    @apply flex justify-start;
+  }
+
   .shell-header-links-no-grow-container {
     @apply flex flex-grow-0 flex-shrink-0 items-center;
   }
