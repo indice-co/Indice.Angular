@@ -1,8 +1,8 @@
 import { AuthService } from '@indice/ng-auth';
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { User } from 'oidc-client';
-import { Event, NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { BehaviorSubject, isObservable, observable, Observable, of } from 'rxjs';
@@ -30,10 +30,12 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   protected statusSub$: Subscription | null = null;
   public user: User | null = null;
   public avatarName: string | null = null;
+  public activeFragment: any | null = null;
 
   constructor(
     @Inject(AuthService) protected authService: AuthService,
     @Inject(Router) protected router: Router,
+    @Inject(ActivatedRoute) protected route: ActivatedRoute,
     @Inject(SHELL_CONFIG) public config: any,
     @Inject(APP_LINKS) public links: any
   ) {
@@ -55,11 +57,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public scroll(el: HTMLElement): void {
-    el.scrollIntoView({ behavior: 'smooth' });
-  }
-
   ngOnInit(): void {
+    this.activeFragment = this.route.fragment.pipe(share());
     this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
     this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
@@ -99,3 +98,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 }
+function ActivatedRouter(ActivatedRouter: any) {
+  throw new Error('Function not implemented.');
+}
+
