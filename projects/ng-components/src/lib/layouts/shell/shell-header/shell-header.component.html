@@ -2,7 +2,7 @@
   <div class="shell-header-paddings">
     <div [class]="border ? 'shell-header-border' : ''">
       <div class="shell-header-menu-container">
-        <div class="shell-header-links-no-grow-container">
+        <div class="shell-header-logo-container">
           <div>
             <a href="#" [routerLink]="['/']"><img class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
           </div>
@@ -10,13 +10,16 @@
 
         <div class="shell-header-link-container">
           <div class="shell-header-link-container-inner">
-            <lib-nav-links-list [links]="sectionLinks" [active-fragment]="activeFragment"
-              [link-class]="'nav-link'" [link-active-class]="'nav-link-active'">
+            <lib-nav-links-list
+              [links]="sectionLinks"
+              [active-fragment]="activeFragment"
+              [link-class]="'nav-link'"
+              [link-active-class]="'nav-link-active'">
             </lib-nav-links-list>
           </div>
         </div>
 
-        <div *ngIf="langs && langs.length > 1 && currentLang" class="shell-header-links-no-grow-container">
+        <div *ngIf="langs && langs.length > 1 && currentLang" class="shell-header-links-far-container">
             <button class="text-blue-300 hover:text-blue-500">
                 <span>{{currentLang}}</span>
                 <i class="text-xs ml-1 ms-Icon ms-Icon--ChevronDown"></i>
@@ -24,7 +27,7 @@
         </div>
 
         <div class="shell-header-md-visible">
-          <div class="shell-header-links-no-grow-container" (clickOutside)="onClickOutside($event)">
+          <div class="shell-header-links-far-container" (clickOutside)="onClickOutside($event)">
 
             <lib-nav-links-list [links]="links.profileActions" [active-fragment]="activeFragment"
               [link-class]="'shell-header-menu-rounded-button'" [link-active-class]="'shell-header-menu-rounded-button-active'">
@@ -46,9 +49,7 @@
                 <div *ngIf="user && showUserNameOnHeader" class="shell-header-profile-userName">
                   {{ user.profile.name }}
                 </div>
-                <button type="button"
-                        *ngIf="user"
-                        (click)="userMenuExpanded = !userMenuExpanded"
+                <button type="button" *ngIf="user" (click)="userMenuExpanded = !userMenuExpanded"
                         class="shell-header-profile-dropdown-button"
                         id="user-menu"
                         aria-expanded="false"

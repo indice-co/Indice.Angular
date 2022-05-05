@@ -51,7 +51,7 @@
   }
 
   .shell-header-md-visible {
-    @apply hidden sm:ml-4 sm:block;
+    @apply hidden sm:block;
   }
 
   .shell-header-link-container {
@@ -62,8 +62,12 @@
     @apply flex justify-start;
   }
 
-  .shell-header-links-no-grow-container {
+  .shell-header-logo-container {
     @apply flex flex-grow-0 flex-shrink-0 items-center;
+  }
+
+  .shell-header-links-far-container {
+    @apply flex flex-grow-0 flex-shrink-0 items-center ml-2;
   }
 
   .shell-header-menu-rounded-button {
