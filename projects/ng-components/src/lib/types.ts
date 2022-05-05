@@ -125,6 +125,7 @@ export interface IShellConfig {
   showFooter: boolean;
   customFooterComponent?: any;
   fluid: boolean;
+  langs?: string[];
 }
 
 export class DefaultShellConfig implements IShellConfig {

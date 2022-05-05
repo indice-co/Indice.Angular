@@ -7,7 +7,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -20,12 +20,12 @@ export class HeaderComponent
 {
   private headerUserSub$: Subscription | null = null;
   // private userSub$: Subscription | null = null;
-
-  constructor(@Inject(AuthService) authService: any,
+  constructor(@Inject(AuthService) authService: AuthService,
               @Inject(Router) router: Router,
+              @Inject(ActivatedRoute) protected route: ActivatedRoute,
               @Inject(APP_LINKS) links: IAppLinks,
               private cdRef: ChangeDetectorRef) {
-    super(authService, router, null, links);
+    super(authService, router, route, null, links);
   }
 
   ngOnInit(): void {

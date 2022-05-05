@@ -36,6 +36,7 @@ import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
 import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empty-state.component';
 import { ToggleComponent } from './controls/toggle/toggle.component';
+import { NavLinksListComponent } from './controls/nav-links-list/nav-links-list.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ToggleComponent } from './controls/toggle/toggle.component';
     UnauthorizedComponent,
     // pipes
     AddressPipe,
-    DurationFormatPipe
+    DurationFormatPipe,
+    NavLinksListComponent
   ],
   imports: [
     CommonModule,

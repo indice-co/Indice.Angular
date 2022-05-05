@@ -19,6 +19,7 @@ export * from './lib/controls/toaster/toaster.component';
 export * from './lib/controls/avatar-initials/avatar-initials.component';
 export * from './lib/controls/toggle/toggle.component';
 export * from './lib/controls/side-pane/side-pane.component';
+export * from './lib/controls/nav-links-list/nav-links-list.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';

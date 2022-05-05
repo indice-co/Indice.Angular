@@ -24,12 +24,10 @@ export class ModelViewLayoutComponent implements OnInit {
   }
 
   public onSidePaneActivated($event: any): void  {
-    //console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = true;
   }
 
   public onSidePaneDeactivated($event: any): void  {
-    //console.log('onSidePaneActivated', $event);
     this.showRightPaneSM = false;
   }
 

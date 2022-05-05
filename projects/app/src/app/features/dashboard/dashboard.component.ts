@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.metaItems = [
+      { key: 'NG-LIB version :', icon: Icons.DateTime, text: new Date().toLocaleTimeString() },
+      { key: 'NG-LIB version :', icon: Icons.DateTime, text: new Date().toLocaleTimeString() },
+      { key: 'NG-LIB version :', icon: Icons.DateTime, text: new Date().toLocaleTimeString() },
       { key: 'NG-LIB version :', icon: Icons.DateTime, text: new Date().toLocaleTimeString() }
     ];
 

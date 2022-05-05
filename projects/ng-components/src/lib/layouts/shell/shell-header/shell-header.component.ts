@@ -20,6 +20,9 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   @Input('profile-menu') profileMenuVisible = true;
   // tslint:disable-next-line:no-input-rename
   @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
+  @Input() langs: string[] | undefined;
+  // tslint:disable-next-line:no-input-rename
+  @Input('current-lang') currentLang: string | undefined;
   @Input() border = true;
   public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;
@@ -37,13 +40,34 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     @Inject(Router) protected router: Router,
     @Inject(ActivatedRoute) protected route: ActivatedRoute,
     @Inject(SHELL_CONFIG) public config: any,
-    @Inject(APP_LINKS) public links: any
-  ) {
+    @Inject(APP_LINKS) public links: any) {
     this.routeSubject = this.router.events.pipe(filter((event) => event instanceof NavigationStart));
   }
 
+  ngOnInit(): void {
+    this.activeFragment = this.route.fragment.pipe(share());
+    this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
+    this.routerSub$ = this.routeSubject.subscribe((event) => {
+      this.mobileMenuExpanded = false;
+      this.userMenuExpanded = false;
+    });
+    this.authService.loadUser().subscribe((user) => {
+      this.setCurrentUser(user);
+    }, error => {
+      console.error(error);
+    });
+    // Detect user changes and display / or not user info accordingly...
+    this.userSub$ = this.authService.user$.subscribe((user: any) => {
+      // console.log('ShellHeaderComponent user subscription');
+      this.setCurrentUser(user);
+    });
+    // set current lang if no current value from langs if any
+    if (!this.currentLang && this.langs && this.langs.length > 0) {
+      this.setCurrentLang(this.langs[0]);
+    }
+  }
+
   ngOnDestroy(): void {
-    console.log(this.showUserNameOnHeader);
 
     if (this.routerSub$) {
       this.routerSub$.unsubscribe();
@@ -57,26 +81,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.activeFragment = this.route.fragment.pipe(share());
-    this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
-    this.routerSub$ = this.routeSubject.subscribe((event) => {
-      this.mobileMenuExpanded = false;
-      this.userMenuExpanded = false;
-    });
-    this.authService.loadUser().subscribe((user) => {
-      console.log(user);
-      this.setCurrentUser(user);
-    }, error => {
-      console.error(error);
-    }
-    );
-    // Detect user changes and display / or not user info accordingly...
-    this.userSub$ = this.authService.user$.subscribe((user: any) => {
-      // console.log('ShellHeaderComponent user subscription');
-      this.setCurrentUser(user);
-    });
-  }
+
 
   // tslint:disable-next-line:typedef
   public onClickOutside($event: any) {
@@ -94,11 +99,11 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.user = user;
     if (this.user && this.user.profile) {
       this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`.toUpperCase();
-      // console.log('load user', this.avatarName);
     }
   }
-}
-function ActivatedRouter(ActivatedRouter: any) {
-  throw new Error('Function not implemented.');
+
+  public setCurrentLang(lang: any): void {
+    this.currentLang = lang;
+  }
 }
 

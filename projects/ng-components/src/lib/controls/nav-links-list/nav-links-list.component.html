@@ -1,0 +1,25 @@
+<ng-container *ngFor="let link of links | async">
+  <ng-container [ngSwitch]="link.type">
+    <a *ngSwitchCase="'router'"
+      href="#"
+      [routerLink]="[link.path]"
+      [routerLinkActive]="navLinkActiveClass"
+      [routerLinkActiveOptions]="{ exact: link.exact }"
+      [class]="navLinkClass">
+      {{ link.text }}
+    </a>
+    <a *ngSwitchCase="'external'"
+      [href]="link.path"
+      [attr.target]="link.external ? '_blank' : '_self'"
+      class="nav-link">
+      {{ link.text }}
+    </a>
+    <a *ngSwitchCase="'fragment'"
+      routerLink="."
+      [fragment]="link.path"
+      [class.active]="(activeFragment | async) === link.path"
+      class="nav-link">
+      {{ link.text }}
+    </a>
+  </ng-container>
+</ng-container>

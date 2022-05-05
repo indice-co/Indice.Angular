@@ -51,7 +51,7 @@
   }
 
   .shell-header-md-visible {
-    @apply hidden sm:ml-6 sm:block;
+    @apply hidden sm:ml-4 sm:block;
   }
 
   .shell-header-link-container {

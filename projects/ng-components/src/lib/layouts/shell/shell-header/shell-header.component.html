@@ -10,56 +10,40 @@
 
         <div class="shell-header-link-container">
           <div class="shell-header-link-container-inner">
-            <ng-container *ngFor="let link of sectionLinks | async">
-              <ng-container [ngSwitch]="link.type">
-                <a *ngSwitchCase="'router'"
-                  href="#"
-                  [routerLink]="[link.path]"
-                  [routerLinkActive]="['nav-link-active']"
-                  [routerLinkActiveOptions]="{ exact: link.exact }"
-                  class="nav-link">
-                  {{ link.text }}
-                </a>
-                <a *ngSwitchCase="'external'"
-                  [href]="link.path"
-                  [attr.target]="link.external ? '_blank' : '_self'"
-                  class="nav-link">
-                  {{ link.text }}
-                </a>
-                <a *ngSwitchCase="'fragment'"
-                  routerLink="."
-                  [fragment]="link.path"
-                  [class.active]="(activeFragment | async) === link.path"
-
-                  class="nav-link">
-                  {{ link.text }}
-                </a>
-              </ng-container>
-            </ng-container>
+            <lib-nav-links-list [links]="sectionLinks" [active-fragment]="activeFragment"
+              [link-class]="'nav-link'" [link-active-class]="'nav-link-active'">
+            </lib-nav-links-list>
           </div>
         </div>
 
-        <div class="shell-header-md-visible">
-          <div class="shell-header-links-no-grow-container">
+        <div *ngIf="langs && langs.length > 1 && currentLang" class="shell-header-links-no-grow-container">
+            <button class="text-blue-300 hover:text-blue-500">
+                <span>{{currentLang}}</span>
+                <i class="text-xs ml-1 ms-Icon ms-Icon--ChevronDown"></i>
+            </button>
+        </div>
 
-            <ng-container *ngFor="let link of links.profileActions | async">
+        <div class="shell-header-md-visible">
+          <div class="shell-header-links-no-grow-container" (clickOutside)="onClickOutside($event)">
+
+            <lib-nav-links-list [links]="links.profileActions" [active-fragment]="activeFragment"
+              [link-class]="'shell-header-menu-rounded-button'" [link-active-class]="'shell-header-menu-rounded-button-active'">
+            </lib-nav-links-list>
+
+            <!-- <ng-container *ngFor="let link of links.profileActions | async">
               <a class="shell-header-menu-rounded-button"
                  (clickOutside)="onClickOutside($event)"
                  [attr.href]="link.path"
                  [attr.target]="link.external ? '_blank' : '_self'">
                 <span class="sr-only">{{ link.text }}</span>
-                <i *ngIf="link.icon"
-                   [class]="link.icon"></i>
+                <i *ngIf="link.icon" [class]="link.icon"></i>
               </a>
-            </ng-container>
+            </ng-container> -->
 
             <!-- Profile dropdown -->
-            <div class="ml-2 relative"
-                 (clickOutside)="onClickOutside($event)"
-                 *ngIf="profileMenuVisible">
+            <div *ngIf="profileMenuVisible" class="ml-2 relative" (clickOutside)="onClickOutside($event)">
               <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">
-                <div *ngIf="user && showUserNameOnHeader"
-                     class="shell-header-profile-userName">
+                <div *ngIf="user && showUserNameOnHeader" class="shell-header-profile-userName">
                   {{ user.profile.name }}
                 </div>
                 <button type="button"
@@ -93,12 +77,12 @@
                      role="menu"
                      aria-orientation="vertical"
                      aria-labelledby="user-menu">
-                  <ng-container *ngFor="let link of links.profile | async">
-                    <a [routerLink]="link.path" [routerLinkActive]="['nav-link-profile-active']"
-                       [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-profile">
-                      {{ link.text }}
-                    </a>
-                  </ng-container>
+                     <lib-nav-links-list
+                        [links]="links.profile"
+                        [active-fragment]="activeFragment"
+                        [link-class]="'nav-link-profile'"
+                        [link-active-class]="'nav-link-profile-active'">
+                    </lib-nav-links-list>
                 </div>
 
               </div>
@@ -115,24 +99,24 @@
                   [attr.aria-expanded]="mobileMenuExpanded">
             <span class="sr-only">Open main menu</span>
             <!--Heroicon name: outline/menu  Menu open: "hidden", Menu closed: "block"-->
-            <svg class="block h-6 w-6"
-                 xmlns="http://www.w3.org/2000/svg"
+            <svg xmlns="http://www.w3.org/2000/svg"
                  fill="none"
                  viewBox="0 0 24 24"
                  stroke="currentColor"
-                 aria-hidden="true">
+                 aria-hidden="true"
+                 [class]="mobileMenuExpanded ? 'hidden':'block h-6 w-6'">
               <path stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M4 6h16M4 12h16M4 18h16" />
             </svg>
             <!--Heroicon name: outline/x Menu open: "block", Menu closed: "hidden"-->
-            <svg class="hidden h-6 w-6"
-                 xmlns="http://www.w3.org/2000/svg"
+            <svg xmlns="http://www.w3.org/2000/svg"
                  fill="none"
                  viewBox="0 0 24 24"
                  stroke="currentColor"
-                 aria-hidden="true">
+                 aria-hidden="true"
+                 [class]="mobileMenuExpanded ? 'block h-6 w-6':'hidden'">
               <path stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
@@ -147,14 +131,9 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="mobile-menu-container" *ngIf="mobileMenuExpanded" id="mobile-menu">
     <div class="mobile-menu-link-container">
-      <ng-container *ngFor="let link of sectionLinks | async">
-        <a *ngIf="link.external"  [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-mobile">
-          {{ link.text }}
-        </a>
-        <a *ngIf="!link.external"  [routerLink]="link.path" [routerLinkActive]="['nav-link-mobile-active']" [routerLinkActiveOptions]="{ exact: link.exact }" class="nav-link-mobile">
-          {{ link.text }}
-          </a>
-      </ng-container>
+      <lib-nav-links-list [links]="sectionLinks" [active-fragment]="activeFragment"
+              [link-class]="'nav-link-mobile'" [link-active-class]="'nav-link-mobile-active'">
+      </lib-nav-links-list>
       <ng-container *ngIf="!user">
         <a href="#" (click)="signin($event)" class="nav-link-mobile">
           <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
@@ -189,17 +168,12 @@
         </button>
       </div>
       <div class="mobile-menu-link-container">
-        <ng-container *ngFor="let link of links.profile | async">
-          <a *ngIf="link.external" [attr.href]="link.path" [attr.target]="'_blank'" class="nav-link-mobile">
-            {{ link.text }}
-          </a>
-          <a [routerLink]="link.path"
-             [routerLinkActive]="['nav-link-mobile-active']"
-             [routerLinkActiveOptions]="{ exact: link.exact }"
-             class="nav-link-mobile">
-            {{ link.text }}
-          </a>
-        </ng-container>
+        <lib-nav-links-list
+            [links]="links.profile"
+            [active-fragment]="activeFragment"
+            [link-class]="'nav-link-mobile'"
+            [link-active-class]="'nav-link-mobile-active'">
+        </lib-nav-links-list>
       </div>
     </div>
   </div>

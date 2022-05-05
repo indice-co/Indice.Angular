@@ -39,6 +39,15 @@ const fluidShellConfig: IShellConfig = {
   appLogoAlt: ''
 };
 
+const defaultShellConfig: IShellConfig = {
+  fluid: false,
+  showFooter: true,
+  showHeader: true,
+  appLogo: '',
+  appLogoAlt: '',
+  langs : ['EL', 'EN']
+};
+
 const routes: Routes = [
   // auth
   { path: 'auth-callback', component: AuthCallbackComponent },
@@ -51,7 +60,7 @@ const routes: Routes = [
 
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { shell: defaultShellConfig }, },
   // SHELL LAYOUTS SAMPLES !!!
   {
     path: 'samples/shell-layout',
