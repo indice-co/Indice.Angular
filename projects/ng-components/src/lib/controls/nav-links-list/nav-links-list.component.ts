@@ -15,6 +15,8 @@ export class NavLinksListComponent implements OnInit {
   @Input('link-class') navLinkClass: string | string = 'nav-link';
   // tslint:disable-next-line:no-input-rename
   @Input('link-active-class') navLinkActiveClass: string | string[] = 'nav-link-active';
+  // tslint:disable-next-line:no-input-rename
+  @Input('container-class') containerClass: string | string[] = '';
   constructor() { }
 
   ngOnInit(): void {

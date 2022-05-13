@@ -87,7 +87,7 @@
   }
 
   .shell-header-profile-dropdown-button {
-    @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
+    @apply max-w-xs outline-none focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
     focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
   }
 
@@ -101,11 +101,11 @@
 
 
   .mobile-menu-button-container {
-    @apply -mr-2 flex sm:hidden;
+    @apply -mr-2 grid grid-cols-1 sm:hidden;
   }
 
   .mobile-menu-button {
-    @apply inline-flex items-center justify-center p-2 rounded-sm text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
+    @apply inline-flex items-center justify-center p-2 rounded-sm outline-none text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
   }
 
   .mobile-menu-container {
@@ -113,7 +113,7 @@
   }
 
   .mobile-menu-link-container {
-    @apply px-2 py-3 space-y-1 sm:px-3;
+    @apply px-2 py-3 grid grid-cols-1 space-y-1;
   }
 
   .mobile-menu-user-info-container {
@@ -148,9 +148,6 @@
     @apply h-6 w-6;
   }
 
-  .mobile-menu-link-container {
-    @apply mt-3 px-2 space-y-1;
-  }
 
 
   .shell-footer-container {
