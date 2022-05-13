@@ -29,8 +29,11 @@
         <div class="shell-header-md-visible">
           <div class="shell-header-links-far-container" (clickOutside)="onClickOutside($event)">
 
-            <lib-nav-links-list [links]="links.profileActions" [active-fragment]="activeFragment"
-              [link-class]="'shell-header-menu-rounded-button'" [link-active-class]="'shell-header-menu-rounded-button-active'">
+            <lib-nav-links-list 
+              [links]="links.profileActions" 
+              [active-fragment]="activeFragment"
+              [link-class]="'shell-header-menu-rounded-button'" 
+              [link-active-class]="'shell-header-menu-rounded-button-active'">
             </lib-nav-links-list>
 
             <!-- <ng-container *ngFor="let link of links.profileActions | async">
@@ -131,16 +134,20 @@
   </div>
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="mobile-menu-container" *ngIf="mobileMenuExpanded" id="mobile-menu">
-    <div class="mobile-menu-link-container">
-      <lib-nav-links-list [links]="sectionLinks" [active-fragment]="activeFragment"
-              [link-class]="'nav-link-mobile'" [link-active-class]="'nav-link-mobile-active'">
-      </lib-nav-links-list>
-      <ng-container *ngIf="!user">
-        <a href="#" (click)="signin($event)" class="nav-link-mobile">
-          <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
-        </a>
-      </ng-container>
+    <lib-nav-links-list
+      [links]="sectionLinks"
+      [active-fragment]="activeFragment"
+      [link-class]="'nav-link-mobile'"
+      [link-active-class]="'nav-link-mobile-active'"
+      [container-class]="'mobile-menu-link-container'">
+    </lib-nav-links-list>
+
+    <div *ngIf="!user">
+      <a href="#" (click)="signin($event)" class="nav-link-mobile">
+        <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
+      </a>
     </div>
+
     <div class="mobile-menu-user-info-container" *ngIf="user">
       <div class="mobile-menu-user-info-container-inner">
         <div class="flex-shrink-0">
@@ -168,14 +175,14 @@
           </svg>
         </button>
       </div>
-      <div class="mobile-menu-link-container">
-        <lib-nav-links-list
-            [links]="links.profile"
-            [active-fragment]="activeFragment"
-            [link-class]="'nav-link-mobile'"
-            [link-active-class]="'nav-link-mobile-active'">
-        </lib-nav-links-list>
-      </div>
     </div>
+
+    <lib-nav-links-list
+          [links]="links.profile"
+          [active-fragment]="activeFragment"
+          [link-class]="'nav-link-mobile'"
+          [link-active-class]="'nav-link-mobile-active'"
+          [container-class]="'mobile-menu-link-container'">
+      </lib-nav-links-list>
   </div>
 </nav>
