@@ -37,6 +37,7 @@ import { DynamicComponentHostDirective } from './directives/dynamic-component-ho
 import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empty-state.component';
 import { ToggleComponent } from './controls/toggle/toggle.component';
 import { NavLinksListComponent } from './controls/nav-links-list/nav-links-list.component';
+import { NotificationsIndicatorComponent } from './controls/notifications-indicator/notifications-indicator.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { NavLinksListComponent } from './controls/nav-links-list/nav-links-list.
     // pipes
     AddressPipe,
     DurationFormatPipe,
-    NavLinksListComponent
+    NavLinksListComponent,
+    NotificationsIndicatorComponent
   ],
   imports: [
     CommonModule,

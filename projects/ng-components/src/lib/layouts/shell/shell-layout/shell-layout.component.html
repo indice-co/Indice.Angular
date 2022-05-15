@@ -5,7 +5,10 @@
       <ng-container *ngIf="activeConfig.customHeaderComponent">
         <div appDynamicComponentHost ="Header"></div>
       </ng-container>
-      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent" [langs]="activeConfig.langs" [show-userName]="activeConfig.showUserNameOnHeader"></lib-shell-header>
+      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent"
+        [langs]="activeConfig.langs"
+        [show-userName]="activeConfig.showUserNameOnHeader"
+        [show-alerts]="activeConfig.showAlertsOnHeader"></lib-shell-header>
     </div>
   </div>
 

@@ -1,3 +1,4 @@
+import { APP_NOTIFICATIONS } from './../../../ng-components/src/lib/tokens';
 import { DefaultShellConfig, IShellConfig } from './../../../ng-components/src/lib/types';
 import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService, ModalService } from '../../../ng-components/src/public-api';
 
@@ -24,6 +25,9 @@ import { ToasterSampleComponent } from './features/controls/toaster-sample/toast
 import { HeaderComponent } from './layout/header/header.component';
 import { SampleModalComponent } from './components/sample-modals/sample-modal.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
+import { AppNotificationsService } from './services/app-notifications.service';
+import { InboxComponent } from './components/inbox/inbox.component';
+import { SampleAppShellConfig } from './app-shell-config';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-pla
     HeaderComponent,
     SampleModalComponent,
     ModalPlayGroundComponent,
+    InboxComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, IndiceAuthModule.forRoot(), IndiceComponentsModule.forRoot()],
   providers: [
@@ -48,8 +53,9 @@ import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-pla
     ModalService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
     { provide: AUTH_SETTINGS, useFactory: () => environment.auth_settings },
-    { provide: SHELL_CONFIG, useFactory: () => new DefaultShellConfig() },
+    { provide: SHELL_CONFIG, useFactory: () => SampleAppShellConfig },
     { provide: APP_LINKS, useFactory: () => new AppLinks() },
+    { provide: APP_NOTIFICATIONS, useClass: AppNotificationsService },
   ],
   bootstrap: [AppComponent],
 })

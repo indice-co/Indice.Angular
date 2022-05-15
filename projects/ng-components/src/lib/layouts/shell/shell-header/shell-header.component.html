@@ -29,10 +29,10 @@
         <div class="shell-header-md-visible">
           <div class="shell-header-links-far-container" (clickOutside)="onClickOutside($event)">
 
-            <lib-nav-links-list 
-              [links]="links.profileActions" 
+            <lib-nav-links-list
+              [links]="links.profileActions"
               [active-fragment]="activeFragment"
-              [link-class]="'shell-header-menu-rounded-button'" 
+              [link-class]="'shell-header-menu-rounded-button'"
               [link-active-class]="'shell-header-menu-rounded-button-active'">
             </lib-nav-links-list>
 
@@ -46,6 +46,9 @@
               </a>
             </ng-container> -->
 
+            <div *ngIf="showAlerts && user"  class="mr-2">
+              <lib-notifications-indicator></lib-notifications-indicator>
+            </div>
             <!-- Profile dropdown -->
             <div *ngIf="profileMenuVisible" class="ml-2 relative" (clickOutside)="onClickOutside($event)">
               <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">

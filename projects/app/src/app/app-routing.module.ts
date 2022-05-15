@@ -21,6 +21,7 @@ import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/f
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
+import { InboxComponent } from './components/inbox/inbox.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -45,7 +46,9 @@ const defaultShellConfig: IShellConfig = {
   showHeader: true,
   appLogo: '',
   appLogoAlt: '',
-  langs : ['EL', 'EN']
+  langs : ['EL', 'EN'],
+  showAlertsOnHeader : true,
+  showUserNameOnHeader : false
 };
 
 const routes: Routes = [
@@ -60,13 +63,19 @@ const routes: Routes = [
 
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { shell: defaultShellConfig }, },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { shell: defaultShellConfig } },
   // SHELL LAYOUTS SAMPLES !!!
   {
     path: 'samples/shell-layout',
     pathMatch: 'full',
     component: ShellSamplesListComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'samples/inbox',
+    pathMatch: 'full',
+    component: InboxComponent,
+    outlet: 'rightpane',
   },
   {
     path: 'samples/shell-layout/info',

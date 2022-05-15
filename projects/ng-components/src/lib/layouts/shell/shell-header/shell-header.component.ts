@@ -20,6 +20,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   @Input('profile-menu') profileMenuVisible = true;
   // tslint:disable-next-line:no-input-rename
   @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
+  // tslint:disable-next-line:no-input-rename
+  @Input('show-alerts') showAlerts: boolean | undefined = false;
   @Input() langs: string[] | undefined;
   // tslint:disable-next-line:no-input-rename
   @Input('current-lang') currentLang: string | undefined;

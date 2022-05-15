@@ -1,5 +1,11 @@
 import { Observable } from 'rxjs';
 
+
+export interface IAppNotifications {
+  messages: Observable<IResultSet<NavLink>>;
+  inboxAction?: () => void | undefined;
+}
+
 export interface IAppLinks {
   public: Observable<NavLink[]>;
   main: Observable<NavLink[]>;
@@ -11,12 +17,13 @@ export interface IAppLinks {
 
 
 export class NavLink {
-  constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string) {
+  constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string, data?: any) {
     this.text = text;
     this.path = path;
     this.exact = exact;
     this.external = external;
     this.icon = icon;
+    this.data = data;
   }
   public text: string;
   public path: string;
@@ -24,6 +31,7 @@ export class NavLink {
   public external: boolean;
   public icon: string | undefined;
   public type = 'router';
+  public data: any | undefined;
 }
 
 export class ExternalNavLink extends NavLink {
@@ -38,6 +46,12 @@ export class FragmentNavLink extends NavLink {
     super(text, path, true, true, icon);
   }
   public type = 'fragment';
+}
+
+export class NotificationNavLink extends NavLink {
+  constructor(text: string, path: string, public isRead: boolean, public creationDate?: Date) {
+    super(text, path, true, false, undefined);
+  }
 }
 
 export class ViewAction {
@@ -121,11 +135,13 @@ export interface IShellConfig {
   appLogoAlt: string;
   showHeader: boolean;
   showUserNameOnHeader?: boolean;
+  showAlertsOnHeader?: boolean;
   customHeaderComponent?: any;
   showFooter: boolean;
   customFooterComponent?: any;
   fluid: boolean;
   langs?: string[];
+
 }
 
 export class DefaultShellConfig implements IShellConfig {
@@ -133,6 +149,7 @@ export class DefaultShellConfig implements IShellConfig {
   appLogoAlt = 'your app name here';
   showHeader = true;
   showUserNameOnHeader = false;
+  showAlertsOnHeader = false;
   showFooter = true;
   fluid = false;
 }
