@@ -13,6 +13,7 @@ export interface IAppLinks {
   profileActions: Observable<NavLink[]>;
   legal: Observable<NavLink[]>;
   brand: Observable<NavLink[]>;
+  notifications?: Observable<NavLink>;
 }
 
 

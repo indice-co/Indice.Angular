@@ -69,8 +69,8 @@
       </ng-template>
     </div>
     <div class="p-1 rounded-sm">
-      <a [routerLink]="'/messages'">
-        <button type="button" class="header-notifications-dropdown-view-all-button">Προβολή όλων</button>
+      <a [routerLink]="allNotificationsLink!.path">
+        <button type="button" class="header-notifications-dropdown-view-all-button">{{allNotificationsLink!.text}}</button>
       </a>
     </div>
   </div>
