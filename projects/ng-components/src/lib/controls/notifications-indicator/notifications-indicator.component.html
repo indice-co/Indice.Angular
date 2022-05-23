@@ -36,12 +36,13 @@
             <ng-container *ngIf="items.length <= 0" class="py-5">
               <div class="notifications-nav-link hover:bg-transparent">Δεν έχετε νέες ειδοποιήσεις</div>
             </ng-container>
-            <ng-container *ngFor="let message of items">
+            <ng-container *ngFor="let message of items; let i = index">
               <li class="mb-2" [ngClass]="{ 'border-l-2 border-blue-500 bg-blue-50 hover:bg-blue-50': !message.data.isRead }">
                 <div class="flex justify-between">
                   <div class="flex-grow">
                     <a
                       [routerLink]="message.path"
+                      (click)="removeItem(i)"
                       class="notifications-nav-link grid"
                       [ngClass]="!message.data.isRead ? ' hover:bg-blue-50' : 'border-b border-gray-100'"
                     >
