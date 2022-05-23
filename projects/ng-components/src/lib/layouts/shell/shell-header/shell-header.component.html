@@ -46,9 +46,6 @@
               </a>
             </ng-container> -->
 
-            <div *ngIf="showAlerts && user"  class="mr-2">
-              <lib-notifications-indicator></lib-notifications-indicator>
-            </div>
             <!-- Profile dropdown -->
             <div *ngIf="profileMenuVisible" class="ml-2 relative" (clickOutside)="onClickOutside($event)">
               <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">
@@ -93,6 +90,9 @@
                 </div>
 
               </div>
+            </div>
+            <div *ngIf="showAlerts && user"  class="mr-2">
+              <lib-notifications-indicator></lib-notifications-indicator>
             </div>
           </div>
         </div>
