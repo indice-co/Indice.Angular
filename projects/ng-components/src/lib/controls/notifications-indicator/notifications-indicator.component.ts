@@ -1,22 +1,22 @@
-import { IAppNotifications } from './../../types';
+import { IAppNotifications, NavLink } from './../../types';
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { APP_NOTIFICATIONS } from '../../tokens';
+import { Observable, of, Subscription } from 'rxjs';
+import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
 
 @Component({
   selector: 'lib-notifications-indicator',
-  templateUrl: './notifications-indicator.component.html',
-  styleUrls: ['./notifications-indicator.component.scss']
+  templateUrl: './notifications-indicator.component.html'
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
 
   public menuExpanded = false;
   public unreadCount = 0;
   public items: any[] = [];
+  public allNotificationsLink?: NavLink;
   private notificationsSub$: Subscription | undefined;
   private inboxAction: any | undefined = undefined;
   public newArrival = false;
-  constructor(@Inject(APP_NOTIFICATIONS) public notifications: IAppNotifications) { }
+  constructor(@Inject(APP_NOTIFICATIONS) public notifications: IAppNotifications, @Inject(APP_LINKS) public links: any) { }
 
   ngOnDestroy(): void {
     if (this.notificationsSub$) {
@@ -25,6 +25,9 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    (this.links['notifications'] as Observable<NavLink>).subscribe(notificationsLink => {
+      this.allNotificationsLink = notificationsLink;
+    });
     this.notificationsSub$ = this.notifications.messages.subscribe(result => {
       if (result.items){
         this.newArrival = true;
