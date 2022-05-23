@@ -1,20 +1,77 @@
-<div class="relative">
+<div class="relative"
+(clickOutside)="onClickOutside($event)">
   <!-- Notifications Button -->
-  <button type="button" (click)="doInboxAction()" aria-expanded="false" aria-haspopup="true">
+  <button type="button"
+          (click)="doInboxAction()"
+          aria-expanded="false"
+          aria-haspopup="true">
     <span class="sr-only">View notifications</span>
     <span class="avatar-container">
       <span class="avatar-text">
-        <i class="ms-Icon "
+        <i class="ms-Icon"
           [class.ms-Icon--MessageFill]="unreadCount > 0"
           [class.text-sky-400]="unreadCount > 0"
           [class.animate-notification]="newArrival"
-          [class.ms-Icon--Message]="unreadCount === 0"></i>
+          [class.ms-Icon--Message]="unreadCount === 0">
+        </i>
       </span>
-      <span *ngIf="unreadCount > 0"
+      <span
+        *ngIf="unreadCount > 0"
         [class.animate-pulse]="newArrival"
         class="absolute top-0 right-0 inline-flex items-center justify-center -mt-1 ml-1 text-xs leading-none text-gray-100 ordinal">
-        {{unreadCount}}
+        {{ unreadCount }}
       </span>
     </span>
   </button>
+
+  <!-- Notifications dropdown -->
+  <div *ngIf="menuExpanded" class="header-notifications-dropdown-with-username" role="menu" aria-orientation="vertical" aria-labelledby="messages-menu">
+    <div class="max-h-64 overflow-y-auto notification-messages min-h">
+      <ng-container *ngIf="!items; else messagesDropDown" class="py-5">
+        <div class="notifications-nav-link hover:bg-transparent">Δεν έχετε νέες ειδοποιήσεις</div>
+      </ng-container>
+      <ng-template #messagesDropDown>
+        <ul class="pr-1.5">
+          <ng-container *ngIf="items; else loading">
+            <ng-container *ngIf="items.length <= 0" class="py-5">
+              <div class="notifications-nav-link hover:bg-transparent">Δεν έχετε νέες ειδοποιήσεις</div>
+            </ng-container>
+            <ng-container *ngFor="let message of items">
+              <li class="mb-2" [ngClass]="{ 'border-l-2 border-blue-500 bg-blue-50 hover:bg-blue-50': !message.data.isRead }">
+                <div class="flex justify-between">
+                  <div class="flex-grow">
+                    <a
+                      [routerLink]="message.path"
+                      class="notifications-nav-link grid"
+                      [ngClass]="!message.data.isRead ? ' hover:bg-blue-50' : 'border-b border-gray-100'"
+                    >
+                      <div class="flex flex-col">
+                        <div class="font-thin tracking-tighter">
+                          {{ message.data.creationDate | date: "EEE, d MMMM" }}
+                        </div>
+                        <div class="font-bold">
+                          {{ message.data.text }}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ng-container>
+          </ng-container>
+
+          <ng-template #loading>
+            <div class="h-32 flex items-center justify-center">
+              <div class="animate-pulse text-s text-gray-600">Loading...</div>
+            </div>
+          </ng-template>
+        </ul>
+      </ng-template>
+    </div>
+    <div class="p-1 rounded-sm">
+      <a [routerLink]="'/messages'">
+        <button type="button" class="header-notifications-dropdown-view-all-button">Προβολή όλων</button>
+      </a>
+    </div>
+  </div>
 </div>

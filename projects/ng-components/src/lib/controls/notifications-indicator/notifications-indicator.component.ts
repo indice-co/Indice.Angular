@@ -1,20 +1,16 @@
-import { IAppNotifications, NavLink } from './../../types';
+import { IAppNotifications } from './../../types';
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { APP_NOTIFICATIONS } from '../../tokens';
-import { NotificationNavLink } from '../../types';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'lib-notifications-indicator',
-  templateUrl: './notifications-indicator.component.html'
+  templateUrl: './notifications-indicator.component.html',
+  styleUrls: ['./notifications-indicator.component.scss']
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
 
-  public notificationsMenuVisible = true;
   public menuExpanded = false;
-  public showNotifications = true;
-  public showUserNameOnHeader = true;
   public unreadCount = 0;
   public items: any[] = [];
   private notificationsSub$: Subscription | undefined;
@@ -47,6 +43,8 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   public doInboxAction(): void {
     if (this.notifications.inboxAction) {
       this.notifications.inboxAction();
+    } else {
+      this.menuExpanded = true;
     }
     this.unreadCount = 0;
   }

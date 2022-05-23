@@ -41,8 +41,8 @@ export class AppNotificationsService implements IAppNotifications {
     });
   }
 
-  public inboxAction(): void {
-    this.router?.navigate(['', { outlets: { rightpane: 'samples/inbox' } }]);
-  }
+  // public inboxAction(): void {
+  //   this.router?.navigate(['', { outlets: { rightpane: 'samples/inbox' } }]);
+  // }
 
 }

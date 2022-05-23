@@ -46,12 +46,23 @@
               </a>
             </ng-container> -->
 
-            <!-- Profile dropdown -->
-            <div *ngIf="profileMenuVisible" class="ml-2 relative" (clickOutside)="onClickOutside($event)">
+            <!-- Username -->
+            <div *ngIf="profileMenuVisible" class="ml-2 relative">
               <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">
                 <div *ngIf="user && showUserNameOnHeader" class="shell-header-profile-userName">
                   {{ user.profile.name }}
                 </div>
+              </div>
+            </div>
+
+            <!-- Notifications dropdown -->
+            <div *ngIf="showAlerts && user" class="ml-2">
+              <lib-notifications-indicator></lib-notifications-indicator>
+            </div>
+
+            <!-- Profile dropdown -->
+            <div *ngIf="profileMenuVisible" class="ml-2 relative" (clickOutside)="onClickOutside($event)">
+              <div [ngClass]="{'shell-header-profile': showUserNameOnHeader}">
                 <button type="button" *ngIf="user" (click)="userMenuExpanded = !userMenuExpanded"
                         class="shell-header-profile-dropdown-button"
                         id="user-menu"
@@ -90,9 +101,6 @@
                 </div>
 
               </div>
-            </div>
-            <div *ngIf="showAlerts && user"  class="mr-2">
-              <lib-notifications-indicator></lib-notifications-indicator>
             </div>
           </div>
         </div>

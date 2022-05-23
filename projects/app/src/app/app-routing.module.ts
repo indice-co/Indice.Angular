@@ -48,7 +48,7 @@ const defaultShellConfig: IShellConfig = {
   appLogoAlt: '',
   langs : ['EL', 'EN'],
   showAlertsOnHeader : true,
-  showUserNameOnHeader : false
+  showUserNameOnHeader : true
 };
 
 const routes: Routes = [

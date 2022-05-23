@@ -8,5 +8,5 @@ export const SampleAppShellConfig: IShellConfig = {
   showHeader: true,
   langs : ['EL', 'EN'],
   showAlertsOnHeader : true,
-  showUserNameOnHeader : false
+  showUserNameOnHeader : true
 };
