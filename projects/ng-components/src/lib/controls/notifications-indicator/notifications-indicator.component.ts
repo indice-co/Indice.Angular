@@ -52,6 +52,10 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
     this.unreadCount = 0;
   }
 
+  public removeItem(index:number){
+    this.items.splice(index,1);
+  }
+
     // this.notificationsSub$ = this.links.notifications?.pipe(map(result => {
     //   this.allItemsLink = result.allNotifications;
     //   this.items = result.items;

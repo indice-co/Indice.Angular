@@ -1,7 +1,8 @@
 version: 1.0.{build}
 branches:
   only:
-  - develop
+  - main
+#  - develop
   
 # Test against this version of Node.js
 environment:
@@ -14,16 +15,20 @@ install:
   - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
   - npm whoami
   - npm install -g @angular/cli@latest
-  - npm install
+  - npm install --force
 
 test_script:
   - node --version
   - npm --version
 #  - ng test --watch false --single-run true
 after_test:
-   - npm run build-components
-#  - ng build ng-components --configuration=production --output-path=%appveyor_build_folder%\package-dist
-#  - ts-node ./projects/ng-components/scripts/css-bundle.ts
+  - cd projects/ng-auth && npm version patch && cd ../
+  - cd projects/ng-components && npm version patch && cd ../
+  - npm run build-auth
+  - npm run build-components
+  - npm run postbuild-components
+  - cd projects/ng-auth && npm publish && cd ../
+  - cd projects/ng-components && npm publish && cd ../
  
 artifacts:
 - path: dist/ng-auth
@@ -41,6 +46,8 @@ notifications:
 - provider: Email
   to:
   - itsenes@indice.gr
+  - s.palaiologos@indice.gr
+  - g.manoltzas@indice.gr
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
