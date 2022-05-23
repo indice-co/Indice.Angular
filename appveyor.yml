@@ -22,10 +22,11 @@ test_script:
   - npm --version
 #  - ng test --watch false --single-run true
 after_test:
-   - npm run build-auth
-   - npm run build-components
-#  - ng build ng-components --configuration=production --output-path=%appveyor_build_folder%\package-dist
-#  - ts-node ./projects/ng-components/scripts/css-bundle.ts
+  - cd projects/ng-auth && npm version patch && cd ../
+  - cd projects/ng-components && npm version patch && cd ../
+  - npm run build-auth
+  - npm run build-components
+  - npm run postbuild-components
  
 artifacts:
 - path: dist/ng-auth
