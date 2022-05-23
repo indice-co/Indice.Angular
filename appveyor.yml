@@ -1,0 +1,46 @@
+version: 1.0.{build}
+branches:
+  only:
+  - develop
+  
+# Test against this version of Node.js
+environment:
+  nodejs_version: "Stable"
+  
+build: off
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
+  - npm whoami
+  - npm install -g @angular/cli@latest
+  - npm install
+
+test_script:
+  - node --version
+  - npm --version
+#  - ng test --watch false --single-run true
+after_test:
+   - npm run build-components
+#  - ng build ng-components --configuration=production --output-path=%appveyor_build_folder%\package-dist
+#  - ts-node ./projects/ng-components/scripts/css-bundle.ts
+ 
+artifacts:
+- path: dist/ng-auth
+  name: ng-auth
+- path: dist/ng-components
+  name: ng-components
+
+#deploy:
+#- provider: Environment
+#  name: Core.Web (STAGE)
+#  on:
+#    branch: stage
+
+notifications:
+- provider: Email
+  to:
+  - itsenes@indice.gr
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
