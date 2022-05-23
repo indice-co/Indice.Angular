@@ -1,5 +1,7 @@
 ![alt text](icon/icon-64.png "Indice logo")
 # Indice.Angular 
+[![Build status](https://ci.appveyor.com/api/projects/status/jipfi4pj705u2jq8?svg=true)](https://ci.appveyor.com/project/cleftheris/indice-angular)
+
 Indice extensions for Angular 2+ 
 
 ## To export a new component
