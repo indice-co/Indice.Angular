@@ -1,6 +1,7 @@
 version: 1.0.{build}
 branches:
   only:
+  - main
   - develop
   
 # Test against this version of Node.js
