@@ -11,7 +11,7 @@ export class AppLinks implements IAppLinks {
 
   public public!: Observable<NavLink[]>;
   public profileActions!: Observable<NavLink[]>;
-  public notifications: Observable<NavLink> = of(new NavLink('Προβολή όλων', '/inbox', true));
+  public notifications: Observable<NavLink> = of(new NavLink('Προβολή όλων', 'samples/inbox', true));
 
   public main: Observable<NavLink[]> = of([
     new NavLink('Αρχική', '/', true),
