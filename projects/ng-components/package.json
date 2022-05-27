@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.2.138",
+  "version": "0.2.141",
   "description": "Indice common components for Angular v12",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "@angular/common": "^12.0.1",
     "@angular/core": "^12.0.1",
     "@angular/router": "^12.0.1",
-    "@indice/ng-auth": "^0.1.19",
+    "@indice/ng-auth": "^0.1.26",
     "oidc-client": "^1.11.5",
     "tailwindcss": "^2.1.2",
     "@tailwindcss/aspect-ratio": "^0.2.0",
@@ -34,13 +34,13 @@
     "rxjs": "^6.6.7"
   },
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@angular/common": "12.0.1",
     "@angular/core": "12.0.1",
     "@angular/router": "^12.0.1",
-    "@indice/ng-auth": "^0.1.4",
+    "@indice/ng-auth": "^0.1.26",
     "oidc-client": "^1.11.5",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
@@ -50,6 +50,7 @@
     "patch-package": "^6.4.7",
     "postcss": "^8.4.12",
     "scss-bundle": "^3.1.2",
-    "tailwindcss": "^2.1.2"
+    "tailwindcss": "^2.1.2",
+    "tslib": "^2.4.0"
   }
 }
