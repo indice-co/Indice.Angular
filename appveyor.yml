@@ -27,8 +27,8 @@ after_test:
   - npm run build-auth
   - npm run build-components
   - npm run postbuild-components
-  - cd projects/ng-auth && npm publish && cd ../
-  - cd projects/ng-components && npm publish && cd ../
+  - cd dist/ng-auth && npm publish && cd ../
+  - cd dist/ng-components && npm publish && cd ../
  
 artifacts:
 - path: dist/ng-auth

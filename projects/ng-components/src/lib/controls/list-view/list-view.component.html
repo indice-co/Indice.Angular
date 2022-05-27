@@ -15,12 +15,6 @@
   </lib-pager>
 </div>
 
-<ng-container *ngIf="!busy && items && items.length === 0">
-  <div class="cards-deck-1">
-    <lib-list-view-empty-state></lib-list-view-empty-state>
-  </div>
-</ng-container>
-
 <ng-container [ngSwitch]="view">
 
   <ng-container *ngSwitchCase="'tiles'">
@@ -144,6 +138,12 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!busy && items && items.length === 0">
+    <div class="cards-deck-1">
+      <lib-list-view-empty-state></lib-list-view-empty-state>
     </div>
   </ng-container>
 </ng-container>
