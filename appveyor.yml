@@ -17,18 +17,20 @@ install:
   - npm install -g @angular/cli@latest
   - npm install --force
 
-test_script:
+before_build:
   - node --version
   - npm --version
 #  - ng test --watch false --single-run true
-after_test:
-  - cd projects/ng-auth && npm version patch && cd ../
-  - cd projects/ng-components && npm version patch && cd ../
-  - npm run build-auth
+build_script:
+# Publish ng-auth
+#   - cd projects/ng-auth && npm version patch && cd ../..
+#   - npm run build-auth
+#   - cd dist/ng-auth && npm publish
+# Publish ng-components
+  - cd projects/ng-components && npm version patch && cd ../..
   - npm run build-components
   - npm run postbuild-components
-  - cd dist/ng-auth && npm publish && cd ../
-  - cd dist/ng-components && npm publish && cd ../
+  - cd dist/ng-components && npm publish
  
 artifacts:
 - path: dist/ng-auth
