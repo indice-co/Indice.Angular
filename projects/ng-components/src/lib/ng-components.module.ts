@@ -131,5 +131,5 @@ export class IndiceComponentsModule {
       ngModule: IndiceComponentsModule,
       providers: [ToasterService]
     };
- }
+  }
 }
