@@ -25,19 +25,15 @@
     @apply items-center align-text-bottom font-medium w-full px-2.5 py-2.5 text-xs text-gray-600 focus:outline-none;
   }
 
-  .notification-messages::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
-    background: transparent;
-    cursor: pointer;
-    /* or add it to the track */
-  }
-
   .notification-messages::-webkit-scrollbar-thumb {
-    @apply bg-gray-600;
-
-    &:hover {
-      @apply bg-gray-700;
-    }
+    @apply bg-gray-600 hover:bg-gray-700;
   }
+}
+
+.notification-messages::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: transparent;
+  cursor: pointer;
+  /* or add it to the track */
 }
