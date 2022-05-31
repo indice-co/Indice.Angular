@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/indice-auth'),
+      dir: require('path').join(__dirname, '../../coverage/ng-auth'),
       subdir: '.',
       reporters: [
         { type: 'html' },
