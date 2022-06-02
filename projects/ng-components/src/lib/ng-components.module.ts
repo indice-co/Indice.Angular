@@ -41,7 +41,6 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
 import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
 import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
 import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sidebar.component';
-import { ShellLayoutTemplateComponent } from './layouts/shell/shell-layout/shell-layout-template/shell-layout-template.component';
 
 @NgModule({
   declarations: [
@@ -89,8 +88,7 @@ import { ShellLayoutTemplateComponent } from './layouts/shell/shell-layout/shell
     NotificationsIndicatorComponent,
     LanguageSelectionComponent,
     UserProfileMenuComponent,
-    ShellSidebarComponent,
-    ShellLayoutTemplateComponent
+    ShellSidebarComponent
   ],
   imports: [
     CommonModule,

@@ -9,13 +9,13 @@
           [routerLinkActive]="navLinkActiveClass"
           [routerLinkActiveOptions]="{ exact: link.exact }"
           [class]="navLinkClass">
-          {{ link.text }}
+          <i *ngIf="showIcons && link.icon" [class]="link.icon + ' mr-3'"></i>{{ link.text }}
         </a>
         <a *ngSwitchCase="'external'"
           [href]="link.path"
           [attr.target]="link.external ? '_blank' : '_self'"
           [class]="navLinkClass">
-          {{ link.text }}
+          <i *ngIf="showIcons && link.icon" [class]="link.icon+ ' mr-3'"></i>{{ link.text }}
         </a>
         <a *ngSwitchCase="'fragment'"
           routerLink="."
@@ -23,7 +23,7 @@
           [class.active]="(activeFragment | async) === link.path"
           [routerLinkActive]="navLinkActiveClass"
           [class]="navLinkClass">
-          {{ link.text }}
+          <i *ngIf="showIcons && link.icon" [class]="link.icon+ ' mr-3'"></i>{{ link.text }}
         </a>
       </ng-container>
     </ng-container>
