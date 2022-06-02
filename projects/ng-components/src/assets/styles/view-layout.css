@@ -24,16 +24,32 @@
     @apply text-2xl md:text-xl text-white font-thin mr-1;
   }
 
+  .sidebar .title-icon {
+    @apply text-2xl md:text-xl font-thin mr-1 text-gray-900;
+  }
+
   .view-layout-title {
     @apply inline text-xl md:text-3xl text-white;
+  }
+
+  .sidebar .view-layout-title {
+    @apply inline text-xl md:text-3xl text-gray-900;
   }
 
   .view-layout-title-busy {
     @apply animate-pulse inline text-xl md:text-3xl text-gray-200;
   }
 
+  .sidebar .view-layout-title-busy {
+    @apply animate-pulse inline text-xl md:text-3xl text-gray-400;
+  }
+
   .meta-container {
     @apply ml-1 mt-2 flex flex-row sm:flex-row sm:flex-wrap space-x-2 sm:space-x-4;
+  }
+
+  .sidebar .meta-container {
+    @apply text-gray-900;
   }
 
   .meta-item-container {

@@ -1,0 +1,15 @@
+<!-- Sidebar component, swap this element with another sidebar if you like -->
+<div class="flex-1 flex flex-col h-full min-h-0 bg-gray-800">
+  <div class="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+    <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow"> -->
+    <a href="#" [routerLink]="['/']"><img class="app-logo" [src]="shellConfig?.appLogo" [alt]="shellConfig?.appLogoAlt" /></a>
+  </div>
+  <div class="pt-4 px-2 sidebar">
+    <lib-nav-links-list
+      [links]="sectionLinks"
+      [active-fragment]="activeFragment"
+      [link-class]="'sidebar nav-link'"
+      [link-active-class]="'sidebar nav-link-active'">
+    </lib-nav-links-list>
+  </div>
+</div>

@@ -16,7 +16,7 @@ import { IndiceAuthModule } from '@indice/ng-auth';
 import { SkeletonLoaderComponent } from './controls/skeleton-loader/skeleton-loader.component';
 import { ListTileComponent } from './controls/list-view/list-tile.component';
 import { ListColumnComponent } from './controls/list-view/list-column.component';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DropDownMenuComponent } from './controls/drop-down-menu/drop-down-menu.component';
 import { ListViewComponent } from './controls/list-view/list-view.component';
 import { PagerComponent } from './controls/pager/pager.component';
@@ -38,6 +38,10 @@ import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empt
 import { ToggleComponent } from './controls/toggle/toggle.component';
 import { NavLinksListComponent } from './controls/nav-links-list/nav-links-list.component';
 import { NotificationsIndicatorComponent } from './controls/notifications-indicator/notifications-indicator.component';
+import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
+import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
+import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sidebar.component';
+import { ShellLayoutTemplateComponent } from './layouts/shell/shell-layout/shell-layout-template/shell-layout-template.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +86,11 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
     AddressPipe,
     DurationFormatPipe,
     NavLinksListComponent,
-    NotificationsIndicatorComponent
+    NotificationsIndicatorComponent,
+    LanguageSelectionComponent,
+    UserProfileMenuComponent,
+    ShellSidebarComponent,
+    ShellLayoutTemplateComponent
   ],
   imports: [
     CommonModule,
@@ -126,7 +134,7 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
 })
 export class IndiceComponentsModule {
   // tslint:disable-next-line:typedef
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<IndiceComponentsModule> {
     return {
       ngModule: IndiceComponentsModule,
       providers: [ToasterService]

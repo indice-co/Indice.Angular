@@ -1,6 +1,8 @@
+import { ShellLayoutType } from './../../../../../ng-components/src/lib/types';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Icons, HeaderMetaItem } from '@indice/ng-components';
+import { SampleAppShellConfig } from '../../app-shell-config';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,4 +39,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl(path);
   }
 
+  public switchLayout(layout: any): void {
+    SampleAppShellConfig.layout = layout;
+  }
 }

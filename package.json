@@ -16,6 +16,7 @@
     "build:prod": "cross-env NODE_ENV=production ng build --prod",
     "e2e": "ng e2e",
     "publish-components": "cd projects/ng-components && npm version patch && cd../.. && ng build ng-components --configuration=production && ts-node ./projects/ng-components/scripts/css-bundle.ts && cd dist/ng-components && npm publish",
+    "commit-components-beta": "cd projects/ng-components && npm version prerelease preid beta && cd../.. && ng build ng-components --configuration=production && npm commit ",
     "publish-auth": "cd projects/ng-auth && npm version patch && cd../.. && ng build ng-auth --configuration=production && cd dist/ng-auth && npm publish"
   },
   "private": false,

@@ -5,15 +5,23 @@
   }
 
   .shell-container {
-    @apply antialiased font-sans bg-gray-100;
+    @apply antialiased font-sans bg-gray-100 h-full;
   }
 
   .shell-header-container {
     @apply bg-gradient-to-r from-gray-900 to-gray-800 pb-24 sm:pb-28 z-50;
   }
 
+  .sidebar .shell-header-container {
+    @apply bg-gradient-to-r from-gray-900 to-gray-800 z-50 pb-0 sm:pb-0 w-full flex justify-end;
+  }
+
   .shell-header-container-inner {
     @apply max-w-7xl mx-auto;
+  }
+
+  .sidebar .shell-header-container-inner {
+    @apply max-w-full mx-auto;
   }
 
   .shell-header-container-inner-fluid {
@@ -24,9 +32,17 @@
     @apply mx-auto -mt-28;
   }
 
+  .sidebar .shell-content-container {
+    @apply mx-auto mt-0;
+  }
+
   .shell-content-container-no-header {
     /* overide this style in your app  */
     @apply mx-auto ;
+  }
+
+  .sidebar .shell-content-container-inner {
+    @apply max-w-full px-4 min-h-screen;
   }
 
   .shell-content-container-inner {
@@ -42,8 +58,17 @@
     @apply mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+
+  .sidebar .shell-header-paddings {
+    @apply mx-auto px-2;
+  }
+
   .shell-header-border {
     @apply border-b border-gray-700;
+  }
+
+  .sidebar .shell-header-border {
+    @apply border-0;
   }
 
   .shell-header-menu-container {
@@ -79,11 +104,11 @@
   }
 
   .shell-header-profile {
-    @apply flex gap-3 items-center;
+    @apply flex items-center;
   }
 
   .shell-header-profile .shell-header-profile-userName {
-    @apply text-white text-xs;
+    @apply cursor-pointer text-white text-xs;
   }
 
   .shell-header-profile-dropdown-button {
@@ -147,8 +172,6 @@
   .mobile-menu-rounded-button-icon-style {
     @apply h-6 w-6;
   }
-
-
 
   .shell-footer-container {
     @apply bg-gradient-to-r from-gray-800 to-gray-900 mt-10 pt-6;

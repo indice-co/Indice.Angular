@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service';
@@ -13,7 +13,7 @@ import { TenantService } from './tenant/tenant-service';
 })
 export class IndiceAuthModule {
   // tslint:disable-next-line:typedef
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<IndiceAuthModule> {
     return {
       ngModule: IndiceAuthModule,
       providers: [

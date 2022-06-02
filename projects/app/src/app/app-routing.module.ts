@@ -1,5 +1,5 @@
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
-import { IShellConfig } from './../../../ng-components/src/lib/types';
+import { IShellConfig, ShellLayoutType } from './../../../ng-components/src/lib/types';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
 import { NgModule } from '@angular/core';
@@ -34,36 +34,26 @@ const customHeaderShellConfig: IShellConfig = {
 
 const fluidShellConfig: IShellConfig = {
   fluid: true,
-  showFooter: true,
-  showHeader: true,
+  showFooter: false,
+  showHeader: false,
   appLogo: '',
   appLogoAlt: ''
 };
 
-const defaultShellConfig: IShellConfig = {
-  fluid: false,
-  showFooter: true,
-  showHeader: true,
-  appLogo: '',
-  appLogoAlt: '',
-  langs : ['EL', 'EN'],
-  showAlertsOnHeader : true,
-  showUserNameOnHeader : true
-};
 
 const routes: Routes = [
   // auth
-  { path: 'auth-callback', component: AuthCallbackComponent },
-  { path: 'auth-renew', component: AuthRenewComponent },
-  { path: 'logged-out', component: LoggedOutComponent },
+  { path: 'auth-callback', component: AuthCallbackComponent, data: { shell: fluidShellConfig } },
+  { path: 'auth-renew', component: AuthRenewComponent, data: { shell: fluidShellConfig } },
+  { path: 'logged-out', component: LoggedOutComponent, data: { shell: fluidShellConfig } },
   // http-status
-  { path: 'error', component: ErrorComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'forbidden', component: UnauthorizedComponent },
+  { path: 'error', component: ErrorComponent, data: { shell: fluidShellConfig } },
+  { path: 'unauthorized', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
+  { path: 'forbidden', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
 
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { shell: defaultShellConfig } },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   // SHELL LAYOUTS SAMPLES !!!
   {
     path: 'samples/shell-layout',
@@ -121,8 +111,7 @@ const routes: Routes = [
   // not found
   {
     path: '**',
-    component: PageNotFoundComponent,
-    data: { shell: { fluid: true, showHeader: false, showFooter: false } },
+    component: PageNotFoundComponent, data: { shell: fluidShellConfig }
   },
 ];
 

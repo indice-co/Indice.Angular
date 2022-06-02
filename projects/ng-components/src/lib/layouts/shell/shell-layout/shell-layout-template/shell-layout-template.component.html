@@ -13,7 +13,7 @@
 
   <main [class]="activeConfig.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
     <div [class]="activeConfig.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
-      <router-outlet *ngIf="loaded && (activeConfig.layout === 'Stacked' || !activeConfig.layout)"></router-outlet>
+      <ng-content></ng-content>
     </div>
   </main>
 
@@ -176,7 +176,7 @@
 
     <main class="shell-content-container-sidebar">
       <div class="shell-content-container-inner">
-        <router-outlet *ngIf="loaded && activeConfig.layout === 'Sidebar'"></router-outlet>
+        <ng-content></ng-content>
       </div>
     </main>
   </div>
