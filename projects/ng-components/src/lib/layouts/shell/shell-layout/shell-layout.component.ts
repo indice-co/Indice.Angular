@@ -21,6 +21,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public loaded = false;
+  public hideSidebar = false;
   constructor(
     @Inject(DOCUMENT) private document: any,
     private router: Router,
