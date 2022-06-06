@@ -41,13 +41,15 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
 import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
 import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
 import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sidebar.component';
+import { LibTabGroupComponent } from './controls/tabs/lib-tab-group.component';
+import { LibTabComponent } from './controls/tabs/lib-tab.component';
 
 @NgModule({
   declarations: [
-    // diectives
+    // Directives
     ClickOutsideDirective,
     DynamicComponentHostDirective,
-    // controls
+    // Controls
     DropDownMenuComponent,
     PagerComponent,
     ListViewComponent,
@@ -65,30 +67,33 @@ import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sideb
     // Toaster
     ToasterContainerComponent,
     ToasterComponent,
-    // shell layout
+    // Shell Layout
     ShellLayoutComponent,
     ShellHeaderComponent,
     ShellFooterComponent,
-    // view layouts
+    // View Layouts
     ViewLayoutComponent,
     SideViewLayoutComponent,
     ModelViewLayoutComponent,
     FormLayoutComponent,
-    // pages (common)
+    // Pages (common)
     AuthCallbackComponent,
     AuthRenewComponent,
     LoggedOutComponent,
     ErrorComponent,
     PageNotFoundComponent,
     UnauthorizedComponent,
-    // pipes
+    // Pipes
     AddressPipe,
     DurationFormatPipe,
     NavLinksListComponent,
     NotificationsIndicatorComponent,
     LanguageSelectionComponent,
     UserProfileMenuComponent,
-    ShellSidebarComponent
+    ShellSidebarComponent,
+    // Tab Group Component
+    LibTabGroupComponent,
+    LibTabComponent
   ],
   imports: [
     CommonModule,
@@ -96,38 +101,40 @@ import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sideb
     IndiceAuthModule
   ],
   exports: [
-    ClickOutsideDirective,
-    DropDownMenuComponent,
-    PagerComponent,
-    ListViewComponent,
-    ListColumnComponent,
-    ListTileComponent,
-    ListDetailsSectionComponent,
-    ListViewEmptyStateComponent,
-    KpiTileComponent,
-    SkeletonLoaderComponent,
-    ShellLayoutComponent,
-    ShellHeaderComponent,
-    ShellFooterComponent,
-    ViewLayoutComponent,
-    SideViewLayoutComponent,
-    ModelViewLayoutComponent,
-    FormLayoutComponent,
+    AddressPipe,
     AuthCallbackComponent,
     AuthRenewComponent,
-    LoggedOutComponent,
-    ErrorComponent,
-    PageNotFoundComponent,
-    UnauthorizedComponent,
-    AddressPipe,
-    DurationFormatPipe,
-    CollapsiblePanelComponent,
-    SidePaneComponent,
-    DatepickerComponent,
-    ToasterContainerComponent,
-    ToasterComponent,
     AvatarInitialsComponent,
-    ToggleComponent
+    ClickOutsideDirective,
+    CollapsiblePanelComponent,
+    DatepickerComponent,
+    DropDownMenuComponent,
+    DurationFormatPipe,
+    ErrorComponent,
+    FormLayoutComponent,
+    KpiTileComponent,
+    LibTabComponent,
+    LibTabGroupComponent,
+    ListColumnComponent,
+    ListDetailsSectionComponent,
+    ListTileComponent,
+    ListViewComponent,
+    ListViewEmptyStateComponent,
+    LoggedOutComponent,
+    ModelViewLayoutComponent,
+    PageNotFoundComponent,
+    PagerComponent,
+    ShellFooterComponent,
+    ShellHeaderComponent,
+    ShellLayoutComponent,
+    SidePaneComponent,
+    SideViewLayoutComponent,
+    SkeletonLoaderComponent,
+    ToasterComponent,
+    ToasterContainerComponent,
+    ToggleComponent,
+    UnauthorizedComponent,
+    ViewLayoutComponent
   ]
 })
 export class IndiceComponentsModule {
