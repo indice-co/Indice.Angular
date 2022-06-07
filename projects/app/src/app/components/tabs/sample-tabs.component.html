@@ -1,0 +1,26 @@
+<div class="mt-4">
+    <lib-tab-group (tabChanged)="onTabChanged($event)" #tabGroup>
+        <lib-tab id="tab-one" label="First Tab">
+            <div class="space-y-2 pb-4 mt-4">
+                This is the content of the first tab!
+            </div>
+        </lib-tab>
+        <lib-tab id="tab-two" label="Second Tab">
+            <div class="space-y-2 pb-4 mt-4">
+                This is the content of the second tab!
+            </div>
+        </lib-tab>
+        <lib-tab id="tab-three" label="Third Tab">
+            <div class="space-y-2 pb-4 mt-4">
+                <b>You can add as many tabs as you like.</b>
+                <br>
+                <p>Content can be anything</p>
+                <div class="inline-flex rounded-md shadow">
+                    <a href="javascript:void(0)" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        Get started
+                    </a>
+                </div>
+            </div>
+        </lib-tab>
+    </lib-tab-group>
+</div>

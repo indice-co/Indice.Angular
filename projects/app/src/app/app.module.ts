@@ -27,6 +27,7 @@ import { AppNotificationsService } from './services/app-notifications.service';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleAppShellConfig } from './app-shell-config';
 import { AppLanguagesService } from './services/app-languages.service';
+import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 
 @NgModule({
   declarations: [
@@ -43,11 +44,12 @@ import { AppLanguagesService } from './services/app-languages.service';
     SampleModalComponent,
     ModalPlayGroundComponent,
     InboxComponent,
+    SampleTabsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    IndiceAuthModule.forRoot(),
+    IndiceAuthModule,
     IndiceComponentsModule.forRoot()
   ],
   providers: [
@@ -64,4 +66,4 @@ import { AppLanguagesService } from './services/app-languages.service';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
