@@ -16,6 +16,7 @@ import { ToasterSampleComponent } from './features/controls/toaster-sample/toast
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
+import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -100,6 +101,7 @@ const routes: Routes = [
     component: ModalPlayGroundComponent,
   },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
+  { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
   // not found
   {
     path: '**',
