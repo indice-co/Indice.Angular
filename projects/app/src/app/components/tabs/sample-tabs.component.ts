@@ -10,6 +10,6 @@ export class SampleTabsComponent implements OnInit {
     public ngOnInit(): void { }
 
     public onTabChanged(tab: LibTabComponent): void {
-        console.debug(tab);
+        console.log(tab);
     }
 }
