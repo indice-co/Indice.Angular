@@ -63,31 +63,31 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.view = params.get('view') || ListViewType.Tiles;
       // console.log('route changes ', this.view);
 
-      // if (params.get('search') !== this.search) {
-      //   this.searchChanged(params.get('search'));
-      // }
+      if (params.get('search') !== this.search) {
+        this.searchChanged(params.get('search'));
+      }
 
-      // const page = +(params.get('page') || 1);
-      // if (page !== this.page) {
-      //   this.page = page;
-      // }
+      const page = +(params.get('page') || 1);
+      if (page !== this.page) {
+        this.page = page;
+      }
 
-      // const size = +(params.get('pagesize') || 20);
-      // if (this.pageSize !== size) {
-      //   this.pageSize = size;
-      // }
+      const size = +(params.get('pagesize') || 20);
+      if (this.pageSize !== size) {
+        this.pageSize = size;
+      }
 
-      // if (params.get('search') !== this.search) {
-      //   this.search = params.get('search');
-      // }
+      if (params.get('search') !== this.search) {
+        this.search = params.get('search');
+      }
 
-      // if (params.get('sort') !== this.sort) {
-      //   this.sort = params.get('sort');
-      // }
+      if (params.get('sort') !== this.sort) {
+        this.sort = params.get('sort');
+      }
 
-      // if (params.get('sortdir') !== this.sortdir) {
-      //   this.sortdir = params.get('sortdir');
-      // }
+      if (params.get('sortdir') !== this.sortdir) {
+        this.sortdir = params.get('sortdir');
+      }
 
     });
 
