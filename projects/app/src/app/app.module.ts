@@ -1,6 +1,4 @@
-import { APP_NOTIFICATIONS } from './../../../ng-components/src/lib/tokens';
-import { DefaultShellConfig, IShellConfig } from './../../../ng-components/src/lib/types';
-import { APP_LINKS, IndiceComponentsModule, SHELL_CONFIG, ToasterService, ModalService } from '../../../ng-components/src/public-api';
+import { APP_LINKS, APP_LANGUAGES, APP_NOTIFICATIONS, IndiceComponentsModule, SHELL_CONFIG, ToasterService, ModalService } from '../../../ng-components/src/public-api';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +26,8 @@ import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-pla
 import { AppNotificationsService } from './services/app-notifications.service';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleAppShellConfig } from './app-shell-config';
+import { AppLanguagesService } from './services/app-languages.service';
+import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +44,14 @@ import { SampleAppShellConfig } from './app-shell-config';
     SampleModalComponent,
     ModalPlayGroundComponent,
     InboxComponent,
+    SampleTabsComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, IndiceAuthModule.forRoot(), IndiceComponentsModule.forRoot()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    IndiceAuthModule,
+    IndiceComponentsModule.forRoot()
+  ],
   providers: [
     AuthService,
     AuthGuardService,
@@ -56,7 +62,8 @@ import { SampleAppShellConfig } from './app-shell-config';
     { provide: SHELL_CONFIG, useFactory: () => SampleAppShellConfig },
     { provide: APP_LINKS, useFactory: () => new AppLinks() },
     { provide: APP_NOTIFICATIONS, useClass: AppNotificationsService },
+    { provide: APP_LANGUAGES, useClass: AppLanguagesService },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

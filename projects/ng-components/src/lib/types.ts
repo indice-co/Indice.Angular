@@ -6,6 +6,13 @@ export interface IAppNotifications {
   inboxAction?: () => void | undefined;
 }
 
+export interface IAppLanguagesService {
+  options: Observable<MenuOption[]> | undefined;
+  selected?: string;
+  default?: string;
+  setSelected?: (lang: string) => void | undefined;
+}
+
 export interface IAppLinks {
   public: Observable<NavLink[]>;
   main: Observable<NavLink[]>;
@@ -132,6 +139,7 @@ export interface IAddress {
 }
 
 export interface IShellConfig {
+  layout?: ShellLayoutType;
   appLogo: string;
   appLogoAlt: string;
   showHeader: boolean;
@@ -141,11 +149,16 @@ export interface IShellConfig {
   showFooter: boolean;
   customFooterComponent?: any;
   fluid: boolean;
-  langs?: string[];
+  showLangsOnHeader?: boolean;
+}
 
+export enum ShellLayoutType {
+  Stacked = 'Stacked',
+  Sidebar = 'Sidebar'
 }
 
 export class DefaultShellConfig implements IShellConfig {
+  layout = ShellLayoutType.Stacked;
   appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
   appLogoAlt = 'your app name here';
   showHeader = true;

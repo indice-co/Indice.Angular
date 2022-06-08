@@ -29,3 +29,6 @@ Indice extensions for Angular 2+
 2. Open new terminal and run `npm run start-mock-server`
 3. Open new terminal and run `npm run start-app`
 4. Voila! Changes on libraries reflect on sample project
+
+
+## Pull requests review check-list

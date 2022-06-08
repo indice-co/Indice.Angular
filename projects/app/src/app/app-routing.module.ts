@@ -1,19 +1,12 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AuthGuardService } from '@indice/ng-auth';
+import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, PageNotFoundComponent, UnauthorizedComponent } from '@indice/ng-components';
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
 import { IShellConfig } from './../../../ng-components/src/lib/types';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from '@indice/ng-auth';
-import {
-  AuthCallbackComponent,
-  AuthRenewComponent,
-  ErrorComponent,
-  LoggedOutComponent,
-  PageNotFoundComponent,
-  UnauthorizedComponent,
-} from '@indice/ng-components';
-
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -22,6 +15,7 @@ import { ControlsSamplesListComponent } from './features/controls/controls-sampl
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 import { InboxComponent } from './components/inbox/inbox.component';
+import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -34,36 +28,24 @@ const customHeaderShellConfig: IShellConfig = {
 
 const fluidShellConfig: IShellConfig = {
   fluid: true,
-  showFooter: true,
-  showHeader: true,
+  showFooter: false,
+  showHeader: false,
   appLogo: '',
   appLogoAlt: ''
 };
 
-const defaultShellConfig: IShellConfig = {
-  fluid: false,
-  showFooter: true,
-  showHeader: true,
-  appLogo: '',
-  appLogoAlt: '',
-  langs : ['EL', 'EN'],
-  showAlertsOnHeader : true,
-  showUserNameOnHeader : true
-};
-
 const routes: Routes = [
   // auth
-  { path: 'auth-callback', component: AuthCallbackComponent },
-  { path: 'auth-renew', component: AuthRenewComponent },
-  { path: 'logged-out', component: LoggedOutComponent },
+  { path: 'auth-callback', component: AuthCallbackComponent, data: { shell: fluidShellConfig } },
+  { path: 'auth-renew', component: AuthRenewComponent, data: { shell: fluidShellConfig } },
+  { path: 'logged-out', component: LoggedOutComponent, data: { shell: fluidShellConfig } },
   // http-status
-  { path: 'error', component: ErrorComponent },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'forbidden', component: UnauthorizedComponent },
-
+  { path: 'error', component: ErrorComponent, data: { shell: fluidShellConfig } },
+  { path: 'unauthorized', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
+  { path: 'forbidden', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
   // features
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { shell: defaultShellConfig } },
+  { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   // SHELL LAYOUTS SAMPLES !!!
   {
     path: 'samples/shell-layout',
@@ -117,12 +99,11 @@ const routes: Routes = [
     pathMatch: 'full',
     component: ModalPlayGroundComponent,
   },
-
+  { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
   // not found
   {
     path: '**',
-    component: PageNotFoundComponent,
-    data: { shell: { fluid: true, showHeader: false, showFooter: false } },
+    component: PageNotFoundComponent, data: { shell: fluidShellConfig }
   },
 ];
 
@@ -130,4 +111,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

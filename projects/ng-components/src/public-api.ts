@@ -20,6 +20,8 @@ export * from './lib/controls/avatar-initials/avatar-initials.component';
 export * from './lib/controls/toggle/toggle.component';
 export * from './lib/controls/side-pane/side-pane.component';
 export * from './lib/controls/nav-links-list/nav-links-list.component';
+export * from './lib/controls/tabs/lib-tab-group.component';
+export * from './lib/controls/tabs/lib-tab.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
@@ -39,6 +41,7 @@ export * from './lib/pages/auth/logged-out/logged-out.component';
 export * from './lib/pages/http-status/error/error.component';
 export * from './lib/pages/http-status/page-not-found/page-not-found.component';
 export * from './lib/pages/http-status/unauthorized/unauthorized.component';
+
 
 // pipes
 export * from './lib/pipes/address.pipe';

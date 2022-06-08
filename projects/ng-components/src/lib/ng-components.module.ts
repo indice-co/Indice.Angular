@@ -16,7 +16,7 @@ import { IndiceAuthModule } from '@indice/ng-auth';
 import { SkeletonLoaderComponent } from './controls/skeleton-loader/skeleton-loader.component';
 import { ListTileComponent } from './controls/list-view/list-tile.component';
 import { ListColumnComponent } from './controls/list-view/list-column.component';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { DropDownMenuComponent } from './controls/drop-down-menu/drop-down-menu.component';
 import { ListViewComponent } from './controls/list-view/list-view.component';
 import { PagerComponent } from './controls/pager/pager.component';
@@ -38,13 +38,18 @@ import { ListViewEmptyStateComponent } from './controls/list-view/list-view-empt
 import { ToggleComponent } from './controls/toggle/toggle.component';
 import { NavLinksListComponent } from './controls/nav-links-list/nav-links-list.component';
 import { NotificationsIndicatorComponent } from './controls/notifications-indicator/notifications-indicator.component';
+import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
+import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
+import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sidebar.component';
+import { LibTabGroupComponent } from './controls/tabs/lib-tab-group.component';
+import { LibTabComponent } from './controls/tabs/lib-tab.component';
 
 @NgModule({
   declarations: [
-    // diectives
+    // Directives
     ClickOutsideDirective,
     DynamicComponentHostDirective,
-    // controls
+    // Controls
     DropDownMenuComponent,
     PagerComponent,
     ListViewComponent,
@@ -62,27 +67,33 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
     // Toaster
     ToasterContainerComponent,
     ToasterComponent,
-    // shell layout
+    // Shell Layout
     ShellLayoutComponent,
     ShellHeaderComponent,
     ShellFooterComponent,
-    // view layouts
+    // View Layouts
     ViewLayoutComponent,
     SideViewLayoutComponent,
     ModelViewLayoutComponent,
     FormLayoutComponent,
-    // pages (common)
+    // Pages (common)
     AuthCallbackComponent,
     AuthRenewComponent,
     LoggedOutComponent,
     ErrorComponent,
     PageNotFoundComponent,
     UnauthorizedComponent,
-    // pipes
+    // Pipes
     AddressPipe,
     DurationFormatPipe,
     NavLinksListComponent,
-    NotificationsIndicatorComponent
+    NotificationsIndicatorComponent,
+    LanguageSelectionComponent,
+    UserProfileMenuComponent,
+    ShellSidebarComponent,
+    // Tab Group Component
+    LibTabGroupComponent,
+    LibTabComponent
   ],
   imports: [
     CommonModule,
@@ -90,43 +101,45 @@ import { NotificationsIndicatorComponent } from './controls/notifications-indica
     IndiceAuthModule
   ],
   exports: [
-    ClickOutsideDirective,
-    DropDownMenuComponent,
-    PagerComponent,
-    ListViewComponent,
-    ListColumnComponent,
-    ListTileComponent,
-    ListDetailsSectionComponent,
-    ListViewEmptyStateComponent,
-    KpiTileComponent,
-    SkeletonLoaderComponent,
-    ShellLayoutComponent,
-    ShellHeaderComponent,
-    ShellFooterComponent,
-    ViewLayoutComponent,
-    SideViewLayoutComponent,
-    ModelViewLayoutComponent,
-    FormLayoutComponent,
+    AddressPipe,
     AuthCallbackComponent,
     AuthRenewComponent,
-    LoggedOutComponent,
-    ErrorComponent,
-    PageNotFoundComponent,
-    UnauthorizedComponent,
-    AddressPipe,
-    DurationFormatPipe,
-    CollapsiblePanelComponent,
-    SidePaneComponent,
-    DatepickerComponent,
-    ToasterContainerComponent,
-    ToasterComponent,
     AvatarInitialsComponent,
-    ToggleComponent
+    ClickOutsideDirective,
+    CollapsiblePanelComponent,
+    DatepickerComponent,
+    DropDownMenuComponent,
+    DurationFormatPipe,
+    ErrorComponent,
+    FormLayoutComponent,
+    KpiTileComponent,
+    LibTabComponent,
+    LibTabGroupComponent,
+    ListColumnComponent,
+    ListDetailsSectionComponent,
+    ListTileComponent,
+    ListViewComponent,
+    ListViewEmptyStateComponent,
+    LoggedOutComponent,
+    ModelViewLayoutComponent,
+    PageNotFoundComponent,
+    PagerComponent,
+    ShellFooterComponent,
+    ShellHeaderComponent,
+    ShellLayoutComponent,
+    SidePaneComponent,
+    SideViewLayoutComponent,
+    SkeletonLoaderComponent,
+    ToasterComponent,
+    ToasterContainerComponent,
+    ToggleComponent,
+    UnauthorizedComponent,
+    ViewLayoutComponent
   ]
 })
 export class IndiceComponentsModule {
   // tslint:disable-next-line:typedef
-  static forRoot() {
+  static forRoot(): ModuleWithProviders<IndiceComponentsModule> {
     return {
       ngModule: IndiceComponentsModule,
       providers: [ToasterService]

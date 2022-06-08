@@ -1,20 +1,19 @@
-<div *ngIf="loaded" [style.display]="!loaded ? 'none':'block'" class="shell-container active-side-pane">
+<div *ngIf="loaded && (activeConfig.layout === 'Stacked' || !activeConfig.layout)" [style.display]="!loaded ? 'none':'block'" class="shell-container active-side-pane">
 
   <div class="shell-header-container" *ngIf="activeConfig.showHeader">
     <div [class]="activeConfig.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
       <ng-container *ngIf="activeConfig.customHeaderComponent">
         <div appDynamicComponentHost ="Header"></div>
       </ng-container>
-      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent"
-        [langs]="activeConfig.langs"
-        [show-userName]="activeConfig.showUserNameOnHeader"
-        [show-alerts]="activeConfig.showAlertsOnHeader"></lib-shell-header>
+      <lib-shell-header *ngIf="!activeConfig.customHeaderComponent" [show-userName]="activeConfig.showUserNameOnHeader"
+        [show-alerts]="activeConfig.showAlertsOnHeader">
+      </lib-shell-header>
     </div>
   </div>
 
   <main [class]="activeConfig.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
     <div [class]="activeConfig.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
-      <router-outlet></router-outlet>
+      <router-outlet *ngIf="loaded && (activeConfig.layout === 'Stacked' || !activeConfig.layout)"></router-outlet>
     </div>
   </main>
 
@@ -25,6 +24,55 @@
       </ng-container>
       <lib-shell-footer *ngIf="!activeConfig.customFooterComponent"></lib-shell-footer>
     </div>
+  </div>
+
+  <lib-side-pane #rightPane>
+    <router-outlet name="rightpane" (activate)="rightPane.onSidePaneActivated($event)" (deactivate)="rightPane.onSidePaneDeactivated($event)"></router-outlet>
+  </lib-side-pane>
+
+  <lib-toaster-container></lib-toaster-container>
+</div>
+
+<!-- SIDEBAR LAYOUT -->
+
+<div *ngIf="loaded && activeConfig.layout === 'Sidebar'" [style.display]="!loaded ? 'none':'block'" class="sidebar shell-container active-side-pane">
+
+  <!-- Static sidebar for desktop -->
+  <div class="hidden w-0 sm:w-64 flex-col inset-y-0 bg-gray-800" [class.hidden]="hideSidebar" [class.fixed]="!hideSidebar">
+    <lib-shell-sidebar [config]="activeConfig" ></lib-shell-sidebar>
+  </div>
+
+  <div class="flex flex-col" [class.pl-64]="!hideSidebar">
+    <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-gray-800">
+
+      <button type="button" class="hidden sm:block px-4 border-0 text-white focus:outline-none" (click)="hideSidebar = !hideSidebar">
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-2 -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+
+      <button type="button" class="block sm:hidden px-4 border-0 text-gray-200 focus:outline-none" (click)="hideSidebar = !hideSidebar">
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-2 --> 111
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+
+      <div class="flex-1">
+        <div class="shell-header-container">
+            <lib-shell-header [shell-layout]="activeConfig.layout"  [show-userName]="activeConfig.showUserNameOnHeader" [show-alerts]="activeConfig.showAlertsOnHeader"></lib-shell-header>
+        </div>
+      </div>
+    </div>
+
+    <main class="shell-content-container-sidebar">
+      <div class="shell-content-container-inner">
+        <router-outlet *ngIf="loaded && activeConfig.layout === 'Sidebar'"></router-outlet>
+      </div>
+    </main>
   </div>
 
   <lib-side-pane #rightPane>
