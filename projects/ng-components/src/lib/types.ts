@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 
 export interface IAppNotifications {
   messages: Observable<IResultSet<NavLink>>;
+  getMessage?: (predicate: (value: any, index: number, obj: any[]) => any) => any | undefined;
+  refresh?: () => void | undefined;
   inboxAction?: () => void | undefined;
 }
 

@@ -28,6 +28,7 @@ import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleAppShellConfig } from './app-shell-config';
 import { AppLanguagesService } from './services/app-languages.service';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
+import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
     SampleModalComponent,
     ModalPlayGroundComponent,
     InboxComponent,
-    SampleTabsComponent
+    SampleTabsComponent,
+    InboxItemComponent
   ],
   imports: [
     BrowserModule,

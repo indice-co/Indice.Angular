@@ -1,0 +1,22 @@
+<lib-side-view-layout [title]="title" [ok-show]="false" [cancel-label]="'Κλείσιμο'">
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div>
+  <div class="mt-5">
+    <dl class="sm:divide-y sm:divide-gray-200">
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">Date</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{message?.date  | date:'EEEE, MMMM d, y HH:mm:ss'}}</dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">Title</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{message?.title}}</dd>
+      </div>
+      <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="text-sm font-medium text-gray-500">Body</dt>
+        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{message?.text}}</dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+</lib-side-view-layout>
