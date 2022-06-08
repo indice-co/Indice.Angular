@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames } from '@angular/common';
+import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // freaksly simple date picker : https://tailwind-elements.com/docs/standard/forms/datepicker/
@@ -21,23 +22,12 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() value: Date | undefined | null = null;
   @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
   @ViewChild('dateInput') dateInput: ElementRef | undefined;
+  @Input() minDate: Date | undefined = undefined;
+  @Input() maxDate: Date | undefined = undefined;
   public showCalendar = false;
   public showYears = false;
-  public monthNames = [
-    'Ιανουάριος',
-    'Φεβρουάριος',
-    'Μάρτιος',
-    'Απρίλιος',
-    'Μάϊος',
-    'Ιούνιος',
-    'Ιούλιος',
-    'Αύγουστος',
-    'Σεπτέμβριος',
-    'Οκτώβριος',
-    'Νοεμβριος',
-    'Δεκέμβριος',
-  ];
-  public dayNames = ['Κυρ', 'Δευ', 'Τρι', 'Τετ', 'Πεμ', 'Παρ', 'Σαβ'];
+  public monthNames = getLocaleMonthNames(this.locale, FormStyle.Standalone, TranslationWidth.Wide);
+  public dayNames = getLocaleDayNames(this.locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
 
   public month: number = -1;
   public year: number = -1;
@@ -66,7 +56,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.calcDays();
   }
 
-  constructor() { }
+  constructor(@Inject(LOCALE_ID) public locale: string) { }
 
   writeValue(obj: any): void {
     if (obj) {
@@ -93,35 +83,42 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
   public selectDateValue(date: any): void {
     // This should be in UTC
-    let selectedDate = new Date(this.year, this.month, date.day, 3, 0, 0, 0);
-    this.value = selectedDate;
-    this.valueChange.emit(this.value);
-    if (this.onChange$) {
-      this.onChange$(this.value);
+    if (!this.outOfRangeDate(date.day)) {
+      let selectedDate = new Date(this.year, this.month, date.day, 3, 0, 0, 0);
+      this.value = selectedDate;
+      this.valueChange.emit(this.value);
+      if (this.onChange$) {
+        this.onChange$(this.value);
+      }
+      this.updateDays();
+      if (this.onTouched$) {
+        this.onTouched$();
+      }
+      this.showCalendar = false;
     }
-    this.updateDays();
-    if (this.onTouched$) {
-      this.onTouched$();
-    }
-    this.showCalendar = false;
   }
 
   public selectYearValue(year: any): void {
     // This should be in UTC
-    let selectedDate = new Date(year.year, this.month ?? 1, this.calendarDates?.find(x => x.selected == true).day ?? 1, 3, 0, 0, 0);
+    const tempYear = this.year;
     this.year = year.year;
-    this.value = selectedDate;
-    this.valueChange.emit(this.value);
-    if (this.onChange$) {
-      this.onChange$(this.value);
+    if (!this.outOfRangeDate(this.calendarDates?.find(x => x.selected == true) ?? {day: 1})) {
+      let selectedDate = new Date(year.year, this.month ?? 1, this.calendarDates?.find(x => x.selected == true).day ?? 1, 3, 0, 0, 0);
+      this.value = selectedDate;
+      this.valueChange.emit(this.value);
+      if (this.onChange$) {
+        this.onChange$(this.value);
+      }
+      this.updateDays();
+      if (this.onTouched$) {
+        this.onTouched$();
+      }
+      this.showYears = false;
+      this.showCalendar = true;
+      this.calcDays();
+    } else {
+      this.year = tempYear;
     }
-    this.updateDays();
-    if (this.onTouched$) {
-      this.onTouched$();
-    }
-    this.showYears = false;
-    this.showCalendar = true;
-    this.calcDays();
   }
 
   public previousMonth(): void {
@@ -249,10 +246,30 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.showCalendar = !this.showCalendar;
     this.calcDays();
   }
-  
-  public closeCalendar(){
+
+  public closeCalendar() {
     this.showCalendar = false;
     this.getDateFromInput();
   }
 
+  outOfRangeDate(date: any): boolean {
+    let outOfRange: boolean = false;
+    if (this.minDate || this.maxDate) {
+      const d = new Date(this.year, this.month, date.day);
+      const dateInMillis = d.getTime();
+      if (this.minDate) {
+        let minDate: number = this.minDate.getTime();
+        if (dateInMillis < minDate && this.minDate.toDateString() !== d.toDateString()) {
+          outOfRange = true;
+        }
+      }
+      if (this.maxDate) {
+        let maxDate: number = this.maxDate.getTime();
+        if (dateInMillis > maxDate && this.maxDate.toDateString() !== d.toDateString()) {
+          outOfRange = true;
+        }
+      }
+    }
+    return outOfRange;
+  }
 }
