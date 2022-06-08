@@ -171,7 +171,6 @@
       }
     }
   },
-  "defaultProject": "ng-auth",
   "cli": {
     "analytics": "fbb03e04-4116-41fe-aa03-eeccfcc4151e"
   }
