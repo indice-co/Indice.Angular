@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 
+import { ComboboxComponent } from 'projects/ng-components/src/public-api';
 import { Contact, ContactResultSet } from './contact';
 
 @Component({
@@ -8,6 +9,8 @@ import { Contact, ContactResultSet } from './contact';
     templateUrl: './sample-combobox.component.html'
 })
 export class SampleComboboxComponent implements OnInit {
+    @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: ComboboxComponent;
+
     constructor(
         private _changeDetector: ChangeDetectorRef,
         private _http: HttpClient
@@ -18,6 +21,11 @@ export class SampleComboboxComponent implements OnInit {
     public contactNames: string[] = [];
     public advancedContactsLoading: boolean = false;
     public contactsLoading: boolean = false;
+
+    public advancedContactsFilter = (item: any) => {
+        const selectedItem = this._advancedContactsCombobox.selectedItems.find(x => x.id == item.id);
+        return selectedItem == null || selectedItem == undefined;
+    };
 
     public ngOnInit(): void { }
 

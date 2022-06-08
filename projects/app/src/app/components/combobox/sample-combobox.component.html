@@ -1,17 +1,47 @@
 <div class="mt-4">
     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
         <div class="sm:col-span-3">
-            <div class="col-span-4">
-                <label for="contacts-combobox-advanced" class="field-label">Όνομα (*)</label>
-                <lib-combobox id="contacts-combobox-advanced" [items]="contacts" [itemTemplate]="itemTemplate" [selectedItemTemplate]="selectedItemTemplate" [busy]="advancedContactsLoading" (onSearch)="onAdvancedContactsSearch($event)"
-                    (onItemSelected)="onAdvancedContactSelected($event)" #advancedContactsCombobox>
-                </lib-combobox>
+            <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">Default Combobox</h3>
+                        <div class="mt-2 text-sm text-green-700">
+                            <p>You can have a combobox with a the default item and results template.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="sm:col-span-3">
             <div class="col-span-4">
                 <label for="contacts-combobox" class="field-label">Όνομα (*)</label>
                 <lib-combobox id="contacts-combobox" [items]="contactNames" [busy]="contactsLoading" (onSearch)="onContactsSearch($event)" (onItemSelected)="onContactSelected($event)" #contactsCombobox></lib-combobox>
+            </div>
+        </div>
+        <div class="sm:col-span-3">
+            <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-green-800">Custom Combobox</h3>
+                        <div class="mt-2 text-sm text-green-700">
+                            <p>You can also have a combobox with a configurable item and results template.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4">
+                <label for="contacts-combobox-advanced" class="field-label">Όνομα (*)</label>
+                <lib-combobox id="contacts-combobox-advanced" [items]="contacts" [itemTemplate]="itemTemplate" [selectedItemTemplate]="selectedItemTemplate" [busy]="advancedContactsLoading" (onSearch)="onAdvancedContactsSearch($event)"
+                    (onItemSelected)="onAdvancedContactSelected($event)" [selectedItemsFilter]="advancedContactsFilter" #advancedContactsCombobox>
+                </lib-combobox>
             </div>
         </div>
     </div>
