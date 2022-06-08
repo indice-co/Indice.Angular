@@ -1,7 +1,7 @@
 {
   "name": "@indice/ng-auth",
   "version": "0.1.26",
-  "description": "Indice extensions for Angular 12 using oidc-client",
+  "description": "Indice extensions for Angular v12 using oidc-client",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/indice-co/Indice.Angular.git"
