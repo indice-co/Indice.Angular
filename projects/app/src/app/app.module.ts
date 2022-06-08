@@ -54,9 +54,9 @@ import { SampleComboboxComponent } from './components/combobox/sample-combobox.c
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     IndiceAuthModule,
     IndiceComponentsModule.forRoot(),
-    HttpClientModule,
   ],
   providers: [
     AuthService,
