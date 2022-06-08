@@ -20,8 +20,9 @@ export * from './lib/controls/avatar-initials/avatar-initials.component';
 export * from './lib/controls/toggle/toggle.component';
 export * from './lib/controls/side-pane/side-pane.component';
 export * from './lib/controls/nav-links-list/nav-links-list.component';
-export * from './lib/controls/tabs/lib-tab-group.component';
+export * from './lib/controls/combobox/combobox.component';
 export * from './lib/controls/tabs/lib-tab.component';
+export * from './lib/controls/tabs/lib-tab-group.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
