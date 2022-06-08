@@ -38,15 +38,24 @@
 <div *ngIf="loaded && activeConfig.layout === 'Sidebar'" [style.display]="!loaded ? 'none':'block'" class="sidebar shell-container active-side-pane">
 
   <!-- Static sidebar for desktop -->
-  <div class="flex w-64 flex-col inset-y-0 bg-gray-800" [class.hidden]="hideSidebar" [class.fixed]="!hideSidebar">
+  <div class="hidden w-0 sm:w-64 flex-col inset-y-0 bg-gray-800" [class.hidden]="hideSidebar" [class.fixed]="!hideSidebar">
     <lib-shell-sidebar [config]="activeConfig" ></lib-shell-sidebar>
   </div>
 
   <div class="flex flex-col" [class.pl-64]="!hideSidebar">
     <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-gray-800">
-      <button type="button" class="px-4 border-0 text-white focus:outline-none" (click)="hideSidebar = !hideSidebar">
+
+      <button type="button" class="hidden sm:block px-4 border-0 text-white focus:outline-none" (click)="hideSidebar = !hideSidebar">
         <span class="sr-only">Open sidebar</span>
         <!-- Heroicon name: outline/menu-alt-2 -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+
+      <button type="button" class="block sm:hidden px-4 border-0 text-gray-200 focus:outline-none" (click)="hideSidebar = !hideSidebar">
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-2 --> 111
         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
         </svg>

@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="mobile-menu-button-container">
+        <div class="mobile-menu-button-container" *ngIf="shellLayout === 'Stacked'">
           <!-- Mobile menu button -->
           <button type="button"
                   (click)="mobileMenuExpanded = !mobileMenuExpanded"

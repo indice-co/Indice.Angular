@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.2.142-beta.5",
+  "version": "0.2.144",
   "description": "Indice common components for Angular v12",
   "repository": {
     "type": "git",
@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
   "peerDependencies": {
-    "@angular/common": "^12.0.1",
-    "@angular/core": "^12.0.1",
-    "@angular/router": "^12.0.1",
+    "@angular/common": "^13.3.11",
+    "@angular/core": "^13.3.11",
+    "@angular/router": "^13.3.11",
     "@indice/ng-auth": "^0.1.26",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
@@ -35,9 +35,9 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@angular/common": "12.0.1",
-    "@angular/core": "12.0.1",
-    "@angular/router": "^12.0.1",
+    "@angular/common": "13.3.11",
+    "@angular/core": "13.3.11",
+    "@angular/router": "^13.3.11",
     "@indice/ng-auth": "^0.1.26",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",

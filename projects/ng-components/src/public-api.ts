@@ -43,6 +43,7 @@ export * from './lib/pages/http-status/error/error.component';
 export * from './lib/pages/http-status/page-not-found/page-not-found.component';
 export * from './lib/pages/http-status/unauthorized/unauthorized.component';
 
+
 // pipes
 export * from './lib/pipes/address.pipe';
 export * from './lib/pipes/duration-format.pipe';
