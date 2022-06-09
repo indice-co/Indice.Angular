@@ -18,6 +18,7 @@ import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
+import { SampleStepperComponent } from './components/stepper/stepper-sample.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -110,11 +111,12 @@ const routes: Routes = [
   },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
   { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
+  { path: 'samples/stepper', pathMatch: 'full', component: SampleStepperComponent },
   // not found
   {
     path: '**',
     component: PageNotFoundComponent, data: { shell: fluidShellConfig }
-  },
+  }
 ];
 
 @NgModule({

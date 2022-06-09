@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
       { text: 'Controls', count: 8, path: 'samples/controls' },
       { text: 'Modal playground', count: NaN, path: 'samples/modal-playground' },
       { text: 'Tab Groups', count: 1, path: 'samples/tab-group' },
+      { text: 'Stepper', count: 1, path: 'samples/stepper' },
       { text: 'Sample inbox view', count: 1, path: 'samples/inbox' },
       { text: 'Combobox', count: 1, path: 'samples/combobox' },
       { text: 'Directives', count: 2, path: '' },

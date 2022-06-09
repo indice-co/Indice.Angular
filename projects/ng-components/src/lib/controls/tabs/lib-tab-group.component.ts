@@ -1,6 +1,6 @@
-import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, InjectionToken, OnInit, Output, QueryList } from '@angular/core';
-import { LIBTABGROUP_ACCESSOR } from '../../tokens';
+import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, OnInit, Output, QueryList } from '@angular/core';
 
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import { LibTabComponent } from './lib-tab.component';
 
 @Component({
