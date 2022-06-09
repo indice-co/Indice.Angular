@@ -1,8 +1,7 @@
 import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, InjectionToken, OnInit, Output, QueryList } from '@angular/core';
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 
 import { LibTabComponent } from './lib-tab.component';
-
-export const LIBTABGROUP_ACCESSOR = new InjectionToken<LibTabGroupComponent>('LibTabGroupAccessor');
 
 @Component({
     selector: 'lib-tab-group',

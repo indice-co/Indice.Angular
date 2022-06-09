@@ -96,8 +96,8 @@ import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.com
     UserProfileMenuComponent,
     ShellSidebarComponent,
     // Tab Group Component
-    LibTabGroupComponent,
-    LibTabComponent
+    LibTabComponent,
+    LibTabGroupComponent
   ],
   imports: [
     CommonModule,

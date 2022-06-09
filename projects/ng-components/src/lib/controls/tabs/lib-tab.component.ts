@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import * as uuid from 'uuid';
-import { LibTabGroupComponent, LIBTABGROUP_ACCESSOR } from './lib-tab-group.component';
 
 @Component({
     selector: 'lib-tab',
@@ -17,7 +16,7 @@ export class LibTabComponent implements OnInit {
     private _isActive: boolean = false;
 
     constructor(
-        @Optional() @Inject(LIBTABGROUP_ACCESSOR) private readonly _tabGroup?: LibTabGroupComponent
+        @Optional() @Inject(LIBTABGROUP_ACCESSOR) public readonly _tabGroup?: any
     ) { }
 
     /** The content provided for the tab. */
