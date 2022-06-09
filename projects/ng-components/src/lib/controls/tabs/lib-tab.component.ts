@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { LIBTABGROUP_ACCESSOR } from '../../tokens';
+
 import * as uuid from 'uuid';
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 
 @Component({
     selector: 'lib-tab',

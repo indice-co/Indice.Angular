@@ -19,6 +19,10 @@ import { FormLayoutComponent } from './layouts/views/form-layout/form-layout.com
 import { IndiceAuthModule } from '@indice/ng-auth';
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
+import { LibStepComponent } from './controls/stepper/lib-step.component';
+import { LibStepInfoDirective } from './controls/stepper/lib-step-info.directive';
+import { LibStepLabelDirective } from './controls/stepper/lib-step-label.directive';
+import { LibStepperComponent } from './controls/stepper/lib-stepper.component';
 import { LibTabComponent } from './controls/tabs/lib-tab.component';
 import { LibTabGroupComponent } from './controls/tabs/lib-tab-group.component';
 import { ListColumnComponent } from './controls/list-view/list-column.component';
@@ -97,7 +101,12 @@ import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.com
     ShellSidebarComponent,
     // Tab Group Component
     LibTabComponent,
-    LibTabGroupComponent
+    LibTabGroupComponent,
+    // Stepper Component
+    LibStepperComponent,
+    LibStepComponent,
+    LibStepLabelDirective,
+    LibStepInfoDirective
   ],
   imports: [
     CommonModule,
@@ -118,6 +127,10 @@ import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.com
     ErrorComponent,
     FormLayoutComponent,
     KpiTileComponent,
+    LibStepComponent,
+    LibStepInfoDirective,
+    LibStepLabelDirective,
+    LibStepperComponent,
     LibTabComponent,
     LibTabGroupComponent,
     ListColumnComponent,

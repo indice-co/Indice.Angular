@@ -1,0 +1,70 @@
+<div class="mt-4">
+    <select class="mb-2" (change)="onStepperTypeChange($event)">
+        <option [value]="'Bullets'">Bullets</option>
+        <option [value]="'BulletsAndText'">Bullets And Text</option>
+        <option [value]="'Circles'">Circles</option>
+        <option [value]="'Panels'">Panels</option>
+        <option [value]="'PanelsWithBorder'" selected>Panels With Border</option>
+        <option [value]="'Progress'">Progress</option>
+        <option [value]="'Simple'">Simple</option>
+    </select>
+    <lib-stepper [linear]="true" [type]="stepperType" (stepChanged)="onStepperStepChanged($event)" #sampleStepper>
+        <lib-step>
+            <ng-template libStepLabel>Step 1</ng-template>
+            <ng-template libStepInfo>Step 1 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>This is step number 1</p>
+            </div>
+        </lib-step>
+        <lib-step [stepControl]="contentForm">
+            <ng-template libStepLabel>Step 2</ng-template>
+            <ng-template libStepInfo>Step 2 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>This is step number 2. Since the stepper is <i>linear</i> you can't go to next steps without having a valid form.</p>
+                <form [formGroup]="contentForm">
+                    <div class="px-4 space-y-2 pb-4 mt-4">
+                        <fieldset>
+                            <legend class="sr-only">Description</legend>
+                            <div class="text-base font-medium text-gray-900" aria-hidden="true">Description (*)</div>
+                            <label for="description" class="field-label hidden">Description (*)</label>
+                            <div class="mt-1 flex rounded-sm">
+                                <textarea rows="3" type="text" name="description" id="description" formControlName="description" placeholder="Your short description..." required maxlength="512" class="p-2"></textarea>
+                            </div>
+                            <p *ngIf="description.invalid && (description.dirty || description.touched)" class="mt-2 text-sm text-red-600">
+                                <span *ngIf="description.errors!['required']">Please enter a description.</span>
+                                <span *ngIf="description.errors!['maxlength']">Please enter a description up to 512 characters.</span>
+                            </p>
+                            <p class="field-info col-span-3">Just an ugly textarea.</p>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </lib-step>
+        <lib-step>
+            <ng-template libStepLabel>Step 3</ng-template>
+            <ng-template libStepInfo>Step 3 sub title</ng-template>
+            <b>You can add as many step as you like.</b>
+            <br>
+            <p>Content can be anything</p>
+            <div class="inline-flex rounded-md shadow mt-2">
+                <button (click)="sampleStepper.goToNextStep()" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    Go to next step
+                </button>
+            </div>
+        </lib-step>
+        <lib-step>
+            <ng-template libStepLabel>Final steo</ng-template>
+            <ng-template libStepInfo>Step 4 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>Let's hear a nice song now</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/B32yjbCSVpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <div class="inline-flex rounded-md shadow mt-2">
+                    <button (click)="sampleStepper.goToPreviousStep()" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        Go to previous step
+                    </button>
+                </div>
+            </div>
+        </lib-step>
+    </lib-stepper>
+</div>
