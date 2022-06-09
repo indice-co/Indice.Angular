@@ -16,6 +16,8 @@ import { ToasterSampleComponent } from './features/controls/toaster-sample/toast
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
+import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
+import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -56,8 +58,15 @@ const routes: Routes = [
   {
     path: 'samples/inbox',
     pathMatch: 'full',
-    component: InboxComponent,
-    outlet: 'rightpane',
+    component: InboxComponent, children : [
+      { path: 'view/:id', component: InboxItemComponent, outlet: 'rightpane'}
+    ]
+  },
+  {
+    path: 'samples/inbox/:id',
+    pathMatch: 'full',
+    component: InboxItemComponent,
+    outlet: 'rightpane'
   },
   {
     path: 'samples/shell-layout/info',
@@ -100,6 +109,7 @@ const routes: Routes = [
     component: ModalPlayGroundComponent,
   },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
+  { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
   // not found
   {
     path: '**',
@@ -108,7 +118,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    scrollOffset: [0, 25]  })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

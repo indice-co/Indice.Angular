@@ -1,10 +1,14 @@
-import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, OnInit, Output, QueryList } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, InjectionToken, OnInit, Output, QueryList } from '@angular/core';
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 
 import { LibTabComponent } from './lib-tab.component';
 
 @Component({
     selector: 'lib-tab-group',
-    templateUrl: './lib-tab-group.component.html'
+    templateUrl: './lib-tab-group.component.html',
+    providers: [
+        { provide: LIBTABGROUP_ACCESSOR, useExisting: forwardRef(() => LibTabGroupComponent) }
+    ]
 })
 export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked {
     constructor() { }

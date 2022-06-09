@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Inject, Input, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import * as uuid from 'uuid';
-import { LibTabGroupComponent } from './lib-tab-group.component';
 
 @Component({
     selector: 'lib-tab',
@@ -17,7 +16,7 @@ export class LibTabComponent implements OnInit {
     private _isActive: boolean = false;
 
     constructor(
-        @Inject(forwardRef(() => LibTabGroupComponent)) private _tabGroup: LibTabGroupComponent
+        @Optional() @Inject(LIBTABGROUP_ACCESSOR) public readonly _tabGroup?: any
     ) { }
 
     /** The content provided for the tab. */
@@ -29,7 +28,7 @@ export class LibTabComponent implements OnInit {
 
     /** Indicates the index of the tab. */
     public get index(): number | undefined {
-        return this._tabGroup.tabs?.toArray().indexOf(this) || undefined;
+        return this._tabGroup?.tabs?.toArray().indexOf(this) || undefined;
     }
 
     /** Indicates whether the tab is active. */

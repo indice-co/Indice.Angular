@@ -35,5 +35,8 @@ export class Icons {
   public static SortAsc = 'ms-Icon ms-Icon--Ascending';
   public static SortDesc = 'ms-Icon ms-Icon--Descending';
 
-  public static Details = ' ms-Icon ms-Icon--AccountActivity'
+  public static Details = ' ms-Icon ms-Icon--AccountActivity';
+
+  public static Messages = ' ms-Icon ms-Icon--Message';
+  public static MessagesUnread = ' ms-Icon ms-Icon--MessageFill';
 }

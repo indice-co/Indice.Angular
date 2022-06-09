@@ -2,7 +2,7 @@ import { APP_LINKS, APP_LANGUAGES, APP_NOTIFICATIONS, IndiceComponentsModule, SH
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,29 +28,35 @@ import { InboxComponent } from './components/inbox/inbox.component';
 import { SampleAppShellConfig } from './app-shell-config';
 import { AppLanguagesService } from './services/app-languages.service';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
+import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
+import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    ShellSamplesListComponent,
-    ViewLayoutsListComponent,
-    CustomHeaderSampleComponent,
-    FluidShellSampleComponent,
-    SampleInfoComponent,
     ControlsSamplesListComponent,
-    ToasterSampleComponent,
+    CustomHeaderSampleComponent,
+    DashboardComponent,
+    FluidShellSampleComponent,
     HeaderComponent,
-    SampleModalComponent,
-    ModalPlayGroundComponent,
     InboxComponent,
-    SampleTabsComponent
+    SampleTabsComponent,
+    InboxItemComponent,
+    ModalPlayGroundComponent,
+    SampleComboboxComponent,
+    SampleInfoComponent,
+    SampleModalComponent,
+    SampleTabsComponent,
+    ShellSamplesListComponent,
+    ToasterSampleComponent,
+    ViewLayoutsListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     IndiceAuthModule,
-    IndiceComponentsModule.forRoot()
+    IndiceComponentsModule.forRoot(),
   ],
   providers: [
     AuthService,
