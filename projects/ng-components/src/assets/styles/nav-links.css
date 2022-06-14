@@ -5,7 +5,7 @@
   }
 
   .sidebar .nav-link {
-    @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md;
+    @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
   }
 
   .nav-link-profile {
@@ -29,7 +29,7 @@
   }
 
   .sidebar .nav-link-active {
-    @apply cursor-default bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md;
+    @apply cursor-default bg-gray-900 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
   }
 
   .nav-link-profile-active {
