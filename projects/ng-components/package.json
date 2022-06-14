@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
   "peerDependencies": {
-    "@angular/common": ">=13.3.11",
-    "@angular/core": ">=13.3.11",
-    "@angular/router": ">=13.3.11",
-    "@indice/ng-auth": "^0.2.1-beta.2",
+    "@angular/common": ">=12.0.4",
+    "@angular/core": ">=12.0.4",
+    "@angular/router": ">=12.0.4",
+    "@indice/ng-auth": "^0.2.0",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "@tailwindcss/line-clamp": "^0.2.0",
@@ -35,9 +35,9 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@angular/common": "13.3.11",
-    "@angular/core": "13.3.11",
-    "@angular/router": "^13.3.11",
+    "@angular/common": "12.0.4",
+    "@angular/core": "12.0.4",
+    "@angular/router": "^12.0.4",
     "@indice/ng-auth": "^0.1.26",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/forms": "^0.3.2",
