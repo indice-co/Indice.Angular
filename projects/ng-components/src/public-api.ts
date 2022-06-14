@@ -23,6 +23,11 @@ export * from './lib/controls/nav-links-list/nav-links-list.component';
 export * from './lib/controls/combobox/combobox.component';
 export * from './lib/controls/tabs/lib-tab.component';
 export * from './lib/controls/tabs/lib-tab-group.component';
+export * from './lib/controls/stepper/lib-stepper.component';
+export * from './lib/controls/stepper/lib-step.component';
+export * from './lib/controls/stepper/lib-step-label.directive';
+export * from './lib/controls/stepper/lib-step-info.directive';
+export * from './lib/controls/stepper/types/stepper-type';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
