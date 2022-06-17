@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() readonly: boolean = false;
   @Input() disabled: boolean = false;
+  @Input() inline: boolean = false;
   @Input('display-format') displayFormat: string | undefined = 'dd/MM/yyyy';
   @Input() placeholder: string | undefined = '';
   @Input() value: Date | undefined | null = null;
@@ -94,6 +95,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       if (this.onTouched$) {
         this.onTouched$();
       }
+      this.calcDays();
       this.showCalendar = false;
     }
   }
@@ -102,7 +104,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     // This should be in UTC
     const tempYear = this.year;
     this.year = year.year;
-    if (!this.outOfRangeDate(this.calendarDates?.find(x => x.selected == true) ?? {day: 1})) {
+    if (!this.outOfRangeDate(this.calendarDates?.find(x => x.selected == true) ?? { day: 1 })) {
       let selectedDate = new Date(year.year, this.month ?? 1, this.calendarDates?.find(x => x.selected == true).day ?? 1, 3, 0, 0, 0);
       this.value = selectedDate;
       this.valueChange.emit(this.value);
@@ -118,6 +120,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.calcDays();
     } else {
       this.year = tempYear;
+      this.showYears = false;
+      this.showCalendar = true;
     }
   }
 
@@ -216,7 +220,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private getDateFromInput() {
-    if (this.dateInput?.nativeElement.value !== '') {
+    if (this.dateInput?.nativeElement.value !== '' && !this.inline) {
       var dateParts = this.dateInput?.nativeElement.value.split("/");
       let dateInGrFormat = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], 3, 0, 0);
       if (dateInGrFormat.toString() !== 'Invalid Date') {
