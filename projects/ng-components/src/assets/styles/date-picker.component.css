@@ -7,7 +7,7 @@
     }
 
     .datepicker-background {
-        @apply bg-gray-100 mt-10 rounded-sm shadow-md p-4 absolute left-0 z-50 w-full;
+        @apply bg-gray-100 mt-10 rounded-sm shadow-md p-4 left-0 z-50 w-full;
     }
     .datepicker-btn-wrapper {
         @apply flex justify-between items-center mb-2;
