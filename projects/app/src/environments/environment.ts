@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  api_base_url: 'https://indice-identity.azurewebsites.net',
+  api_base_url: 'https://identity.indice.gr',
   api_docs: '',
-  auth_settings : {
+  auth_settings: {
     accessTokenExpiringNotificationTime: 60,
-    authority: 'https://indice-identity.azurewebsites.net',
+    authority: 'https://identity.indice.gr',
     automaticSilentRenew: true,
     client_id: 'indice-ng-sample-app',
     filterProtocolClaims: true,

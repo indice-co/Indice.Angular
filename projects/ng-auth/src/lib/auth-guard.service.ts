@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     const observable = this.authService.isLoggedIn();
     observable.subscribe((isLoggedIn: boolean) => {
       if (!isLoggedIn) {
-        this.authService.signinRedirect(state?.url || undefined);
+        this.authService.signinRedirect(state?.url || undefined, route?.data?.register || false);
       }
     });
     return observable;

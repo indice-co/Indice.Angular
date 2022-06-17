@@ -111,9 +111,20 @@ export class AuthService {
     }));
   }
 
-  public signinRedirect(location?: string | undefined): void {
+  public signinRedirect(location?: string | undefined, register: boolean = false): void {
+    const authorizeArgs: any = {};
+    if (location) {
+      authorizeArgs['data'] = {
+        url: location
+      };
+    }
+    if (register) {
+      authorizeArgs['extraQueryParams'] = {
+        operation: 'register'
+      };
+    }
     this.userManager
-      .signinRedirect({ data: { url: location || '' } })
+      .signinRedirect(authorizeArgs)
       .catch((error: any) => { });
   }
 
