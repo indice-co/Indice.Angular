@@ -1,4 +1,4 @@
-import { BaseListComponent, Icons, ListViewType } from '@indice/ng-components';
+import { BaseListComponent, Icons, ListViewType, MenuOption } from '@indice/ng-components';
 import { Component, OnInit } from '@angular/core';
 import { IResultSet, SwitchViewAction, RouterViewAction } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
@@ -25,12 +25,19 @@ export class ControlsSamplesListComponent extends BaseListComponent<SampleViewMo
   constructor(private route: ActivatedRoute, private router: Router) {
     super(route, router);
     this.view = ListViewType.Tiles;
+    this.sort = 'title';
+    this.sortdir = 'asc';
+    this.search = '';
     this.pageSize = 10;
+    this.sortOptions = [
+      new MenuOption('Title', 'title'),
+      new MenuOption('Description', 'description')
+    ];
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
-    const items = ShellLayoutsListSamples;
-    return of({count: items.length, items }).pipe(delay(1200));
+    let items = Array(20).fill(ShellLayoutsListSamples[0]);
+    return of({ count: items.length, items }).pipe(delay(1200));
   }
 
   ngOnInit(): void {
