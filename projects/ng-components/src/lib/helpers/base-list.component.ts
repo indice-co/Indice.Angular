@@ -15,7 +15,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public pageSize = 20;
   public count = 0;
   public sort: string | null = '';
-  public sortdir: string | null = '-';
+  public sortdir: string | null = '';
   public search: string | null = '';
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
@@ -85,9 +85,9 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.sort = params.get('sort');
       }
 
-      if (params.get('sortdir') !== this.sortdir) {
-        this.sortdir = params.get('sortdir');
-      }
+      // if (params.get('sortdir') !== this.sortdir) {
+      //   this.sortdir = params.get('sortdir');
+      // }
 
     });
 
