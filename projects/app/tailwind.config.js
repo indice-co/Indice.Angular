@@ -10,7 +10,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      border: ['focus'],
+      opacity: ['disabled']
+    }
   },
   plugins: [],
 }
