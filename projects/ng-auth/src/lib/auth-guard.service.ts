@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
     const observable = this.authService.isLoggedIn();
     observable.subscribe((isLoggedIn: boolean) => {
       if (!isLoggedIn) {
-        this.authService.signinRedirect(state?.url || undefined);
+        this.authService.signinRedirect(state?.url || undefined, route?.data?.register || route?.firstChild?.data?.register || false);
       }
     });
     return observable;
@@ -23,7 +23,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
 
   // tslint:disable-next-line:max-line-length
   public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.canActivate(undefined, undefined);
+    return this.canActivate(childRoute, state);
   }
 
   public canLoad(): Observable<boolean> | Promise<boolean> | boolean {
