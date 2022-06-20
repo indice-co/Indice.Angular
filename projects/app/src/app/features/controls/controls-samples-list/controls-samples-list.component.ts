@@ -38,6 +38,7 @@ export class ControlsSamplesListComponent extends BaseListComponent<SampleViewMo
     this.actions = [];
     this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView, 'switch to tiles view'));
     this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView, 'switch to table (grid) view'));
+    this.actions.push(new SwitchViewAction(ListViewType.Gallery, Icons.ItemsCount, 'switch to gallery view'));
     this.actions.push(new RouterViewAction(Icons.Information, 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
   }
 }
