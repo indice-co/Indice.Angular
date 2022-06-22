@@ -1,6 +1,6 @@
 <div class="px-2">
 
-  <lib-pager *ngIf="showPager"
+  <lib-pager *ngIf="showPager && (pagerPosition == 'top' || pagerPosition == 'both')"
              [page]="page"
              [page-size]="pageSize"
              [count]="count"
@@ -149,3 +149,20 @@
 </ng-container>
 
 <ng-content></ng-content>
+
+<div class="pt-2 px-2">
+
+  <lib-pager *ngIf="items && items.length !== 0 && showPager && (pagerPosition == 'bottom' || pagerPosition == 'both')"
+             [page]="page"
+             [page-size]="pageSize"
+             [count]="count"
+             [sort-options]="sortOptions"
+             [sort]="sort"
+             [sort-dir]="sortdir"
+             [busy]="busy"
+             (pageChanged)="emitPageChanged($event)"
+             (pageSizeChanged)="emitPageSizeChanged($event)"
+             (sortChanged)="emitSortChanged($event)"
+             (sortdirChanged)="emitSortdirChanged($event)">
+  </lib-pager>
+</div>

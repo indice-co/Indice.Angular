@@ -131,6 +131,12 @@ export class MenuOption {
   public icon: string | undefined;
 }
 
+export enum PagerPosition {
+  Top = 'top',
+  Bottom = 'bottom',
+  Both = 'both'
+}
+
 export interface IAddress {
   id?: string;
   street?: string | null;
