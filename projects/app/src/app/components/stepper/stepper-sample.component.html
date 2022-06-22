@@ -1,14 +1,14 @@
 <div class="mt-4">
     <select class="mb-2" (change)="onStepperTypeChange($event)">
-        <option [value]="'Bullets'">Bullets</option>
-        <option [value]="'BulletsAndText'">Bullets And Text</option>
-        <option [value]="'Circles'">Circles</option>
-        <option [value]="'Panels'">Panels</option>
-        <option [value]="'PanelsWithBorder'" selected>Panels With Border</option>
-        <option [value]="'Progress'">Progress</option>
-        <option [value]="'Simple'">Simple</option>
+        <option [value]="'Bullets'" [selected]="selectedStepperType === stepperType.Bullets">Bullets</option>
+        <option [value]="'BulletsAndText'" [selected]="selectedStepperType === stepperType.BulletsAndText">Bullets And Text</option>
+        <option [value]="'Circles'" [selected]="selectedStepperType === stepperType.Circles">Circles</option>
+        <option [value]="'Panels'" [selected]="selectedStepperType === stepperType.Panels">Panels</option>
+        <option [value]="'PanelsWithBorder'" [selected]="selectedStepperType === stepperType.PanelsWithBorder">Panels With Border</option>
+        <option [value]="'Progress'" [selected]="selectedStepperType === stepperType.Progress">Progress</option>
+        <option [value]="'Simple'" [selected]="selectedStepperType === stepperType.Simple">Simple</option>
     </select>
-    <lib-stepper [linear]="true" [type]="stepperType" (stepChanged)="onStepperStepChanged($event)" #sampleStepper>
+    <lib-stepper [linear]="true" [type]="selectedStepperType" (stepChanged)="onStepperStepChanged($event)" #sampleStepper>
         <lib-step>
             <ng-template libStepLabel>Step 1</ng-template>
             <ng-template libStepInfo>Step 1 sub title</ng-template>
@@ -53,7 +53,7 @@
             </div>
         </lib-step>
         <lib-step>
-            <ng-template libStepLabel>Final steo</ng-template>
+            <ng-template libStepLabel>Final step</ng-template>
             <ng-template libStepInfo>Step 4 sub title</ng-template>
             <div class="px-4 space-y-2 pb-4 mt-4">
                 <p>Let's hear a nice song now</p>

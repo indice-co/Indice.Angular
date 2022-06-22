@@ -1,0 +1,99 @@
+@layer components {
+    /* Bullets */
+    .stepper-bullets-container {
+        @apply flex items-center justify-center;
+    }
+
+    .stepper-bullets-counter {
+        @apply text-sm font-medium;
+    }
+
+    .stepper-bullets-ol {
+        @apply ml-8 flex items-center space-x-5;
+    }
+
+    .stepper-bullets-completed-step {
+        @apply block w-2.5 h-2.5 bg-blue-600 rounded-full hover:bg-blue-900;
+    }
+
+    .stepper-bullets-active-step {
+        @apply relative flex items-center justify-center;
+    }
+
+    .stepper-bullets-active-step-level1 {
+        @apply absolute w-5 h-5 p-px flex;
+    }
+
+    .stepper-bullets-active-step-level11 {
+        @apply w-full h-full rounded-full bg-blue-200;
+    }
+
+    .stepper-bullets-active-step-bullet {
+        @apply relative block w-2.5 h-2.5 bg-blue-600 rounded-full;
+    }
+
+    .stepper-bullets-upcoming-step {
+        @apply block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400;
+    }
+
+    /* Bullets & Text */
+    .stepper-bullets-and-text-container {
+        @apply flex items-center justify-center;
+    }
+
+    .stepper-bullets-and-text-ol {
+        @apply space-y-6;
+    }
+
+    .stepper-bullets-and-text-completed-step {
+        @apply flex items-start;
+    }
+
+    .stepper-bullets-and-text-completed-step-level1 {
+        @apply flex-shrink-0 relative h-5 w-5 flex items-center justify-center;
+    }
+
+    .stepper-bullets-and-text-completed-step-container {
+        @apply ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900;
+    }
+
+    .stepper-bullets-and-text-active-step {
+        @apply flex items-start;
+    }
+
+    .stepper-bullets-and-text-active-step-level1 {
+        @apply flex-shrink-0 h-5 w-5 relative flex items-center justify-center;
+    }
+
+    .stepper-bullets-and-text-active-step-level11 {
+        @apply absolute h-4 w-4 rounded-full bg-blue-200;
+    }
+
+    .stepper-bullets-and-text-active-step-level12 {
+        @apply relative block w-2 h-2 bg-blue-600 rounded-full;
+    }
+
+    .stepper-bullets-and-text-active-step-container {
+        @apply ml-3 text-sm font-medium text-blue-600;
+    }
+
+    .stepper-bullets-and-text-upcoming-step {
+        @apply flex items-start;
+    }
+
+    .stepper-bullets-and-text-upcoming-step-level1 {
+        @apply flex-shrink-0 h-5 w-5 relative flex items-center justify-center;
+    }
+
+    .stepper-bullets-and-text-upcoming-step-level2 {
+        @apply h-2 w-2 bg-gray-300 rounded-full group-hover:bg-gray-400;
+    }
+
+    .stepper-bullets-and-text-upcoming-step-container {
+        @apply ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900;
+    }
+
+    /* Circles */
+
+    /* Panels With Border */
+}

@@ -11,7 +11,8 @@ import { StepperType } from 'projects/ng-components/src/lib/controls/stepper/typ
 export class SampleStepperComponent implements OnInit {
     public ngOnInit(): void { }
 
-    public stepperType: StepperType = StepperType.PanelsWithBorder;
+    public selectedStepperType: StepperType = StepperType.PanelsWithBorder;
+    public stepperType = StepperType;
     public contentForm: FormGroup = new FormGroup({
         description: new FormControl(undefined, [
             Validators.required,
@@ -28,6 +29,6 @@ export class SampleStepperComponent implements OnInit {
     }
 
     public onStepperTypeChange($event: any): void { 
-        this.stepperType = $event.currentTarget.value;
+        this.selectedStepperType = $event.currentTarget.value;
     }
 }
