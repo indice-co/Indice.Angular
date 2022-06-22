@@ -152,7 +152,7 @@
 
 <div class="pt-2 px-2">
 
-  <lib-pager *ngIf="showPager && (pagerPosition == 'bottom' || pagerPosition == 'both')"
+  <lib-pager *ngIf="items && items.length !== 0 && showPager && (pagerPosition == 'bottom' || pagerPosition == 'both')"
              [page]="page"
              [page-size]="pageSize"
              [count]="count"
