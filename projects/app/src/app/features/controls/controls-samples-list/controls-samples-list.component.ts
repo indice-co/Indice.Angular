@@ -36,6 +36,8 @@ export class ControlsSamplesListComponent extends BaseListComponent<SampleViewMo
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
+    console.log('loadItems',this.sortdir);
+    
     let items = Array(20).fill(ShellLayoutsListSamples[0]);
     return of({ count: items.length, items }).pipe(delay(1200));
   }

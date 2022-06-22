@@ -63,7 +63,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.view = params.get('view') || ListViewType.Tiles;
       // console.log('route changes ', this.view);
 
-      if (params.get('search') !== this.search) {
+      if (params.get('search') !== null && params.get('search') !== this.search) {
         this.searchChanged(params.get('search'));
       }
 
@@ -85,18 +85,19 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.sort = params.get('sort');
       }
 
-      // if (params.get('sortdir') !== this.sortdir) {
-      //   this.sortdir = params.get('sortdir');
-      // }
-
+      if (params.get('dir') !== this.sortdir) {
+        this.sortdir = params.get('dir');
+      }
     });
-
+    
     // just to sync params in query
     this.setRouteParams(true);
     this.load();
   }
 
   private setRouteParams(locationChange: boolean = false): void {
+    console.log(this.sortdir);
+    
     this.router$.navigate([], {
       relativeTo: this.route$, queryParams: {
         view: this.view,
