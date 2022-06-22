@@ -218,9 +218,9 @@
         </ol>
     </nav>
     <!-- Panels With Border -->
-    <div class="lg:border-t lg:border-b lg:border-gray-200" *ngSwitchCase="StepperType.PanelsWithBorder">
+    <div class="border-t border-b border-gray-200" *ngSwitchCase="StepperType.PanelsWithBorder">
         <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Progress">
-            <ol role="list" class="rounded-md overflow-hidden lg:flex lg:border-l lg:border-r lg:border-gray-200 lg:rounded-none">
+            <ol role="list" class="rounded-md overflow-hidden flex border-l border-r border-gray-200 lg:rounded-none">
                 <li *ngFor="let step of steps" (click)="onSelectStep(step)" class="relative overflow-hidden lg:flex-1 cursor-pointer">
                     <!-- Completed Step -->
                     <div class="border border-gray-200 overflow-hidden border-b-0 rounded-t-md lg:border-0" *ngIf="step.state === StepState.Completed">
@@ -305,8 +305,6 @@
     </div>
     <!-- Progress -->
     <div *ngSwitchCase="StepperType.Progress">
-        <!-- <h4 class="sr-only">Status</h4>
-        <p class="text-sm font-medium text-gray-900">Migrating MySQL database...</p> -->
         <div class="mt-6" aria-hidden="true">
             <div class="bg-gray-200 rounded-full overflow-hidden">
                 <div class="h-2 bg-blue-600 rounded-full" [style.width]="(((currentStepIndex + 1) / steps.length) * 100) + '%'"></div>
