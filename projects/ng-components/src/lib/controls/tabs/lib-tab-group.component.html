@@ -1,12 +1,12 @@
-<div class="sm:hidden">
+<div class="tab-group-select-hidden">
     <label for="tabs" class="sr-only">Select a tab</label>
     <select id="tabs" name="tabs" (change)="onTabSelectChanged(+tabsSelect.value)" class="tab-group-select" #tabsSelect>
         <option [value]="i" *ngFor="let tab of tabs; let i = index">{{ tab.label }}</option>
     </select>
 </div>
-<div class="hidden sm:block">
+<div class="tab-group-container-hidden">
     <div class="tab-group-container">
-        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+        <nav class="tab-group-container-nav" aria-label="Tabs">
             <a *ngFor="let tab of tabs" href="javascript:void(0)" [class.tab]="!tab.isActive" [class.tab-active]="tab.isActive" (click)="onTabChanged(tab)">
                 {{ tab.label }}
             </a>
