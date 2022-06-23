@@ -16,7 +16,7 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   private notificationsSub$: Subscription | undefined;
   private inboxAction: any | undefined = undefined;
   public newArrival = false;
-  constructor(@Inject(APP_NOTIFICATIONS) public notifications: IAppNotifications, @Inject(APP_LINKS) public links: any) { }
+  constructor(@Inject(APP_NOTIFICATIONS) public notifications?: IAppNotifications, @Inject(APP_LINKS) public links?: any) { }
 
   ngOnDestroy(): void {
     if (this.notificationsSub$) {
@@ -25,21 +25,25 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    (this.links['notifications'] as Observable<NavLink>).subscribe(notificationsLink => {
-      this.allNotificationsLink = notificationsLink;
-    });
-    this.notificationsSub$ = this.notifications.messages.subscribe(result => {
-      if (result.items){
-        this.newArrival = true;
-        this.unreadCount = result.count;
-        this.items = result.items;
-        setTimeout( () => { this.newArrival = false; }, 1000 );
-      }
-    });
+    if(this.links && this.links['notifications']) {
+      (this.links['notifications'] as Observable<NavLink>).subscribe(notificationsLink => {
+        this.allNotificationsLink = notificationsLink;
+      });
+    }
+    if(this.notifications) {
+      this.notificationsSub$ = this.notifications?.messages.subscribe(result => {
+        if (result.items){
+          this.newArrival = true;
+          this.unreadCount = result.count;
+          this.items = result.items;
+          setTimeout( () => { this.newArrival = false; }, 1000 );
+        }
+      });
+    }
   }
 
   public doInboxAction(): void {
-    if (this.notifications.inboxAction) {
+    if (this.notifications?.inboxAction) {
       this.notifications.inboxAction();
     } else {
       this.menuExpanded = !this.menuExpanded;

@@ -33,6 +33,8 @@ export * from './lib/controls/stepper/types/stepper-type';
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
 export * from './lib/layouts/shell/shell-header/shell-header.component';
 export * from './lib/layouts/shell/shell-footer/shell-footer.component';
+export * from './lib/layouts/shell/shell-sidebar/shell-sidebar.component';
+export * from './lib/layouts/shell/shell-sidebar-header/shell-sidebar-header.component';
 
 // view layouts
 export * from './lib/layouts/views/view-layout/view-layout.component';

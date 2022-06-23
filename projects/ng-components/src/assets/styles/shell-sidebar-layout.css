@@ -1,0 +1,109 @@
+@layer components {
+
+  .sidebar-off-canvas-menu-container {
+    @apply relative z-40 md:hidden;
+  }
+
+  
+  
+  .sidebar-off-canvas-menu-backdrop {
+    @apply fixed inset-0 transition-opacity ease-linear opacity-0 duration-300 pointer-events-none bg-gray-600 bg-opacity-75;
+  }
+
+  .sidebar-off-canvas-menu-backdrop-opacity-100 {
+    @apply fixed inset-0 transition-opacity ease-linear duration-300 pointer-events-none bg-gray-600 bg-opacity-75 opacity-100;
+  }
+
+  .sidebar-off-canvas-menu-container-inner {
+    @apply fixed inset-0 flex z-40 transition ease-in-out duration-300 transform translate-x-0;
+  }
+
+  .sidebar-off-canvas-menu-container-inner-active {
+    @apply translate-x-0;
+  }
+
+  .sidebar-off-canvas-menu-container-inner-not-active {
+    @apply -translate-x-full;
+  }
+
+
+  .sidebar-off-canvas-menu-container-inner-translate-x-full {
+    @apply fixed inset-0 flex z-40 transition ease-in-out duration-300 transform -translate-x-full;
+  }
+
+  .sidebar-off-canvas-layout-container {
+    @apply relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800;
+  }
+
+  .sidebar-off-canvas-toggle-button-container {
+    @apply absolute top-0 right-0 -mr-12 pt-2;
+  }
+
+  .sidebar-off-canvas-toggle-button {
+    @apply ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none;
+  }
+  
+  .sidebar-off-canvas-app-logo-container {
+    @apply flex-shrink-0 flex items-center px-4;
+  }
+
+  .sidebar-dummy-element {
+    @apply flex-shrink-0 w-14;
+  }
+
+  .sidebar-static-menu-outer-container {
+    @apply hidden md:flex;
+  }
+
+  .sidebar-static-menu-container {
+    @apply flex-col w-64 fixed inset-y-0;
+  }
+
+  .sidebar-static-menu-container-active {
+    @apply flex;
+  }
+
+  .sidebar-static-menu-container-not-active {
+    @apply hidden;
+  }
+
+  .sidebar-static-menu-container-inner {
+    @apply flex-1 flex flex-col min-h-0 bg-gray-800 shadow-lg;
+  }
+
+  .sidebar-static-menu-app-logo-container {
+    @apply flex items-center h-16 flex-shrink-0 px-4 bg-gray-900 shadow-sm;
+  }
+
+  /* !!!! malakai onoma !!!! */
+  .sidebar-static-menu-wrapper {
+    @apply flex flex-col;
+  }
+
+  .sidebar-static-menu-wrapper-active {
+    @apply sm:pl-64;
+  }
+
+  .sidebar-static-menu-toggle-button-container {
+    @apply sticky top-0 z-10 flex-shrink-0 flex h-16 bg-gray-900 shadow;
+  }
+
+  .sidebar-static-menu-toggle-button {
+    @apply px-4 text-white bg-gray-800 focus:outline-none;
+  }
+
+  .sidebar-static-menu-header-container {
+    @apply flex-1 px-4 flex justify-between;
+  }
+
+  .sidebar-static-menu-header-near-container  {
+    @apply flex-1 flex;
+  }
+
+  .sidebar-static-menu-header-far-container {
+    @apply ml-4 flex items-center md:ml-6;
+  }
+
+}
+
+

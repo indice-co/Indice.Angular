@@ -1,11 +1,11 @@
 @layer components {
 
   .avatar-container {
-    @apply inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-800;
+    @apply inline-flex items-center justify-center h-8 w-8 rounded-full ;
   }
 
   .avatar-container-large {
-    @apply inline-flex items-center justify-center h-12 w-12 rounded-full bg-gray-500;
+    @apply inline-flex items-center justify-center h-12 w-12 rounded-full;
   }
 
   .avatar-text {

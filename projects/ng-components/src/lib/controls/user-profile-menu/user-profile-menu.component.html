@@ -1,4 +1,4 @@
-<div class="relative" (clickOutside)="onClickOutside($event)" (click)="userMenuExpanded = !userMenuExpanded">
+<div class="relative" (clickOutside)="onClickOutside($event)">
 
   <div class="inline-flex">
     <!-- Username -->
@@ -9,11 +9,13 @@
     </div>
 
     <div [class.ml-2]="showUserName">
-      <button type="button" *ngIf="user"
+      <button type="button" 
+              *ngIf="user"
               class="shell-header-profile-dropdown-button"
               id="user-menu"
               aria-expanded="false"
-              aria-haspopup="true">
+              aria-haspopup="true"
+              (click)="userMenuExpanded = !userMenuExpanded">
         <span class="sr-only">Open user menu</span>
         <span class="avatar-container">
           <span class="avatar-text">{{this.avatarName}}</span>
@@ -22,7 +24,7 @@
 
       <button type="button"
               *ngIf="!user"
-              (click)="signin(null)"
+              (click)="signin($event)"
               class="shell-header-profile-dropdown-button"
               id="user-menu"
               aria-expanded="false"

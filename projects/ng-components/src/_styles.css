@@ -21,6 +21,10 @@
 @import './assets/styles/modal.css';
 @import './assets/styles/tab-group.css';
 
+@import './assets/styles/shell-sidebar.css';
+@import './assets/styles/shell-sidebar-header.css';
+@import './assets/styles/shell-sidebar-layout.css';
+
 @import './assets/styles/notifications-indicator.component.css';
 @import './assets/styles/indice-ng-icons-inline.css';
 
