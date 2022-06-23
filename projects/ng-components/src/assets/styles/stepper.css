@@ -3,35 +3,27 @@
     .stepper-bullets-container {
         @apply flex items-center justify-center;
     }
-
     .stepper-bullets-counter {
         @apply text-sm font-medium;
     }
-
     .stepper-bullets-ol {
         @apply ml-8 flex items-center space-x-5;
     }
-
     .stepper-bullets-completed-step {
         @apply block w-2.5 h-2.5 bg-blue-600 rounded-full hover:bg-blue-900;
     }
-
     .stepper-bullets-active-step {
         @apply relative flex items-center justify-center;
     }
-
     .stepper-bullets-active-step-level1 {
         @apply absolute w-5 h-5 p-px flex;
     }
-
     .stepper-bullets-active-step-level11 {
         @apply w-full h-full rounded-full bg-blue-200;
     }
-
     .stepper-bullets-active-step-bullet {
         @apply relative block w-2.5 h-2.5 bg-blue-600 rounded-full;
     }
-
     .stepper-bullets-upcoming-step {
         @apply block w-2.5 h-2.5 bg-gray-200 rounded-full hover:bg-gray-400;
     }
@@ -40,55 +32,42 @@
     .stepper-bullets-and-text-container {
         @apply flex items-center justify-center;
     }
-
     .stepper-bullets-and-text-ol {
         @apply space-y-6;
     }
-
     .stepper-bullets-and-text-completed-step {
         @apply flex items-start;
     }
-
     .stepper-bullets-and-text-completed-step-level1 {
         @apply flex-shrink-0 relative h-5 w-5 flex items-center justify-center;
     }
-
     .stepper-bullets-and-text-completed-step-container {
         @apply ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900;
     }
-
     .stepper-bullets-and-text-active-step {
         @apply flex items-start;
     }
-
     .stepper-bullets-and-text-active-step-level1 {
         @apply flex-shrink-0 h-5 w-5 relative flex items-center justify-center;
     }
-
     .stepper-bullets-and-text-active-step-level11 {
         @apply absolute h-4 w-4 rounded-full bg-blue-200;
     }
-
     .stepper-bullets-and-text-active-step-level12 {
         @apply relative block w-2 h-2 bg-blue-600 rounded-full;
     }
-
     .stepper-bullets-and-text-active-step-container {
         @apply ml-3 text-sm font-medium text-blue-600;
     }
-
     .stepper-bullets-and-text-upcoming-step {
         @apply flex items-start;
     }
-
     .stepper-bullets-and-text-upcoming-step-level1 {
         @apply flex-shrink-0 h-5 w-5 relative flex items-center justify-center;
     }
-
     .stepper-bullets-and-text-upcoming-step-level2 {
         @apply h-2 w-2 bg-gray-300 rounded-full group-hover:bg-gray-400;
     }
-
     .stepper-bullets-and-text-upcoming-step-container {
         @apply ml-3 text-sm font-medium text-gray-500 group-hover:text-gray-900;
     }
@@ -96,4 +75,97 @@
     /* Circles */
 
     /* Panels With Border */
+    .panels-with-border-container {
+        @apply border-t border-b border-gray-200;
+    }
+    .panels-with-border-nav {
+        @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    }
+    .panels-with-border-ol {
+        @apply rounded-md overflow-hidden lg:flex lg:border-l lg:border-r lg:border-gray-200 lg:rounded-none;
+    }
+    .panels-with-border-li {
+        @apply relative overflow-hidden lg:flex-1 cursor-pointer;
+    }
+    .panels-with-border-completed-step {
+        @apply border border-gray-200 overflow-hidden border-b-0 rounded-t-md lg:border-0;
+    }
+    .panels-with-border-completed-step-level1 {
+        @apply absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto;
+    }
+    .panels-with-border-completed-step-level2 {
+        @apply px-6 py-5 flex items-start text-sm font-medium;
+    }
+    .panels-with-border-completed-step-level21 {
+        @apply flex-shrink-0;
+    }
+    .panels-with-border-completed-step-level211 {
+        @apply w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full;
+    }
+    .panels-with-border-completed-step-level22 {
+        @apply mt-0.5 ml-4 min-w-0 flex flex-col;
+    }
+    .panels-with-border-completed-step-level221 {
+        @apply text-xs font-semibold tracking-wide uppercase;
+    }
+    .panels-with-border-completed-step-level222 {
+        @apply text-sm font-medium text-gray-500;
+    }
+    .panels-with-border-active-step {
+        @apply border border-gray-200 overflow-hidden lg:border-0;
+    }
+    .panels-with-border-active-step-level1 {
+        @apply absolute top-0 left-0 w-1 h-full bg-blue-600 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto;
+    }
+    .panels-with-border-active-step-level2 {
+        @apply px-6 py-5 flex items-start text-sm font-medium lg:pl-9;
+    }
+    .panels-with-border-active-step-level21 {
+        @apply flex-shrink-0;
+    }
+    .panels-with-border-active-step-level211 {
+        @apply w-10 h-10 flex items-center justify-center border-2 border-blue-600 rounded-full;
+    }
+    .panels-with-border-active-step-level211-text {
+        @apply text-blue-600;
+    }
+    .panels-with-border-active-step-level22 {
+        @apply mt-0.5 ml-4 min-w-0 flex flex-col;
+    }
+    .panels-with-border-active-step-level221 {
+        @apply text-xs font-semibold text-blue-600 tracking-wide uppercase;
+    }
+    .panels-with-border-active-step-level222 {
+        @apply text-sm font-medium text-gray-500;
+    }
+    .panels-with-border-step-separator {
+        @apply hidden absolute top-0 left-0 w-3 inset-0 lg:block;
+    }
+    .panels-with-border-upcoming-step {
+        @apply border border-gray-200 overflow-hidden border-t-0 rounded-b-md lg:border-0;
+    }
+    .panels-with-border-upcoming-step-level1 {
+        @apply absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto;
+    }
+    .panels-with-border-upcoming-step-level2 {
+        @apply px-6 py-5 flex items-start text-sm font-medium lg:pl-9;
+    }
+    .panels-with-border-upcoming-step-level21 {
+        @apply flex-shrink-0;
+    }
+    .panels-with-border-upcoming-step-level211 {
+        @apply w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full;
+    }
+    .panels-with-border-upcoming-step-level211-text {
+        @apply text-gray-500;
+    }
+    .panels-with-border-upcoming-step-level22 {
+        @apply mt-0.5 ml-4 min-w-0 flex flex-col;
+    }
+    .panels-with-border-upcoming-step-level221 {
+        @apply text-xs font-semibold text-gray-500 tracking-wide uppercase;
+    }
+    .panels-with-border-upcoming-step-level222 {
+        @apply text-sm font-medium text-gray-500;
+    }
 }

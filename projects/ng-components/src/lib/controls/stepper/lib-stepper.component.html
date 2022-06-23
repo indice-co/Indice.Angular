@@ -218,27 +218,27 @@
         </ol>
     </nav>
     <!-- Panels With Border -->
-    <div class="border-t border-b border-gray-200" *ngSwitchCase="StepperType.PanelsWithBorder">
-        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Progress">
-            <ol role="list" class="rounded-md overflow-hidden lg:flex lg:border-l lg:border-r lg:border-gray-200 lg:rounded-none">
-                <li *ngFor="let step of steps" (click)="onSelectStep(step)" class="relative overflow-hidden lg:flex-1 cursor-pointer">
+    <div class="panels-with-border-container" *ngSwitchCase="StepperType.PanelsWithBorder">
+        <nav class="panels-with-border-nav" aria-label="Progress">
+            <ol role="list" class="panels-with-border-ol">
+                <li *ngFor="let step of steps" (click)="onSelectStep(step)" class="panels-with-border-li">
                     <!-- Completed Step -->
-                    <div class="border border-gray-200 overflow-hidden border-b-0 rounded-t-md lg:border-0" *ngIf="step.state === StepState.Completed">
+                    <div class="panels-with-border-completed-step" *ngIf="step.state === StepState.Completed">
                         <div class="group">
-                            <span class="absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto" aria-hidden="true"></span>
-                            <span class="px-6 py-5 flex items-start text-sm font-medium">
-                                <span class="flex-shrink-0">
-                                    <span class="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full">
+                            <span class="panels-with-border-completed-step-level1" aria-hidden="true"></span>
+                            <span class="panels-with-border-completed-step-level2">
+                                <span class="panels-with-border-completed-step-level21">
+                                    <span class="panels-with-border-completed-step-level211">
                                         <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                         </svg>
                                     </span>
                                 </span>
-                                <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
-                                    <span class="text-xs font-semibold tracking-wide uppercase" *ngIf="step.stepLabel">
+                                <span class="panels-with-border-completed-step-level22">
+                                    <span class="panels-with-border-completed-step-level221" *ngIf="step.stepLabel">
                                         <ng-container [ngTemplateOutlet]="step.stepLabel.template"></ng-container>
                                     </span>
-                                    <span class="text-sm font-medium text-gray-500" *ngIf="step.stepInfo">
+                                    <span class="panels-with-border-completed-step-level222" *ngIf="step.stepInfo">
                                         <ng-container [ngTemplateOutlet]="step.stepInfo.template"></ng-container>
                                     </span>
                                 </span>
@@ -246,44 +246,44 @@
                         </div>
                     </div>
                     <!-- Active Step -->
-                    <div class="border border-gray-200 overflow-hidden lg:border-0" *ngIf="step.state === StepState.Active">
+                    <div class="panels-with-border-active-step" *ngIf="step.state === StepState.Active">
                         <div aria-current="step">
-                            <span class="absolute top-0 left-0 w-1 h-full bg-blue-600 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto" aria-hidden="true"></span>
-                            <span class="px-6 py-5 flex items-start text-sm font-medium lg:pl-9">
-                                <span class="flex-shrink-0">
-                                    <span class="w-10 h-10 flex items-center justify-center border-2 border-blue-600 rounded-full">
-                                        <span class="text-blue-600">{{ step.index + 1 }}</span>
+                            <span class="panels-with-border-active-step-level1" aria-hidden="true"></span>
+                            <span class="panels-with-border-active-step-level2">
+                                <span class="panels-with-border-active-step-level21">
+                                    <span class="panels-with-border-active-step-level211">
+                                        <span class="panels-with-border-active-step-level211-text">{{ step.index + 1 }}</span>
                                     </span>
                                 </span>
-                                <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
-                                    <span class="text-xs font-semibold text-blue-600 tracking-wide uppercase" *ngIf="step.stepLabel">
+                                <span class="panels-with-border-active-step-level22">
+                                    <span class="panels-with-border-active-step-level221" *ngIf="step.stepLabel">
                                         <ng-container [ngTemplateOutlet]="step.stepLabel.template"></ng-container>
                                     </span>
-                                    <span class="text-sm font-medium text-gray-500" *ngIf="step.stepInfo">
+                                    <span class="panels-with-border-active-step-level222" *ngIf="step.stepInfo">
                                         <ng-container [ngTemplateOutlet]="step.stepInfo.template"></ng-container>
                                     </span>
                                 </span>
                             </span>
                         </div>
                         <!-- Separator -->
-                        <div class="hidden absolute top-0 left-0 w-3 inset-0 lg:block" aria-hidden="true" *ngIf="step.index !== 0">
+                        <div class="panels-with-border-step-separator" aria-hidden="true" *ngIf="step.index !== 0">
                             <svg class="h-full w-full text-gray-300" viewBox="0 0 12 82" fill="none" preserveAspectRatio="none">
                                 <path d="M0.5 0V31L10.5 41L0.5 51V82" stroke="currentcolor" vector-effect="non-scaling-stroke" />
                             </svg>
                         </div>
                     </div>
                     <!-- Upcoming Step -->
-                    <div class="border border-gray-200 overflow-hidden border-t-0 rounded-b-md lg:border-0" *ngIf="step.state === StepState.Upcoming">
+                    <div class="panels-with-border-upcoming-step" *ngIf="step.state === StepState.Upcoming">
                         <div class="group">
-                            <span class="absolute top-0 left-0 w-1 h-full bg-transparent group-hover:bg-gray-200 lg:w-full lg:h-1 lg:bottom-0 lg:top-auto" aria-hidden="true"></span>
-                            <span class="px-6 py-5 flex items-start text-sm font-medium lg:pl-9">
-                                <span class="flex-shrink-0">
-                                    <span class="w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full">
-                                        <span class="text-gray-500">{{ step.index + 1 }}</span>
+                            <span class="panels-with-border-upcoming-step-level1" aria-hidden="true"></span>
+                            <span class="panels-with-border-upcoming-step-level2">
+                                <span class="panels-with-border-upcoming-step-level21">
+                                    <span class="panels-with-border-upcoming-step-level211">
+                                        <span class="panels-with-border-upcoming-step-level211-text">{{ step.index + 1 }}</span>
                                     </span>
                                 </span>
-                                <span class="mt-0.5 ml-4 min-w-0 flex flex-col">
-                                    <span class="text-xs font-semibold text-gray-500 tracking-wide uppercase" *ngIf="step.stepLabel">
+                                <span class="panels-with-border-upcoming-step-level22">
+                                    <span class="panels-with-border-upcoming-step-level221" *ngIf="step.stepLabel">
                                         <ng-container [ngTemplateOutlet]="step.stepLabel.template"></ng-container>
                                     </span>
                                     <span class="text-sm font-medium text-gray-500" *ngIf="step.stepInfo">
@@ -293,7 +293,7 @@
                             </span>
                         </div>
                         <!-- Separator -->
-                        <div class="hidden absolute top-0 left-0 w-3 inset-0 lg:block" aria-hidden="true" *ngIf="step.index !== 0">
+                        <div class="panels-with-border-step-separator" aria-hidden="true" *ngIf="step.index !== 0">
                             <svg class="h-full w-full text-gray-300" viewBox="0 0 12 82" fill="none" preserveAspectRatio="none">
                                 <path d="M0.5 0V31L10.5 41L0.5 51V82" stroke="currentcolor" vector-effect="non-scaling-stroke" />
                             </svg>
