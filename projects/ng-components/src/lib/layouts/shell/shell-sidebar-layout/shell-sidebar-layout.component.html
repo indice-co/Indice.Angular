@@ -1,26 +1,17 @@
 <div>
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-    
-    <!--  -->
     <div class="sidebar-off-canvas-menu-container" role="dialog" aria-modal="true">
-
       <!-- Off-canvas menu backdrop, show/hide based on off-canvas menu state.-->
-    
-      <!--  -->
       <div class="sidebar-off-canvas-menu-backdrop" 
           [class.sidebar-off-canvas-menu-backdrop-opacity-100]="showMobileSidebar">
       </div>
   
-      <!--  -->
       <div class="sidebar-off-canvas-menu-container-inner" 
       [class.sidebar-off-canvas-menu-container-inner-active]="showMobileSidebar" 
       [class.sidebar-off-canvas-menu-container-inner-not-active]="!showMobileSidebar">
         <!-- Off-canvas menu, show/hide based on off-canvas menu state.-->
-        
-        <!--  -->
         <div class="sidebar-off-canvas-layout-container">
           <!--Close button, show/hide based on off-canvas menu state.-->
-          <!--  -->
           <div class="sidebar-off-canvas-toggle-button-container">
             <button type="button" class="sidebar-off-canvas-toggle-button" (click)="showMobileSidebar = !showMobileSidebar">
               <span class="sr-only">Close sidebar</span>
@@ -31,7 +22,6 @@
             </button>
           </div>
   
-          <!--  -->
           <div class="sidebar-off-canvas-app-logo-container">
             <img class="h-8 w-auto" [src]="config?.appLogo" [alt]="config?.appLogoAlt">
           </div>
@@ -40,7 +30,6 @@
          
         </div>
   
-        <!--  -->
         <div class="sidebar-dummy-element" aria-hidden="true">
           <!-- Dummy element to force sidebar to shrink to fit close icon -->
         </div>
@@ -48,20 +37,13 @@
     </div>
   
     <!-- Static sidebar for desktop -->
-    
-    <!--  -->
     <div class="sidebar-static-menu-outer-container">
     
-      <!--  -->
     <div class="sidebar-static-menu-container" 
       [class.sidebar-static-menu-container-active]="showMobileSidebar" 
       [class.sidebar-static-menu-container-not-active]="!showMobileSidebar">
       <!-- Sidebar component, swap this element with another sidebar if you like -->
-      
-      <!--  -->
       <div class="sidebar-static-menu-container-inner">
-      
-        <!--  -->
         <div class="sidebar-static-menu-app-logo-container">
           <img class="h-8 w-auto" [src]="config?.appLogo" [alt]="config?.appLogoAlt">
         </div>
@@ -70,9 +52,7 @@
     </div>
     </div>
 
-    <!-- sidebar-static-menu-container1 -->
     <div class="sidebar-static-menu-wrapper" [class.sidebar-static-menu-wrapper-active]="showMobileSidebar">
-      <!--  -->
       <div class="sidebar-static-menu-toggle-button-container">
         <button type="button" class="sidebar-static-menu-toggle-button" (click)="showMobileSidebar = !showMobileSidebar">
           <span class="sr-only">Toggle sidebar</span>
@@ -84,11 +64,9 @@
         
         <!-- sidebar-static-menu-header-container -->
         <div class="sidebar-static-menu-header-container">
-          <!--  -->
           <div class="sidebar-static-menu-header-near-container">
             
           </div>
-          <!--  -->
           <div class="sidebar-static-menu-header-far-container">
             <lib-shell-sidebar-header 
             [show-userName]="config?.showUserNameOnHeader"
