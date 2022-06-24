@@ -15,6 +15,7 @@ import { StepSelectedEvent } from './types/step-selected-event';
 export class LibStepperComponent implements OnInit, AfterViewChecked {
     // Private properties.
     private _currentStepIndex: number = 0;
+    private _isCompleted = false;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
@@ -41,12 +42,19 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
         return this._currentStepIndex;
     }
 
+    /** Indicates whether stepper can go a step back. */
     public get canGoBack(): boolean {
         return this._currentStepIndex > 0;
     }
 
+    /** Indicates whether stepper can go a step forward. */
     public get canGoForward(): boolean {
         return this._currentStepIndex < this.steps?.length - 1;
+    }
+
+    /** Indicates whether  */
+    public get isCompleted(): boolean {
+        return this._isCompleted;
     }
 
     public ngOnInit(): void { }
@@ -57,6 +65,10 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
 
     /** Proceeds to the next step, if any. */
     public goToNextStep(): void {
+        if (this.currentStep?.isLast && !this._isCompleted) {
+            this._isCompleted = true;
+            this.completed.emit();
+        }
         if (!this.canGoForward) {
             return;
         }
