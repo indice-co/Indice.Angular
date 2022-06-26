@@ -1,5 +1,9 @@
 <div class="px-2">
 
+  <lib-advanced-search [searchOptions]="searchOptions"
+                       [filters]="filters"
+                       (advancedSearchChanged)="emitAdvancedSearchChanged($event)"></lib-advanced-search>
+
   <lib-pager *ngIf="showPager && (pagerPosition == 'top' || pagerPosition == 'both')"
              [page]="page"
              [page-size]="pageSize"
@@ -20,7 +24,9 @@
   <ng-container *ngSwitchCase="'tiles'">
     <div [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy"
+                           [count]="5"
+                           [type]="'tiles'"></lib-skeleton-loader>
 
       <ng-container *ngIf="items && items.length > 0">
         <ng-container *ngFor="let item of items">
@@ -36,9 +42,12 @@
 
   <!-- *ngSwitchCase="'gallery'" -->
   <ng-container *ngSwitchCase="'gallery'">
-    <ul role="list" [class]="tilesDeckClass">
+    <ul role="list"
+        [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy"
+                           [count]="5"
+                           [type]="'tiles'"></lib-skeleton-loader>
 
       <ng-container *ngIf="!busy && items && items.length > 0">
         <ng-container *ngFor="let item of items">
@@ -69,7 +78,8 @@
               </ng-container>
             </tr>
           </thead>
-          <tbody class="list-view-tbody" *ngIf="busy">
+          <tbody class="list-view-tbody"
+                 *ngIf="busy">
             <ng-container *ngFor="let item of loaderItems;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
@@ -88,7 +98,7 @@
                 </ng-container>
                 <td *ngFor="let col of columns"
                     [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
-                    <div class="w-full animate-pulse h-8 bg-gray-200 rounded"></div>
+                  <div class="w-full animate-pulse h-8 bg-gray-200 rounded"></div>
                 </td>
               </tr>
               <ng-container *ngIf="detailsSectionSupported">
@@ -102,7 +112,8 @@
               </ng-container>
             </ng-container>
           </tbody>
-          <tbody class="list-view-tbody" *ngIf="!busy">
+          <tbody class="list-view-tbody"
+                 *ngIf="!busy">
             <ng-container *ngFor="let item of items;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">

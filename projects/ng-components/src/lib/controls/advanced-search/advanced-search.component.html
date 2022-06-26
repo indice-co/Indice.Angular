@@ -1,0 +1,107 @@
+<div class="flex gap-6 mb-2 px-2">
+    <!--SEARCH FIELDS-->
+    <div>
+        <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+               for="selectedField">
+            Πεδίο Αναζήτησης
+        </label>
+        <select [(ngModel)]="selectedField"
+                (ngModelChange)="selectedFieldChanged()"
+                name="selectedField"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <ng-container *ngFor="let option of searchOptions">
+                <option [ngValue]="option">{{ option.name }}</option>
+            </ng-container>
+        </select>
+    </div>
+    <!--SEARCH FIELDS INPUT-->
+    <div *ngIf="selectedField"
+         class="search-field-input-{{selectedField.dataType}}">
+        <div class="flex gap-6 mb-6"
+             *ngIf="selectedField">
+            <div *ngIf="selectedField.dataType === 'array'">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                       for="selectedField">
+                    Τιμή Πεδίου
+                </label>
+                <select [(ngModel)]="fieldValue"
+                        name="selectedField"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+        focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option *ngFor="let option of selectedField.options"
+                            [value]="option.value">{{ option.label }}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="selectedField.dataType === 'string'">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                       for="selectedField">
+                    Τιμή Πεδίου
+                </label>
+                <input (keyup.enter)="search()"
+                       [(ngModel)]="fieldValue"
+                       type="text"
+                       placeholder="Αναζήτηση"
+                       maxlength="300">
+            </div>
+            <div class="date-range"
+                 *ngIf="selectedField.dataType === 'daterange'">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2"
+                       for="selectedField">
+                    &nbsp;
+                </label>
+                <span class="tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Από:
+                </span>
+                <input type="date"
+                       placeholder="Από"
+                       [(ngModel)]="fieldValueDateFrom">
+                <span class="tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    Έως:
+                </span>
+                <input type="date"
+                       placeholder="Έως"
+                       [(ngModel)]="fieldValueDateTo">
+            </div>
+        </div>
+    </div>
+    <!--DO SEARCH-->
+    <ng-container *ngIf="selectedField">
+        <button type="button"
+                [ngClass]="{'opacity-50 cursor-not-allowed': fieldValue === undefined && fieldValueDateFrom === undefined && fieldValueDateTo === undefined}"
+                [disabled]="fieldValue === undefined && fieldValueDateFrom === undefined && fieldValueDateTo === undefined"
+                (click)="search()">
+            <i [class]="'ms-Icon ms-Icon--Search'"></i>
+        </button>
+        <!--CLEAR-->
+        <button type="button"
+                (click)="clear()">
+            <i [class]="'ms-Icon ms-Icon--Cancel'"></i>
+        </button>
+    </ng-container>
+</div>
+<!--FILTER CHIPS-->
+<!-- This example requires Tailwind CSS v2.0+ -->
+<ng-container *ngFor="let filter of filters; let i = index">
+    <span *ngIf="filter && filter.member"
+          class="inline-flex rounded-full items-center mx-2 mb-4 py-1 pl-3 pr-1 text-sm font-medium bg-gray-300 text-gray-700">
+        {{ filter.uiName }} {{ filter.uiOperator }} '{{ filter.uiValue }}'
+        <button (click)="removeFilter(i)"
+                type="button"
+                class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 
+            hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:bg-gray-500 focus:text-white">
+            <span class="sr-only">Remove large option</span>
+            <svg class="h-2 w-2"
+                 stroke="currentColor"
+                 fill="none"
+                 viewBox="0 0 8 8">
+                <path stroke-linecap="round"
+                      stroke-width="1.5"
+                      d="M1 1l6 6m0-6L1 7" />
+            </svg>
+        </button>
+    </span>
+</ng-container>

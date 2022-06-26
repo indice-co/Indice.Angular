@@ -4,12 +4,15 @@ import { ListTileComponent } from './list-tile.component';
 import { ListColumnComponent } from './list-column.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
 import { Icons } from '../../icons';
+import { FilterClause, SearchOption } from '../advanced-search/models';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
+  @Input() searchOptions: SearchOption[] = [];
+  @Input() filters?: FilterClause[];
   // BUSY STATE
   @Input() busy = false;
   // DATA SOURCE!
@@ -71,6 +74,7 @@ export class ListViewComponent implements OnChanges {
   @Output() detailsOpened: EventEmitter<{ item: any, open: boolean }> = new EventEmitter<{ item: any, open: boolean }>();
   @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output() sortdirChanged: EventEmitter<string> = new EventEmitter<string>();
+  @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
 
   private multipleFullWidth = false;
   public expandIcon = Icons.Expand;
@@ -90,7 +94,7 @@ export class ListViewComponent implements OnChanges {
     for (let i = 0; i < 5; i++) {
       this.loaderItems.push({});
     }
-    if (this.pagerPosition){
+    if (this.pagerPosition) {
       this.pagerPosition = this.pagerPosition as PagerPosition;
     }
   }
@@ -116,6 +120,9 @@ export class ListViewComponent implements OnChanges {
   }
   public emitSortdirChanged($event: string): void {
     this.sortdirChanged.emit($event);
+  }
+  public emitAdvancedSearchChanged($event: FilterClause[]): void {
+    this.advancedSearchChanged.emit($event);
   }
 
   public toggleDetails(item: any): void {

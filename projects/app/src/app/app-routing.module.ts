@@ -19,6 +19,7 @@ import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
 import { SampleStepperComponent } from './components/stepper/stepper-sample.component';
+import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -60,8 +61,8 @@ const routes: Routes = [
   {
     path: 'samples/inbox',
     pathMatch: 'full',
-    component: InboxComponent, children : [
-      { path: 'view/:id', component: InboxItemComponent, outlet: 'rightpane'}
+    component: InboxComponent, children: [
+      { path: 'view/:id', component: InboxItemComponent, outlet: 'rightpane' }
     ]
   },
   {
@@ -113,6 +114,12 @@ const routes: Routes = [
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
   { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
   { path: 'samples/stepper', pathMatch: 'full', component: SampleStepperComponent },
+  // ADVANCED SEARCH!
+  {
+    path: 'samples/advanced-search-playground',
+    pathMatch: 'full',
+    component: AdvancedSearchPlaygroundComponent,
+  },
   // not found
   {
     path: '**',
@@ -124,7 +131,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
-    scrollOffset: [0, 25]  })],
+    scrollOffset: [0, 25]
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
