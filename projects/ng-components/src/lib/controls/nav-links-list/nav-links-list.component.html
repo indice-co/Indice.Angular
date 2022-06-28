@@ -20,9 +20,7 @@
         <a *ngSwitchCase="'fragment'"
           routerLink="."
           [fragment]="link.path"
-          [class.active]="(activeFragment | async) === link.path"
-          [routerLinkActive]="navLinkActiveClass"
-          [class]="navLinkClass">
+          [class]="fragmentValue === link.path ? navLinkClass + ' ' + navLinkActiveClass : navLinkClass">
           <i *ngIf="showIcons && link.icon" [class]="link.icon+ ' mr-3'"></i>{{ link.text }}
         </a>
       </ng-container>
