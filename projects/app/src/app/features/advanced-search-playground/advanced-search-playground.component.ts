@@ -46,25 +46,8 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
-    let title: string | undefined;
-    let description: string | undefined;
-
-    if (this.filters !== undefined && this.filters.length > 0) {
-      for (let i = 0; i < this.filters.length; i++) {
-        const fc: FilterClause = this.filters[i];
-        switch (fc.member) {
-          case 'title':
-            title = fc.value;
-            break;
-          case 'description':
-            description = fc.value;
-            break;
-          default:
-            break;
-        }
-      }
-    }
-
+    let title = this.filters?.find(f => f.member === 'title')?.value;
+    let description = this.filters?.find(f => f.member === 'description')?.value;
     let items = Array(20).fill(ShellLayoutsListSamples[0]);
     return of({ count: items.length, items }).pipe(delay(1200));
   }
