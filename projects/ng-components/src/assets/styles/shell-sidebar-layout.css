@@ -72,7 +72,11 @@
   }
 
   .sidebar-static-menu-app-logo-container {
-    @apply flex items-center h-16 flex-shrink-0 px-4 bg-gray-900 shadow-sm;
+    @apply flex items-center h-16 flex-shrink-0 px-4 bg-gray-900;
+  }
+
+  .sidebar-static-menu-header-app-logo-container {
+    @apply flex items-center h-16 flex-shrink-0 ;
   }
 
   /* !!!! malakai onoma !!!! */
