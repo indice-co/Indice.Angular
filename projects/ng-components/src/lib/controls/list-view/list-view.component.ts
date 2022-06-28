@@ -11,7 +11,7 @@ import { FilterClause, SearchOption } from '../advanced-search/models';
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
-  @Input() searchOptions: SearchOption[] = [];
+  @Input('search-options') searchOptions: SearchOption[] = [];
   @Input() filters?: FilterClause[];
   // BUSY STATE
   @Input() busy = false;

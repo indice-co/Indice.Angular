@@ -7,7 +7,7 @@ import { SearchOption, FilterClause, QueryParameters, Operators } from './models
 })
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  @Input() searchOptions: SearchOption[] = [];
+  @Input('search-options') searchOptions: SearchOption[] = [];
   @Input() filters?: FilterClause[];
 
   public selectedField?: SearchOption;

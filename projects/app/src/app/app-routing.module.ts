@@ -59,8 +59,8 @@ const routes: Routes = [
   {
     path: 'samples/inbox',
     pathMatch: 'full',
-    component: InboxComponent, children: [
-    path: 'samples/inbox', pathMatch: 'full', component: InboxComponent, children: [
+    component: InboxComponent,
+    children: [
       { path: 'view/:id', component: InboxItemComponent, outlet: 'rightpane' }
     ]
   },

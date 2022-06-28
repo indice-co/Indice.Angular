@@ -1,0 +1,55 @@
+@layer components {
+
+  .advanced-search-container {
+
+  }
+
+  .advanced-search-filter {
+    @apply flex gap-6 mb-2 pr-2;
+  }
+
+  .advanced-search-filter-field-container {
+
+  }
+
+  .advanced-search-filter-value-container {
+    @apply flex gap-6 mb-6;
+  }
+
+  .advanced-search-filter-field-label {
+
+  }
+
+  .advanced-search-filter-field-select {
+  
+  }
+
+  .advanced-search-filter-value-label {
+    @apply block; 
+  }
+
+  .advanced-search-filter-value-select {
+
+  }
+
+  .advanced-search-filter-value-input {
+
+  }
+
+  .advanced-search-filter-value-input-daterange-from {
+
+  }
+
+  .advanced-search-filter-value-input-daterange-to {
+
+  }
+
+  .advanced-search-chips {
+    @apply inline-flex rounded-full items-center mx-2 mb-4 py-1 pl-3 pr-1 text-sm font-medium bg-gray-300 text-gray-700;
+  }
+
+  .advanced-search-chips-remove-filter {
+    @apply flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-gray-400 hover:bg-gray-200 hover:text-gray-500 focus:outline-none focus:bg-gray-500 focus:text-white;
+  }
+
+}
