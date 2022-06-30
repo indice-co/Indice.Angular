@@ -20,28 +20,20 @@
 
   }
 
-  .advanced-search-filter-field-select {
-  
-  }
-
   .advanced-search-filter-value-label {
     @apply block; 
   }
 
-  .advanced-search-filter-value-select {
-
-  }
-
   .advanced-search-filter-value-input {
-
+    @apply w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm;
   }
 
   .advanced-search-filter-value-input-daterange-from {
-
+    @apply  mt-6 p-2;
   }
 
   .advanced-search-filter-value-input-daterange-to {
-
+    @apply  mt-6 p-2;
   }
 
   .advanced-search-chips {

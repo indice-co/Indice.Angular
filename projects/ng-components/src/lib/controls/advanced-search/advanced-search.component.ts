@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MenuOption } from '@indice/ng-components';
 import { SearchOption, FilterClause, QueryParameters, Operators } from './models';
 
 @Component({
@@ -8,27 +9,56 @@ import { SearchOption, FilterClause, QueryParameters, Operators } from './models
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
-  @Input() filters?: FilterClause[];
-
+  @Input() filters: FilterClause[] = [];
+  public menuOptions: MenuOption[] = [];
   public selectedField?: SearchOption;
   public fieldValue?: string;
   public fieldValueDateFrom: any;
   public fieldValueDateTo: any;
+  public menuOptionsDictionary: { [key: string]: MenuOption[] } = {};
 
   constructor() { }
 
-  public ngOnInit(): void { }
+  public ngOnInit(): void {
+    this.searchOptions.forEach((searchOption) => {
+      this.menuOptions.push({
+        text: searchOption.name,
+        value: searchOption.field,
+        data: searchOption.dataType,
+        description: searchOption.placeholder,
+        icon: undefined
+      });
+      if (searchOption.dataType === 'array') {
+        let menuOpts: MenuOption[] = [];
+        searchOption.options?.forEach((selectInputOption) => {
+          menuOpts.push({
+            text: selectInputOption.label,
+            value: selectInputOption.value,
+            data: undefined,
+            description: selectInputOption.description,
+            icon: undefined
+          });
+        })
+        this.menuOptionsDictionary[searchOption.field] = menuOpts;
+      }
+    });
+  }
 
-  public selectedFieldChanged() {
+  public selectedFieldChanged(field: string) {
+    this.selectedField = this.searchOptions.find((searchOption) => searchOption.field === field);
     this.fieldValue = undefined;
   }
 
+  public selectedFieldValueChanged(fieldValue: string) {
+    this.fieldValue = fieldValue;
+  }
+
   public search() {
-    if (!this.filters) {
-      this.filters = [];
+    if (!this.selectedField || !this.selectedField.dataType) {
+      return;
     }
     // the filter is of type 'daterange'
-    if (this.selectedField && this.selectedField.dataType && this.selectedField.dataType === 'daterange') {
+    if (this.selectedField.dataType === 'daterange') {
       if (!this.selectedField.multiTerm) {
         this.filters = this.filters.filter((f) => {
           return f.member !== QueryParameters.FILTER_FROM && f.member !== QueryParameters.FILTER_TO;
@@ -45,7 +75,7 @@ export class AdvancedSearchComponent implements OnInit {
       }
     }
     // the filter isn't of type 'daterange' (everything else)
-    if (this.selectedField && this.selectedField.dataType && this.selectedField.dataType !== 'daterange') {
+    else {
       if (this.fieldValue === undefined) { // handle empty field value
         return;
       }
@@ -74,6 +104,8 @@ export class AdvancedSearchComponent implements OnInit {
   public clear() {
     this.fieldValueDateFrom = undefined;
     this.fieldValueDateTo = undefined;
+    this.selectedField = undefined;
+    this.fieldValue = undefined;
     this.filters = [];
     this.advancedSearchChanged.emit(this.filters);
   }

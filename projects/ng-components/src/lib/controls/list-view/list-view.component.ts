@@ -12,7 +12,7 @@ import { FilterClause, SearchOption } from '../advanced-search/models';
 })
 export class ListViewComponent implements OnChanges {
   @Input('search-options') searchOptions: SearchOption[] = [];
-  @Input() filters?: FilterClause[];
+  @Input() filters: FilterClause[] = [];
   // BUSY STATE
   @Input() busy = false;
   // DATA SOURCE!

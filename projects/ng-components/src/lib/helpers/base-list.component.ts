@@ -19,7 +19,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public sort: string | null = '';
   public sortdir: string | null = '';
   public search: string | null = '';
-  public filters?: FilterClause[] = [];
+  public filters: FilterClause[] = [];
   public searchOptions?: SearchOption[] = [];
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];

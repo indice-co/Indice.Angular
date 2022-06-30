@@ -4,16 +4,10 @@
         <div class="advanced-search-filter-field-container">
             <label class="advanced-search-filter-field-label"
                    for="selectedField">
-                Αναζήτηση ανα:
+                Αναζήτηση ανά:
             </label>
-            <select [(ngModel)]="selectedField"
-                    (ngModelChange)="selectedFieldChanged()"
-                    name="selectedField"
-                    class="advanced-search-filter-field-select">
-                <ng-container *ngFor="let option of searchOptions">
-                    <option [ngValue]="option">{{ option.name }}</option>
-                </ng-container>
-            </select>
+            <lib-drop-down-menu [options]="menuOptions"
+                                (selectedChanged)="selectedFieldChanged($event)"></lib-drop-down-menu>
         </div>
         <!--SEARCH FIELDS INPUT-->
         <div *ngIf="selectedField"
@@ -21,20 +15,16 @@
             <div *ngIf="selectedField.dataType === 'array'">
                 <label class="advanced-search-filter-value-label"
                        for="fieldValue">
-                    Τιμή Πεδίου
+                    &nbsp;
                 </label>
-                <select [(ngModel)]="fieldValue"
-                        name="fieldValue"
-                        class="advanced-search-filter-value-select">
-                    <option *ngFor="let option of selectedField.options"
-                            [value]="option.value">{{ option.label }}
-                    </option>
-                </select>
+                <lib-drop-down-menu [options]="menuOptionsDictionary[selectedField.field]"
+                                    [selected]="fieldValue"
+                                    (selectedChanged)="selectedFieldValueChanged($event)"></lib-drop-down-menu>
             </div>
             <div *ngIf="selectedField.dataType === 'string'">
                 <label class="advanced-search-filter-value-label"
                        for="fieldValue">
-                    Τιμή Πεδίου
+                    &nbsp;
                 </label>
                 <input (keyup.enter)="search()"
                        [(ngModel)]="fieldValue"
@@ -44,23 +34,24 @@
                        maxlength="300"
                        class="advanced-search-filter-value-input">
             </div>
-            <div *ngIf="selectedField.dataType === 'daterange'">
-                <label class="advanced-search-filter-value-label">
-                    &nbsp;
-                </label>
-                <span class="advanced-search-filter-value-input-daterange-from">
-                    Από:
-                </span>
-                <input type="date"
-                       placeholder="Από"
-                       [(ngModel)]="fieldValueDateFrom">
-                <span class="advanced-search-filter-value-input-daterange-to">
-                    Έως:
-                </span>
-                <input type="date"
-                       placeholder="Έως"
-                       [(ngModel)]="fieldValueDateTo">
-            </div>
+            <ng-container *ngIf="selectedField.dataType === 'daterange'">
+                <div>
+                    <span class="advanced-search-filter-value-input-daterange-from">
+                        Από:
+                    </span>
+                    <lib-date-picker [maxDate]="fieldValueDateTo"
+                                     [(ngModel)]="fieldValueDateFrom"
+                                     [placeholder]="'01/01/2022'"></lib-date-picker>
+                </div>
+                <div *ngIf="selectedField.dataType === 'daterange'">
+                    <span class="advanced-search-filter-value-input-daterange-to">
+                        Έως:
+                    </span>
+                    <lib-date-picker [minDate]="fieldValueDateFrom"
+                                     [(ngModel)]="fieldValueDateTo"
+                                     [placeholder]="'01/01/2022'"></lib-date-picker>
+                </div>
+            </ng-container>
         </div>
         <ng-container *ngIf="selectedField">
             <!--DO SEARCH-->

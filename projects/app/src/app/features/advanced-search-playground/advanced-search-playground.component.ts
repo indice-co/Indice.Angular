@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IResultSet, ListViewType, MenuOption } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
-import { FilterClause, SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
+import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
 import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-list.component';
 
 @Component({
