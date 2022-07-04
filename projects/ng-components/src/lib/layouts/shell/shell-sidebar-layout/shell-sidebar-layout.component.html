@@ -65,7 +65,9 @@
         <!-- sidebar-static-menu-header-container -->
         <div class="sidebar-static-menu-header-container">
           <div class="sidebar-static-menu-header-near-container">
-            
+            <div class="sidebar-static-menu-header-app-logo-container" *ngIf="!showMobileSidebar">
+              <img class="h-8 w-auto" [src]="config?.appLogo" [alt]="config?.appLogoAlt">
+            </div>
           </div>
           <div class="sidebar-static-menu-header-far-container">
             <lib-shell-sidebar-header 

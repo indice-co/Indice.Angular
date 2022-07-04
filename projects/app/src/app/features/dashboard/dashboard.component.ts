@@ -34,7 +34,8 @@ export class DashboardComponent implements OnInit {
       { text: 'Combobox', count: 1, path: 'samples/combobox' },
       { text: 'Directives', count: 2, path: '' },
       { text: 'Pipes', count: 2, path: '' },
-      { text: 'Services', count: 3, path: '' }
+      { text: 'Services', count: 3, path: '' },
+      { text: 'Advanced Search Playground', count: 1, path: 'samples/advanced-search-playground' }
     );
   }
 

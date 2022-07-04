@@ -4,45 +4,44 @@ import { Profile, SignoutResponse, User, UserManager } from 'oidc-client';
 import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
-import { IAuthSettings } from './types';
+import { IAuthSettings, SignInRedirectOptions } from './types';
 
 /** https://github.com/IdentityModel/oidc-client-js/wiki */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private userManager: UserManager;
-  private user: User = null as any;
-  private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private _userManager: UserManager;
+  private _user: User = null as any;
+  private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
-    this.userManager = new UserManager(authSettings);
+    this._userManager = new UserManager(authSettings);
     this.loadUser().subscribe();
-    this.userManager.events.addUserLoaded((user: User) => this.user = user);
-    this.userManager.events.addAccessTokenExpiring(() => this.signinSilent()
-      .subscribe((user: User) => this.user = user, (error: any) => throwError(error)));
-    this.userManager.events.addUserSignedOut(() => this.removeUser());
+    this._userManager.events.addUserLoaded((user: User) => this._user = user);
+    this._userManager.events.addAccessTokenExpiring(() => this.signinSilent().subscribe((user: User) => this._user = user, (error: any) => throwError(error)));
+    this._userManager.events.addUserSignedOut(() => this.removeUser());
   }
 
-  public user$ = this.userSubject.asObservable();
+  public user$ = this._userSubject.asObservable();
 
   public loadUser(): Observable<User | null> {
-    return from(this.userManager.getUser()).pipe(map((user: User | null) => {
+    return from(this._userManager.getUser()).pipe(map((user: User | null) => {
       if (user) {
-        this.user = user;
-        this.userSubject.next(user);
-        this.userSubject.complete();
+        this._user = user;
+        this._userSubject.next(user);
+        this._userSubject.complete();
       }
       return user;
     }));
   }
 
   public isLoggedIn(): Observable<boolean> {
-    return from(this.userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
+    return from(this._userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
   }
 
   public getUserProfile(): Profile | undefined {
-    return this.user?.profile || undefined;
+    return this._user?.profile || undefined;
   }
 
   public getEmail(): string | undefined {
@@ -70,7 +69,7 @@ export class AuthService {
   }
 
   public getCurrentUser(): User {
-    return this.user;
+    return this._user;
   }
 
   public isAdmin(): boolean {
@@ -78,61 +77,60 @@ export class AuthService {
   }
 
   public getAuthorizationHeaderValue(): string {
-    if (this.user) {
-      return `${this.user.token_type} ${this.user.access_token}`;
+    if (this._user) {
+      return `${this._user.token_type} ${this._user.access_token}`;
     }
     return '';
   }
 
   public getAccessTokenValue(): string {
-    if (this.user) {
-      return `${this.user.access_token}`;
+    if (this._user) {
+      return `${this._user.access_token}`;
     }
     return '';
   }
 
   public signoutRedirect(): void {
-    this.userManager.signoutRedirect();
+    this._userManager.signoutRedirect();
   }
 
   public removeUser(): Observable<void> {
-    this.userManager.clearStaleState();
-    return from(this.userManager.removeUser());
+    this._userManager.clearStaleState();
+    return from(this._userManager.removeUser());
   }
 
   public signoutRedirectCallback(): Observable<SignoutResponse> {
-    return from(this.userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
-      this.user = null as any;
-      this.userSubject.next(null);
-      this.userSubject.complete();
+    return from(this._userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
+      this._user = null as any;
+      this._userSubject.next(null);
+      this._userSubject.complete();
       return response;
     }, (error: any) => {
       throwError(error);
     }));
   }
 
-  public signinRedirect(location?: string | undefined, register: boolean = false): void {
+  public signinRedirect(signInRedirectOptions?: SignInRedirectOptions): void {
     const authorizeArgs: any = {};
-    if (location) {
-      authorizeArgs['data'] = {
-        url: location
-      };
+    if (signInRedirectOptions?.location) {
+      authorizeArgs['data'] = { url: location };
     }
-    if (register) {
-      authorizeArgs['extraQueryParams'] = {
-        operation: 'register'
-      };
+    if (signInRedirectOptions?.promptRegister === true) {
+      authorizeArgs['extraQueryParams'] = { operation: 'register' };
     }
-    this.userManager
+    if (signInRedirectOptions?.tenant) {
+      authorizeArgs['acr_values'] = `tenant:${signInRedirectOptions.tenant}`;
+    }
+    this._userManager
       .signinRedirect(authorizeArgs)
       .catch((error: any) => { });
   }
 
   public signinRedirectCallback(): Observable<User> {
-    return from(this.userManager.signinRedirectCallback()).pipe(map((user: User) => {
-      this.user = user;
-      this.userSubject.next(this.user);
-      this.userSubject.complete();
+    return from(this._userManager.signinRedirectCallback()).pipe(map((user: User) => {
+      this._user = user;
+      this._userSubject.next(this._user);
+      this._userSubject.complete();
       return user;
     }, (error: any) => {
       throwError(error);
@@ -141,20 +139,20 @@ export class AuthService {
   }
 
   public signinSilent(): Observable<User> {
-    return from(this.userManager.signinSilent()).pipe(map((user: User) => {
-      this.userSubject.next(user);
-      this.userSubject.complete();
+    return from(this._userManager.signinSilent()).pipe(map((user: User) => {
+      this._userSubject.next(user);
+      this._userSubject.complete();
       return user;
     }));
   }
 
   public signinSilentCallback(): Observable<User | undefined> {
-    return from(this.userManager.signinSilentCallback()).pipe(map((user: User | undefined) => {
+    return from(this._userManager.signinSilentCallback()).pipe(map((user: User | undefined) => {
       if (user) {
-        this.user = user;
+        this._user = user;
       }
-      this.userSubject.next(this.user);
-      this.userSubject.complete();
+      this._userSubject.next(this._user);
+      this._userSubject.complete();
       return user;
     }, (error: any) => {
       throwError(error);
