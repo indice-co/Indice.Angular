@@ -89,15 +89,12 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.sortdir = params.get('dir');
       }
     });
-    
     // just to sync params in query
     this.setRouteParams(true);
     this.load();
   }
 
   private setRouteParams(locationChange: boolean = false): void {
-    console.log(this.sortdir);
-    
     this.router$.navigate([], {
       relativeTo: this.route$, queryParams: {
         view: this.view,
