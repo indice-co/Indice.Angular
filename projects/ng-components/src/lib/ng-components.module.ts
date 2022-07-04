@@ -53,6 +53,8 @@ import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.com
 import { ShellSidebarHeaderComponent } from './layouts/shell/shell-sidebar-header/shell-sidebar-header.component';
 import { ShellSidebarLayoutComponent } from './layouts/shell/shell-sidebar-layout/shell-sidebar-layout.component';
 import { ShellStackedLayoutComponent } from './layouts/shell/shell-stacked-layout/shell-stacked-layout.component';
+import { AdvancedSearchComponent } from './controls/advanced-search/advanced-search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -112,12 +114,14 @@ import { ShellStackedLayoutComponent } from './layouts/shell/shell-stacked-layou
     LibStepInfoDirective,
     ShellSidebarHeaderComponent,
     ShellSidebarLayoutComponent,
-    ShellStackedLayoutComponent
+    ShellStackedLayoutComponent,
+    AdvancedSearchComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    IndiceAuthModule
+    IndiceAuthModule,
+    FormsModule
   ],
   exports: [
     AddressPipe,
