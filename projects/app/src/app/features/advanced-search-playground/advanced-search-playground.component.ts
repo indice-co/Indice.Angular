@@ -1,11 +1,11 @@
 import { delay } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IResultSet, ListViewType, MenuOption } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
 import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
 import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-list.component';
+import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src/public-api';
 
 @Component({
   selector: 'app-advanced-search-playground',

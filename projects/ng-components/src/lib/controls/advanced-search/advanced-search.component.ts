@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MenuOption } from '@indice/ng-components';
+import { MenuOption } from '../../types';
 import { SearchOption, FilterClause, QueryParameters, Operators } from './models';
 
 @Component({
