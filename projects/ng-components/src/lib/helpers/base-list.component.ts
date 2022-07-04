@@ -1,5 +1,4 @@
-import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
-import { FilterClause, QueryParameters } from './../controls/advanced-search/models';
+import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
 import { Observable, Subscription, of } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
