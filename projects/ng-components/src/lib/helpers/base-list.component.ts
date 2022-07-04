@@ -1,5 +1,4 @@
-import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
-import { FilterClause, QueryParameters } from './../controls/advanced-search/models';
+import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
 import { Observable, Subscription, of } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -20,7 +19,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public sortdir: string | null = '';
   public search: string | null = '';
   public filters: FilterClause[] = [];
-  public searchOptions?: SearchOption[] = [];
+  public searchOptions: SearchOption[] = [];
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
