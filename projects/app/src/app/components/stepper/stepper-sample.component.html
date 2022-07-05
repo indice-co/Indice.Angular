@@ -1,14 +1,14 @@
 <div class="mt-4">
     <select class="mb-2" (change)="onStepperTypeChange($event)">
-        <option [value]="'Bullets'">Bullets</option>
-        <option [value]="'BulletsAndText'">Bullets And Text</option>
-        <option [value]="'Circles'">Circles</option>
-        <option [value]="'Panels'">Panels</option>
-        <option [value]="'PanelsWithBorder'" selected>Panels With Border</option>
-        <option [value]="'Progress'">Progress</option>
-        <option [value]="'Simple'">Simple</option>
+        <option [value]="'Bullets'" [selected]="selectedStepperType === stepperType.Bullets">Bullets</option>
+        <option [value]="'BulletsAndText'" [selected]="selectedStepperType === stepperType.BulletsAndText">Bullets And Text</option>
+        <option [value]="'Circles'" [selected]="selectedStepperType === stepperType.Circles">Circles</option>
+        <option [value]="'Panels'" [selected]="selectedStepperType === stepperType.Panels">Panels</option>
+        <option [value]="'PanelsWithBorder'" [selected]="selectedStepperType === stepperType.PanelsWithBorder">Panels With Border</option>
+        <option [value]="'Progress'" [selected]="selectedStepperType === stepperType.Progress">Progress</option>
+        <option [value]="'Simple'" [selected]="selectedStepperType === stepperType.Simple">Simple</option>
     </select>
-    <lib-stepper [linear]="true" [type]="stepperType" (stepChanged)="onStepperStepChanged($event)" #sampleStepper>
+    <lib-stepper [linear]="true" [type]="selectedStepperType" (stepChanged)="onStepperStepChanged($event)" (completed)="onStepperCompleted()" #sampleStepper>
         <lib-step>
             <ng-template libStepLabel>Step 1</ng-template>
             <ng-template libStepInfo>Step 1 sub title</ng-template>
@@ -43,28 +43,32 @@
         <lib-step>
             <ng-template libStepLabel>Step 3</ng-template>
             <ng-template libStepInfo>Step 3 sub title</ng-template>
-            <b>You can add as many step as you like.</b>
-            <br>
-            <p>Content can be anything</p>
-            <div class="inline-flex rounded-md shadow mt-2">
-                <button (click)="sampleStepper.goToNextStep()" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                    Go to next step
-                </button>
+            <div class="mt-4">
+                <b>You can add as many step as you like.</b>
+                <br>
+                <p>Content can be anything</p>
             </div>
         </lib-step>
         <lib-step>
-            <ng-template libStepLabel>Final steo</ng-template>
+            <ng-template libStepLabel>Final step</ng-template>
             <ng-template libStepInfo>Step 4 sub title</ng-template>
             <div class="px-4 space-y-2 pb-4 mt-4">
                 <p>Let's hear a nice song now</p>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/B32yjbCSVpU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
-                <div class="inline-flex rounded-md shadow mt-2">
-                    <button (click)="sampleStepper.goToPreviousStep()" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                        Go to previous step
-                    </button>
-                </div>
             </div>
         </lib-step>
     </lib-stepper>
+    <div class="p-5">
+        <div class="flex justify-end">
+            <button type="button" (click)="sampleStepper.goToPreviousStep()" *ngIf="sampleStepper.canGoBack"
+                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Previous
+            </button>
+            <button type="submit" (click)="sampleStepper.goToNextStep()" *ngIf="sampleStepper.canGoForward || sampleStepper.currentStep?.isLast"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                {{ sampleStepper.currentStep?.isLast ? 'Complete' : 'Next' }}
+            </button>
+        </div>
+    </div>
 </div>

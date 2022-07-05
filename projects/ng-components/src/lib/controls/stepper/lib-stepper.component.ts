@@ -1,4 +1,4 @@
-import { Component, ContentChildren, EventEmitter, forwardRef, Input, OnInit, Output, QueryList } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, Input, OnInit, Output, QueryList } from '@angular/core';
 
 import { LibStepComponent, StepState } from './lib-step.component';
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -12,16 +12,19 @@ import { StepSelectedEvent } from './types/step-selected-event';
         { provide: LIBSTEPPER_ACCESSOR, useExisting: forwardRef(() => LibStepperComponent) }
     ]
 })
-export class LibStepperComponent implements OnInit {
+export class LibStepperComponent implements OnInit, AfterViewChecked {
     // Private properties.
     private _currentStepIndex: number = 0;
+    private _isCompleted = false;
 
-    constructor() { }
+    constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
     /** The inner steps of the wizard. */
     @ContentChildren(LibStepComponent, { descendants: true }) public steps!: QueryList<LibStepComponent>;
     /** Emmited when a step change occurs. */
     @Output() public readonly stepChanged = new EventEmitter<StepSelectedEvent>();
+    /** Emmited when the stepper navigates away from the final step. Only emits once. */
+    @Output() public readonly completed = new EventEmitter<void>();
     /** Indicates whether each step has to be validated before proceeding to the next. */
     @Input() public linear: boolean = false;
     /** The type of the stepper. */
@@ -39,12 +42,34 @@ export class LibStepperComponent implements OnInit {
         return this._currentStepIndex;
     }
 
+    /** Indicates whether stepper can go a step back. */
+    public get canGoBack(): boolean {
+        return this._currentStepIndex > 0;
+    }
+
+    /** Indicates whether stepper can go a step forward. */
+    public get canGoForward(): boolean {
+        return this._currentStepIndex < this.steps?.length - 1;
+    }
+
+    /** Indicates whether  */
+    public get isCompleted(): boolean {
+        return this._isCompleted;
+    }
+
     public ngOnInit(): void { }
+
+    public ngAfterViewChecked(): void {
+        this._changeDetectorRef.detectChanges();
+    }
 
     /** Proceeds to the next step, if any. */
     public goToNextStep(): void {
-        // Cannot go forward.
-        if (this._currentStepIndex === this.steps.length - 1) {
+        if (this.currentStep?.isLast && !this._isCompleted) {
+            this._isCompleted = true;
+            this.completed.emit();
+        }
+        if (!this.canGoForward) {
             return;
         }
         this.updateCurrentStepIndex(this._currentStepIndex + 1);
@@ -52,8 +77,7 @@ export class LibStepperComponent implements OnInit {
 
     /** Proceeds to the previous step, if any. */
     public goToPreviousStep(): void {
-        // Cannot go back.
-        if (this._currentStepIndex === 0) {
+        if (!this.canGoBack) {
             return;
         }
         this.updateCurrentStepIndex(this._currentStepIndex - 1);

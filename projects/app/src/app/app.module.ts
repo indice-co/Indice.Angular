@@ -28,6 +28,7 @@ import { ShellSamplesListComponent } from './features/shell/shell-samples-list/s
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SampleTabsComponent,
     ShellSamplesListComponent,
     ToasterSampleComponent,
-    ViewLayoutsListComponent
+    ViewLayoutsListComponent,
+    AdvancedSearchPlaygroundComponent
   ],
   imports: [
     AppRoutingModule,

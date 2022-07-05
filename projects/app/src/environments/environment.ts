@@ -5,12 +5,14 @@
 export const environment = {
   production: false,
   api_base_url: 'https://identity.indice.gr',
+  // api_base_url: 'https://localhost:2000',
   api_docs: '',
   auth_settings: {
     accessTokenExpiringNotificationTime: 60,
     authority: 'https://identity.indice.gr',
+    // authority: 'https://localhost:2000',
     automaticSilentRenew: true,
-    client_id: 'indice-ng-sample-app',
+    client_id: 'backoffice-ui',
     filterProtocolClaims: true,
     loadUserInfo: true,
     monitorSession: true,

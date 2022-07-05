@@ -1,4 +1,13 @@
 @import './assets/styles/avatar-initials.css';
+@import './assets/styles/toggle.css';
+@import './assets/styles/modal.css';
+@import './assets/styles/tab-group.css';
+
+@import './assets/styles/shell-sidebar.css';
+@import './assets/styles/shell-sidebar-header.css';
+@import './assets/styles/shell-sidebar-layout.css';
+
+@import './assets/styles/notifications-indicator.component.css';
 @import './assets/styles/base.css';
 @import './assets/styles/cards.css';
 @import './assets/styles/collapsible-panel.css';
@@ -13,9 +22,11 @@
 @import './assets/styles/nav-links.css';
 @import './assets/styles/notifications-indicator.component.css';
 @import './assets/styles/pager.css';
+@import './assets/styles/advanced-search.css';
 @import './assets/styles/shell-layout.css';
 @import './assets/styles/side-pane.css';
 @import './assets/styles/side-view-layout.css';
+@import './assets/styles/stepper.css';
 @import './assets/styles/tab-group.css';
 @import './assets/styles/toast.css';
 @import './assets/styles/toggle.css';

@@ -39,12 +39,12 @@ export class LibStepComponent {
 
     /** Indicates the index of the step. */
     public get index(): number {
-        return this._stepper?.steps.toArray().indexOf(this);
+        return this._stepper ? this._stepper.steps.toArray().indexOf(this) : -1;
     }
 
     /** Indicates whether this step is the last step. */
     public get isLast(): boolean {
-        return this._stepper?.steps.length - 1 === this.index;
+        return this._stepper ? this._stepper.steps.length - 1 === this.index : false;
     }
 
     /** Indicates whether you can navigate to the step or not. */

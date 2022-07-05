@@ -24,7 +24,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
   @Input('show-alerts') showAlerts: boolean | undefined = false;
   // tslint:disable-next-line:no-input-rename
-  @Input('shell-layout') shellLayout: ShellLayoutType | undefined = ShellLayoutType.Stacked;
+  @Input('show-langs') showLangs: boolean | undefined = false;
   @Input() border = true;
   public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;

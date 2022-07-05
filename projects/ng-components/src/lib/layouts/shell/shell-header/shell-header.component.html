@@ -1,14 +1,14 @@
 <nav>
   <div class="shell-header-paddings">
-    <div [class]="border ? 'shell-header-border' : ''">
+    <div class="shell-header-border">
       <div class="shell-header-menu-container">
-        <div *ngIf="shellLayout==='Stacked'" class="shell-header-logo-container">
+        <div class="shell-header-logo-container">
           <div>
             <a href="#" [routerLink]="['/']"><img class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>
           </div>
         </div>
 
-        <div *ngIf="shellLayout==='Stacked'" class="shell-header-link-container">
+        <div class="shell-header-link-container">
           <div class="shell-header-link-container-inner">
             <lib-nav-links-list
               [links]="sectionLinks"
@@ -32,23 +32,23 @@
 
 
             <!-- Profile dropdown -->
-            <div *ngIf="profileMenuVisible" class="ml-2">
+            <div *ngIf="profileMenuVisible" class="ml-4">
               <lib-user-profile-menu [show-user-name]="showUserNameOnHeader"></lib-user-profile-menu>
             </div>
 
             <!-- Notifications dropdown -->
-            <div *ngIf="showAlerts && user" class="ml-2">
+            <div *ngIf="showAlerts && user" class="ml-4">
               <lib-notifications-indicator></lib-notifications-indicator>
             </div>
 
             <!-- languages dropdown -->
-            <div *ngIf="config.showLangsOnHeader" class="ml-2">
+            <div *ngIf="showLangs" class="ml-4">
               <lib-language-selection></lib-language-selection>
             </div>
           </div>
         </div>
 
-        <div class="mobile-menu-button-container" *ngIf="shellLayout === 'Stacked'">
+        <div class="mobile-menu-button-container">
           <!-- Mobile menu button -->
           <button type="button"
                   (click)="mobileMenuExpanded = !mobileMenuExpanded"
@@ -82,7 +82,6 @@
             </svg>
           </button>
         </div>
-
       </div>
     </div>
   </div>
