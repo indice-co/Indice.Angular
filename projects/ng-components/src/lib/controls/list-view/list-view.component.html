@@ -162,9 +162,9 @@
 
 <ng-content></ng-content>
 
-<div class="pt-2 px-2">
-
+<div class="px-2">
   <lib-pager *ngIf="items && items.length !== 0 && showPager && (pagerPosition == 'bottom' || pagerPosition == 'both')"
+             class="pt-2"
              [page]="page"
              [page-size]="pageSize"
              [count]="count"
