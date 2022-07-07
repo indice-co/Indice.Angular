@@ -9,6 +9,7 @@ export class KpiTileComponent implements OnInit {
   @Input() title: string | undefined = undefined;
   @Input() busy = false;
   @Input() kpi: any | undefined = undefined;
+  @Input() hideBtn: boolean | undefined = false;
   // tslint:disable-next-line:no-output-rename
   @Output('tile-action') tileAction: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
