@@ -15,10 +15,12 @@ import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-pla
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
 import { SampleStepperComponent } from './components/stepper/stepper-sample.component';
+import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
+
 
 const customHeaderShellConfig: IShellConfig = {
   fluid: false,
@@ -48,7 +50,17 @@ const routes: Routes = [
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'samples/shell-layout', pathMatch: 'full', component: ShellSamplesListComponent, canActivate: [AuthGuardService], data: { register: true } },
   {
-    path: 'samples/inbox', pathMatch: 'full', component: InboxComponent, children: [
+    path: 'samples/shell-layout',
+    pathMatch: 'full',
+    component: ShellSamplesListComponent,
+    canActivate: [AuthGuardService],
+    // data: { register: true }
+  },
+  {
+    path: 'samples/inbox',
+    pathMatch: 'full',
+    component: InboxComponent,
+    children: [
       { path: 'view/:id', component: InboxItemComponent, outlet: 'rightpane' }
     ]
   },
@@ -80,6 +92,12 @@ const routes: Routes = [
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
   { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
   { path: 'samples/stepper', pathMatch: 'full', component: SampleStepperComponent },
+  // ADVANCED SEARCH!
+  {
+    path: 'samples/advanced-search-playground',
+    pathMatch: 'full',
+    component: AdvancedSearchPlaygroundComponent,
+  },
   // not found
   {
     path: '**',

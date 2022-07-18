@@ -47,6 +47,8 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
       this.notifications.inboxAction();
     } else {
       this.menuExpanded = !this.menuExpanded;
+      this.ngOnDestroy();
+      this.ngOnInit();
     }
     this.unreadCount = 0;
   }

@@ -48,6 +48,10 @@ export class AuthService {
     return this.getUserProfile()?.email;
   }
 
+  public hasVerifiedEmail(): boolean | undefined {
+    return this.getUserProfile()?.email_verified;
+  }
+
   public getSubjectId(): string | undefined {
     return this.getUserProfile()?.sub;
   }
@@ -113,7 +117,7 @@ export class AuthService {
   public signinRedirect(signInRedirectOptions?: SignInRedirectOptions): void {
     const authorizeArgs: any = {};
     if (signInRedirectOptions?.location) {
-      authorizeArgs['data'] = { url: location };
+      authorizeArgs['data'] = { url: signInRedirectOptions.location };
     }
     if (signInRedirectOptions?.promptRegister === true) {
       authorizeArgs['extraQueryParams'] = { operation: 'register' };
