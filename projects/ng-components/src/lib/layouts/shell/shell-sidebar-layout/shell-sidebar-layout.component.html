@@ -53,7 +53,8 @@
     </div>
 
     <div class="sidebar-static-menu-wrapper" [class.sidebar-static-menu-wrapper-active]="showMobileSidebar">
-      <div class="sidebar-static-menu-toggle-button-container">
+      
+      <div class="sidebar-static-menu-sticky-header-container" *ngIf="config?.showHeader">
         <button type="button" class="sidebar-static-menu-toggle-button" (click)="showMobileSidebar = !showMobileSidebar">
           <span class="sr-only">Toggle sidebar</span>
           <!-- Heroicon name: outline/menu-alt-2 -->

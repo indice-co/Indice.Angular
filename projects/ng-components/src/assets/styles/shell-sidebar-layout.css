@@ -88,7 +88,7 @@
     @apply sm:pl-64;
   }
 
-  .sidebar-static-menu-toggle-button-container {
+  .sidebar-static-menu-sticky-header-container {
     @apply sticky top-0 z-10 flex-shrink-0 flex h-16 bg-gray-900 shadow;
   }
 
