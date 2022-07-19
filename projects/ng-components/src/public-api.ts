@@ -5,6 +5,8 @@ export * from './lib/directives/click-outside.directive';
 // controls
 export * from './lib/controls/drop-down-menu/drop-down-menu.component';
 export * from './lib/controls/pager/pager.component';
+export * from './lib/controls/breadcrumb/breadcrumb.component';
+export * from './lib/controls/breadcrumb/breadcrumb-item';
 export * from './lib/controls/list-view/list-view.component';
 export * from './lib/controls/list-view/list-column.component';
 export * from './lib/controls/list-view/list-tile.component';
@@ -67,5 +69,6 @@ export * from './lib/services/modal-service/modal-service';
 export { ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE, CloseInterceptorFn } from './lib/services/modal-service/modal-options.class';
 export * from './lib/services/modal-service/modal.class';
 export * from './lib/services/toaster.service';
+export * from './lib/services/breadcrumb.service';
 
 export * from './lib/ng-components.module';
