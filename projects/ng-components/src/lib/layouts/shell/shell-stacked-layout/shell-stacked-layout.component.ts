@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { IShellConfig } from '../../../types';
 
 @Component({
@@ -6,10 +7,9 @@ import { IShellConfig } from '../../../types';
   templateUrl: './shell-stacked-layout.component.html'
 })
 export class ShellStackedLayoutComponent implements OnInit {
-  @Input() config: IShellConfig | undefined;
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  @Input() config: IShellConfig | undefined;
 
+  public ngOnInit(): void { }
 }

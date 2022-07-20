@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { NavigationEnd, Route, Router } from '@angular/router';
 
+import { SHELL_CONFIG } from '@indice/ng-components';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { BreadcrumbItem } from '../controls/breadcrumb/breadcrumb-item';
+import { UtilitiesService } from './utilities.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,20 +15,23 @@ export class BreadcrumbService {
     private _breadcrumb$: Subject<BreadcrumbItem[]> = new Subject<BreadcrumbItem[]>();
 
     constructor(
-        private _router: Router
+        private _router: Router,
+        private _utilities: UtilitiesService,
+        @Optional() @Inject(SHELL_CONFIG) public _shellConfig?: any
     ) {
-        this._defaultHome = this._getDefaultHomeItem();
-        this._router
-            .events
-            .pipe(
-                filter(event => event instanceof NavigationEnd),
-                distinctUntilChanged(),
-                map(_ => {
+        if (_shellConfig?.breadcrumb) {
+            this._defaultHome = this._getDefaultHomeItem();
+            this._router
+                .events
+                .pipe(
+                    filter(event => event instanceof NavigationEnd),
+                    distinctUntilChanged()
+                )
+                .subscribe(_ => {
                     const breadcrumb = [...this._buildBreadcrumb()];
                     this._breadcrumb$.next(breadcrumb);
-                })
-            )
-            .subscribe();
+                });
+        }
     }
 
     public breadcrumb: Observable<BreadcrumbItem[]> = this._breadcrumb$.asObservable();
@@ -36,7 +41,9 @@ export class BreadcrumbService {
         if (this._defaultHome) {
             breadcrumb.push(this._defaultHome);
         }
-        const activeRoute = this._findActiveRoute(this._router.url);
+        const url = this._router.url;
+        const path = this._utilities.getPathFromUrl(url) || '';
+        const activeRoute = this._findActiveRoute(path);
         const parentRoutes = this._findParentRoutes(activeRoute);
         breadcrumb.push(...parentRoutes);
         if (activeRoute && activeRoute?.path !== this._defaultHome?.url) {

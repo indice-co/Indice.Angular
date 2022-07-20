@@ -22,20 +22,22 @@ import { ToasterSampleComponent } from './features/controls/toaster-sample/toast
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
 
 const customHeaderShellConfig: IShellConfig = {
+  appLogo: '',
+  appLogoAlt: '',
+  breadcrumb: true,
+  customHeaderComponent: HeaderComponent,
   fluid: false,
   showFooter: false,
   showHeader: true,
-  customHeaderComponent: HeaderComponent,
-  appLogo: '',
-  appLogoAlt: ''
 };
 
 const fluidShellConfig: IShellConfig = {
+  appLogo: '',
+  appLogoAlt: '',
+  breadcrumb: true,
   fluid: true,
   showFooter: false,
-  showHeader: false,
-  appLogo: '',
-  appLogoAlt: ''
+  showHeader: false
 };
 
 const routes: Routes = [

@@ -93,7 +93,7 @@
     </div>
     <div flex-1>
       <main class="shell-content-container-fluid">
-        <lib-breadcrumb></lib-breadcrumb>
+        <lib-breadcrumb *ngIf="config?.breadcrumb || false"></lib-breadcrumb>
         <div class="shell-content-container-inner">
           <router-outlet *ngIf="(config && config.layout === 'Sidebar')"></router-outlet>
         </div>
