@@ -1,7 +1,9 @@
 <div class="relative" (clickOutside)="onClickOutside($event)">
   <button class="text-blue-300 hover:text-blue-400" (click)="menuExpanded = !menuExpanded">
     <i class="text-xs mr-1 ms-Icon ms-Icon--Globe"></i>
-    <span>{{langsService?.selected || langsService?.default}}</span>
+    <ng-container *ngFor="let lang of langsService?.options | async">
+      <span *ngIf="lang.value === langsService?.selected">{{lang.text || langsService?.default}}</span>
+    </ng-container>
   </button>
 
   <div
