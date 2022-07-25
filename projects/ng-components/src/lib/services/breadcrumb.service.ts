@@ -43,32 +43,63 @@ export class BreadcrumbService {
         }
         const url = this._router.url;
         const path = this._utilities.getPathFromUrl(url) || '';
-        const activeRoute = this._findActiveRoute(path);
+        const activeRoute = this._findRouteFromUrl(path);
         const parentRoutes = this._findParentRoutes(activeRoute);
         breadcrumb.push(...parentRoutes);
         if (activeRoute && activeRoute?.path !== this._defaultHome?.url) {
             breadcrumb.push(new BreadcrumbItem(this._getRouteTitle(activeRoute), activeRoute.path || ''));
         }
-        return breadcrumb;
+        return breadcrumb.map((route: BreadcrumbItem) => {
+            const routeSegments = route.url?.split('/') || [];
+            routeSegments.forEach((segment: string, index: number) => {
+                if (segment.startsWith(':')) {
+                    route.url = route.url?.replace(segment, url.split('/')[index + 1]);
+                }
+            });
+            return route;
+        });
     }
 
-    private _findActiveRoute(url: string): Route | undefined {
+    private _findRouteFromUrl(url: string): Route | undefined {
         const urlSegments = url.split('/').filter((segment: string) => segment !== '');
         const routerConfig = this._router.config;
-        return routerConfig
-            .filter((route: Route) => route.path?.split('/').length === urlSegments.length)
-            .find((route: Route) => {
-                const routeSegments = route.path?.split('/') || [];
-                let segmentsMatched = false;
-                for (let i = 0; i < routeSegments.length; i++) {
-                    const currentSegment = routeSegments[i];
-                    const isDynamicSegment = currentSegment.startsWith(':');
-                    if (!isDynamicSegment) {
-                        segmentsMatched = currentSegment === urlSegments[i];
-                    }
+        const flattenedRouterConfig = this._flattenRoutes(routerConfig);
+        const filteredRouterConfig = flattenedRouterConfig.filter((route: Route) => route.path?.split('/').length === urlSegments.length);
+        const route = filteredRouterConfig.find((route: Route) => {
+            const routeSegments = route.path?.split('/') || [];
+            let segmentsMatched = false;
+            for (let i = 0; i < routeSegments.length; i++) {
+                const currentSegment = routeSegments[i];
+                const isDynamicSegment = currentSegment.startsWith(':');
+                if (!isDynamicSegment) {
+                    segmentsMatched = currentSegment === urlSegments[i];
                 }
-                return segmentsMatched ? route : undefined;
-            });
+            }
+            return segmentsMatched ? route : undefined;
+        });
+        return route;
+    }
+
+    private _flattenRoutes(routes: Route[], level?: number): Route[] {
+        let children: Route[] = [];
+        level = level || 0;
+        return routes.map((route: Route) => {
+            if (route.data?.breadcrumb) {
+                route.data.breadcrumb._level = level;
+            } else if (!route.data) {
+                route.data = { breadcrumb: { _level: level } };
+            } else {
+                route.data.breadcrumb = { _level: level };
+            }
+            if (route.children && route.children.length) {
+                route.children.forEach((child: Route) => {
+                    const childPath = child.path?.endsWith('/') ? child.path.slice(0, -1) : child.path;
+                    child.path = child.path?.indexOf(route.path || '') === -1 ? `${route.path}/${childPath}` : childPath;
+                });
+                children = [...children, ...route.children];
+            }
+            return route;
+        }).concat(children.length ? this._flattenRoutes(children, level + 1) : children);
     }
 
     private _findParentRoutes(activeRoute: Route | undefined, items: BreadcrumbItem[] = []): BreadcrumbItem[] {
@@ -80,8 +111,8 @@ export class BreadcrumbService {
             return [...items];
         }
         const previousUrl = urlSegments.slice(0, -1).join('/');
-        const route = this._findActiveRoute(previousUrl);
-        if (route) {
+        const route = this._findRouteFromUrl(previousUrl);
+        if (route && (route.data?.breadcrumb._level > 0 || (!route.children || route.children.length === 0))) {
             items.push(new BreadcrumbItem(this._getRouteTitle(route), route.path || ''));
             this._findParentRoutes(route, [...items]);
         }

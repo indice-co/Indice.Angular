@@ -13,12 +13,15 @@ import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, Indi
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { DepthComponent } from './components/depth/depth.component';
+import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
 import { environment } from './../environments/environment';
 import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
+import { MoreDetailsComponent } from './components/depth/more-details/more-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SampleAppShellConfig } from './app-shell-config';
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
@@ -29,6 +32,7 @@ import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
+import { MoreDetailsSubComponent } from './components/depth/more-details/sub/more-details-sub.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +41,15 @@ import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-l
     ControlsSamplesListComponent,
     CustomHeaderSampleComponent,
     DashboardComponent,
+    DepthComponent,
+    DepthDetailsComponent,
     FluidShellSampleComponent,
     HeaderComponent,
     InboxComponent,
     InboxItemComponent,
     ModalPlayGroundComponent,
+    MoreDetailsComponent,
+    MoreDetailsSubComponent,
     SampleComboboxComponent,
     SampleInfoComponent,
     SampleModalComponent,
