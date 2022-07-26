@@ -1,10 +1,10 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { Data, NavigationEnd, Route, Router } from '@angular/router';
 
-import { SHELL_CONFIG } from '@indice/ng-components';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { BreadcrumbItem } from '../controls/breadcrumb/breadcrumb-item';
+import { SHELL_CONFIG } from '../tokens';
 import { UtilitiesService } from './utilities.service';
 
 @Injectable({
