@@ -1,12 +1,16 @@
 
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AddressPipe } from './pipes/address.pipe';
+import { AdvancedSearchComponent } from './controls/advanced-search/advanced-search.component';
 import { AuthCallbackComponent } from './pages/auth/auth-callback/auth-callback.component';
 import { AuthRenewComponent } from './pages/auth/auth-renew/auth-renew.component';
 import { AvatarInitialsComponent } from './controls/avatar-initials/avatar-initials.component';
+import { BreadcrumbComponent } from './controls/breadcrumb/breadcrumb.component';
+import { BreadcrumbService } from './services/breadcrumb.service';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 import { ComboboxComponent } from './controls/combobox/combobox.component';
@@ -40,6 +44,9 @@ import { ShellFooterComponent } from './layouts/shell/shell-footer/shell-footer.
 import { ShellHeaderComponent } from './layouts/shell/shell-header/shell-header.component';
 import { ShellLayoutComponent } from './layouts/shell/shell-layout/shell-layout.component';
 import { ShellSidebarComponent } from './layouts/shell/shell-sidebar/shell-sidebar.component';
+import { ShellSidebarHeaderComponent } from './layouts/shell/shell-sidebar-header/shell-sidebar-header.component';
+import { ShellSidebarLayoutComponent } from './layouts/shell/shell-sidebar-layout/shell-sidebar-layout.component';
+import { ShellStackedLayoutComponent } from './layouts/shell/shell-stacked-layout/shell-stacked-layout.component';
 import { SidePaneComponent } from './controls/side-pane/side-pane.component';
 import { SideViewLayoutComponent } from './layouts/views/side-view-layout/side-view-layout.component';
 import { SkeletonLoaderComponent } from './controls/skeleton-loader/skeleton-loader.component';
@@ -50,72 +57,59 @@ import { ToggleComponent } from './controls/toggle/toggle.component';
 import { UnauthorizedComponent } from './pages/http-status/unauthorized/unauthorized.component';
 import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
 import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.component';
-import { ShellSidebarHeaderComponent } from './layouts/shell/shell-sidebar-header/shell-sidebar-header.component';
-import { ShellSidebarLayoutComponent } from './layouts/shell/shell-sidebar-layout/shell-sidebar-layout.component';
-import { ShellStackedLayoutComponent } from './layouts/shell/shell-stacked-layout/shell-stacked-layout.component';
-import { AdvancedSearchComponent } from './controls/advanced-search/advanced-search.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    // Directives
-    ClickOutsideDirective,
-    DynamicComponentHostDirective,
-    // Controls
-    DropDownMenuComponent,
-    PagerComponent,
-    ListViewComponent,
-    ListColumnComponent,
-    ListTileComponent,
-    ListDetailsSectionComponent,
-    ListViewEmptyStateComponent,
-    SkeletonLoaderComponent,
-    CollapsiblePanelComponent,
-    KpiTileComponent,
-    SidePaneComponent,
-    DatepickerComponent,
-    AvatarInitialsComponent,
-    ToggleComponent,
-    ComboboxComponent,
-    // Toaster
-    ToasterContainerComponent,
-    ToasterComponent,
-    // Shell Layout
-    ShellLayoutComponent,
-    ShellHeaderComponent,
-    ShellFooterComponent,
-    // View Layouts
-    ViewLayoutComponent,
-    SideViewLayoutComponent,
-    ModelViewLayoutComponent,
-    FormLayoutComponent,
-    // Pages (common)
+    AddressPipe,
+    AdvancedSearchComponent,
     AuthCallbackComponent,
     AuthRenewComponent,
-    LoggedOutComponent,
-    ErrorComponent,
-    PageNotFoundComponent,
-    UnauthorizedComponent,
-    // Pipes
-    AddressPipe,
+    AvatarInitialsComponent,
+    BreadcrumbComponent,
+    ClickOutsideDirective,
+    CollapsiblePanelComponent,
+    ComboboxComponent,
+    DatepickerComponent,
+    DropDownMenuComponent,
     DurationFormatPipe,
-    NavLinksListComponent,
-    NotificationsIndicatorComponent,
+    DynamicComponentHostDirective,
+    ErrorComponent,
+    FormLayoutComponent,
+    KpiTileComponent,
     LanguageSelectionComponent,
-    UserProfileMenuComponent,
-    ShellSidebarComponent,
-    // Tab Group Component
+    LibStepComponent,
+    LibStepInfoDirective,
+    LibStepLabelDirective,
+    LibStepperComponent,
     LibTabComponent,
     LibTabGroupComponent,
-    // Stepper Component
-    LibStepperComponent,
-    LibStepComponent,
-    LibStepLabelDirective,
-    LibStepInfoDirective,
+    ListColumnComponent,
+    ListDetailsSectionComponent,
+    ListTileComponent,
+    ListViewComponent,
+    ListViewEmptyStateComponent,
+    LoggedOutComponent,
+    ModelViewLayoutComponent,
+    NavLinksListComponent,
+    NotificationsIndicatorComponent,
+    PageNotFoundComponent,
+    PagerComponent,
+    ShellFooterComponent,
+    ShellHeaderComponent,
+    ShellLayoutComponent,
+    ShellSidebarComponent,
     ShellSidebarHeaderComponent,
     ShellSidebarLayoutComponent,
     ShellStackedLayoutComponent,
-    AdvancedSearchComponent
+    SidePaneComponent,
+    SideViewLayoutComponent,
+    SkeletonLoaderComponent,
+    ToasterComponent,
+    ToasterContainerComponent,
+    ToggleComponent,
+    UnauthorizedComponent,
+    UserProfileMenuComponent,
+    ViewLayoutComponent
   ],
   imports: [
     CommonModule,
@@ -128,6 +122,7 @@ import { FormsModule } from '@angular/forms';
     AuthCallbackComponent,
     AuthRenewComponent,
     AvatarInitialsComponent,
+    BreadcrumbComponent,
     ClickOutsideDirective,
     CollapsiblePanelComponent,
     ComboboxComponent,
@@ -166,11 +161,13 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class IndiceComponentsModule {
-  // tslint:disable-next-line:typedef
   static forRoot(): ModuleWithProviders<IndiceComponentsModule> {
     return {
       ngModule: IndiceComponentsModule,
-      providers: [ToasterService]
+      providers: [
+        BreadcrumbService,
+        ToasterService
+      ]
     };
   }
 }

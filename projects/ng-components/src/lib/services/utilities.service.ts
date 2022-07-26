@@ -37,4 +37,11 @@ export class UtilitiesService {
     }
     return this.validationErrors;
   }
+
+  public getPathFromUrl(url: string): string | undefined {
+    if (!url) {
+      return undefined;
+    }
+    return url.split(/[?#]/)[0];
+  }
 }

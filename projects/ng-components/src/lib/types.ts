@@ -148,17 +148,18 @@ export interface IAddress {
 }
 
 export interface IShellConfig {
-  layout?: ShellLayoutType;
   appLogo: string;
   appLogoAlt: string;
-  showHeader: boolean;
-  showUserNameOnHeader?: boolean;
-  showAlertsOnHeader?: boolean;
-  customHeaderComponent?: any;
-  showFooter: boolean;
+  breadcrumb: boolean;
   customFooterComponent?: any;
+  customHeaderComponent?: any;
   fluid: boolean;
+  layout?: ShellLayoutType;
+  showAlertsOnHeader?: boolean;
+  showFooter: boolean;
+  showHeader: boolean;
   showLangsOnHeader?: boolean;
+  showUserNameOnHeader?: boolean;
 }
 
 export enum ShellLayoutType {
@@ -167,14 +168,15 @@ export enum ShellLayoutType {
 }
 
 export class DefaultShellConfig implements IShellConfig {
-  layout = ShellLayoutType.Stacked;
   appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
   appLogoAlt = 'your app name here';
-  showHeader = true;
-  showUserNameOnHeader = false;
+  breadcrumb = false;
+  fluid = false;
+  layout = ShellLayoutType.Stacked;
   showAlertsOnHeader = false;
   showFooter = true;
-  fluid = false;
+  showHeader = true;
+  showUserNameOnHeader = false;
 }
 
 export enum SCREEN_SIZE {
@@ -198,7 +200,7 @@ export enum ToastType {
   Warning = 'warning'
 }
 
-export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
+export const NULL_TOAST = { title: '_____NULL_____' } as Toast;
 
 export interface Toast {
   type: ToastType;
@@ -208,10 +210,10 @@ export interface Toast {
 }
 
 export enum SidePaneSize {
-   Default = '',
-   Small25 = '25%',
-   Medium50 = '50%',
-   Large75 = '75%'
+  Default = '',
+  Small25 = '25%',
+  Medium50 = '50%',
+  Large75 = '75%'
 }
 
 export enum SidePaneOverlayType {
