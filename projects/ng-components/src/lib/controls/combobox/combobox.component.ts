@@ -19,6 +19,7 @@ export class ComboboxComponent implements OnInit {
     constructor() { }
 
     @Input() public id: string = 'combobox';
+    @Input() public placeholder: string | undefined;
 
     @Input('items') public set items(items: any[]) {
         if (!this.itemTemplate) {
@@ -36,17 +37,23 @@ export class ComboboxComponent implements OnInit {
         }
     }
 
-    @Input() public itemTemplate: TemplateRef<HTMLElement> | null = null;
+    @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
-    @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | null = null;
+    @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public busy: boolean = false;
+    @Input() public multiple: boolean = true;
     @Input() public debounceMs: number = 1000;
     @Output() public onSearch: EventEmitter<string | undefined> = new EventEmitter();
     @Output() public onItemSelected: EventEmitter<any> = new EventEmitter();
-    public showOptions: boolean = false;
+    public showResults: boolean = false;
     public selectedItems: any[] = [];
+    public value: string | undefined;
 
     public ngOnInit(): void {
+        if (this.itemTemplate && !this.multiple) { 
+            this.multiple = true;
+            console.warn('You cannot have a custom item template with single selection.');
+        }
         this.emitSearchEvent();
         this._debouncer
             .pipe(
@@ -57,11 +64,11 @@ export class ComboboxComponent implements OnInit {
     }
 
     public onInputClick(): void {
-        this.showOptions = true;
+        this.showResults = true;
     }
 
     public onInputClickOutside(): void {
-        this.showOptions = false;
+        this.showResults = false;
     }
 
     public onInputKeyUp(event: any): void {
@@ -70,7 +77,11 @@ export class ComboboxComponent implements OnInit {
 
     public onListItemSelected(item: any): void {
         this.onItemSelected.emit(item);
-        this.selectedItems.push(item);
+        if (this.multiple) {
+            this.selectedItems.push(item);
+        } else {
+            this.value = item;
+        }
     }
 
     public removeSelectedItem(item: any): void {
