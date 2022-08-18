@@ -1,22 +1,45 @@
 <div class="mt-4">
-    <lib-tab-group (tabChanged)="onTabChanged($event)" #tabGroup>
-        <lib-tab id="tab-one" label="First Tab">
+    <lib-tab-group (tabChanged)="onTabChanged($event)"
+                   #tabGroup>
+        <lib-tab id="tab-one"
+                 labelText="First Tab">
+            <ng-template libTabLabel>First Tab</ng-template>
             <div class="space-y-2 pb-4 mt-4">
                 This is the content of the first tab!
             </div>
         </lib-tab>
-        <lib-tab id="tab-two" label="Second Tab">
+        <lib-tab id="tab-two"
+                 labelText="Second Tab">
+            <ng-template libTabLabel>Second Tab</ng-template>
             <div class="space-y-2 pb-4 mt-4">
                 This is the content of the second tab!
             </div>
         </lib-tab>
-        <lib-tab id="tab-three" label="Third Tab">
+        <lib-tab id="tab-three"
+                 labelText="Third Tab">
+            <ng-template let-tab
+                         libTabLabel>
+                <span (click)="onTabDelete(tab)">
+                    Third Tab
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-4 w-4 inline"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </ng-template>
             <div class="space-y-2 pb-4 mt-4">
                 <b>You can add as many tabs as you like.</b>
                 <br>
                 <p>Content can be anything</p>
                 <div class="inline-flex rounded-md shadow">
-                    <a href="javascript:void(0)" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    <a href="javascript:void(0)"
+                       class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                         Get started
                     </a>
                 </div>

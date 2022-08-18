@@ -25,6 +25,7 @@ export * from './lib/controls/nav-links-list/nav-links-list.component';
 export * from './lib/controls/combobox/combobox.component';
 export * from './lib/controls/tabs/lib-tab.component';
 export * from './lib/controls/tabs/lib-tab-group.component';
+export * from './lib/controls/tabs/lib-tab-label.directive';
 export * from './lib/controls/stepper/lib-stepper.component';
 export * from './lib/controls/stepper/lib-step.component';
 export * from './lib/controls/stepper/lib-step-label.directive';

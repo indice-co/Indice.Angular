@@ -1,8 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[libStepLabel]'
+    selector: '[libTabLabel]'
 })
-export class LibStepLabelDirective {
+export class LibTabLabelDirective {
     constructor(public template: TemplateRef<any>) { }
 }
