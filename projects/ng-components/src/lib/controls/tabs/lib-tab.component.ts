@@ -31,7 +31,7 @@ export class LibTabComponent implements OnInit {
 
     /** Indicates the index of the tab. */
     public get index(): number {
-        const index = this._tabGroup?.tabs?.indexOf(this);
+        const index = this._tabGroup?.tabs.toArray()?.indexOf(this);
         return index;
     }
 

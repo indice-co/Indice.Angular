@@ -33,6 +33,6 @@
 </div>
 <ng-template let-tab
              #defaultTabLabel>
-    {{ 'tab-' + (tab.index + 1) }}
+    {{ tab.labelText || 'tab-' + (tab.index + 1) }}
 </ng-template>
 <ng-template #emptyTemplate></ng-template>
