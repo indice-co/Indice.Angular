@@ -1,5 +1,4 @@
-<div [class.none]="!loaded"
-     [class.block]="loaded">
+<div [class.hidden]="!loaded" [class.block]="loaded">
   <!-- STACKED LAYOUT -->
   <div *ngIf="(activeConfig.layout === 'Stacked' || !activeConfig.layout)"
        class="shell-container active-side-pane">
