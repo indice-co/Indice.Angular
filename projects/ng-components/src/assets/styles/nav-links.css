@@ -21,7 +21,11 @@
   }
 
   .sidebar .nav-link-list-container-inner {
-    @apply flex-1 px-2 py-4 space-y-1;
+    @apply flex-1 px-2 py-4 space-y-2;
+  }
+
+  .sidebar .nav-link-list-container-inner .icons-only {
+    @apply flex-1 px-2 py-4 space-y-4;
   }
 
   .nav-link-active {

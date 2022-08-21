@@ -3,6 +3,8 @@
  <div class="shell-sidebar-component-links-container sidebar">
     <lib-nav-links-list
       [show-icons]="true"
+      [show-text]="!sticky"
+      [large-icons]="sticky"
       [links]="sectionLinks"
       [active-fragment]="activeFragment"
       [link-class]="'sidebar nav-link group'"

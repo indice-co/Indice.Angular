@@ -12,7 +12,7 @@
   }
 
   .pager-pages-container {
-    @apply relative z-30 inline-flex rounded-sm;
+    @apply relative inline-flex rounded-sm;
   }
 
   .pager-button {

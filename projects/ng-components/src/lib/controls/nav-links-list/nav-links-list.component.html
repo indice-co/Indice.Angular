@@ -1,6 +1,6 @@
 
 <div [class]="containerClass ?? 'nav-link-list-container'">
-  <div class="nav-link-list-container-inner">
+  <div class="nav-link-list-container-inner" [class.icons-only]="!showText">
     <ng-container *ngFor="let link of links | async">
       <ng-container [ngSwitch]="link.type">
         <a *ngSwitchCase="'router'"
@@ -9,19 +9,28 @@
           [routerLinkActive]="navLinkActiveClass"
           [routerLinkActiveOptions]="{ exact: link.exact }"
           [class]="navLinkClass">
-          <i *ngIf="showIcons && link.icon" [class]="link.icon + ' mr-3'"></i>{{ link.text }}
+          <div class="inline-flex items-center">
+            <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+            <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
+          </div>
         </a>
         <a *ngSwitchCase="'external'"
           [href]="link.path"
           [attr.target]="link.external ? '_blank' : '_self'"
           [class]="navLinkClass">
-          <i *ngIf="showIcons && link.icon" [class]="link.icon+ ' mr-3'"></i>{{ link.text }}
+          <div class="inline-flex items-center">
+          <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+          <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
+        </div>
         </a>
         <a *ngSwitchCase="'fragment'"
           routerLink="."
           [fragment]="link.path"
           [class]="fragmentValue === link.path ? navLinkClass + ' ' + navLinkActiveClass : navLinkClass">
-          <i *ngIf="showIcons && link.icon" [class]="link.icon+ ' mr-3'"></i>{{ link.text }}
+          <div class="inline-flex items-center">
+            <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+            <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
+          </div>
         </a>
       </ng-container>
     </ng-container>

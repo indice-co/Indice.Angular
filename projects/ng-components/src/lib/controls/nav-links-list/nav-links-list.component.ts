@@ -19,6 +19,8 @@ export class NavLinksListComponent implements OnInit, OnDestroy {
   @Input('container-class') containerClass: string | string[] | undefined = undefined;
   // tslint:disable-next-line:no-input-rename
   @Input('show-icons') showIcons: boolean | undefined = false;
+  @Input('show-text') showText: boolean | undefined = true;
+  @Input('large-icons') largeIcons: boolean = false;
   public fragmentValue: string | undefined;
   private fragmentSub$: Subscription | undefined;
   constructor() { }

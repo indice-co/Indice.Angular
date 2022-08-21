@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { Icons } from './icons';
 
 
 export interface IAppNotifications {
@@ -47,7 +48,7 @@ export class NavLink {
 
 export class ExternalNavLink extends NavLink {
   constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
-    super(text, path, true, openInNewTab, icon);
+    super(text, path, true, openInNewTab, icon ?? Icons.External);
   }
   public type = 'external';
 }

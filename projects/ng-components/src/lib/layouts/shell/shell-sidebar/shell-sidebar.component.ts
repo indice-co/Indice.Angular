@@ -16,6 +16,7 @@ export class ShellSidebarComponent implements OnInit {
   public sectionLinks: Observable<NavLink[]> = of([]);
   // tslint:disable-next-line:no-input-rename
   @Input('config') shellConfig: IShellConfig | undefined = undefined;
+  @Input('sticky') sticky: boolean = false;
   public activeFragment: any | null = null;
   constructor(@Inject(Router) protected router: Router,
               @Inject(ActivatedRoute) protected route: ActivatedRoute,
