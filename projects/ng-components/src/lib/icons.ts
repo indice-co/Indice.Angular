@@ -40,5 +40,6 @@ export class Icons {
   public static Messages = ' ms-Icon ms-Icon--Message';
   public static MessagesUnread = ' ms-Icon ms-Icon--MessageFill';
 
-  public static External= ' ms-Icon ms-Icon--FileSymlink';
+  public static External = ' ms-Icon ms-Icon--FileSymlink';
+  public static Statistics = ' ms-Icon ms-Icon--BIDashboard';
 }

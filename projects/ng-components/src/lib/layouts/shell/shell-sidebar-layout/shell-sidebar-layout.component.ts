@@ -8,7 +8,7 @@ import { IShellConfig } from '../../../types';
 export class ShellSidebarLayoutComponent implements OnInit {
   
   @Input() config: IShellConfig | undefined;
-  public showMobileSidebar = true;
+  public showMobileSidebar = false;
   constructor() { }
 
   ngOnInit(): void {
