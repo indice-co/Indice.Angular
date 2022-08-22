@@ -3,7 +3,7 @@ export class Icons {
   public static Dashboard = `ms-Icon ms-Icon--HomeGroup `;
   public static Locations = `ms-Icon ms-Icon--MapPin `;
   public static ChargePoints = `ms-Icon ms-Icon--ChatBot `;
-  public static Transations = `ms-Icon ms-Icon--PaymentCard `;
+  public static Transations = `ms-Icon ms-Icon--LightningBolt `;
   public static Badges = `ms-Icon ms-Icon--IDBadge `;
 
   public static Information = `ms-Icon ms-Icon--Info`;

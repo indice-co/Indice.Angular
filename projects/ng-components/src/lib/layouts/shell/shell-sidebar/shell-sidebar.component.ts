@@ -18,6 +18,12 @@ export class ShellSidebarComponent implements OnInit {
   @Input('config') shellConfig: IShellConfig | undefined = undefined;
   @Input('sticky') sticky: boolean = false;
   public activeFragment: any | null = null;
+  public get activeNavLinkClass(): string {
+    const linkClasses = 'sidebar ' + (this.sticky ? 'nav-link-active-b' : 'nav-link-active-l') + ' group';
+    console.log('activeNavLinkClass getter ', linkClasses);
+    return linkClasses;
+  }
+  
   constructor(@Inject(Router) protected router: Router,
               @Inject(ActivatedRoute) protected route: ActivatedRoute,
               @Inject(APP_LINKS) public links: any) { }
@@ -26,5 +32,6 @@ export class ShellSidebarComponent implements OnInit {
     this.activeFragment = this.route.fragment.pipe(share());
     this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
   }
-
+  
+  
 }
