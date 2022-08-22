@@ -26,13 +26,9 @@
     .shell-sidebar-component-container {
         @apply flex w-full flex-col h-full min-h-0 bg-gray-800;
     }
-
-    .shell-sidebar-component-container-inner {
-        @apply flex items-center h-16 flex-shrink-0 px-4 bg-gray-900;
-    }
-    
+   
     .shell-sidebar-component-links-container {
-        @apply pt-4 px-2;
+        @apply pt-4;
     }
 
 }
