@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseListComponent, Icons, RouterViewAction, ViewAction, ListViewType } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 
 export const ShellLayoutsListSamples = [
@@ -43,12 +43,13 @@ export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel
     return of({count: 100, items }).pipe(delay(1200));
   }
 
-  ngOnInit(): void {
-    super.ngOnInit();
-    this.actions = [];
-    this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView, 'switch to tiles view'));
-    this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView, 'switch to table (grid) view'));
-    this.actions.push(new RouterViewAction(Icons.Information, 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
+  public getViewActions(): Observable<ViewAction[]> {
+    return super.getViewActions().pipe(map(actions => {
+      actions.push(new SwitchViewAction('tiles', Icons.TilesView, 'πλακίδια'));
+      actions.push(new SwitchViewAction('table', Icons.TableView, 'πίνακας'));
+      actions.push(new RouterViewAction(Icons.Information, 'samples/shell-layout/info', 'rightpane', 'Πληροφορίες'));
+      return actions;
+    }));
   }
 
 }

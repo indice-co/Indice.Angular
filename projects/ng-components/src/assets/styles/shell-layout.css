@@ -29,7 +29,7 @@
   }
 
   .shell-content-container {
-    @apply mx-auto -mt-28;
+    @apply mx-auto -mt-24;
   }
 
   .sidebar .shell-content-container {
