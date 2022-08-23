@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InboxComponent } from './inbox.component';
+import { ShellSidebarComponent } from '../lib/layouts/shell/shell-sidebar/shell-sidebar.component';
 
-describe('InboxComponent', () => {
-  let component: InboxComponent;
-  let fixture: ComponentFixture<InboxComponent>;
+describe('ShellSidebarComponent', () => {
+  let component: ShellSidebarComponent;
+  let fixture: ComponentFixture<ShellSidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InboxComponent ]
+      declarations: [ ShellSidebarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InboxComponent);
+    fixture = TestBed.createComponent(ShellSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

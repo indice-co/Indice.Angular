@@ -1,11 +1,53 @@
-<lib-view-layout title="@indice/ng-lib samples"  [meta-items]="metaItems">
-
-  <div class="cards-deck-4">
-
-    <ng-container *ngFor="let tile of tiles">
-      <lib-kpi-tile [title]="tile.text" [kpi]="tile.count" (tile-action)="navigate(tile.path)"></lib-kpi-tile>
-    </ng-container>
-
+<lib-view-layout title="@indice/ng-lib samples"
+                 [meta-items]="metaItems">
+  <div class="cards-deck-1 pb-6">
+    <div class="bg-gray-200 shadow-xl">
+      <div class="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          <span class="block">Ready to dive in?</span>
+          <span class="block">Try the new sidebar shell layout feature now!</span>
+        </h2>
+        <div class="mt-8 flex gap-4 justify-center">
+          <button (click)="switchLayout('Stacked')"
+                  type="button"
+                  class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="-ml-1 mr-3 h-5 w-5"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="2">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            Stacked layout
+          </button>
+          <button (click)="switchLayout('Sidebar')"
+                  type="button"
+                  class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="-ml-1 mr-3 h-5 w-5"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="2">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+            </svg>
+            Sidebar layout
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-
+  <div class="cards-deck-4 mb-4">
+    <ng-container *ngFor="let tile of tiles">
+      <lib-kpi-tile [title]="tile.text"
+                    [kpi]="tile.count"
+                    (tile-action)="navigate(tile.path)">
+      </lib-kpi-tile>
+    </ng-container>
+  </div>
 </lib-view-layout>

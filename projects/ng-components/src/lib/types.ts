@@ -1,9 +1,20 @@
 import { Observable } from 'rxjs';
+import { Icons } from './icons';
 
 
 export interface IAppNotifications {
   messages: Observable<IResultSet<NavLink>>;
+  getMessage?: (predicate: (value: any, index: number, obj: any[]) => any) => any | undefined;
+  markMessageRead?: (predicate: (value: any, index: number, obj: any[]) => any) => any | undefined;
+  refresh?: () => void | undefined;
   inboxAction?: () => void | undefined;
+}
+
+export interface IAppLanguagesService {
+  options: Observable<MenuOption[]> | undefined;
+  selected?: string;
+  default?: string;
+  setSelected?: (lang: string) => void | undefined;
 }
 
 export interface IAppLinks {
@@ -37,7 +48,7 @@ export class NavLink {
 
 export class ExternalNavLink extends NavLink {
   constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
-    super(text, path, true, openInNewTab, icon);
+    super(text, path, true, openInNewTab, icon ?? Icons.External);
   }
   public type = 'external';
 }
@@ -121,6 +132,12 @@ export class MenuOption {
   public icon: string | undefined;
 }
 
+export enum PagerPosition {
+  Top = 'top',
+  Bottom = 'bottom',
+  Both = 'both'
+}
+
 export interface IAddress {
   id?: string;
   street?: string | null;
@@ -134,25 +151,33 @@ export interface IAddress {
 export interface IShellConfig {
   appLogo: string;
   appLogoAlt: string;
-  showHeader: boolean;
-  showUserNameOnHeader?: boolean;
-  showAlertsOnHeader?: boolean;
-  customHeaderComponent?: any;
-  showFooter: boolean;
+  breadcrumb: boolean;
   customFooterComponent?: any;
+  customHeaderComponent?: any;
   fluid: boolean;
-  langs?: string[];
+  layout?: ShellLayoutType;
+  showAlertsOnHeader?: boolean;
+  showFooter: boolean;
+  showHeader: boolean;
+  showLangsOnHeader?: boolean;
+  showUserNameOnHeader?: boolean;
+}
 
+export enum ShellLayoutType {
+  Stacked = 'Stacked',
+  Sidebar = 'Sidebar'
 }
 
 export class DefaultShellConfig implements IShellConfig {
   appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
   appLogoAlt = 'your app name here';
-  showHeader = true;
-  showUserNameOnHeader = false;
+  breadcrumb = false;
+  fluid = false;
+  layout = ShellLayoutType.Stacked;
   showAlertsOnHeader = false;
   showFooter = true;
-  fluid = false;
+  showHeader = true;
+  showUserNameOnHeader = false;
 }
 
 export enum SCREEN_SIZE {
@@ -176,7 +201,7 @@ export enum ToastType {
   Warning = 'warning'
 }
 
-export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
+export const NULL_TOAST = { title: '_____NULL_____' } as Toast;
 
 export interface Toast {
   type: ToastType;
@@ -186,10 +211,10 @@ export interface Toast {
 }
 
 export enum SidePaneSize {
-   Default = '',
-   Small25 = '25%',
-   Medium50 = '50%',
-   Large75 = '75%'
+  Default = '',
+  Small25 = '25%',
+  Medium50 = '50%',
+  Large75 = '75%'
 }
 
 export enum SidePaneOverlayType {

@@ -104,7 +104,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1mb",
-                  "maximumError": "4mb"
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -171,7 +171,6 @@
       }
     }
   },
-  "defaultProject": "ng-auth",
   "cli": {
     "analytics": "fbb03e04-4116-41fe-aa03-eeccfcc4151e"
   }

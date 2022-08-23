@@ -1,0 +1,139 @@
+<div>
+  <div class="sidebar-off-canvas-menu-container"
+       role="dialog"
+       aria-modal="true">
+    <div class="sidebar-off-canvas-menu-backdrop"
+         [class.sidebar-off-canvas-menu-backdrop-opacity-100]="showMobileSidebar">
+    </div>
+    <div class="sidebar-off-canvas-menu-container-inner"
+         [class.sidebar-off-canvas-menu-container-inner-active]="showMobileSidebar"
+         [class.sidebar-off-canvas-menu-container-inner-not-active]="!showMobileSidebar">
+      <div class="sidebar-off-canvas-layout-container">
+        <div class="sidebar-off-canvas-toggle-button-container">
+          <button type="button"
+                  class="sidebar-off-canvas-toggle-button"
+                  (click)="showMobileSidebar = !showMobileSidebar">
+            <span class="sr-only">Close sidebar</span>
+            <!-- Heroicon name: outline/x -->
+            <svg class="h-6 w-6 text-white"
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 aria-hidden="true">
+              <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>          
+        </div>
+        <div class="sidebar-off-canvas-app-logo-container">
+          <img class="h-8 w-auto"
+               [src]="config?.appLogo"
+               [alt]="config?.appLogoAlt">
+        </div>
+        <lib-shell-sidebar></lib-shell-sidebar>
+      </div>
+      <div class="sidebar-dummy-element"
+           aria-hidden="true">
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-static-menu-outer-container">
+    <div class="sidebar-static-menu-container"
+         [class.sidebar-static-menu-container-active]="showMobileSidebar"
+         [class.sidebar-static-menu-container-not-active]="!showMobileSidebar">
+      <div class="sidebar-static-menu-container-inner">
+        <div class="sidebar-static-menu-app-logo-container">
+          <img *ngIf="showMobileSidebar" class="h-8 w-auto"
+               [src]="config?.appLogo"
+               [alt]="config?.appLogoAlt">
+          <button 
+              *ngIf="!showMobileSidebar"
+              type="button"
+              class="sidebar-static-menu-toggle-button"
+              (click)="showMobileSidebar = !showMobileSidebar">
+              <span class="sr-only">Toggle sidebar</span>
+              <svg class="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  aria-hidden="true">
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 6h16M4 12h16M4 18h7" />
+              </svg>
+            </button>
+          </div>
+          <lib-shell-sidebar [sticky]="!showMobileSidebar"></lib-shell-sidebar>
+        </div>
+    </div>
+  </div>
+  <div class="sidebar-static-menu-wrapper"
+       [class.sidebar-static-menu-wrapper-active]="showMobileSidebar">
+    <div class="sidebar-static-menu-sticky-header-container"
+         *ngIf="config?.showHeader">
+      <button *ngIf="!showMobileSidebar"
+              type="button"
+              class="sidebar-static-menu-toggle-button sm:hidden"
+              (click)="showMobileSidebar = !showMobileSidebar">
+        <span class="sr-only">Toggle sidebar</span>
+        <svg class="h-6 w-6"
+             xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="2"
+             stroke="currentColor"
+             aria-hidden="true">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+      <button *ngIf="showMobileSidebar"
+              type="button"
+              class="sidebar-static-menu-toggle-button"
+              (click)="showMobileSidebar = !showMobileSidebar">
+        <span class="sr-only">Toggle sidebar</span>
+        <svg class="h-6 w-6"
+             xmlns="http://www.w3.org/2000/svg"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke-width="2"
+             stroke="currentColor"
+             aria-hidden="true">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </button>
+      <div class="sidebar-static-menu-header-container">
+        <div class="sidebar-static-menu-header-near-container">
+          <div class="sidebar-static-menu-header-app-logo-container"
+               *ngIf="!showMobileSidebar">
+            <img class="h-8 w-auto"
+                 [src]="config?.appLogo"
+                 [alt]="config?.appLogoAlt">
+          </div>
+        </div>
+        <div class="sidebar-static-menu-header-far-container">
+          <lib-shell-sidebar-header [show-userName]="config?.showUserNameOnHeader"
+                                    [show-alerts]="config?.showAlertsOnHeader"
+                                    [show-langs]="config?.showLangsOnHeader">
+          </lib-shell-sidebar-header>
+        </div>
+      </div>
+    </div>
+    <div flex-1>
+      <main class="shell-content-container-fluid">
+        <lib-breadcrumb *ngIf="config?.breadcrumb || false"></lib-breadcrumb>
+        <div class="shell-content-container-inner">
+          <router-outlet *ngIf="(config && config.layout === 'Sidebar')"></router-outlet>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

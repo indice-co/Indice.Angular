@@ -8,6 +8,8 @@ export interface IAuthSettings {
   filterProtocolClaims: boolean;
   loadUserInfo: boolean;
   silent_redirect_uri: string;
+  extraQueryParams: any;
+  acr_values?: string;
 }
 
 export class DefaultAuthSettings implements IAuthSettings {
@@ -22,4 +24,11 @@ export class DefaultAuthSettings implements IAuthSettings {
   filterProtocolClaims = true;
   loadUserInfo = false;
   silent_redirect_uri = '';
+  extraQueryParams = {};
+}
+
+export class SignInRedirectOptions {
+  location?: string;
+  promptRegister?: boolean;
+  tenant?: string; 
 }

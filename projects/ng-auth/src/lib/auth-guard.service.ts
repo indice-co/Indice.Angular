@@ -10,20 +10,22 @@ import { AuthService } from './auth.service';
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
   constructor(@Inject(AuthService) private authService: AuthService) { }
 
-  // tslint:disable-next-line:max-line-length
   public canActivate(route: ActivatedRouteSnapshot | undefined, state: RouterStateSnapshot | undefined): Observable<boolean> | Promise<boolean> | boolean {
     const observable = this.authService.isLoggedIn();
     observable.subscribe((isLoggedIn: boolean) => {
       if (!isLoggedIn) {
-        this.authService.signinRedirect(state?.url || undefined);
+        this.authService.signinRedirect({
+          location: state?.url || undefined,
+          promptRegister: route?.data?.register || route?.firstChild?.data?.register || false,
+          tenant: 'gman'
+        });
       }
     });
     return observable;
   }
 
-  // tslint:disable-next-line:max-line-length
   public canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.canActivate(undefined, undefined);
+    return this.canActivate(childRoute, state);
   }
 
   public canLoad(): Observable<boolean> | Promise<boolean> | boolean {

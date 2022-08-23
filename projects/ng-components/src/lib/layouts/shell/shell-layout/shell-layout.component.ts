@@ -8,6 +8,7 @@ import { Subscription, timer } from 'rxjs';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 
+
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'lib-shell-layout',
@@ -20,11 +21,12 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public loaded = false;
+  public hideSidebar = false;
   constructor(
     @Inject(DOCUMENT) private document: any,
     private router: Router,
     private location: Location,
-    @Inject(SHELL_CONFIG) private config: IShellConfig | null,
+    @Inject(SHELL_CONFIG) private config: IShellConfig | undefined,
     private componentLoaderFactory: ComponentLoaderFactory
   ) {
     if (!config) {

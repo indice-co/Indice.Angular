@@ -8,11 +8,11 @@
   }
 
   .pager-icon-button {
-    @apply inline-flex relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply inline-flex relative ml-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
   }
 
   .pager-pages-container {
-    @apply relative z-30 inline-flex rounded-sm;
+    @apply relative inline-flex rounded-sm;
   }
 
   .pager-button {

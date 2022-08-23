@@ -1,3 +1,4 @@
+import { ShellLayoutType } from './../../../types';
 import { AuthService } from '@indice/ng-auth';
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { User } from 'oidc-client';
@@ -22,9 +23,8 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
   // tslint:disable-next-line:no-input-rename
   @Input('show-alerts') showAlerts: boolean | undefined = false;
-  @Input() langs: string[] | undefined;
   // tslint:disable-next-line:no-input-rename
-  @Input('current-lang') currentLang: string | undefined;
+  @Input('show-langs') showLangs: boolean | undefined = false;
   @Input() border = true;
   public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;
@@ -63,10 +63,6 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
       // console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
     });
-    // set current lang if no current value from langs if any
-    if (!this.currentLang && this.langs && this.langs.length > 0) {
-      this.setCurrentLang(this.langs[0]);
-    }
   }
 
   ngOnDestroy(): void {
@@ -82,8 +78,6 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
       this.userSub$.unsubscribe();
     }
   }
-
-
 
   // tslint:disable-next-line:typedef
   public onClickOutside($event: any) {
@@ -104,8 +98,5 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  public setCurrentLang(lang: any): void {
-    this.currentLang = lang;
-  }
 }
 

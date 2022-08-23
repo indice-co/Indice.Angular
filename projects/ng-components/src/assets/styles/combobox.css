@@ -1,0 +1,29 @@
+@layer components {
+    .combobox-wrapper {
+        @apply relative mt-1;
+    }
+
+    .combobox-input {
+        @apply w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm;
+    }
+
+    .combobox-icons {
+        @apply absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none;
+    }
+
+    .combobox-results {
+        @apply absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
+    }
+
+    .combobox-default-item-template {
+        @apply hover:bg-gray-100 relative cursor-pointer select-none py-2 pl-3 pr-3 block truncate;
+    }
+
+    .combobox-selected-item-wrapper {
+        @apply relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400;
+    }
+
+    .combobox-selected-item-remove-btn {
+        @apply cursor-pointer bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500;
+    }
+}

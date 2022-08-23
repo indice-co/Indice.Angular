@@ -1,0 +1,126 @@
+<div class="mt-4">
+    <select class="mb-2"
+            (change)="onStepperTypeChange($event)">
+        <option [value]="'Bullets'"
+                [selected]="selectedStepperType === stepperType.Bullets">
+            Bullets
+        </option>
+        <option [value]="'BulletsAndText'"
+                [selected]="selectedStepperType === stepperType.BulletsAndText">
+            Bullets And Text
+        </option>
+        <option [value]="'Circles'"
+                [selected]="selectedStepperType === stepperType.Circles">
+            Circles
+        </option>
+        <option [value]="'Panels'"
+                [selected]="selectedStepperType === stepperType.Panels">
+            Panels
+        </option>
+        <option [value]="'PanelsWithBorder'"
+                [selected]="selectedStepperType === stepperType.PanelsWithBorder">
+            Panels With Border
+        </option>
+        <option [value]="'Progress'"
+                [selected]="selectedStepperType === stepperType.Progress">
+            Progress
+        </option>
+        <option [value]="'Simple'"
+                [selected]="selectedStepperType === stepperType.Simple">
+            Simple
+        </option>
+    </select>
+    <lib-stepper [linear]="true"
+                 [type]="selectedStepperType"
+                 (stepChanged)="onStepperStepChanged($event)"
+                 (completed)="onStepperCompleted()"
+                 #sampleStepper>
+        <lib-step>
+            <ng-template libStepLabel>Step 1</ng-template>
+            <ng-template libStepInfo>Step 1 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>This is step number 1</p>
+            </div>
+        </lib-step>
+        <lib-step [stepControl]="contentForm">
+            <ng-template libStepLabel>Step 2</ng-template>
+            <ng-template libStepInfo>Step 2 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>This is step number 2. Since the stepper is <i>linear</i> you can't go to next steps without having a valid form.</p>
+                <form [formGroup]="contentForm">
+                    <div class="px-4 space-y-2 pb-4 mt-4">
+                        <fieldset>
+                            <legend class="sr-only">Description</legend>
+                            <div class="text-base font-medium text-gray-900"
+                                 aria-hidden="true">
+                                Description (*)
+                            </div>
+                            <label for="description"
+                                   class="field-label hidden">
+                                Description (*)
+                            </label>
+                            <div class="mt-1 flex rounded-sm">
+                                <textarea rows="3"
+                                          type="text"
+                                          name="description"
+                                          id="description"
+                                          formControlName="description"
+                                          placeholder="Your short description..."
+                                          required
+                                          maxlength="512"
+                                          class="p-2">
+                                </textarea>
+                            </div>
+                            <p *ngIf="description.invalid && (description.dirty || description.touched)"
+                               class="mt-2 text-sm text-red-600">
+                                <span *ngIf="description.errors!['required']">Please enter a description.</span>
+                                <span *ngIf="description.errors!['maxlength']">Please enter a description up to 512 characters.</span>
+                            </p>
+                            <p class="field-info col-span-3">Just an ugly textarea.</p>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+        </lib-step>
+        <lib-step>
+            <ng-template libStepLabel>Step 3</ng-template>
+            <ng-template libStepInfo>Step 3 sub title</ng-template>
+            <div class="mt-4">
+                <b>You can add as many step as you like.</b>
+                <br>
+                <p>Content can be anything</p>
+            </div>
+        </lib-step>
+        <lib-step>
+            <ng-template libStepLabel>Final step</ng-template>
+            <ng-template libStepInfo>Step 4 sub title</ng-template>
+            <div class="px-4 space-y-2 pb-4 mt-4">
+                <p>Let's hear a nice song now</p>
+                <iframe width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/B32yjbCSVpU"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </lib-step>
+    </lib-stepper>
+    <div class="p-5">
+        <div class="flex justify-end">
+            <button type="button"
+                    (click)="sampleStepper.goToPreviousStep()"
+                    *ngIf="sampleStepper.canGoBack"
+                    class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Previous
+            </button>
+            <button type="submit"
+                    (click)="sampleStepper.goToNextStep()"
+                    *ngIf="sampleStepper.canGoForward || sampleStepper.currentStep?.isLast"
+                    class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                {{ sampleStepper.currentStep?.isLast ? 'Complete' : 'Next' }}
+            </button>
+        </div>
+    </div>
+</div>

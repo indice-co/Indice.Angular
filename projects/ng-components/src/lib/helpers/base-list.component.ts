@@ -1,6 +1,7 @@
+import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
 import { Observable, Subscription, of } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
@@ -15,8 +16,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public pageSize = 20;
   public count = 0;
   public sort: string | null = '';
-  public sortdir: string | null = '-';
+  public sortdir: string | null = '';
   public search: string | null = '';
+  public filters: FilterClause[] = [];
+  public searchOptions: SearchOption[] = [];
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
@@ -63,37 +66,61 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.view = params.get('view') || ListViewType.Tiles;
       // console.log('route changes ', this.view);
 
-      // if (params.get('search') !== this.search) {
-      //   this.searchChanged(params.get('search'));
-      // }
+      if (params.get('search') !== null && params.get('search') !== this.search) {
+        this.searchChanged(params.get('search'));
+      }
 
-      // const page = +(params.get('page') || 1);
-      // if (page !== this.page) {
-      //   this.page = page;
-      // }
+      const page = +(params.get('page') || 1);
+      if (page !== this.page) {
+        this.page = page;
+      }
 
-      // const size = +(params.get('pagesize') || 20);
-      // if (this.pageSize !== size) {
-      //   this.pageSize = size;
-      // }
+      const size = +(params.get('pagesize') || 20);
+      if (this.pageSize !== size) {
+        this.pageSize = size;
+      }
 
-      // if (params.get('search') !== this.search) {
-      //   this.search = params.get('search');
-      // }
+      if (params.get('search') !== this.search) {
+        this.search = params.get('search');
+      }
 
-      // if (params.get('sort') !== this.sort) {
-      //   this.sort = params.get('sort');
-      // }
+      if (params.get('sort') !== this.sort) {
+        this.sort = params.get('sort');
+      }
 
-      // if (params.get('sortdir') !== this.sortdir) {
-      //   this.sortdir = params.get('sortdir');
-      // }
-
+      if (params.get('dir') !== this.sortdir) {
+        this.sortdir = params.get('dir');
+      }
+      // initialize filters that may reside in the query string
+      this.filters = this.getFiltersFrom(params);
     });
-
     // just to sync params in query
     this.setRouteParams(true);
     this.load();
+  }
+
+  /**
+ * Get filters from a querystring
+ * @param queryParamMap
+ * @returns filters found from a paramMap
+ */
+  private getFiltersFrom(queryParamMap: ParamMap): FilterClause[] {
+    let filterResult: FilterClause[] = [];
+    if (queryParamMap.has(QueryParameters.FILTER) && queryParamMap.get(QueryParameters.FILTER)!.length > 0) {
+      let filterValue = queryParamMap.get(QueryParameters.FILTER);
+      const filterValues = filterValue?.split(","); // we may have multiple filters in filter query param
+      if (filterValues && filterValues.length > 0) {
+        // create the filterClauses derived from the query params
+        for (var index in filterValues) {
+          let filterClause = FilterClause.parse(filterValues[index]);
+          const parsed = new FilterClause(filterClause!.member, filterClause!.value, filterClause!.operator, filterClause!.dataType, this.searchOptions);
+          if (parsed !== undefined) {
+            filterResult.push(parsed);
+          }
+        }
+      }
+    }
+    return filterResult;
   }
 
   private setRouteParams(locationChange: boolean = false): void {
@@ -104,9 +131,19 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         pagesize: this.pageSize,
         search: this.search,
         sort: this.sort,
-        dir: this.sortdir
+        dir: this.sortdir,
+        filter: this.filterClausesToString(this.filters)
       }, queryParamsHandling: 'merge', skipLocationChange: locationChange
     });
+  }
+
+  private filterClausesToString(filters: FilterClause[] | undefined) {
+    return filters?.map((f: FilterClause) => {
+      if (f.dataType === 'datetime') {
+        f.value = (new Date(f.value)).toISOString();
+      }
+      return f.toString();
+    }).join(',');
   }
 
   public actionHandler($event: ViewAction): void {
@@ -191,6 +228,15 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       this.setRouteParams();
       this.refresh();
     }
+  }
+
+  public advancedSearchChanged(filters: FilterClause[]): void {
+    this.count = 0;
+    this.page = 1;
+    this.items = null;
+    this.filters = filters;
+    this.setRouteParams();
+    this.load();
   }
 
   public searchChanged(searchText: string | null): void {

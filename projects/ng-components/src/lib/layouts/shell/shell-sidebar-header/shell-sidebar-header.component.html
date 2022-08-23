@@ -1,0 +1,23 @@
+<div class="shell-header-paddings">
+    <div class="shell-header-border">
+        <div class="shell-header-menu-container">
+            <div class="shell-header-md-visible">
+                <div class="shell-header-links-far-container" (clickOutside)="onClickOutside($event)">
+                <!-- Profile dropdown -->
+                <div *ngIf="profileMenuVisible" class="ml-4">
+                    <lib-user-profile-menu [show-user-name]="showUserNameOnHeader"></lib-user-profile-menu>
+                </div>
+                <!-- Notifications dropdown -->
+                <div *ngIf="showAlerts && user" class="ml-4">
+                    <lib-notifications-indicator></lib-notifications-indicator>
+                </div>
+                <!-- languages dropdown -->
+                <div *ngIf="showLangs" class="ml-4">
+                    <lib-language-selection></lib-language-selection>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

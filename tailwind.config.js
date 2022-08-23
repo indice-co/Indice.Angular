@@ -6,11 +6,15 @@ module.exports = {
     extend: {
       animation: {
         'bounce-once': 'bounce 1s ease-in-out',
+        'notification': 'spin 1s linear 3'
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      border: ['focus'],
+      opacity: ['disabled']
+    }
   },
   plugins:
   [require('@tailwindcss/aspect-ratio')
