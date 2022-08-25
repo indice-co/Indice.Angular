@@ -40,6 +40,7 @@ export class ComboboxComponent implements OnInit {
     @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
     @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
+    @Input() public noResultsTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public busy: boolean = false;
     @Input() public multiple: boolean = true;
     @Input() public debounceMs: number = 1000;
@@ -48,9 +49,10 @@ export class ComboboxComponent implements OnInit {
     public showResults: boolean = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
+    protected searchTerm: string | undefined;
 
     public ngOnInit(): void {
-        if (this.itemTemplate && !this.multiple) { 
+        if (this.itemTemplate && !this.multiple) {
             this.multiple = true;
             console.warn('You cannot have a custom item template with single selection.');
         }
@@ -60,7 +62,10 @@ export class ComboboxComponent implements OnInit {
                 debounceTime(this.debounceMs),
                 distinctUntilChanged()
             )
-            .subscribe((value: string) => this.emitSearchEvent(value));
+            .subscribe((value: string) => {
+                this.searchTerm = value;
+                this.emitSearchEvent(value);
+            });
     }
 
     public onInputClick(): void {
@@ -84,7 +89,7 @@ export class ComboboxComponent implements OnInit {
         }
     }
 
-    public removeSelectedItem(item: any): void {
+    public removeItem(item: any): void {
         const index = this.selectedItems.indexOf(item);
         if (index > -1) {
             this.selectedItems.splice(index, 1);

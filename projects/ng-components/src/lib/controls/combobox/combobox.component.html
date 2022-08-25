@@ -45,7 +45,7 @@
         </svg>
     </div>
     <ul [id]="id + '-results'"
-        *ngIf="showResults"
+        *ngIf="showResults && items.length > 0"
         class="combobox-results"
         role="listbox">
         <li *ngFor="let item of items; let i = index;"
@@ -58,6 +58,12 @@
             </ng-container>
         </li>
     </ul>
+    <div class="combobox-results"
+         *ngIf="noResultsTemplate && items.length === 0">
+        <ng-container [ngTemplateOutlet]="noResultsTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: searchTerm }">
+        </ng-container>
+    </div>
 </div>
 <ul *ngIf="selectedItems.length > 0"
     role="list"
@@ -87,7 +93,7 @@
             </div>
             <div class="ml-4 flex-shrink-0 flex">
                 <button type="button"
-                        (click)="removeSelectedItem(item)"
+                        (click)="removeItem(item)"
                         class="combobox-selected-item-remove-btn">
                     <span class="sr-only">Close</span>
                     <svg class="h-5 w-5"

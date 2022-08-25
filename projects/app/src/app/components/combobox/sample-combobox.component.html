@@ -31,6 +31,7 @@
                               (onSearch)="onContactsSearch($event)"
                               (onItemSelected)="onContactSelected($event)"
                               [multiple]="false"
+                              [noResultsTemplate]="noResultsTemplate"
                               #contactsCombobox>
                 </lib-combobox>
             </div>
@@ -68,12 +69,19 @@
                               (onSearch)="onAdvancedContactsSearch($event)"
                               (onItemSelected)="onAdvancedContactSelected($event)"
                               [selectedItemsFilter]="advancedContactsFilter"
+                              [noResultsTemplate]="noResultsTemplate"
                               #advancedContactsCombobox>
                 </lib-combobox>
             </div>
         </div>
     </div>
 </div>
+<ng-template #noResultsTemplate
+             let-searchTerm>
+    <p class="m-2">
+        No results for term <i>{{ searchTerm }}</i>
+    </p>
+</ng-template>
 <ng-template let-item
              #itemTemplate>
     <span class="hover:bg-gray-100 relative cursor-pointer select-none py-2 pl-3 pr-3 block truncate">{{ item.salutation }} {{ item.fullName || (item.firstName + ' ' + item.lastName) }}</span>
@@ -81,7 +89,7 @@
 <ng-template let-item
              #selectedItemTemplate>
     <div class="grid grid-cols-1">
-        <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400">
+        <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-start space-x-3 hover:border-gray-400">
             <div class="flex-shrink-0">
                 <img class="h-10 w-10 rounded-full"
                      [src]="'https://messaging.indice.gr/avatar/' + item.fullName + '?circular=true'"
@@ -119,7 +127,7 @@
             </div>
             <div class="ml-4 flex-shrink-0 flex">
                 <button type="button"
-                        (click)="advancedContactsCombobox.removeSelectedItem(item)"
+                        (click)="advancedContactsCombobox.removeItem(item)"
                         class="cursor-pointer bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500">
                     <span class="sr-only">Close</span>
                     <svg class="h-5 w-5"
