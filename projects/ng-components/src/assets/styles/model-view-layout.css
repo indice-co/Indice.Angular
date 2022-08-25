@@ -8,7 +8,7 @@
   }
 
   .model-view-aside {
-    @apply py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-4 md:col-span-3;
+    @apply py-6 px-2 sm:px-6 lg:py-0 lg:px-0 md:col-span-3;
   }
 
   .model-view-aside-header-section {

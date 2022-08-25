@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { HeaderMetaItem } from '../../../types';
+import { HeaderMetaItem, ViewAction } from '../../../types';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,6 +18,9 @@ export class ModelViewLayoutComponent implements OnInit {
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
     // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
   ];
+  @Input() icon: string | null = null;
+  @Input() busy = false;
+  @Input() actions: ViewAction[] | null = null;
   constructor( private location: Location) { }
 
   ngOnInit(): void {

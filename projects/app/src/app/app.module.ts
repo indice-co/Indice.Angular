@@ -33,6 +33,9 @@ import { ShellSamplesListComponent } from './features/shell/shell-samples-list/s
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
 import { MoreDetailsSubComponent } from './components/depth/more-details/sub/more-details-sub.component';
+import { ModelViewLayoutSampleComponent } from './features/view-layouts/model-view-layout-sample/model-view-layout-sample.component';
+import { DemoViewContentsComponent } from './components/demo-view-contents/demo-view-contents.component';
+import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,10 @@ import { MoreDetailsSubComponent } from './components/depth/more-details/sub/mor
     SampleTabsComponent,
     ShellSamplesListComponent,
     ToasterSampleComponent,
-    ViewLayoutsListComponent
+    ViewLayoutsListComponent,
+    ModelViewLayoutSampleComponent,
+    DemoViewContentsComponent,
+    DemoViewFormComponent
   ],
   imports: [
     AppRoutingModule,

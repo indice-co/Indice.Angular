@@ -24,6 +24,9 @@ import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
 import { ShellSamplesListComponent } from './features/shell/shell-samples-list/shell-samples-list.component';
 import { ToasterSampleComponent } from './features/controls/toaster-sample/toaster-sample.component';
 import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-list/view-layouts-list.component';
+import { ModelViewLayoutSampleComponent } from './features/view-layouts/model-view-layout-sample/model-view-layout-sample.component';
+import { DemoViewContentsComponent } from './components/demo-view-contents/demo-view-contents.component';
+import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
@@ -51,6 +54,7 @@ const routes: Routes = [
   { path: 'error', component: ErrorComponent, data: { shell: fluidShellConfig } },
   { path: 'unauthorized', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
   { path: 'forbidden', component: UnauthorizedComponent, data: { shell: fluidShellConfig } },
+
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent, data: { breadcrumb: { title: 'The Dashboard', isHome: true } } },
   { path: 'samples/shell-layout', pathMatch: 'full', component: ShellSamplesListComponent, canActivate: [AuthGuardService], data: { /*register: true*/ } },
@@ -61,7 +65,18 @@ const routes: Routes = [
   { path: 'samples/shell-layout/fluid', pathMatch: 'full', component: FluidShellSampleComponent, data: { shell: fluidShellConfig } },
   { path: 'samples/controls', pathMatch: 'full', component: ControlsSamplesListComponent },
   { path: 'samples/controls/toaster', pathMatch: 'full', component: ToasterSampleComponent },
-  { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent },
+  
+  { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent, data: { breadcrumb: { title: 'View layouts' } }  },
+  { path: 'samples/view-layouts/model-view', component: ModelViewLayoutSampleComponent, data: { breadcrumb: { title: 'Model View Layout sample' } },
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'tab1' },
+      { path: 'tab1', component: DemoViewContentsComponent, data: { breadcrumb: { title: 'Model View Layout sample' } }},
+      { path: 'tab2', component: DemoViewFormComponent, data: { breadcrumb: { title: 'Model View Layout sample' } } },
+      { path: 'aux-tab1', component: DemoViewContentsComponent, data: { breadcrumb: { title: 'Model View Layout sample' } }},
+
+    ]
+  },
+
   { path: 'samples/modal-playground', pathMatch: 'full', component: ModalPlayGroundComponent },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
   { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },

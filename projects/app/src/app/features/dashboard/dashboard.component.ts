@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
       { key: 'NG-LIB version :', icon: Icons.DateTime, text: new Date().toLocaleTimeString() }
     ];
     this.tiles.push(
-      { text: 'Shell', count: 2, path: 'samples/shell-layout' },
-      { text: 'View Layouts', count: 4, path: 'samples/view-layouts' },
+      { text: 'Shell', count: NaN, path: 'samples/shell-layout' },
+      { text: 'View Layouts', count: 1, path: 'samples/view-layouts' },
       { text: 'Common pages', count: 4, path: '' },
       { text: 'Controls', count: 8, path: 'samples/controls' },
       { text: 'Modal playground', count: NaN, path: 'samples/modal-playground' },

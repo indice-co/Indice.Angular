@@ -1,13 +1,13 @@
-<lib-view-layout title="View layouts" [meta-items]="metaItems">
-  <lib-list-view [items]="items" [view]="view" [show-pager]="false">
+<lib-view-layout title="View layouts" [meta-items]="metaItems" >
+  <lib-list-view [items]="items" [view]="view" [show-pager]="false" [busy]="!items">
     <lib-list-tile>
       <ng-template let-item>
-        <div class="card">
+        <div class="card h-80">
           <div class="card-header">
-            {{ item.title }}
+            <a [routerLink]="item.path">{{ item.title }}</a>
           </div>
           <div class="card-body py-5">
-            <p class="overflow-ellipsis overflow-hidden">{{ item.description}}</p>
+            <p class="text-xs overflow-y-auto">{{ item.description}}</p>
           </div>
           <div class="card-footer">
             <a [routerLink]="item.path">View sample</a>

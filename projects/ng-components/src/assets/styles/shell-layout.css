@@ -42,11 +42,11 @@
   }
 
   .sidebar .shell-content-container-inner {
-    @apply max-w-full px-4 min-h-screen;
+    @apply max-w-full px-4 pb-2 min-h-screen;
   }
 
   .shell-content-container-inner {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen;
+    @apply max-w-7xl mx-auto px-4 pb-2 sm:px-6 lg:px-8 min-h-screen;
   }
 
   .shell-content-container-inner-fluid {

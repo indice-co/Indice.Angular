@@ -72,13 +72,14 @@
         </div>
     </div>
   </div>
+  
   <div class="sidebar-static-menu-wrapper"
-       [class.sidebar-static-menu-wrapper-active]="showMobileSidebar">
+       [class.sidebar-static-menu-wrapper-expanded]="showMobileSidebar">
     <div class="sidebar-static-menu-sticky-header-container"
          *ngIf="config?.showHeader">
       <button *ngIf="!showMobileSidebar"
               type="button"
-              class="sidebar-static-menu-toggle-button sm:hidden"
+              class="sidebar-static-menu-toggle-button-md"
               (click)="showMobileSidebar = !showMobileSidebar">
         <span class="sr-only">Toggle sidebar</span>
         <svg class="h-6 w-6"
