@@ -2,7 +2,7 @@
   <lib-list-view [items]="items" [view]="view" [show-pager]="false" [busy]="!items">
     <lib-list-tile>
       <ng-template let-item>
-        <div class="card h-80">
+        <div class="card sample">
           <div class="card-header">
             <a [routerLink]="item.path">{{ item.title }}</a>
           </div>
