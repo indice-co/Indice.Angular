@@ -5,10 +5,11 @@
     class="dropdown-button"
     aria-haspopup="listbox"
     aria-expanded="true"
-    aria-labelledby="listbox-label"
-  >
+    aria-labelledby="listbox-label">
     <span class="dropdown-selected-text">
-      {{ selectedOption?.text || placeholder }}
+      <i *ngIf="selectedOption?.icon && showIcons" 
+          [class]="selectedOption?.icon" 
+          [class.mr-2]="selectedOption?.icon"></i>{{ selectedOption?.text || placeholder }}
     </span>
     <span class="dropdown-button-icon">
       <!-- Heroicon name: solid/selector -->
@@ -37,7 +38,7 @@
         role="option"
       >
         <span [class]="isSelected(option) ? 'dropdown-li-selected-text' : 'dropdown-li-text'">
-          {{ option.text }}
+          <i *ngIf="option.icon && showIcons" [class]="option.icon" [class.mr-2]="option.icon"></i>{{ option.text }}
         </span>
         <span *ngIf="isSelected(option)" class="dropdown-li-selected-indicator-container">
           <!-- Heroicon name: solid/check -->

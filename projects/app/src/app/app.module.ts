@@ -36,6 +36,7 @@ import { MoreDetailsSubComponent } from './components/depth/more-details/sub/mor
 import { ModelViewLayoutSampleComponent } from './features/view-layouts/model-view-layout-sample/model-view-layout-sample.component';
 import { DemoViewContentsComponent } from './components/demo-view-contents/demo-view-contents.component';
 import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
+import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
     ViewLayoutsListComponent,
     ModelViewLayoutSampleComponent,
     DemoViewContentsComponent,
-    DemoViewFormComponent
+    DemoViewFormComponent,
+    DropDownMenuSampleComponent
   ],
   imports: [
     AppRoutingModule,

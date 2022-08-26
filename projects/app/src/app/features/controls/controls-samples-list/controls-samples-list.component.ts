@@ -6,11 +6,16 @@ import { SampleViewModel } from '../../../models/sample.vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 
-export const ShellLayoutsListSamples = [
+export const ControlsSamples = [
   new SampleViewModel(
     'Toaster service',
     'Toast notifications notifications',
-    undefined, 'toaster')
+    undefined, 'toaster'),
+  new SampleViewModel(
+      'Drop down',
+      'Drop down menu control',
+      undefined, 'drop-down-menu')
+
 ];
 
 @Component({
@@ -36,7 +41,7 @@ export class ControlsSamplesListComponent extends BaseListComponent<SampleViewMo
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
-    let items = Array(20).fill(ShellLayoutsListSamples[0]);
+    let items = ControlsSamples;
     return of({ count: items.length, items }).pipe(delay(1200));
   }
 

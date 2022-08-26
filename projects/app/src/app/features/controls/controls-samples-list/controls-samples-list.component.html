@@ -3,11 +3,11 @@
     (pageSizeChanged)="pageSizeChanged($event)" (sortChanged)="sortChanged($event)" (sortdirChanged)="sortdirChanged($event)">
     <lib-list-tile>
       <ng-template let-item>
-        <div class="card">
+        <div class="card sample">
           <div class="card-header">
             {{ item.title }}
           </div>
-          <div class="card-body py-5">
+          <div class="card-body py-2 text-xs">
             <p class="overflow-ellipsis overflow-hidden">{{ item.description}}</p>
           </div>
           <div class="card-footer">

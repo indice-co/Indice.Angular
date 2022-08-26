@@ -1,0 +1,12 @@
+<lib-view-layout title="Drop down menu control">
+    <div class="px-4 py-10">
+        <h2 class="py-2">No icons</h2>
+        <lib-drop-down-menu [options]="options1" [(selected)]="option1"></lib-drop-down-menu>
+        <h2 class="py-2">Selected: {{option1}}</h2>
+    </div>
+    <div class="px-4 py-10">
+        <h2 class="py-2">With icons</h2>
+        <lib-drop-down-menu [options]="options1" [show-icons]="true" [(selected)]="option2"></lib-drop-down-menu>
+        <h2 class="py-2">Selected: {{option2}}</h2>
+    </div>
+</lib-view-layout>

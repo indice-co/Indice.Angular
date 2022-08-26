@@ -9,11 +9,11 @@
   }
 
   .dropdown-selected-text {
-    @apply block truncate;
+    @apply truncate inline-flex items-center;
   }
 
   .dropdown-button-icon {
-    @apply absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none;
+    @apply absolute inset-y-0 right-0 flex items-center pointer-events-none;
   }
 
   .dropdown-arrow {
@@ -33,11 +33,11 @@
   }
 
   .dropdown-li-text {
-    @apply font-normal block truncate;
+    @apply font-normal truncate inline-flex items-center ;
   }
 
   .dropdown-li-selected-text {
-    @apply font-semibold block truncate;
+    @apply font-semibold truncate inline-flex items-center ;
   }
 
   .dropdown-li-selected-indicator-container {

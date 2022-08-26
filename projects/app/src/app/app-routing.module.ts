@@ -27,6 +27,7 @@ import { ViewLayoutsListComponent } from './features/view-layouts/view-layouts-l
 import { ModelViewLayoutSampleComponent } from './features/view-layouts/model-view-layout-sample/model-view-layout-sample.component';
 import { DemoViewContentsComponent } from './components/demo-view-contents/demo-view-contents.component';
 import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
+import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
@@ -65,6 +66,7 @@ const routes: Routes = [
   { path: 'samples/shell-layout/fluid', pathMatch: 'full', component: FluidShellSampleComponent, data: { shell: fluidShellConfig } },
   { path: 'samples/controls', pathMatch: 'full', component: ControlsSamplesListComponent },
   { path: 'samples/controls/toaster', pathMatch: 'full', component: ToasterSampleComponent },
+  { path: 'samples/controls/drop-down-menu', pathMatch: 'full', component: DropDownMenuSampleComponent },
   
   { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent, data: { breadcrumb: { title: 'View layouts' } }  },
   { path: 'samples/view-layouts/model-view', component: ModelViewLayoutSampleComponent, data: { breadcrumb: { title: 'Model View Layout sample' } },
