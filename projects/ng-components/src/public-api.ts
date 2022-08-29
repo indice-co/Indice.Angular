@@ -71,5 +71,6 @@ export { ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE, CloseInterceptorFn } from 
 export * from './lib/services/modal-service/modal.class';
 export * from './lib/services/toaster.service';
 export * from './lib/services/breadcrumb.service';
+export * from './lib/services/user-settings.service';
 
 export * from './lib/ng-components.module';

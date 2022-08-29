@@ -59,7 +59,7 @@
         </li>
     </ul>
     <div class="combobox-results"
-         *ngIf="noResultsTemplate && items.length === 0">
+         *ngIf="noResultsTemplate && items.length === 0 && !busy">
         <ng-container [ngTemplateOutlet]="noResultsTemplate"
                       [ngTemplateOutletContext]="{ $implicit: searchTerm }">
         </ng-container>

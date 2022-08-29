@@ -57,7 +57,7 @@ import { ToggleComponent } from './controls/toggle/toggle.component';
 import { UnauthorizedComponent } from './pages/http-status/unauthorized/unauthorized.component';
 import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
 import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.component';
-import { LibTabLabelDirective } from '../public-api';
+import { LibTabLabelDirective, UserSettingsService } from '../public-api';
 
 @NgModule({
   declarations: [
@@ -169,7 +169,8 @@ export class IndiceComponentsModule {
       ngModule: IndiceComponentsModule,
       providers: [
         BreadcrumbService,
-        ToasterService
+        ToasterService,
+        UserSettingsService
       ]
     };
   }

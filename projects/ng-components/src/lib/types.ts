@@ -233,3 +233,5 @@ export interface IValidationProblemDetails {
   instance?: string | undefined;
   errors?: { [key: string]: string[]; } | undefined;
 }
+
+export type UserSettingKey = 'MobileSideBar';
