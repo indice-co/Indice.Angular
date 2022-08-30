@@ -86,6 +86,11 @@ export class AdvancedSearchComponent implements OnInit {
         this.filters = this.filters.filter((f) => {
           return f.member !== this.selectedField!.field;
         });
+      } else { // selectedField is multiTerm: just checking if we already have the newly selected filterClause in filters
+        const isDuplicate = this.filters.some(f => f.toString() === filterClause.toString());
+        if (isDuplicate) {
+          return;
+        }
       }
 
       this.filters.push(filterClause);
