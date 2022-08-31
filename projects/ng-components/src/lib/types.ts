@@ -72,13 +72,15 @@ export class ViewAction {
   public param: any;
   public icon: string;
   public tooltip: string | null;
+  public text?: string;
 
-  constructor(type: string, key: string | null, param: any, icon: string, tooltip: string | null) {
+  constructor(type: string, key: string | null, param: any, icon: string, tooltip: string | null, text?: string) {
     this.type = type;
     this.key = key;
     this.param = param;
     this.icon = icon;
     this.tooltip = tooltip;
+    this.text = text;
   }
 }
 
@@ -92,8 +94,8 @@ export class ListViewType {
 export class RouterViewAction extends ViewAction {
   public outlet: string | null = null;
   public link: string | null = null;
-  constructor(icon: string, link: string, outlet: string | null, tooltip: string | null) {
-    super('router-link', null, null, icon, tooltip);
+  constructor(icon: string, link: string, outlet: string | null, tooltip: string | null, text?: string) {
+    super('router-link', null, null, icon, tooltip, text);
     this.outlet = outlet;
     this.link = link;
   }
