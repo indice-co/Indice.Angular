@@ -22,7 +22,8 @@
       </div>
     </div>
     <div class="view-layout-title-container-far">
-      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
+      <ng-container *ngFor="let action of actions"
+                    [ngSwitch]="action.type">
 
         <ng-container *ngSwitchCase="'search'">
           <label for="search"
@@ -30,29 +31,29 @@
             Search
           </label>
           <div class="search-container mr-1">
-              <input id="text"
-                    #search
-                    class="search-input"
-                    [placeholder]="searchPlaceholder"
-                    type="search"
-                    name="search"
-                    (input)="searchActionType(search.value)"
-                    (onsearch)="handleClear($event)">
-              <button type="button"
+            <input id="text"
+                   #search
+                   class="search-input"
+                   [placeholder]="searchPlaceholder"
+                   type="search"
+                   name="search"
+                   (input)="searchActionType(search.value)"
+                   (onsearch)="handleClear($event)">
+            <button type="button"
                     href="#"
                     class="search-button"
                     [title]="action.tooltip"
                     (click)="searchActionClick(action, search.value)">
-                    <i [class]="action.icon"></i>
-              </button>
-           </div>
+              <i [class]="action.icon"></i>
+            </button>
+          </div>
         </ng-container>
 
         <ng-container *ngSwitchCase="'switch-view'">
           <button [disabled]="view === action.param"
                   type="button"
                   href="#"
-                  class="mr-1 disabled:opacity-75 btn-view-header"
+                  class="p-2 disabled:opacity-75 btn-view-header"
                   (click)="switchViewActionClick(action)">
             <span class="inline-block relative">
               <i [class]="action.icon"></i>
@@ -62,23 +63,27 @@
             </span>
           </button>
         </ng-container>
-        
+
         <ng-container *ngSwitchCase="'router-link'">
           <button type="button"
                   href="#"
-                  class="mr-1 btn-view-header"
+                  class="p-2 btn-view-header"
                   [title]="action.tooltip"
                   (click)="routerLinkActionClick(action)">
-            <i [class]="action.icon"></i>
+            <i [class]="action.icon"
+               [ngClass]="{'pr-1': action.text}"></i>
+            {{ action.text }}
           </button>
         </ng-container>
-        
+
         <ng-container *ngSwitchDefault>
           <button type="button"
-                  class="mr-1 btn-view-header"
+                  class="p-2 btn-view-header"
                   [title]="action.tooltip"
                   (click)="emitActionClick(action)">
-            <i [class]="action.icon"></i>
+            <i [class]="action.icon"
+               [ngClass]="{'pr-1': action.text}"></i>
+            {{ action.text }}
           </button>
         </ng-container>
       </ng-container>
