@@ -69,6 +69,18 @@
         </div>
         <lib-shell-sidebar [sticky]="showMobileSidebar"></lib-shell-sidebar>
       </div>
+      <div class="flex flex-shrink-0 bg-gray-700 p-4"
+           *ngIf="!showMobileSidebar && sidebarFooterTemplate">
+        <div class="group block flex-shrink-0">
+          <div class="flex items-center">
+            <div>
+              <p class="text-sm font-medium text-gray-400">
+                <ng-container [ngTemplateOutlet]="sidebarFooterTemplate"></ng-container>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="sidebar-static-menu-wrapper"
