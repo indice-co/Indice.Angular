@@ -11,12 +11,18 @@ export const ControlsSamples = [
   new SampleViewModel(
     'Toaster service',
     'Toast notifications notifications',
-    undefined, 'toaster'),
+    undefined, 
+    'toaster'),
   new SampleViewModel(
     'Drop down',
     'Drop down menu control',
-    undefined, 'drop-down-menu')
-
+    undefined, 
+    'drop-down-menu'),
+    new SampleViewModel(
+      'Toggle Button',
+      'Toggle button control',
+      undefined, 
+      'toggle-button'),
 ];
 
 @Component({

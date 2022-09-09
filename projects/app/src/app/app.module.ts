@@ -37,6 +37,7 @@ import { ModelViewLayoutSampleComponent } from './features/view-layouts/model-vi
 import { DemoViewContentsComponent } from './components/demo-view-contents/demo-view-contents.component';
 import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
+import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 
 @NgModule({
   declarations: [
@@ -59,14 +60,14 @@ import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-
     SampleModalComponent,
     SampleStepperComponent,
     SampleTabsComponent,
-    SampleTabsComponent,
     ShellSamplesListComponent,
     ToasterSampleComponent,
     ViewLayoutsListComponent,
     ModelViewLayoutSampleComponent,
     DemoViewContentsComponent,
     DemoViewFormComponent,
-    DropDownMenuSampleComponent
+    DropDownMenuSampleComponent,
+    ToggleButtonSampleComponent
   ],
   imports: [
     AppRoutingModule,

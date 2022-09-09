@@ -1,0 +1,76 @@
+Mission statement:
+
+Indice.Angular is an Angular framework to standarize and accelerate the development of line of business applications aka backoffice apps. 
+The framework is highly opinionated and not designed to support ANY scenario but to support VERY specific/common application scenarios 
+mainly for crud applications - e.g. listing data, displaying and editing data. 
+
+The goal of standardization is to ensure uniformity to certain practices within INDICE. We consider standarization 
+as the primary instrument to accelerate the development of stable apps that are responsive, beautiful, performant and all inherit 
+our company's style guide (when we get one). 
+
+warn·ing (wôr′nĭng) n. 1. A statement telling of or an indication providing evidence of impending danger, difficulty, or misfortune: 
+If you are planning to implement an angular app with a totally custom design be very cautious, use the do not use our libraries or do it at your own risk.
+
+Vision:
+Our vision for the indice.angular project is to concetrate all existing and future best practices in implenenting angular apps, 
+save time and effort for our developers for common (and tedious sometimes) tasks and achieve greatness.
+
+
+Current status:
+The framework currently offers two libraries the indice/ng-components and @indice/ng-auth and a sample application.
+
+indice/ng-components provides developers with: 
+	Layouts:
+		the two most common application layouts (the holy grail and stacked) with built-in support for sidebar navigation 
+		and toast notifications
+		Simple Page layout 
+		Model view layout
+	
+	Unstyled, UI components, designed to integrate beautifully with Tailwind CSS:
+		Listview (both table and tiles)
+		Tab control
+		Radio button list
+
+	Services: 
+		basic or skeleton services for navigation links, localization support, notifications and messages
+		
+
+indice/ng-auth provides developers with: 
+	Services:
+		interceptors, guards etc...
+
+	Components:
+		callback component
+
+Sample application
+	This serves as the documentation center with applied examples and in the near future the base for our cli schematics.
+	
+
+Roadmap:
+	headless ui components: 
+		menu (dropdown), 
+		listbox, 
+		combobox (autocomplete), 
+		switch (toggle),
+		disclosure,
+		dialog,
+		popover,
+		radiogroup,
+		tabs,
+		transitions,
+		query builder,
+		text inputs (masked/not) with validation support
+		stepper (wizard control)
+		html editor,
+		handlebars preview control,
+		Dynamic forms
+		
+Action plan / Tasks:
+	- Sample application - inconsistent - poor or no documentation !!!!
+	- Mobile first responsive fixes everywhere !!!!
+	- Platform wiki entries
+	
+	
+	 
+
+

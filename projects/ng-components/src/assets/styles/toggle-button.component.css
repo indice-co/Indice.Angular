@@ -1,0 +1,53 @@
+@layer components {
+    .toggle-button-button {
+        @apply relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-1 focus:ring-gray-500 focus:ring-offset-1;
+    }
+
+    .toggle-button-button-disabled {
+        @apply opacity-75;
+    }
+
+    .toggle-button-bg-false {
+        @apply bg-gray-200;
+    }
+
+    .toggle-button-bg-true {
+        @apply bg-gray-600;
+    }
+
+    .toggle-button-icon-container {
+        @apply pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out;
+    }
+
+    .toggle-button-icon-container-true {
+        @apply translate-x-5;
+    }
+
+    .toggle-button-icon-container-false {
+        @apply translate-x-0;
+    }
+
+    .toggle-button-icon-container-inner {
+        @apply opacity-100 ease-in duration-200 absolute inset-0 flex h-full w-full items-center justify-center transition-opacity;
+    }
+
+    .toggle-button-container-inner-true {
+        @apply opacity-0 ease-out duration-100;
+    }
+
+    .toggle-button-container-inner-false {
+        @apply opacity-100 ease-in duration-200;
+    }
+
+    .toggle-button-icon {
+        @apply h-3 w-3 text-gray-600;
+    }
+
+    .toggle-button-text {
+        @apply text-sm font-medium text-gray-900;
+    }
+
+    .toggle-button-description {
+        @apply text-xs mt-1 text-gray-500;
+    }
+}

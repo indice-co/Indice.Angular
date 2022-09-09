@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
       { text: 'Shell', count: NaN, path: 'samples/shell-layout' },
       { text: 'View Layouts', count: 1, path: 'samples/view-layouts' },
       { text: 'Common pages', count: 4, path: '' },
-      { text: 'Controls', count: 2, path: 'samples/controls' },
+      { text: 'Controls', count: 3, path: 'samples/controls' },
       { text: 'Modal playground', count: NaN, path: 'samples/modal-playground' },
       { text: 'Tab Groups', count: 1, path: 'samples/tab-group' },
       { text: 'Stepper', count: 1, path: 'samples/stepper' },

@@ -58,6 +58,7 @@ import { UnauthorizedComponent } from './pages/http-status/unauthorized/unauthor
 import { UserProfileMenuComponent } from './controls/user-profile-menu/user-profile-menu.component';
 import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.component';
 import { LibTabLabelDirective, UserSettingsService } from '../public-api';
+import { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { LibTabLabelDirective, UserSettingsService } from '../public-api';
     ToggleComponent,
     UnauthorizedComponent,
     UserProfileMenuComponent,
-    ViewLayoutComponent
+    ViewLayoutComponent,
+    ToggleButtonComponent
   ],
   imports: [
     CommonModule,
@@ -160,7 +162,8 @@ import { LibTabLabelDirective, UserSettingsService } from '../public-api';
     ToasterContainerComponent,
     ToggleComponent,
     UnauthorizedComponent,
-    ViewLayoutComponent
+    ViewLayoutComponent,
+    ToggleButtonComponent
   ]
 })
 export class IndiceComponentsModule {
