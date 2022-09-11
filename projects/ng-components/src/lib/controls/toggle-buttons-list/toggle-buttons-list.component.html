@@ -1,0 +1,26 @@
+<div class="relative items-center inline-flex">
+    <div class="flex-none mr-2" *ngIf="icon">
+        <i [class]="icon"></i>
+    </div>
+    <div class="block lg:hidden z-10">
+        <lib-drop-down-menu class="w-full mw-40" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options"></lib-drop-down-menu>
+    </div>
+    <div class="hidden lg:block">
+        <ng-template ngFor let-option [ngForOf]="options" let-i="index">
+            <!-- [tooltip]="option.description" -->
+            <button type="button"
+                    [disabled]="option.value === value"
+                    [class.bg-gray-100]="option.value === value"
+                    class="relative disabled:bg-gray-100 inline-flex items-center p-2 first:border-l first:rounded-l-sm last:rounded-r-sm border-t border-b border-r border-gray-300 bg-white text-xs text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none"
+                    (click)="selectOption(option.value)">
+            <div class="flex-none mr-2" *ngIf="option.icon">
+                <i [class]="option.icon"></i>
+            </div>
+            <span class="mr-2 block overflow-ellipsis overflow-hidden">{{option.text}}</span>
+            <span *ngIf="option.data && option.data.count>=0"
+                    class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs text-gray-700 tabular-nums">{{option.data.count}}
+            </span>
+            </button>
+        </ng-template>
+    </div>
+</div>

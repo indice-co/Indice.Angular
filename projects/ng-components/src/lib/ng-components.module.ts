@@ -59,6 +59,7 @@ import { UserProfileMenuComponent } from './controls/user-profile-menu/user-prof
 import { ViewLayoutComponent } from './layouts/views/view-layout/view-layout.component';
 import { LibTabLabelDirective, UserSettingsService } from '../public-api';
 import { ToggleButtonComponent } from './controls/toggle-button/toggle-button.component';
+import { ToggleButtonsListComponent } from './controls/toggle-buttons-list/toggle-buttons-list.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { ToggleButtonComponent } from './controls/toggle-button/toggle-button.co
     UnauthorizedComponent,
     UserProfileMenuComponent,
     ViewLayoutComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
+    ToggleButtonsListComponent
   ],
   imports: [
     CommonModule,
@@ -163,7 +165,8 @@ import { ToggleButtonComponent } from './controls/toggle-button/toggle-button.co
     ToggleComponent,
     UnauthorizedComponent,
     ViewLayoutComponent,
-    ToggleButtonComponent
+    ToggleButtonComponent,
+    ToggleButtonsListComponent
   ]
 })
 export class IndiceComponentsModule {

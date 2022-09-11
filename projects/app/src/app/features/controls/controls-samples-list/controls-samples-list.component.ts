@@ -23,6 +23,11 @@ export const ControlsSamples = [
       'Toggle button control',
       undefined, 
       'toggle-button'),
+    new SampleViewModel(
+      'Toggle Buttons List',
+      'Toggle buttons list control',
+      undefined, 
+      'toggle-buttons-list')
 ];
 
 @Component({

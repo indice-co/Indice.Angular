@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from '@indice/ng-auth';
-import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, PageNotFoundComponent, UnauthorizedComponent } from '@indice/ng-components';
+import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, PageNotFoundComponent, ShellLayoutType, UnauthorizedComponent } from '@indice/ng-components';
 import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DepthComponent } from './components/depth/depth.component';
 import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
-import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
@@ -29,6 +28,7 @@ import { DemoViewContentsComponent } from './components/demo-view-contents/demo-
 import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
+import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
@@ -41,12 +41,16 @@ const customHeaderShellConfig: IShellConfig = {
 };
 
 const fluidShellConfig: IShellConfig = {
-  appLogo: '',
-  appLogoAlt: '',
-  breadcrumb: true,
+  appLogo : 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white',
+  appLogoAlt : 'your app name here',
+  breadcrumb: false,
   fluid: true,
+  layout : ShellLayoutType.Stacked,
+  showAlertsOnHeader : false,
   showFooter: false,
-  showHeader: false
+  showHeader: false,
+  showLangsOnHeader: false,
+  showUserNameOnHeader : false
 };
 
 const routes: Routes = [
@@ -64,11 +68,11 @@ const routes: Routes = [
   { path: 'samples/inbox/:id', component: InboxItemComponent, data: { breadcrumb: { title: 'Inbox Details' } } },
   { path: 'samples/shell-layout/info', pathMatch: 'full', component: SampleInfoComponent, outlet: 'rightpane' },
   { path: 'samples/shell-layout/custom-header', pathMatch: 'full', component: CustomHeaderSampleComponent, data: { shell: customHeaderShellConfig } },
-  { path: 'samples/shell-layout/fluid', pathMatch: 'full', component: FluidShellSampleComponent, data: { shell: fluidShellConfig } },
   { path: 'samples/controls', pathMatch: 'full', component: ControlsSamplesListComponent },
   { path: 'samples/controls/toaster', pathMatch: 'full', component: ToasterSampleComponent },
   { path: 'samples/controls/drop-down-menu', pathMatch: 'full', component: DropDownMenuSampleComponent },
   { path: 'samples/controls/toggle-button', pathMatch: 'full', component: ToggleButtonSampleComponent },
+  { path: 'samples/controls/toggle-buttons-list', pathMatch: 'full', component: ToggleButtonsListSampleComponent },
   { path: 'samples/view-layouts', pathMatch: 'full', component: ViewLayoutsListComponent, data: { breadcrumb: { title: 'View layouts' } }  },
   { path: 'samples/view-layouts/model-view', component: ModelViewLayoutSampleComponent, data: { breadcrumb: { title: 'Model View Layout sample' } },
     children: [

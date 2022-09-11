@@ -16,7 +16,6 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DepthComponent } from './components/depth/depth.component';
 import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
 import { environment } from './../environments/environment';
-import { FluidShellSampleComponent } from './features/shell/fluid-shell-sample/fluid-shell-sample.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
@@ -38,6 +37,7 @@ import { DemoViewContentsComponent } from './components/demo-view-contents/demo-
 import { DemoViewFormComponent } from './components/demo-view-form/demo-view-form.component';
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
+import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,6 @@ import { ToggleButtonSampleComponent } from './components/toggle-button-sample/t
     DashboardComponent,
     DepthComponent,
     DepthDetailsComponent,
-    FluidShellSampleComponent,
     HeaderComponent,
     InboxComponent,
     InboxItemComponent,
@@ -67,7 +66,8 @@ import { ToggleButtonSampleComponent } from './components/toggle-button-sample/t
     DemoViewContentsComponent,
     DemoViewFormComponent,
     DropDownMenuSampleComponent,
-    ToggleButtonSampleComponent
+    ToggleButtonSampleComponent,
+    ToggleButtonsListSampleComponent
   ],
   imports: [
     AppRoutingModule,
