@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MenuOption } from '@indice/ng-components';
+import { MenuOption } from '../../types';
+
 
 @Component({
   selector: 'lib-toggle-buttons-list',
