@@ -17,7 +17,6 @@ export class ToggleButtonsListComponent implements OnInit {
   }
 
   public selectOption(optionValue: any): void {
-    console.debug('selectOption ', optionValue);
     this.value = optionValue;
     this.valueChange.emit(optionValue);
   }

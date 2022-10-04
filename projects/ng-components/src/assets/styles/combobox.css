@@ -1,4 +1,4 @@
-@layer components {
+
     .combobox-wrapper {
         @apply relative mt-1;
     }
@@ -26,4 +26,3 @@
     .combobox-selected-item-remove-btn {
         @apply cursor-pointer bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500;
     }
-}

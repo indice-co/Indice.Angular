@@ -1,4 +1,4 @@
-@layer components {
+
     .shell-sidebar-container-fixed {
         @apply fixed w-0 sm:w-64 flex-col inset-y-0 bg-gray-800;
     }
@@ -30,5 +30,3 @@
     .shell-sidebar-component-links-container {
         @apply pt-4;
     }
-
-}

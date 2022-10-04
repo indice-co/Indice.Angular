@@ -1,0 +1,41 @@
+
+    .toggle-buttons-list-container {
+        @apply relative items-center inline-flex;
+    }
+
+    .toggle-buttons-list-icon-container {
+        @apply flex-none mr-2;
+    }
+
+    .toggle-buttons-list-drop-down-contaner {
+        @apply block lg:hidden z-10;
+    }
+
+    /* mw-40 not supported*/
+    .toggle-buttons-list-drop-down {
+        @apply w-full;
+    }
+
+    .toggle-buttons-list {
+        @apply hidden lg:block;
+    }
+
+    .toggle-buttons-list-button {
+        @apply relative inline-flex items-center p-2 first:border-l first:rounded-l-sm last:rounded-r-sm border-t border-b border-r border-gray-300 bg-white text-xs text-gray-700 hover:text-gray-900 focus:z-10 focus:outline-none;
+    }
+
+    .toggle-buttons-list-button-selected {
+        @apply bg-gray-100;
+    }
+
+    .toggle-buttons-list-button-icon-container {
+        @apply flex-none mr-2;
+    }
+
+    .toggle-buttons-list-button-button-text {
+        @apply mr-2 block overflow-ellipsis overflow-hidden;
+    }
+
+    .toggle-buttons-list-button-button-count {
+       @apply ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs text-gray-700 tabular-nums; 
+    }

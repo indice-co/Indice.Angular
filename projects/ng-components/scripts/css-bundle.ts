@@ -7,7 +7,7 @@ async function bundleScss(): Promise<void> {
   console.log('running bundleScss');
   const isolatedStyles = ['modal.css'];
   const bundler = new scssBundler.Bundler();
-  const sourcePath = './projects/ng-components/src/_styles.css';
+  const sourcePath = './projects/ng-components/src/_styles.scss';
   const { found, bundledContent, imports } = await bundler.bundle(sourcePath, ['./src/**/*.css', './src/**/*.scss']);
   if (imports) {
     console.log('running bundleScss - imports found');
@@ -22,11 +22,11 @@ async function bundleScss(): Promise<void> {
   }
 
   if (found) {
-    await fs.writeFile('./dist/ng-components/_styles.css', bundledContent);
+    await fs.writeFile('./dist/ng-components/_styles.scss', bundledContent);
     isolatedStyles.forEach((f) => {
       fs.copy(`./projects/ng-components/src/assets/styles/${f}`, `./dist/ng-components/${f}`);
     });
-    console.log('running bundleScss - finidshed file');
+    console.log('running bundleScss - finished bundling!');
   }
 }
 

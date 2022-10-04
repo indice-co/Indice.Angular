@@ -1,4 +1,4 @@
-@layer components {
+
 
   .md-visible {
     @apply hidden md:block;
@@ -33,6 +33,4 @@
   .selected-view-indicator {
     @apply absolute top-0 right-0 block ml-2 h-1.5 w-1.5 rounded-full ring-1 ring-white bg-blue-300;
   }
-
-}
 

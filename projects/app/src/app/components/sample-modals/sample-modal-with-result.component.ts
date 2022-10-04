@@ -9,7 +9,9 @@ export class SampleModalWithResultComponent {
   public showActions = true;
   public secondModalRef: Modal | undefined;
   public title = 'A title';
-  constructor(public modalRef: Modal) {}
+  constructor(public modalRef: Modal) {
+    console.log('SampleModalWithResultComponent', this.modalRef.content);
+  }
 
   public answer(result: boolean): void {
     this.modalRef.hide(result);

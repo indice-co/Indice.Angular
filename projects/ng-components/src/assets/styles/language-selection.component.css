@@ -1,0 +1,11 @@
+.langs-button {
+    @apply text-blue-300 hover:text-blue-400;
+}
+
+.langs-menu-expanded {
+    @apply transition ease-out duration-200 origin-top-right z-30 absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
+
+.langs-menu-collapsed {
+    @apply hidden transition ease-in duration-75 origin-top-right z-30 right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+}

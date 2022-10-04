@@ -3,8 +3,7 @@ import { HeaderMetaItem, Icons, RouterViewAction, ViewAction } from '@indice/ng-
 
 @Component({
   selector: 'app-model-view-layout-sample',
-  templateUrl: './model-view-layout-sample.component.html',
-  styleUrls: ['./model-view-layout-sample.component.scss']
+  templateUrl: './model-view-layout-sample.component.html'
 })
 export class ModelViewLayoutSampleComponent implements OnInit {
 

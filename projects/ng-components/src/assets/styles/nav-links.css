@@ -1,4 +1,4 @@
-@layer components {
+
 
   .nav-link {
     @apply cursor-pointer text-white hover:bg-gray-700 hover:text-white hover:shadow-sm px-3 py-2 rounded-sm text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
@@ -63,4 +63,3 @@
   .min-nav-link-text-width {
     width: 220px;
   }
-}

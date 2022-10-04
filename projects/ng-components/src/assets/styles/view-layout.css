@@ -1,4 +1,4 @@
-@layer components {
+
 
   .view-container {
     @apply mt-4 sm:mt-5 flex flex-col;
@@ -75,10 +75,10 @@
   .search-container {
     @apply relative inline-flex items-center bg-white text-gray-400 focus-within:text-gray-600 hover:shadow-sm border border-gray-200;
   }
-
-  /* .search-input {
+/* 
+  .search-input {
     @apply pl-10 pr-20 w-60 bg-gray-50 rounded-sm text-sm text-gray-900 border-gray-400 placeholder-gray-500 outline-none focus:shadow focus:outline-none z-0;
-  } */
+  }  */
 
   .search-input {
     @apply w-60 rounded-sm text-sm text-gray-900 pt-2 pl-2 pb-2 placeholder-gray-500 outline-none border-0 focus:outline-none focus:ring-0;
@@ -87,4 +87,3 @@
   .search-button {
     @apply mr-1 text-xs focus:outline-none inline-flex items-center justify-center w-6 h-6 text-gray-800 hover:text-gray-900;
   }
-}

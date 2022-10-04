@@ -1,4 +1,4 @@
-@layer components {
+
 
   .side-pane-outer-container {
     @apply fixed inset-0 overflow-hidden z-40;
@@ -43,4 +43,3 @@
   .side-pane {
     @apply flex flex-col bg-white shadow-xl overflow-y-hidden;
   }
-}

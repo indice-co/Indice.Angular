@@ -1,4 +1,4 @@
-@layer components {
+
   .model-view-container {
     @apply mt-5 min-w-full min-h-screen;
   }
@@ -42,4 +42,3 @@
   .model-view-details-container {
     @apply sm:px-6 lg:px-2 lg:col-span-8 md:col-span-9;
   }
-}

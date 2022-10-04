@@ -1,4 +1,4 @@
-@layer components {
+
 
   .sidebar-off-canvas-menu-container {
     @apply relative z-40 md:hidden;
@@ -118,7 +118,4 @@
   .sidebar-static-menu-header-far-container {
     @apply ml-4 flex items-center md:ml-6;
   }
-
-}
-
 

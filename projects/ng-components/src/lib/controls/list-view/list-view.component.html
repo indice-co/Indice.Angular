@@ -2,7 +2,8 @@
   <lib-advanced-search *ngIf="searchOptions && searchOptions.length > 0"
                        [search-options]="searchOptions"
                        [filters]="filters"
-                       (advancedSearchChanged)="emitAdvancedSearchChanged($event)"></lib-advanced-search>
+                       (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
+  </lib-advanced-search>
 
   <lib-pager *ngIf="showPager && (pagerPosition == 'top' || pagerPosition == 'both')"
              [page]="page"
@@ -16,6 +17,7 @@
              (pageSizeChanged)="emitPageSizeChanged($event)"
              (sortChanged)="emitSortChanged($event)"
              (sortdirChanged)="emitSortdirChanged($event)">
+             <ng-content select="[pager-near-content]" ngProjectAs="[pager-near-content]"></ng-content>
   </lib-pager>
 </div>
 

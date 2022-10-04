@@ -1,4 +1,4 @@
-@layer components {
+
   .form-layout-container {
     @apply bg-white shadow-sm border border-gray-200 rounded-sm;
   }
@@ -46,4 +46,3 @@
   .form-actions {
     @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6 flex justify-end;
   }
-}

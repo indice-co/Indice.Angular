@@ -1,4 +1,4 @@
-@layer components {
+
     .datepicker-input {
         @apply w-full focus:ring-0 focus:outline-none rounded-none sm:text-sm border-gray-300 focus:border-transparent;
     }
@@ -62,4 +62,3 @@
     .datepicker-days.out-of-range{
         @apply cursor-not-allowed opacity-25;
     }
-}

@@ -1,5 +1,8 @@
 <div class="pager-container">
-  <div class="pager-container-inner">
+  <div class="pager-container-near">
+      <ng-content select="[pager-near-content]"></ng-content>
+  </div>
+  <div class="pager-container-far">
     <div class="inline-flex" *ngIf="sortOptions && sortOptions.length > 0">
       <lib-drop-down-menu [options]="sortOptions" [selected]="sort" (selectedChanged)="sortOptionChanged($event)"></lib-drop-down-menu>
       <button (click)="toggleSortdir()" [disabled]="!sort || busy" class="pager-icon-button">
@@ -11,7 +14,7 @@
     </div>
     <div class="pager-pages-container">
       <lib-drop-down-menu [options]="pageSizeOptions" [selected]="pageSize" (selectedChanged)="pageSizeOptionChanged($event)"></lib-drop-down-menu>
-      <div class="mx-2"  *ngIf="count !== null && count > pageSize">
+      <div class="mx-1">
         <button [disabled]="!canPreviousPage || busy"  (click)="previousPage()"
                 class="pager-arrow-button-left">
           <span class="sr-only">Previous</span>
@@ -28,7 +31,7 @@
           </svg>
         </button>
       </div>
-      <lib-drop-down-menu *ngIf="(pages && pages.length > 0) && (count !== null && count > pageSize)" [options]="pages" [selected]="page" (selectedChanged)="pageOptionChanged($event)"></lib-drop-down-menu>
+      <lib-drop-down-menu *ngIf="false && (pages && pages.length > 0)" [options]="pages" [selected]="page" (selectedChanged)="pageOptionChanged($event)"></lib-drop-down-menu>
     </div>
   </div>
 </div>

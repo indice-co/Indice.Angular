@@ -1,4 +1,4 @@
-@layer components {
+
   .collapsible-panel-container {
     @apply bg-white border border-gray-200 mb-2;
   }
@@ -22,4 +22,3 @@
   .collapsible-panel-content-container {
     @apply relative overflow-hidden transition-all duration-700;
   }
-}

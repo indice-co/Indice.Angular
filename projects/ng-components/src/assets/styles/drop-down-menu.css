@@ -1,11 +1,11 @@
-@layer components {
+
   .dropdown-container {
     @apply relative w-auto;
   }
 
   .dropdown-button {
-    @apply bg-white relative w-full border border-gray-300 rounded-sm shadow-sm pl-3 pr-10 py-2 text-left cursor-default
-  focus:outline-none focus:border-gray-500 sm:text-sm;
+    @apply bg-white relative w-full border border-gray-300 rounded-sm pl-3 pr-10 py-2 text-left cursor-default
+  focus:outline-none focus:border-gray-500 text-sm;
   }
 
   .dropdown-selected-text {
@@ -21,7 +21,7 @@
   }
 
   .dropdown-ul {
-    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-x-hidden;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-x-hidden;
   }
 
   .dropdown-li {
@@ -47,4 +47,3 @@
   .dropdown-li-selected-indicator {
     @apply h-5 w-5;
   }
-}
