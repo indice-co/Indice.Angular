@@ -13,9 +13,9 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;
   @Input() title = 'no title';
   // tslint:disable-next-line:no-input-rename
-  @Input('primary-links') primary: { text: string, link: string }[] | null = null;
+  @Input('primary-links') primary: { text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
   // tslint:disable-next-line:no-input-rename
-  @Input('secondary-links') secondary: { text: string, link: string }[] | null = null;
+  @Input('secondary-links') secondary: { text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
     // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
@@ -32,13 +32,13 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
       this.optionsLoaded = true;
       if(this.primary) {
         this.primary.forEach(p => {
-          this._options.push(new MenuOption(p.text, p.link));
+          this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
 
       if(this.secondary) {
         this.secondary.forEach(p => {
-          this._options.push(new MenuOption(p.text, p.link));
+          this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
       this.selectedTab = this._options[0].value; 
@@ -53,7 +53,8 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
         if(event.urlAfterRedirects) {
           var urlParts = event.urlAfterRedirects.split('/');
           if(urlParts && urlParts.length > 0) {
-            this.selectedTab = urlParts[urlParts.length-1];
+            const lastPart = urlParts[urlParts.length-1];
+            this.selectedTab = lastPart.split('?')[0];
           }
         }
       }

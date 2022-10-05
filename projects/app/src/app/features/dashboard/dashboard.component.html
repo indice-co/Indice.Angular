@@ -43,6 +43,10 @@
     </div>
   </div>
   <div class="cards-deck-4 mb-4">
+    <lib-kpi-tile [title]="'Custom tile with content'"
+                  [kpi]="'1'">
+          <div class="bg-red h-10 w-full">LALALALA</div>
+      </lib-kpi-tile>
     <ng-container *ngFor="let tile of tiles">
       <lib-kpi-tile [title]="tile.text"
                     [kpi]="tile.count"

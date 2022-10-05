@@ -18,6 +18,7 @@
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
                        [routerLink]="section.link"
+                       [routerLinkActiveOptions]="{ exact: false }"
                        class="view-nav-link">
                       {{section.text}}
                     </a>
@@ -28,6 +29,7 @@
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
                        [routerLink]="section.link"
+                       [routerLinkActiveOptions]="{ exact: false }"
                        class="view-nav-link">
                       {{section.text}}
                     </a>
