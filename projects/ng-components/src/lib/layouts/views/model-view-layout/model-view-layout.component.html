@@ -8,6 +8,9 @@
               <ng-content></ng-content>
             </div>
             <!-- menu items -->
+            <div class="model-view-menu-container-mobile">
+                <lib-drop-down-menu [options]="tabsOptions" [selected]="selectedTab" (selectedChange)="navigateLink($event)"></lib-drop-down-menu>
+            </div>
             <div class="model-view-menu-container">
               <nav class="model-view-menu-nav">
                 <div class="model-view-menu-item">
@@ -24,7 +27,6 @@
                   <ng-container *ngFor="let section of secondary">
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
-                       [routerLinkActiveOptions]="{ exact: true }"
                        [routerLink]="section.link"
                        class="view-nav-link">
                       {{section.text}}

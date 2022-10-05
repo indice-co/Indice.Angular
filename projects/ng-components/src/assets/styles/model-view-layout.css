@@ -24,7 +24,11 @@
   }
 
   .model-view-menu-container {
-    @apply mt-2 px-4 py-4 flow-root;
+    @apply mt-2 px-4 py-4 flow-root hidden sm:block;
+  }
+
+  .model-view-menu-container-mobile {
+    @apply mt-2 px-4 py-2 flow-root sm:hidden;
   }
 
   .model-view-menu-nav {

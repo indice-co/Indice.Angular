@@ -5,7 +5,7 @@
 
   .dropdown-button {
     @apply bg-white relative w-full border border-gray-300 rounded-sm pl-3 pr-10 py-2 text-left cursor-default
-  focus:outline-none focus:border-gray-500 text-sm;
+  focus:outline-none focus:border-gray-500 text-xs;
   }
 
   .dropdown-selected-text {
@@ -21,7 +21,7 @@
   }
 
   .dropdown-ul {
-    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-x-hidden;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-xs ring-1 ring-black ring-opacity-5 focus:outline-none overflow-x-hidden;
   }
 
   .dropdown-li {
