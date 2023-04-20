@@ -44,5 +44,5 @@
   }
 
   .model-view-details-container {
-    @apply sm:px-6 lg:px-2 lg:col-span-8 md:col-span-9;
+    @apply sm:px-6 lg:px-2 lg:col-span-9 md:col-span-10;
   }

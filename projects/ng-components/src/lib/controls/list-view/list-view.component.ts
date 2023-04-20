@@ -91,7 +91,7 @@ export class ListViewComponent implements OnChanges {
   public detailsTemplate: any | null | undefined = null;
 
   constructor() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 9; i++) {
       this.loaderItems.push({});
     }
     if (this.pagerPosition) {

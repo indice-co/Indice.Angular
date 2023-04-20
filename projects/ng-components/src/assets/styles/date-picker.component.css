@@ -35,10 +35,10 @@
         @apply flex flex-wrap -mx-1 items-center;
     }
     .datepicker-year {
-        @apply cursor-pointer text-center hover:text-blue-600 text-sm rounded-full leading-loose transition ease-in-out duration-100;
+        @apply cursor-pointer text-center hover:text-white text-sm rounded-sm leading-loose transition ease-in-out duration-100;
     }
     .datepicker-year.selected {
-        @apply bg-gray-700 text-blue-600 font-medium;
+        @apply bg-gray-700 text-white font-medium;
     }
     .datepicker-year.not-selected {
         @apply text-gray-800 hover:bg-gray-800;
@@ -49,11 +49,11 @@
     }
 
     .datepicker-days {
-        @apply cursor-pointer text-center hover:text-blue-600 text-sm rounded-full leading-loose transition ease-in-out duration-100;
+        @apply cursor-pointer text-center hover:text-white text-sm rounded-sm leading-loose transition ease-in-out duration-100;
     }
 
     .datepicker-days.selected {
-        @apply bg-gray-700 text-blue-600 font-medium;
+        @apply bg-gray-700 text-white font-medium;
     }
     .datepicker-days.not-selected {
         @apply text-gray-800 hover:bg-gray-800;
