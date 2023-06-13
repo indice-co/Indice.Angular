@@ -9,6 +9,19 @@
             <lib-drop-down-menu [options]="menuOptions"
                                 (selectedChanged)="selectedFieldChanged($event)"></lib-drop-down-menu>
         </div>
+        <!--SEARCH FIELDS OPERATOR MENU-->
+        <div *ngIf="operatorsEnabled && selectedField"
+             class="advanced-search-filter-value-container">
+            <div *ngIf="selectedField.dataType === 'array' || selectedField.dataType === 'string'">
+                <label class="advanced-search-filter-value-label"
+                       for="fieldValue">
+                    &nbsp;
+                </label>
+                <lib-drop-down-menu [options]="operatorMenuOptions"
+                                    [selected]="fieldValue"
+                                    (selectedChanged)="selectedOperatorChanged($event)"></lib-drop-down-menu>
+            </div>
+        </div>
         <!--SEARCH FIELDS INPUT-->
         <div *ngIf="selectedField"
              class="advanced-search-filter-value-container">

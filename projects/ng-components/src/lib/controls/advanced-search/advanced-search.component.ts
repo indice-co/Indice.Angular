@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuOption } from '../../types';
-import { SearchOption, FilterClause, QueryParameters, Operators } from './models';
+import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions } from './models';
 
 @Component({
   selector: 'lib-advanced-search',
@@ -9,8 +9,13 @@ import { SearchOption, FilterClause, QueryParameters, Operators } from './models
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input('operators-enabled') operatorsEnabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
+  public operatorMenuOptions: MenuOption[] = [];
+  public operatorOptions = OperatorOptions;
+  public operators: { [key: string]: MenuOption[] } = {};
+  public selectedOperator?: string;
   public selectedField?: SearchOption;
   public fieldValue?: string;
   public fieldValueDateFrom: any;
@@ -46,10 +51,27 @@ export class AdvancedSearchComponent implements OnInit {
 
   public selectedFieldChanged(field: string) {
     this.selectedField = this.searchOptions.find((searchOption) => searchOption.field === field);
+    let operatorMenuOpts: MenuOption[] = [];
+    this.operatorOptions[this.selectedField?.dataType != undefined ? this.selectedField.dataType : 'string'].forEach(x => {
+      operatorMenuOpts.push({
+        text: x.description != undefined ? x.description : x.label,
+        value: x.value,
+        data: undefined,
+        description: x.description,
+        icon: undefined
+      })
+    })
+    this.operatorMenuOptions = operatorMenuOpts;
     this.fieldValue = undefined;
   }
 
+  public selectedOperatorChanged(operator: any) {
+    this.selectedOperator = operator;
+    console.log(this.selectedOperator);
+  }
+
   public selectedFieldValueChanged(fieldValue: string) {
+    console.log(fieldValue);
     this.fieldValue = fieldValue;
   }
 
@@ -79,9 +101,10 @@ export class AdvancedSearchComponent implements OnInit {
       if (this.fieldValue === undefined) { // handle empty field value
         return;
       }
+      debugger;
+      this.selectedOperator = this.selectedOperator ?? 'eq';
       // create the filterClause
-      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, Operators.EQUALS.value as FilterClause.Op, this.selectedField.dataType, this.searchOptions); // operator is always 'equals'...
-
+      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions); // operator is always 'equals'...
       if (!this.selectedField.multiTerm) { // multiTerm means that we can have multiple filter values of the SAME filter clause (eg "filter case types that are Phone OR Address")
         this.filters = this.filters.filter((f) => {
           return f.member !== this.selectedField!.field;

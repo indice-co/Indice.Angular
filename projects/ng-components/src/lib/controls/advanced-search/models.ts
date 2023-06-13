@@ -1,5 +1,9 @@
 import { formatDate } from "@angular/common";
 
+export interface IDictionary<T> {
+  [key: string]: T;
+}
+
 export namespace Operators {
   export const EQUALS = { label: '=', value: 'eq', description: 'Ίσο με' };
   export const NOT_EQUALS = { label: '≠', value: 'neq', description: 'Διάφορο του' };
@@ -43,6 +47,11 @@ export namespace FilterClause {
   export type Op = 'eq' | 'neq' | 'gt' | 'lt' | 'gte' | 'lte' | 'contains' | 'in';
   export type Dt = 'string' | 'integer' | 'number' | 'boolean' | 'datetime' | 'array' | 'daterange' | undefined;
 }
+
+export const OperatorOptions: IDictionary<{ label: string; value: string; description?: string }[]> = {
+  'string': [Operators.EQUALS, Operators.NOT_EQUALS, Operators.CONTAINS],
+  'array': [Operators.EQUALS, Operators.NOT_EQUALS]
+};
 
 export class FilterClause {
   // Member path to compare
