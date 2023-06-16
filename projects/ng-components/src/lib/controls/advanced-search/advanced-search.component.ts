@@ -9,7 +9,7 @@ import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
-  @Input('operators-disabled') operatorsDisabled: boolean = true;
+  @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];

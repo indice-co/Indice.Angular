@@ -11,10 +11,10 @@
         </div>
         <!--SEARCH FIELDS OPERATOR MENU-->
         <div *ngIf="!operatorsDisabled && selectedField"
-             class="advanced-search-filter-value-container">
+             class="advanced-search-filter-operator-container">
             <div *ngIf="selectedField.dataType === 'array' || selectedField.dataType === 'string'">
-                <label class="advanced-search-filter-value-label"
-                       for="fieldValue">
+                <label class="advanced-search-filter-operator-label"
+                       for="selectedOperator">
                     &nbsp;
                 </label>
                 <lib-drop-down-menu [options]="operatorMenuOptions"

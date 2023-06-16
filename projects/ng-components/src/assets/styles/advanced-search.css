@@ -24,6 +24,14 @@
     @apply block; 
   }
 
+  .advanced-search-filter-operator-container {
+
+  }
+
+  .advanced-search-filter-operator-label {
+    @apply block; 
+  }
+
   .advanced-search-filter-value-input {
     @apply w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-12 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm;
   }
