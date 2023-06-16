@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MenuOption } from '../../types';
-import { SearchOption, FilterClause, QueryParameters, Operators } from './models';
+import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions } from './models';
 
 @Component({
   selector: 'lib-advanced-search',
@@ -9,8 +9,13 @@ import { SearchOption, FilterClause, QueryParameters, Operators } from './models
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
+  public operatorMenuOptions: MenuOption[] = [];
+  public operatorOptions = OperatorOptions;
+  public operators: { [key: string]: MenuOption[] } = {};
+  public selectedOperator?: string;
   public selectedField?: SearchOption;
   public fieldValue?: string;
   public fieldValueDateFrom: any;
@@ -46,7 +51,29 @@ export class AdvancedSearchComponent implements OnInit {
 
   public selectedFieldChanged(field: string) {
     this.selectedField = this.searchOptions.find((searchOption) => searchOption.field === field);
+    this.selectedOperator = undefined;
+    // Since we have special UI handling for the daterange, we don't need to fill the operatorMenuOptions in that case.
+    if (this.selectedField?.dataType != 'daterange') {
+      let operatorMenuOpts: MenuOption[] = [];
+      // based on the data type that we are filtering, fill the operator dropdown with the correct operators. The default is the string with equals/not-equals/contains
+      this.operatorOptions[this.selectedField?.dataType ?? 'string'].forEach(x => {
+        operatorMenuOpts.push({
+          text: x.description ?? x.label,
+          value: x.value,
+          data: undefined,
+          description: x.description,
+          icon: undefined
+        })
+      })
+      this.operatorMenuOptions = operatorMenuOpts;
+      // Preselect the first option from the operators menu so there will always be a default value, which is the 'equals' operator for all data types for now.
+      this.selectedOperator = this.operatorMenuOptions[0].value;
+    }
     this.fieldValue = undefined;
+  }
+
+  public selectedOperatorChanged(operator: any) {
+    this.selectedOperator = operator;
   }
 
   public selectedFieldValueChanged(fieldValue: string) {
@@ -79,9 +106,10 @@ export class AdvancedSearchComponent implements OnInit {
       if (this.fieldValue === undefined) { // handle empty field value
         return;
       }
+      // if no operator was provided, it falls back to the default 'equals' operator
+      this.selectedOperator = this.selectedOperator ?? Operators.EQUALS.value;
       // create the filterClause
-      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, Operators.EQUALS.value as FilterClause.Op, this.selectedField.dataType, this.searchOptions); // operator is always 'equals'...
-
+      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions);
       if (!this.selectedField.multiTerm) { // multiTerm means that we can have multiple filter values of the SAME filter clause (eg "filter case types that are Phone OR Address")
         this.filters = this.filters.filter((f) => {
           return f.member !== this.selectedField!.field;
@@ -106,11 +134,21 @@ export class AdvancedSearchComponent implements OnInit {
     }
   }
 
+  public isDateValueUnpicked(): boolean {
+    return this.fieldValueDateFrom === undefined && this.fieldValueDateTo === undefined;
+  }
+
+  public isFieldAndOperatorUnpicked(): boolean {
+    // if the operators are enabled we need to check for both the field value and the operator value
+    return this.operatorsDisabled ? this.fieldValue === undefined : (this.fieldValue === undefined || this.selectedOperator === undefined);
+  }
+
   public clear() {
     this.fieldValueDateFrom = undefined;
     this.fieldValueDateTo = undefined;
     this.selectedField = undefined;
     this.fieldValue = undefined;
+    this.selectedOperator = undefined;
     this.filters = [];
     this.advancedSearchChanged.emit(this.filters);
   }
