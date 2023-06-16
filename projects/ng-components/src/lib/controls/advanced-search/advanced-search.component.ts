@@ -107,7 +107,7 @@ export class AdvancedSearchComponent implements OnInit {
         return;
       }
       // if no operator was provided, it falls back to the default 'equals' operator
-      this.selectedOperator = this.selectedOperator ?? 'eq';
+      this.selectedOperator = this.selectedOperator ?? Operators.EQUALS.value;
       // create the filterClause
       const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions);
       if (!this.selectedField.multiTerm) { // multiTerm means that we can have multiple filter values of the SAME filter clause (eg "filter case types that are Phone OR Address")
