@@ -66,6 +66,7 @@ export class AdvancedSearchComponent implements OnInit {
         })
       })
       this.operatorMenuOptions = operatorMenuOpts;
+      // Preselect the first option from the operators menu so there will always be a default value, which is the 'equals' operator for all data types for now.
       this.selectedOperator = this.operatorMenuOptions[0].value;
     }
     this.fieldValue = undefined;
@@ -131,6 +132,15 @@ export class AdvancedSearchComponent implements OnInit {
       this.filters.splice(index, 1);
       this.advancedSearchChanged.emit(this.filters);
     }
+  }
+
+  public isDateValueUnpicked(): boolean {
+    return this.fieldValueDateFrom === undefined && this.fieldValueDateTo === undefined;
+  }
+
+  public isFieldAndOperatorUnpicked(): boolean {
+    // if the operators are enabled we need to check for both the field value and the operator value
+    return this.operatorsDisabled ? this.fieldValue === undefined : (this.fieldValue === undefined || this.selectedOperator === undefined);
   }
 
   public clear() {

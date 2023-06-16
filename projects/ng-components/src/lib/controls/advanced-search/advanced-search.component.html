@@ -69,8 +69,8 @@
         <ng-container *ngIf="selectedField">
             <!--DO SEARCH-->
             <button type="button"
-                    [ngClass]="{'opacity-50 cursor-not-allowed': fieldValueDateFrom === undefined && fieldValueDateTo === undefined && (fieldValue === undefined || (operatorsDisabled || selectedOperator === undefined)) && (fieldValue === undefined || !operatorsDisabled)}"
-                    [disabled]="fieldValueDateFrom === undefined && fieldValueDateTo === undefined && (fieldValue === undefined || (operatorsDisabled || selectedOperator === undefined)) && (fieldValue === undefined || !operatorsDisabled)"
+                    [ngClass]="{'opacity-50 cursor-not-allowed': isDateValueUnpicked() && isFieldAndOperatorUnpicked()}"
+                    [disabled]="isDateValueUnpicked() && isFieldAndOperatorUnpicked()"
                     (click)="search()">
                 <i [class]="'ms-Icon ms-Icon--Search'"></i>
             </button>
