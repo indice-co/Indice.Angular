@@ -84,6 +84,10 @@
     @apply flex items-center h-16 flex-shrink-0 ;
   }
 
+  .shell-sidebar-logo {
+    @apply h-8 w-auto;
+  }
+
   /* !!!! malakai onoma !!!! */
   .sidebar-static-menu-wrapper {
     @apply flex flex-col md:pl-20;

@@ -28,7 +28,7 @@
           </button>
         </div>
         <div class="sidebar-off-canvas-app-logo-container">
-          <img class="h-8 w-auto"
+          <img class="shell-sidebar-logo"
                [src]="config?.appLogo"
                [alt]="config?.appLogoAlt">
         </div>
@@ -46,7 +46,7 @@
       <div class="sidebar-static-menu-container-inner">
         <div class="sidebar-static-menu-app-logo-container">
           <img *ngIf="!showMobileSidebar"
-               class="h-8 w-auto"
+               class="shell-sidebar-logo"
                [src]="config?.appLogo"
                [alt]="config?.appLogoAlt">
           <button *ngIf="showMobileSidebar"
@@ -125,7 +125,7 @@
         <div class="sidebar-static-menu-header-near-container">
           <div class="sidebar-static-menu-header-app-logo-container"
                *ngIf="showMobileSidebar">
-            <img class="h-8 w-auto"
+            <img class="shell-sidebar-logo"
                  [src]="config?.appLogo"
                  [alt]="config?.appLogoAlt">
           </div>
