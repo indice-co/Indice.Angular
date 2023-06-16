@@ -1,9 +1,5 @@
 import { formatDate } from "@angular/common";
 
-export interface IDictionary<T> {
-  [key: string]: T;
-}
-
 export namespace Operators {
   export const EQUALS = { label: '=', value: 'eq', description: 'Ίσο με' };
   export const NOT_EQUALS = { label: '≠', value: 'neq', description: 'Διάφορο του' };
@@ -48,6 +44,11 @@ export namespace FilterClause {
   export type Dt = 'string' | 'integer' | 'number' | 'boolean' | 'datetime' | 'array' | 'daterange' | undefined;
 }
 
+// Dictionary with the DataType as a key and the value an array of available operators.
+export interface IDictionary<T> {
+  [key: string]: T;
+}
+
 export const OperatorOptions: IDictionary<{ label: string; value: string; description?: string }[]> = {
   'string': [Operators.EQUALS, Operators.NOT_EQUALS, Operators.CONTAINS],
   'array': [Operators.EQUALS, Operators.NOT_EQUALS]
@@ -88,8 +89,22 @@ export class FilterClause {
         this.uiName = fo.name;
       }
     }
-    // uiOperator
-    this.uiOperator = this.dataType === 'datetime' ? '' : Operators.EQUALS.label; // that's fine (for now)...
+    // We don't want a uiOperator for the datetime dataType. For strings and arrays we have the equals/not-equals/contains operators. The switch case can be expanded for more data types/operators when needed.
+    if (this.dataType === 'datetime') {
+      this.uiOperator = '';
+    } else {
+      switch (this.operator) {
+        case (Operators.EQUALS.value):
+          this.uiOperator = Operators.EQUALS.label;
+          break;
+        case (Operators.NOT_EQUALS.value):
+          this.uiOperator = Operators.NOT_EQUALS.label;
+          break;
+        case (Operators.CONTAINS.value):
+          this.uiOperator = Operators.CONTAINS.label;
+          break;
+      }
+    }
     // uiValue
     this.uiValue = this.value;
     if ((this.dataType === 'datetime')) {

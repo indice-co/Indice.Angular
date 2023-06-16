@@ -10,7 +10,7 @@
                                 (selectedChanged)="selectedFieldChanged($event)"></lib-drop-down-menu>
         </div>
         <!--SEARCH FIELDS OPERATOR MENU-->
-        <div *ngIf="operatorsEnabled && selectedField"
+        <div *ngIf="!operatorsDisabled && selectedField"
              class="advanced-search-filter-value-container">
             <div *ngIf="selectedField.dataType === 'array' || selectedField.dataType === 'string'">
                 <label class="advanced-search-filter-value-label"
@@ -18,7 +18,7 @@
                     &nbsp;
                 </label>
                 <lib-drop-down-menu [options]="operatorMenuOptions"
-                                    [selected]="fieldValue"
+                                    [selected]="selectedOperator"
                                     (selectedChanged)="selectedOperatorChanged($event)"></lib-drop-down-menu>
             </div>
         </div>
@@ -69,8 +69,8 @@
         <ng-container *ngIf="selectedField">
             <!--DO SEARCH-->
             <button type="button"
-                    [ngClass]="{'opacity-50 cursor-not-allowed': fieldValue === undefined && fieldValueDateFrom === undefined && fieldValueDateTo === undefined}"
-                    [disabled]="fieldValue === undefined && fieldValueDateFrom === undefined && fieldValueDateTo === undefined"
+                    [ngClass]="{'opacity-50 cursor-not-allowed': fieldValueDateFrom === undefined && fieldValueDateTo === undefined && (fieldValue === undefined || (operatorsDisabled || selectedOperator === undefined)) && (fieldValue === undefined || !operatorsDisabled)}"
+                    [disabled]="fieldValueDateFrom === undefined && fieldValueDateTo === undefined && (fieldValue === undefined || (operatorsDisabled || selectedOperator === undefined)) && (fieldValue === undefined || !operatorsDisabled)"
                     (click)="search()">
                 <i [class]="'ms-Icon ms-Icon--Search'"></i>
             </button>

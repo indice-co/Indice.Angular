@@ -9,7 +9,7 @@ import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
-  @Input('operators-enabled') operatorsEnabled: boolean = false;
+  @Input('operators-disabled') operatorsDisabled: boolean = true;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
@@ -51,27 +51,31 @@ export class AdvancedSearchComponent implements OnInit {
 
   public selectedFieldChanged(field: string) {
     this.selectedField = this.searchOptions.find((searchOption) => searchOption.field === field);
-    let operatorMenuOpts: MenuOption[] = [];
-    this.operatorOptions[this.selectedField?.dataType != undefined ? this.selectedField.dataType : 'string'].forEach(x => {
-      operatorMenuOpts.push({
-        text: x.description != undefined ? x.description : x.label,
-        value: x.value,
-        data: undefined,
-        description: x.description,
-        icon: undefined
+    this.selectedOperator = undefined;
+    // Since we have special UI handling for the daterange, we don't need to fill the operatorMenuOptions in that case.
+    if (this.selectedField?.dataType != 'daterange') {
+      let operatorMenuOpts: MenuOption[] = [];
+      // based on the data type that we are filtering, fill the operator dropdown with the correct operators. The default is the string with equals/not-equals/contains
+      this.operatorOptions[this.selectedField?.dataType ?? 'string'].forEach(x => {
+        operatorMenuOpts.push({
+          text: x.description ?? x.label,
+          value: x.value,
+          data: undefined,
+          description: x.description,
+          icon: undefined
+        })
       })
-    })
-    this.operatorMenuOptions = operatorMenuOpts;
+      this.operatorMenuOptions = operatorMenuOpts;
+      this.selectedOperator = this.operatorMenuOptions[0].value;
+    }
     this.fieldValue = undefined;
   }
 
   public selectedOperatorChanged(operator: any) {
     this.selectedOperator = operator;
-    console.log(this.selectedOperator);
   }
 
   public selectedFieldValueChanged(fieldValue: string) {
-    console.log(fieldValue);
     this.fieldValue = fieldValue;
   }
 
@@ -101,10 +105,10 @@ export class AdvancedSearchComponent implements OnInit {
       if (this.fieldValue === undefined) { // handle empty field value
         return;
       }
-      debugger;
+      // if no operator was provided, it falls back to the default 'equals' operator
       this.selectedOperator = this.selectedOperator ?? 'eq';
       // create the filterClause
-      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions); // operator is always 'equals'...
+      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions);
       if (!this.selectedField.multiTerm) { // multiTerm means that we can have multiple filter values of the SAME filter clause (eg "filter case types that are Phone OR Address")
         this.filters = this.filters.filter((f) => {
           return f.member !== this.selectedField!.field;
@@ -134,6 +138,7 @@ export class AdvancedSearchComponent implements OnInit {
     this.fieldValueDateTo = undefined;
     this.selectedField = undefined;
     this.fieldValue = undefined;
+    this.selectedOperator = undefined;
     this.filters = [];
     this.advancedSearchChanged.emit(this.filters);
   }
