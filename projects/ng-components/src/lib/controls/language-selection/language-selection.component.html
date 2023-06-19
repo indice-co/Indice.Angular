@@ -1,11 +1,13 @@
 <div class="relative" (clickOutside)="onClickOutside($event)">
-  <button class="text-blue-300 hover:text-blue-400" (click)="menuExpanded = !menuExpanded">
+  <button class="langs-button" (click)="menuExpanded = !menuExpanded">
     <i class="text-xs mr-1 ms-Icon ms-Icon--Globe"></i>
-    <span>{{langsService?.selected || langsService?.default}}</span>
+    <ng-container *ngFor="let lang of langsService?.options | async">
+      <span *ngIf="lang.value === langsService?.selected">{{lang.text}}</span>
+    </ng-container>
   </button>
 
   <div
-    [class]="menuExpanded ? 'transition ease-out duration-200 origin-top-right z-30 absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none':'hidden transition ease-in duration-75 origin-top-right z-30 right-0 mt-2 w-56 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+    [class]="menuExpanded ? 'langs-menu-expanded':'langs-menu-collapsed'" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
     <div class="py-1" role="none">
       <ng-container *ngFor="let lang of langsService?.options | async">
         <a (click)="selectLang(lang)" *ngIf="lang.value != langsService?.selected" class="nav-link-profile" role="menuitem" tabindex="-1" id="menu-item-0">

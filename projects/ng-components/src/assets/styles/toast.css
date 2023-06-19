@@ -1,4 +1,3 @@
-@layer components {
   .toast {
     @apply fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start z-50;
     animation: move 400ms ease-in;
@@ -69,4 +68,3 @@
       opacity: 0;
     }
   }
-}

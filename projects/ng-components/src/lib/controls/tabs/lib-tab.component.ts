@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as uuid from 'uuid';
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
+import { LibTabLabelDirective } from './lib-tab-label.directive';
 
 @Component({
     selector: 'lib-tab',
@@ -21,15 +22,17 @@ export class LibTabComponent implements OnInit {
     ) { }
 
     /** The content provided for the tab. */
-    @ViewChild(TemplateRef, { static: true }) public content!: TemplateRef<any>;
-    /** A label for the tab header. */
-    @Input() public label: string | undefined;
+    @ViewChild(TemplateRef, { static: true }) public content: TemplateRef<any> | null = null;
+    /** A label template for the tab header. */
+    @ContentChild(LibTabLabelDirective) public label: LibTabLabelDirective | undefined;
     /** Indicates the unique id assigned in the tab. */
-    @Input() public id!: string;
+    @Input() public id: string | undefined;
+    @Input() public labelText: string | undefined;
 
     /** Indicates the index of the tab. */
-    public get index(): number | undefined {
-        return this._tabGroup?.tabs?.toArray().indexOf(this) || undefined;
+    public get index(): number {
+        const index = this._tabGroup?.tabs.toArray()?.indexOf(this);
+        return index;
     }
 
     /** Indicates whether the tab is active. */

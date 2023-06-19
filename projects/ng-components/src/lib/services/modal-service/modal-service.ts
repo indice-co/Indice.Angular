@@ -54,6 +54,7 @@ export class ModalService implements OnDestroy {
     this.modalsCount++;
     const combinedConfig = { ...this.defaultConfig, ...config };
     combinedConfig.id = config?.id || new Date().getUTCMilliseconds();
+    console.log('show', combinedConfig);
     this.createLoaders();
 
     this.addBodyPadding();

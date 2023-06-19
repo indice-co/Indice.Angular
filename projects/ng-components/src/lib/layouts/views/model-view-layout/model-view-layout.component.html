@@ -1,4 +1,4 @@
-<lib-view-layout [title]="title" [meta-items]="metaItems">
+<lib-view-layout [title]="title" [meta-items]="metaItems" [actions]="actions" [icon]="icon" [busy]="busy">
   <main class="model-view-container">
     <div class="model-view-container-inner">
       <aside class="model-view-aside">
@@ -8,6 +8,9 @@
               <ng-content></ng-content>
             </div>
             <!-- menu items -->
+            <div class="model-view-menu-container-mobile">
+                <lib-drop-down-menu [options]="tabsOptions" [selected]="selectedTab" (selectedChange)="navigateLink($event)"></lib-drop-down-menu>
+            </div>
             <div class="model-view-menu-container">
               <nav class="model-view-menu-nav">
                 <div class="model-view-menu-item">
@@ -15,7 +18,9 @@
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
                        [routerLink]="section.link"
+                       [routerLinkActiveOptions]="{ exact: false }"
                        class="view-nav-link">
+                      <i *ngIf="section.icon" [class]="section.icon + ' mr-2'"]></i>
                       {{section.text}}
                     </a>
                   </ng-container>
@@ -24,9 +29,10 @@
                   <ng-container *ngFor="let section of secondary">
                     <a href="#"
                        [routerLinkActive]="['view-nav-link-active']"
-                       [routerLinkActiveOptions]="{ exact: true }"
                        [routerLink]="section.link"
+                       [routerLinkActiveOptions]="{ exact: false }"
                        class="view-nav-link">
+                      <i *ngIf="section.icon" [class]="section.icon + ' mr-2'"]></i>
                       {{section.text}}
                     </a>
                   </ng-container>

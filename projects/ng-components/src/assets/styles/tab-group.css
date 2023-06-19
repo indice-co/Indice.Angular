@@ -1,4 +1,4 @@
-@layer components {
+
     .tab-group-select-hidden {
         @apply sm:hidden;
     }
@@ -26,4 +26,3 @@
     .tab-group-container {
         @apply border-b border-gray-200;
     }
-}

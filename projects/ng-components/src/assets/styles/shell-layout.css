@@ -1,4 +1,4 @@
-@layer components {
+
 
   .app-logo {
     @apply h-8 w-8;
@@ -29,7 +29,7 @@
   }
 
   .shell-content-container {
-    @apply mx-auto -mt-28;
+    @apply mx-auto -mt-24;
   }
 
   .sidebar .shell-content-container {
@@ -42,11 +42,11 @@
   }
 
   .sidebar .shell-content-container-inner {
-    @apply max-w-full px-4 min-h-screen;
+    @apply max-w-full px-4 pb-2 min-h-screen;
   }
 
   .shell-content-container-inner {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen;
+    @apply max-w-7xl mx-auto px-4 pb-2 sm:px-6 lg:px-8 min-h-screen;
   }
 
   .shell-content-container-inner-fluid {
@@ -250,6 +250,3 @@
   .shell-footer-copyright {
     @apply max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 mt-8 lg:mt-12 border-t-2 border-gray-700 py-5;
   }
-}
-
-

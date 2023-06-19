@@ -1,29 +1,32 @@
-@layer components {
+
   .pager-container {
-    @apply flex items-center justify-between mb-2;
+    @apply flex flex-col sm:flex-row mb-2 justify-start;
   }
 
-  .pager-container-inner {
-    @apply sm:flex-1 sm:flex sm:items-center sm:justify-between;
+  .pager-container-near {
+    @apply sm:flex-1 justify-start items-center mb-1 sm:mb-0;
+  }
+
+  .pager-container-far {
+    @apply justify-start flex-nowrap items-center;
   }
 
   .pager-icon-button {
-    @apply inline-flex relative ml-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply inline-flex relative ml-1 mr-2 items-center px-2 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
   }
 
   .pager-pages-container {
-    @apply relative z-30 inline-flex rounded-sm;
+    @apply relative inline-flex rounded-sm;
   }
 
   .pager-button {
-    @apply relative ml-2 inline-flex items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply relative ml-1 inline-flex items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
   }
 
   .pager-arrow-button-left {
-    @apply hidden sm:inline-flex relative ml-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply inline-flex relative ml-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
   }
 
   .pager-arrow-button-right {
-    @apply hidden sm:inline-flex relative mr-2 items-center px-2 py-2 rounded-l-sm border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50;
+    @apply inline-flex relative mr-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
   }
-}

@@ -1,83 +1,76 @@
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input } from '@angular/core';
+import { ActivationStart, Router } from '@angular/router';
+
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { SHELL_CONFIG } from './../../../tokens';
 import { IShellConfig, DefaultShellConfig } from './../../../types';
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked } from '@angular/core';
-import { DOCUMENT, Location } from '@angular/common';
-import { ActivationStart, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Subscription, timer } from 'rxjs';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 
-
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'lib-shell-layout',
   templateUrl: './shell-layout.component.html',
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
-  @ViewChildren(DynamicComponentHostDirective)
-  dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
+  @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
+  private _routerSub$: Subscription | null = null;
+
+  constructor(
+    private _router: Router,
+    private _componentLoaderFactory: ComponentLoaderFactory,
+    @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined
+  ) {
+    if (!_config) {
+      _config = new DefaultShellConfig();
+    }
+    this.activeConfig = _config;
+  }
+
+  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
   public showRightPaneSM = false;
-  private routerSub$: Subscription | null = null;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public loaded = false;
   public hideSidebar = false;
-  constructor(
-    @Inject(DOCUMENT) private document: any,
-    private router: Router,
-    private location: Location,
-    @Inject(SHELL_CONFIG) private config: IShellConfig | undefined,
-    private componentLoaderFactory: ComponentLoaderFactory
-  ) {
-    if (!config) {
-      config = new DefaultShellConfig();
-    }
-    this.activeConfig = config;
-  }
 
-  ngAfterViewChecked(): void {
+  public ngAfterViewChecked(): void {
     setTimeout(() => { this.loaded = true; }, 200);
   }
 
-  ngOnInit(): void {
-    this.routerSub$ = this.router.events.pipe(filter((event) => event instanceof ActivationStart)).subscribe((e) => {
-      // console.log('ShellLayoutComponent ActivationStart', e);
-      if ((e as ActivationStart)?.snapshot) {
-        // console.log('ShellLayoutComponent ActivationStart snapshot', (e as ActivationStart)?.snapshot);
-        if ((e as ActivationStart)?.snapshot?.data) {
-          // console.log('ShellLayoutComponent ActivationStart snapshot data', (e as ActivationStart)?.snapshot.data);
-          if ((e as ActivationStart)?.snapshot?.data.shell) {
-            // console.log('ShellLayoutComponent ActivationStart snapshot data shell params',
-            // (e as ActivationStart)?.snapshot.data.shell);
-            this.activeConfig = (e as ActivationStart)?.snapshot.data.shell as IShellConfig;
-            // console.log('ShellLayoutComponent activeConfig from route: ', this.activeConfig);
-            if (this.activeConfig.customHeaderComponent) {
-              this.initCustomComponents();
+  public ngOnInit(): void {
+    this._routerSub$ = this._router
+      .events
+      .pipe(
+        filter((event) => event instanceof ActivationStart)
+      ).subscribe((event) => {
+        if ((event as ActivationStart)?.snapshot) {
+          if ((event as ActivationStart)?.snapshot?.data) {
+            if ((event as ActivationStart)?.snapshot?.data.shell) {
+              this.activeConfig = (event as ActivationStart)?.snapshot.data.shell as IShellConfig;
+              if (this.activeConfig.customHeaderComponent) {
+                this.initCustomComponents();
+              }
+            } else {
+              this.activeConfig = this._config ? this._config : new DefaultShellConfig();
             }
-          } else {
-            this.activeConfig = this.config ? this.config : new DefaultShellConfig();
-            // console.log('ShellLayoutComponent default activeConfig: ', this.activeConfig);
           }
         }
-      }
-    });
+      });
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.initCustomComponents();
   }
 
   private initCustomComponents(): void {
-    if (this.dynamicComponentHosts && this.dynamicComponentHosts.length > 0) {
-      this.loadCustomComponent(this.dynamicComponentHosts.find((_) => _.hostName === 'Header'));
-      // since you're not using it...
-      // this.loadCustomComponent(this.dynamicComponentHosts.find(_ => _.hostName === 'Footer'));
+    if (this._dynamicComponentHosts && this._dynamicComponentHosts.length > 0) {
+      this.loadCustomComponent(this._dynamicComponentHosts.find((_) => _.hostName === 'Header'));
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.routerSub$) {
-      this.routerSub$.unsubscribe();
+  public ngOnDestroy(): void {
+    if (this._routerSub$) {
+      this._routerSub$.unsubscribe();
     }
   }
 
@@ -85,8 +78,8 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
     if (host) {
       const viewContainerRef = host.viewContainerRef;
       if (viewContainerRef && this.activeConfig.customHeaderComponent) {
-        const clf = this.componentLoaderFactory.createLoader(viewContainerRef);
-        const headerCompRef = clf.attach(this.activeConfig.customHeaderComponent).to(viewContainerRef.element).show();
+        const clf = this._componentLoaderFactory.createLoader(viewContainerRef);
+        clf.attach(this.activeConfig.customHeaderComponent).to(viewContainerRef.element).show();
       }
     }
   }

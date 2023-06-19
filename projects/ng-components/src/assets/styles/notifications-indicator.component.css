@@ -1,4 +1,4 @@
-@layer components {
+
 
   .notifications-nav-link {
     @apply block py-3 pl-3 pr-2 text-xs text-gray-700 hover:bg-gray-50;
@@ -28,7 +28,7 @@
   .notification-messages::-webkit-scrollbar-thumb {
     @apply bg-gray-600 hover:bg-gray-700;
   }
-}
+
 
 .notification-messages::-webkit-scrollbar {
   width: 7px;

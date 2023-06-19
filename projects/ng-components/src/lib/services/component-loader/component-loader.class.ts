@@ -216,7 +216,7 @@ export class ComponentLoader<T> {
         parent: this.injector,
       });
       const componentRef = contentCf.create(injector);
-      Object.assign(componentRef.instance, initialState);
+      // Object.assign(componentRef.instance, initialState);
       this.applicationRef.attachView(componentRef.hostView);
       return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);
     }

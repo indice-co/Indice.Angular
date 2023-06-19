@@ -1,0 +1,17 @@
+<lib-view-layout title="Toggle buttons list">
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button list</p>
+        <lib-toggle-buttons-list
+            [options]="filterOptions"
+            [(value)]="selectedFilter">
+        </lib-toggle-buttons-list>
+        <p class="text-sm py-2">Selected: {{selectedFilter}}</p>
+    </div>
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button list - with count</p>
+        <lib-toggle-buttons-list 
+            [options]="filterOptions"
+            [(value)]="selectedFilter">
+        </lib-toggle-buttons-list>
+    </div>
+</lib-view-layout>

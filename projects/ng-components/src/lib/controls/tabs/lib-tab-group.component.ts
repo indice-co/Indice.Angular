@@ -16,7 +16,7 @@ export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterCont
     /** The inner tabs of the group. */
     @ContentChildren(LibTabComponent, { descendants: true }) public tabs: QueryList<LibTabComponent> | undefined = undefined;
     /** Emmited when a step change occurs. */
-    @Output() public tabChanged: EventEmitter<LibTabComponent> = new EventEmitter<LibTabComponent>();
+    @Output() protected tabChanged: EventEmitter<LibTabComponent> = new EventEmitter<LibTabComponent>();
 
     /** The current tab. */
     public get currentTab(): LibTabComponent | undefined {
@@ -29,6 +29,22 @@ export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterCont
     }
 
     public ngOnInit(): void { }
+
+    protected onTabChanged(selectedTab: LibTabComponent): void {
+        if (selectedTab.isActive) {
+            return;
+        }
+        this.tabs?.forEach((tab: LibTabComponent) => tab.isActive = tab.id === selectedTab.id);
+        this.tabChanged.emit(selectedTab);
+    }
+
+    protected onTabSelectChanged(selectedTabIndex: number): void {
+        if (selectedTabIndex === this.currentΤabIndex) {
+            return;
+        }
+        this.tabs?.forEach((tab: LibTabComponent, index: number) => tab.isActive = index === selectedTabIndex);
+        this.tabChanged.emit(this.tabs?.get(selectedTabIndex));
+    }
 
     public ngAfterContentInit(): void {
         if (!this.tabs) {
@@ -43,15 +59,5 @@ export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterCont
                 this.tabs.get(0)!.isActive = true;
             }
         }
-    }
-
-    public onTabChanged(selectedTab: LibTabComponent): void {
-        this.tabs!.forEach((tab: LibTabComponent) => tab.isActive = tab.id === selectedTab.id);
-        this.tabChanged.emit(selectedTab);
-    }
-
-    public onTabSelectChanged(selectedTabIndex: number): void {
-        this.tabs!.forEach((tab: LibTabComponent, index: number) => tab.isActive = index === selectedTabIndex);
-        this.tabChanged.emit(this.tabs?.get(selectedTabIndex));
     }
 }

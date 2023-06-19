@@ -1,0 +1,56 @@
+<lib-view-layout title="Toggle Button Sample Page">
+    
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button - with text and description</p>
+        <lib-toggle-button 
+            [(value)]="toggleDisabled" 
+            [text]="toggleDisabled ? 'The toggle buttons below ARE DISABLED' : 'The toggle buttons below ARE NOT DISABLED'" 
+            [description]="toggleDisabled ? 'Click here to enable' : 'Click here to disable'">
+        </lib-toggle-button>
+    </div>
+
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button - with text-true, text-false, description-true, description-false</p>
+        <lib-toggle-button 
+            [(value)]="toggleDisabled" 
+            text-true="The toggle buttons below ARE DISABLED" 
+            description-true="Click here to enable"
+            text-false="The toggle buttons below ARE NOT DISABLED" 
+            description-false="Click here to disable">
+        </lib-toggle-button>
+    </div>
+
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button - with text-true, text-false and description</p>
+        <lib-toggle-button 
+            [(value)]="toggleValue" 
+            [description]="toggleDisabled ? 'the button disabled' : 'the button is enabled'" 
+            [disabled]="toggleDisabled" 
+            text-true="true text" 
+            text-false="false text">
+        </lib-toggle-button>
+    </div>
+
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button - with text-true, text-false but no description</p>
+        <lib-toggle-button 
+            [(value)]="toggleValue" 
+            [disabled]="toggleDisabled" 
+            text-true="true text - no description" 
+            text-false="false text - no description">
+        </lib-toggle-button>
+    </div>
+
+    <div class="py-4">
+        <p class="text-sm py-2">Toggle button - with text-true, text-false but no description and NO ICON</p>
+        <lib-toggle-button 
+            [(value)]="toggleValue" 
+            [disabled]="toggleDisabled" 
+            [icon]="false"
+            text-true="true text - no description" 
+            text-false="false text - no description">
+        </lib-toggle-button>
+    </div>
+
+    Current toggle value: {{toggleValue}}
+</lib-view-layout>

@@ -1,18 +1,15 @@
-<div class="card"
-     [ngClass]="{'card-deck-busy' : busy }">
+<div class="card" [ngClass]="{'card-deck-busy' : busy }">
   <div class="card-body">
     <div class="kpi-tile-title-container">
-      <a href="#"
-         class="kpi-tile-action"
-         (click)="emitTileAction($event)">{{title || '-'}}</a>
+      <a href="#" class="kpi-tile-action" (click)="emitTileAction($event)">{{title || '-'}}</a>
     </div>
-    <p class="kpi-tile-value">{{kpi || '-'}}</p>
+    <div class="grid grid-cols-2 grid-flow-row gap-2 items-center">
+      <p class="kpi-tile-value">{{kpi || '-'}}</p>
+      <ng-content></ng-content>
+    </div>
     <div class="card-footer">
       <div class="text-xs">
-        <a href="#"
-           class="kpi-tile-action"
-           [ngClass]="{'invisible': hideBtn}"
-           (click)="emitTileAction($event)">Περισσότερα</a>
+        <a href="#" class="kpi-tile-action" [ngClass]="{'invisible': hideBtn}" (click)="emitTileAction($event)">{{actionText}}</a>
       </div>
     </div>
   </div>

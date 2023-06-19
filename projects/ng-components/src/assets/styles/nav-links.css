@@ -1,4 +1,4 @@
-@layer components {
+
 
   .nav-link {
     @apply cursor-pointer text-white hover:bg-gray-700 hover:text-white hover:shadow-sm px-3 py-2 rounded-sm text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
@@ -21,7 +21,11 @@
   }
 
   .sidebar .nav-link-list-container-inner {
-    @apply flex-1 px-2 py-4 space-y-1;
+    @apply flex-1 px-2 py-4 space-y-2;
+  }
+
+  .sidebar .nav-link-list-container-inner .icons-only {
+    @apply flex-1 px-2 py-4 space-y-4;
   }
 
   .nav-link-active {
@@ -30,6 +34,14 @@
 
   .sidebar .nav-link-active {
     @apply cursor-default bg-gray-900 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+  }
+
+  .sidebar .nav-link-active-b {
+    @apply cursor-default bg-gray-900 border-b border-blue-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+  }
+
+  .sidebar .nav-link-active-l {
+    @apply cursor-default bg-gray-900 border-l border-blue-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
   }
 
   .nav-link-profile-active {
@@ -48,4 +60,6 @@
     @apply cursor-default bg-gray-50 border-gray-600 text-gray-900 border-l-4 py-2 px-3 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
   }
 
-}
+  .min-nav-link-text-width {
+    width: 220px;
+  }

@@ -5,6 +5,8 @@ export * from './lib/directives/click-outside.directive';
 // controls
 export * from './lib/controls/drop-down-menu/drop-down-menu.component';
 export * from './lib/controls/pager/pager.component';
+export * from './lib/controls/breadcrumb/breadcrumb.component';
+export * from './lib/controls/breadcrumb/breadcrumb-item';
 export * from './lib/controls/list-view/list-view.component';
 export * from './lib/controls/list-view/list-column.component';
 export * from './lib/controls/list-view/list-tile.component';
@@ -23,11 +25,14 @@ export * from './lib/controls/nav-links-list/nav-links-list.component';
 export * from './lib/controls/combobox/combobox.component';
 export * from './lib/controls/tabs/lib-tab.component';
 export * from './lib/controls/tabs/lib-tab-group.component';
+export * from './lib/controls/tabs/lib-tab-label.directive';
 export * from './lib/controls/stepper/lib-stepper.component';
 export * from './lib/controls/stepper/lib-step.component';
 export * from './lib/controls/stepper/lib-step-label.directive';
 export * from './lib/controls/stepper/lib-step-info.directive';
 export * from './lib/controls/stepper/types/stepper-type';
+export * from './lib/controls/toggle-button/toggle-button.component';
+export * from './lib/controls/toggle-buttons-list/toggle-buttons-list.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
@@ -67,5 +72,7 @@ export * from './lib/services/modal-service/modal-service';
 export { ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE, CloseInterceptorFn } from './lib/services/modal-service/modal-options.class';
 export * from './lib/services/modal-service/modal.class';
 export * from './lib/services/toaster.service';
+export * from './lib/services/breadcrumb.service';
+export * from './lib/services/user-settings.service';
 
 export * from './lib/ng-components.module';

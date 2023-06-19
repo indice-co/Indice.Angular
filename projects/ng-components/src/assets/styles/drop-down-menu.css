@@ -1,19 +1,19 @@
-@layer components {
+
   .dropdown-container {
     @apply relative w-auto;
   }
 
   .dropdown-button {
-    @apply bg-white relative w-full border border-gray-300 rounded-sm shadow-sm pl-3 pr-10 py-2 text-left cursor-default
-  focus:outline-none focus:border-gray-500 sm:text-sm;
+    @apply bg-white relative w-full border border-gray-300 rounded-sm pl-3 pr-10 py-2 text-left cursor-default
+  focus:outline-none focus:border-gray-500 text-xs;
   }
 
   .dropdown-selected-text {
-    @apply block truncate;
+    @apply truncate inline-flex items-center;
   }
 
   .dropdown-button-icon {
-    @apply absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none;
+    @apply absolute inset-y-0 right-0 flex items-center pointer-events-none;
   }
 
   .dropdown-arrow {
@@ -21,7 +21,7 @@
   }
 
   .dropdown-ul {
-    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm overflow-x-hidden;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-xs ring-1 ring-black ring-opacity-5 focus:outline-none overflow-x-hidden;
   }
 
   .dropdown-li {
@@ -33,11 +33,11 @@
   }
 
   .dropdown-li-text {
-    @apply font-normal block truncate;
+    @apply font-normal truncate inline-flex items-center ;
   }
 
   .dropdown-li-selected-text {
-    @apply font-semibold block truncate;
+    @apply font-semibold truncate inline-flex items-center ;
   }
 
   .dropdown-li-selected-indicator-container {
@@ -47,4 +47,3 @@
   .dropdown-li-selected-indicator {
     @apply h-5 w-5;
   }
-}

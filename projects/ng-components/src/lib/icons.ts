@@ -3,7 +3,7 @@ export class Icons {
   public static Dashboard = `ms-Icon ms-Icon--HomeGroup `;
   public static Locations = `ms-Icon ms-Icon--MapPin `;
   public static ChargePoints = `ms-Icon ms-Icon--ChatBot `;
-  public static Transations = `ms-Icon ms-Icon--PaymentCard `;
+  public static Transations = `ms-Icon ms-Icon--LightningBolt `;
   public static Badges = `ms-Icon ms-Icon--IDBadge `;
 
   public static Information = `ms-Icon ms-Icon--Info`;
@@ -39,4 +39,7 @@ export class Icons {
 
   public static Messages = ' ms-Icon ms-Icon--Message';
   public static MessagesUnread = ' ms-Icon ms-Icon--MessageFill';
+
+  public static External = ' ms-Icon ms-Icon--FileSymlink';
+  public static Statistics = ' ms-Icon ms-Icon--BIDashboard';
 }

@@ -1,4 +1,4 @@
-@layer components {
+
 
   .md-visible {
     @apply hidden md:block;
@@ -14,12 +14,12 @@
 
 
   .btn-view-header {
-    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-white transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-900;
+    @apply text-base focus:outline-none inline-flex items-center justify-center h-8 text-white transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-800;
   }
 
 
   .sidebar .btn-view-header {
-    @apply text-base focus:outline-none inline-flex items-center justify-center w-10 h-10 text-gray-900 transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-900 hover:text-white;
+    @apply text-base focus:outline-none inline-flex items-center justify-center h-8 text-gray-900 transition-colors duration-150 rounded-md hover:shadow-sm hover:bg-gray-800 hover:text-white;
   }
 
   .btn-form-view-header {
@@ -33,6 +33,4 @@
   .selected-view-indicator {
     @apply absolute top-0 right-0 block ml-2 h-1.5 w-1.5 rounded-full ring-1 ring-white bg-blue-300;
   }
-
-}
 

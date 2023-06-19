@@ -1,18 +1,38 @@
 <div class="tab-group-select-hidden">
-    <label for="tabs" class="sr-only">Select a tab</label>
-    <select id="tabs" name="tabs" (change)="onTabSelectChanged(+tabsSelect.value)" class="tab-group-select" #tabsSelect>
-        <option [value]="i" *ngFor="let tab of tabs; let i = index">{{ tab.label }}</option>
+    <label for="tabs"
+           class="sr-only">
+        Select a tab
+    </label>
+    <select id="tabs"
+            name="tabs"
+            (change)="onTabSelectChanged(+tabsSelect.value)"
+            class="tab-group-select"
+            #tabsSelect>
+        <option [value]="i"
+                *ngFor="let tab of tabs; let i = index">
+            {{ tab.labelText }}
+        </option>
     </select>
 </div>
 <div class="tab-group-container-hidden">
     <div class="tab-group-container">
-        <nav class="tab-group-container-nav" aria-label="Tabs">
-            <a *ngFor="let tab of tabs" href="javascript:void(0)" [class.tab]="!tab.isActive" [class.tab-active]="tab.isActive" (click)="onTabChanged(tab)">
-                {{ tab.label }}
+        <nav class="tab-group-container-nav"
+             aria-label="Tabs">
+            <a *ngFor="let tab of tabs"
+               href="javascript:void(0)"
+               [class.tab]="!tab.isActive"
+               [class.tab-active]="tab.isActive"
+               (click)="onTabChanged(tab)">
+                <ng-container *ngTemplateOutlet="tab.label ? tab.label.template: defaultTabLabel; context:{ $implicit: tab }"></ng-container>
             </a>
         </nav>
     </div>
 </div>
 <div *ngIf="currentTab?.content">
-    <ng-container [ngTemplateOutlet]="currentTab!.content"></ng-container>
+    <ng-container [ngTemplateOutlet]="currentTab?.content || emptyTemplate"></ng-container>
 </div>
+<ng-template let-tab
+             #defaultTabLabel>
+    {{ tab.labelText || 'tab-' + (tab.index + 1) }}
+</ng-template>
+<ng-template #emptyTemplate></ng-template>

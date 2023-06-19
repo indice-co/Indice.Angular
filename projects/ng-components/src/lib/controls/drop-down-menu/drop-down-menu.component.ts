@@ -7,11 +7,12 @@ import { MenuOption } from '../../types';
   templateUrl: './drop-down-menu.component.html',
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {
-  @Input() options: MenuOption[] = [];
+  @Input() options: MenuOption[] | undefined = [];
   // tslint:disable-next-line:no-input-rename
   @Input('selected') selectedValue: any | null = null;
   @Input() multiple = false;
   @Input() placeholder: string = 'Παρακαλώ επιλέξτε...';
+  @Input('show-icons') showIcons = false;
 
   private selectedOption$: MenuOption | null = null;
   public get selectedOption(): MenuOption | null {

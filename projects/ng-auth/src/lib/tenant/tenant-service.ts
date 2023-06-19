@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TenantService {
-    private _instanceId = new Date().toLocaleTimeString();
     private _tenantSubject: BehaviorSubject<string> = new BehaviorSubject('');
 
     constructor() { }
@@ -15,5 +14,9 @@ export class TenantService {
 
     public getTenant(): Observable<string> {
         return this._tenantSubject.asObservable();
+    }
+
+    public getTenantValue(): string {
+        return this._tenantSubject.getValue();
     }
 }

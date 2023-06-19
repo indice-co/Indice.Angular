@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { Icons } from './icons';
 
 
 export interface IAppNotifications {
@@ -47,7 +48,7 @@ export class NavLink {
 
 export class ExternalNavLink extends NavLink {
   constructor(text: string, path: string, openInNewTab?: boolean, icon?: string) {
-    super(text, path, true, openInNewTab, icon);
+    super(text, path, true, openInNewTab, icon ?? Icons.External);
   }
   public type = 'external';
 }
@@ -71,13 +72,15 @@ export class ViewAction {
   public param: any;
   public icon: string;
   public tooltip: string | null;
+  public text?: string;
 
-  constructor(type: string, key: string | null, param: any, icon: string, tooltip: string | null) {
+  constructor(type: string, key: string | null, param: any, icon: string, tooltip: string | null, text?: string) {
     this.type = type;
     this.key = key;
     this.param = param;
     this.icon = icon;
     this.tooltip = tooltip;
+    this.text = text;
   }
 }
 
@@ -91,8 +94,8 @@ export class ListViewType {
 export class RouterViewAction extends ViewAction {
   public outlet: string | null = null;
   public link: string | null = null;
-  constructor(icon: string, link: string, outlet: string | null, tooltip: string | null) {
-    super('router-link', null, null, icon, tooltip);
+  constructor(icon: string, link: string, outlet: string | null, tooltip: string | null, text?: string) {
+    super('router-link', null, null, icon, tooltip, text);
     this.outlet = outlet;
     this.link = link;
   }
@@ -148,17 +151,18 @@ export interface IAddress {
 }
 
 export interface IShellConfig {
-  layout?: ShellLayoutType;
   appLogo: string;
   appLogoAlt: string;
-  showHeader: boolean;
-  showUserNameOnHeader?: boolean;
-  showAlertsOnHeader?: boolean;
-  customHeaderComponent?: any;
-  showFooter: boolean;
+  breadcrumb: boolean;
   customFooterComponent?: any;
+  customHeaderComponent?: any;
   fluid: boolean;
+  layout?: ShellLayoutType;
+  showAlertsOnHeader?: boolean;
+  showFooter: boolean;
+  showHeader: boolean;
   showLangsOnHeader?: boolean;
+  showUserNameOnHeader?: boolean;
 }
 
 export enum ShellLayoutType {
@@ -167,14 +171,15 @@ export enum ShellLayoutType {
 }
 
 export class DefaultShellConfig implements IShellConfig {
-  layout = ShellLayoutType.Stacked;
   appLogo = 'https://tailwindui.com/img/logos/workflow-mark.svg?color=white';
   appLogoAlt = 'your app name here';
-  showHeader = true;
-  showUserNameOnHeader = false;
+  breadcrumb = false;
+  fluid = false;
+  layout = ShellLayoutType.Stacked;
   showAlertsOnHeader = false;
   showFooter = true;
-  fluid = false;
+  showHeader = true;
+  showUserNameOnHeader = false;
 }
 
 export enum SCREEN_SIZE {
@@ -198,7 +203,7 @@ export enum ToastType {
   Warning = 'warning'
 }
 
-export const NULL_TOAST = { title : '_____NULL_____' } as Toast;
+export const NULL_TOAST = { title: '_____NULL_____' } as Toast;
 
 export interface Toast {
   type: ToastType;
@@ -208,10 +213,10 @@ export interface Toast {
 }
 
 export enum SidePaneSize {
-   Default = '',
-   Small25 = '25%',
-   Medium50 = '50%',
-   Large75 = '75%'
+  Default = '',
+  Small25 = '25%',
+  Medium50 = '50%',
+  Large75 = '75%'
 }
 
 export enum SidePaneOverlayType {
@@ -230,3 +235,5 @@ export interface IValidationProblemDetails {
   instance?: string | undefined;
   errors?: { [key: string]: string[]; } | undefined;
 }
+
+export type UserSettingKey = 'MobileSideBar';

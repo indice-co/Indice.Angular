@@ -1,0 +1,27 @@
+<div class="relative items-center inline-flex">
+    <div class="toggle-buttons-list-icon-container" *ngIf="icon">
+        <i [class]="icon"></i>
+    </div>
+    <div class="toggle-buttons-list-drop-down-contaner">
+        <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
+        </lib-drop-down-menu>
+    </div>
+    <div class="toggle-buttons-list">
+        <ng-template ngFor let-option [ngForOf]="options" let-i="index">
+            <!-- [tooltip]="option.description" -->
+            <button type="button"
+                    [disabled]="option.value === value"
+                    [class.toggle-buttons-list-button-selected]="option.value === value"
+                    class="toggle-buttons-list-button"
+                    (click)="selectOption(option.value)">
+            <div class="toggle-buttons-list-button-icon-container" *ngIf="option.icon">
+                <i [class]="option.icon"></i>
+            </div>
+            <span class="toggle-buttons-list-button-button-text">{{option.text}}</span>
+            <span *ngIf="option.data && option.data.count"
+                  class="toggle-buttons-list-button-button-count">{{option.data.count}}
+            </span>
+            </button>
+        </ng-template>
+    </div>
+</div>
