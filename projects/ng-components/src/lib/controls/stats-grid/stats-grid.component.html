@@ -1,0 +1,42 @@
+<div *ngIf="!busy">
+    <ul role="list" class="grid gap-1"
+        [class.grid-cols-4]="mode==='normal'"
+        [class.grid-flow-col]="mode!=='normal'">
+      <ng-container *ngFor="let value of values; index as i">
+        <li class="col-span-1 flex pb-2" *ngIf="mode==='normal'">
+          <div class="grid-cols-1 border-l-2 px-1" [style]="'border-color:' + colors[i]">
+            <div class="text-xs text-ellipsis overflow-hidden">{{labels[i]}}</div>
+            <div *ngIf="isNumber(values[i])" class="font-medium text-sm md:text-lg text-ellipsis overflow-hidden">{{values[i] | number:'1.0-2':'el'}}</div>
+            <div *ngIf="!isNumber(values[i])" class="font-medium text-sm md:text-lg text-ellipsis overflow-hidden">{{values[i]}}</div>
+          </div>
+        </li>
+        <li class="col-span-1 flex pb-2" *ngIf="mode!=='normal'">
+          <div class="grid-cols-1 border-l-2 pl-1 pr-2" [style]="'border-color:' + colors[i]">
+            <div *ngIf="isNumber(values[i])" class="font-medium text-xs lg:text-sm text-ellipsis overflow-hidden">{{values[i] | number:'1.0-2':'el'}}</div>
+            <div *ngIf="!isNumber(values[i])" class="font-medium text-xs lg:text-sm text-ellipsis overflow-hidden">{{values[i]}}</div>
+            <div class="text-xs max-w-18 lg:w-auto truncate text-ellipsis overflow-hidden">{{labels[i]}}</div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+  <div *ngIf="busy">
+    <ul role="list" class="grid gap-1"
+        [class.grid-cols-4]="mode==='normal'"
+        [class.grid-flow-col]="mode!=='normal'">
+      <ng-container *ngFor="let value of values; index as i">
+        <li class="animate-pulse col-span-1 flex pb-2" *ngIf="mode==='normal'">
+          <div class="grid-cols-1 border-l-2 px-1" style="border-color:rgb(168, 162, 158, 0.2)">
+            <div class="rounded-md bg-slate-400/25 h-3 w-14"></div>
+            <div class="rounded-md bg-slate-400/25 mt-2 h-4 w-6"></div>
+          </div>
+        </li>
+        <li class="animate-pulse col-span-1 flex pb-2" *ngIf="mode!=='normal'">
+          <div class="grid-cols-1 border-l-2 pl-1 pr-2" style="border-color:rgb(168, 162, 158, 0.2)">
+            <div class="rounded-md bg-slate-400/25 h-3 w-14"></div>
+            <div class="rounded-md bg-slate-400/25 mt-2 h-4 w-6"></div>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>  

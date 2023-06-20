@@ -33,6 +33,11 @@ export * from './lib/controls/stepper/lib-step-info.directive';
 export * from './lib/controls/stepper/types/stepper-type';
 export * from './lib/controls/toggle-button/toggle-button.component';
 export * from './lib/controls/toggle-buttons-list/toggle-buttons-list.component';
+export * from './lib/controls/content-tile/content-tile-header/content-tile-header.component';
+export * from './lib/controls/content-tile/content-tile-item/content-tile-item.component';
+export * from './lib/controls/content-tile/content-tile.component';
+export * from './lib/controls/stats-grid/stats-grid.component';
+export * from './lib/controls/progress-bar/progress-bar.component';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
@@ -59,6 +64,7 @@ export * from './lib/pages/http-status/unauthorized/unauthorized.component';
 // pipes
 export * from './lib/pipes/address.pipe';
 export * from './lib/pipes/duration-format.pipe';
+export * from './lib/pipes/short-number.pipe';
 
 // common stuff (tokens, types, helper classes)
 export * from './lib/tokens';
