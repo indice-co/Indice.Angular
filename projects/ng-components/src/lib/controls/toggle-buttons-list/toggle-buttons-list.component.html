@@ -2,11 +2,16 @@
     <div class="toggle-buttons-list-icon-container" *ngIf="icon">
         <i [class]="icon"></i>
     </div>
-    <div class="toggle-buttons-list-drop-down-contaner">
+    <div class="toggle-buttons-list-drop-down-compact-container" *ngIf="compact">
         <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
         </lib-drop-down-menu>
     </div>
-    <div class="toggle-buttons-list">
+
+    <div class="toggle-buttons-list-drop-down-contaner" *ngIf="!compact">
+        <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
+        </lib-drop-down-menu>
+    </div>
+    <div class="toggle-buttons-list" *ngIf="!compact">
         <ng-template ngFor let-option [ngForOf]="options" let-i="index">
             <!-- [tooltip]="option.description" -->
             <button type="button"
@@ -19,7 +24,7 @@
             </div>
             <span class="toggle-buttons-list-button-button-text">{{option.text}}</span>
             <span *ngIf="option.data && option.data.count"
-                  class="toggle-buttons-list-button-button-count">{{option.data.count}}
+                class="toggle-buttons-list-button-button-count">{{option.data.count}}
             </span>
             </button>
         </ng-template>
