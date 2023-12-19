@@ -17,7 +17,7 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
         this.authService.signinRedirect({
           location: state?.url || undefined,
           promptRegister: route?.data?.register || route?.firstChild?.data?.register || false,
-          tenant: 'gman'
+          tenant: route?.params['tenantAlias'] ?? 'localhost'
         });
       }
     });
