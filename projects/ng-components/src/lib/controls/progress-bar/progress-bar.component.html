@@ -1,0 +1,7 @@
+<div class="progress-bar-container">
+    <div class="progress-bar-label">{{text}} {{valueText ?? value}}/{{totalText ?? total}}</div>
+    <div class="progress-bar-backdrop">
+      <div class="progress-bar-inner" [style]="'width:' + percentage + '%' "></div>
+    </div>
+  </div>
+  

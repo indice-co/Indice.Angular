@@ -12,7 +12,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input('selected') selectedValue: any | null = null;
   @Input() multiple = false;
   @Input() placeholder: string = 'Παρακαλώ επιλέξτε...';
-  @Input('show-icons') showIcons = false;
+  @Input('show-icons') showIcons = true;
 
   private selectedOption$: MenuOption | null = null;
   public get selectedOption(): MenuOption | null {

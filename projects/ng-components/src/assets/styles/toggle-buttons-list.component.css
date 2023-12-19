@@ -7,8 +7,12 @@
         @apply flex-none mr-2;
     }
 
-    .toggle-buttons-list-drop-down-contaner {
+    .toggle-buttons-list-drop-down-container {
         @apply block lg:hidden z-10;
+    }
+
+    .toggle-buttons-list-drop-down-compact-container {
+        @apply block z-10;
     }
 
     /* mw-40 not supported*/

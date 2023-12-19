@@ -10,6 +10,7 @@ export class ToggleButtonsListComponent implements OnInit {
   @Input() icon: string | undefined = undefined;
   @Input() options: MenuOption[] | undefined;
   @Input() value: any | undefined;
+  @Input() compact: boolean = true;
   @Output() valueChange: EventEmitter<any> = new EventEmitter(undefined);
   constructor() { }
 
