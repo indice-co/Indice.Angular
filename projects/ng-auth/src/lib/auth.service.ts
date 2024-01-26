@@ -164,7 +164,7 @@ export class AuthService {
     }));
   }
 
-  private hasRole(roleName: string): boolean {
+  public hasRole(roleName: string): boolean {
     const roleClaim = this.getUserProfile()?.role as string;
     if (roleClaim && Array.isArray(roleClaim)) {
       const roles = Array.from(roleClaim);

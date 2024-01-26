@@ -137,6 +137,7 @@ import { ProgressBarComponent } from './controls/progress-bar/progress-bar.compo
   ],
   exports: [
     AddressPipe,
+    AdvancedSearchComponent,
     AuthCallbackComponent,
     AuthRenewComponent,
     AvatarInitialsComponent,
