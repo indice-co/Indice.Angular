@@ -88,6 +88,7 @@
                   <td class="list-view-td-details"
                       *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
                     <button disabled
+                            title="expand-collapse"
                             type="button"
                             class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->
@@ -122,6 +123,7 @@
                   <td class="list-view-td-details"
                       *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
                     <button (click)="toggleDetails(item)"
+                            title="toggleDetails"
                             type="button"
                             class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->
