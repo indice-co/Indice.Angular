@@ -23,11 +23,11 @@ export class ContentTileComponent implements OnInit {
   set items(refs: QueryList<ContentTileItemComponent>) {
     if (refs) {
       this.itemTemplates = refs.toArray();
+      console.log('ContentTileComponent',this.itemTemplates);
     }
   }
 
   @ContentChild(ContentTileHeaderComponent) header: ContentTileHeaderComponent | undefined = undefined;
-  
   constructor(private router: Router) { }
 
   ngOnInit(): void {

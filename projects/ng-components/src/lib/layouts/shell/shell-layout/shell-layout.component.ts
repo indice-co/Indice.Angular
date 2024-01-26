@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
