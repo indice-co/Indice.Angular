@@ -29,6 +29,7 @@ export class ListViewComponent implements OnChanges {
   // SORTING - pass through for pager component
   // tslint:disable-next-line:no-input-rename
   @Input('sort-options') sortOptions: MenuOption[] = [];
+  @Input('operators-disabled') operatorsDisabled: boolean = false;
   // tslint:disable-next-line:no-input-rename
   @Input('sort-dir') sortdir: string | null = '-';
   // tslint:disable-next-line:no-input-rename
