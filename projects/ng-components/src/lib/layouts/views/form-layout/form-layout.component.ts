@@ -12,6 +12,8 @@ export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;
   @Input() title: string | null = null;
+  @Input() image: string | null = null;
+  @Input() icon: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
   @Input() actions: ViewAction[] | null = null;
