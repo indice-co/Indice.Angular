@@ -88,16 +88,16 @@ export class AdvancedSearchComponent implements OnInit {
     if (this.selectedField.dataType === 'daterange') {
       if (!this.selectedField.multiTerm) {
         this.filters = this.filters.filter((f) => {
-          return f.member !== QueryParameters.FILTER_FROM && f.member !== QueryParameters.FILTER_TO;
+          return f.dataType !== 'datetime';
         });
       }
       if (this.fieldValueDateFrom) {
-        const filterClauseFrom = new FilterClause(QueryParameters.FILTER_FROM, this.fieldValueDateFrom, Operators.GREATER_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
+        const filterClauseFrom = new FilterClause(this.selectedField.field, this.fieldValueDateFrom, Operators.GREATER_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
         this.filters.push(filterClauseFrom);
       }
 
       if (this.fieldValueDateTo) {
-        const filterClauseTo = new FilterClause(QueryParameters.FILTER_TO, this.fieldValueDateTo, Operators.LESS_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
+        const filterClauseTo = new FilterClause(this.selectedField.field, this.fieldValueDateTo, Operators.LESS_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
         this.filters.push(filterClauseTo);
       }
     }
