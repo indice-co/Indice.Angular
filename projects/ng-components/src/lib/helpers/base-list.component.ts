@@ -24,6 +24,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public metaItems: HeaderMetaItem[] = [];
   public abstract newItemLink: string | null;
   private routeSub$: Subscription | undefined;
+  private loadSub$: Subscription | undefined;
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
   }
@@ -31,6 +32,9 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.routeSub$) {
       this.routeSub$.unsubscribe();
+    }
+    if(this.loadSub$) {
+      this.loadSub$.unsubscribe();
     }
   }
 
@@ -157,7 +161,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     // console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
-    this.loadItems().subscribe(result => {
+    this.loadSub$ = this.loadItems().subscribe(result => {
       this.count = result ? result.count : 0;
       this.items = result?.items;
       this.updateHeaderMeta();
@@ -188,6 +192,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
   public refresh(): void {
     this.count = 0;
+    this.updateHeaderMeta();
     this.page = 1;
     this.items = null;
     this.setRouteParams();

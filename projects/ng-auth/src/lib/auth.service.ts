@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 
-import { Profile, SignoutResponse, User, UserManager } from 'oidc-client';
+import { IdTokenClaims, SignoutResponse, User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
@@ -18,9 +18,27 @@ export class AuthService {
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
     this._userManager = new UserManager(authSettings);
     this.loadUser().subscribe();
-    this._userManager.events.addUserLoaded((user: User) => this._user = user);
-    this._userManager.events.addAccessTokenExpiring(() => this.signinSilent().subscribe((user: User) => this._user = user, (error: any) => throwError(error)));
-    this._userManager.events.addUserSignedOut(() => this.removeUser());
+    
+    this._userManager.events.addUserLoaded(() => {
+      this._userManager.getUser().then((user: User | null) => {
+        if (user) {
+          this._user = user;
+          this._userSubject.next(user);
+          this._userSubject.complete();
+        } else {
+
+        }
+      });
+    });
+
+    this._userManager.events.addAccessTokenExpiring(() => {
+      this._userManager.signinSilent();
+    });
+       
+    this._userManager.events.addUserSignedOut(() => {
+      this._userManager.clearStaleState();
+      this._userManager.removeUser();
+    });
   }
 
   public user$ = this._userSubject.asObservable();
@@ -40,7 +58,7 @@ export class AuthService {
     return from(this._userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
   }
 
-  public getUserProfile(): Profile | undefined {
+  public getUserProfile(): IdTokenClaims | undefined {
     return this._user?.profile || undefined;
   }
 
@@ -143,7 +161,7 @@ export class AuthService {
   }
 
   public signinSilent(): Observable<User> {
-    return from(this._userManager.signinSilent()).pipe(map((user: User) => {
+    return from(this._userManager.signinSilent()).pipe(map((user: any) => {
       this._userSubject.next(user);
       this._userSubject.complete();
       return user;
@@ -151,7 +169,7 @@ export class AuthService {
   }
 
   public signinSilentCallback(): Observable<User | undefined> {
-    return from(this._userManager.signinSilentCallback()).pipe(map((user: User | undefined) => {
+    return from(this._userManager.signinSilentCallback()).pipe(map((user: any) => {
       if (user) {
         this._user = user;
       }

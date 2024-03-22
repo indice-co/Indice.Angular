@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-auth",
-  "version": "0.2.8",
+  "version": "0.2.9-beta.0",
   "description": "Indice extensions for Angular v12 using oidc-client",
   "repository": {
     "type": "git",
@@ -24,12 +24,12 @@
     "@angular/common": ">=12.0.4",
     "@angular/core": ">=12.0.4",
     "@angular/router": ">=12.0.4",
-    "oidc-client": "^1.11.5",
+    "oidc-client-ts": "^3.0.1",
     "rxjs": "^6.6.7"
   },
   "devDependencies": {
     "@angular/router": ">=12.0.4",
-    "oidc-client": "^1.11.5",
     "tslib": "^2.4.0"
-  }
+  },
+  "dependencies": {}
 }

@@ -11,6 +11,10 @@
     @apply flex-1 min-w-0;
   }
 
+  .form-header-image {
+    @apply w-12 h-12;
+  }
+
   .form-title {
     @apply text-lg leading-6 font-medium text-gray-900;
   }
