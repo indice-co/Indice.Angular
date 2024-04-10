@@ -220,16 +220,16 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private getDateFromInput() {
-    if (this.dateInput?.nativeElement.value !== '' && !this.inline) {
-      
-      if(!this.dateInput?.nativeElement.value) {
-        this.value = undefined;
-        if (this.onChange$) {
-          this.onChange$(this.value);
-        }
-        return;
+    if(!this.dateInput?.nativeElement.value || this.dateInput?.nativeElement.value === '') {
+      this.value = undefined;
+      this.valueChange.emit(this.value);
+      if (this.onChange$) {
+        this.onChange$(this.value);
       }
+      return;
+    }
 
+    if (this.dateInput?.nativeElement.value !== '' && !this.inline) {    
       var dateParts = this.dateInput?.nativeElement.value.split("/");
       let dateInGrFormat = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], 3, 0, 0);
       if (dateInGrFormat.toString() !== 'Invalid Date') {
