@@ -4,8 +4,8 @@
   }
 
   .dropdown-button {
-    @apply bg-white relative w-full border border-gray-300 rounded-sm pl-3 pr-10 py-2 text-left cursor-default
-  focus:outline-none focus:border-gray-500 text-xs;
+    @apply bg-white block w-full rounded-sm border-0 pl-3 py-1.5 pr-10 ring-1 ring-inset ring-gray-200 placeholder:text-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-500 
+    text-xs leading-6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200;
   }
 
   .dropdown-selected-text {
@@ -17,11 +17,11 @@
   }
 
   .dropdown-arrow {
-    @apply h-5 w-5 text-gray-400;
+    @apply h-5 w-5 text-gray-600;
   }
 
   .dropdown-ul {
-    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-xs ring-1 ring-black ring-opacity-5 focus:outline-none overflow-x-hidden;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow-lg max-h-60 rounded-sm py-1 text-xs ring-1 ring-gray-300 ring-opacity-5 focus:outline-none overflow-x-hidden;
   }
 
   .dropdown-li {
