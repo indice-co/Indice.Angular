@@ -6,11 +6,6 @@
         <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
         </lib-drop-down-menu>
     </div>
-
-    <div class="toggle-buttons-list-drop-down-contaner" *ngIf="!compact">
-        <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
-        </lib-drop-down-menu>
-    </div>
     <div class="toggle-buttons-list" *ngIf="!compact">
         <ng-template ngFor let-option [ngForOf]="options" let-i="index">
             <!-- [tooltip]="option.description" -->

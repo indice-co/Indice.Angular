@@ -9,7 +9,7 @@
   }
 
   .dropdown-selected-text {
-    @apply truncate inline-flex items-start place-items-center;
+    @apply truncate w-full inline-flex items-start place-items-center;
   }
 
   .dropdown-button-icon {
