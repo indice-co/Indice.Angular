@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { Icons } from './icons';
+import { Params } from '@angular/router';
 
 
 export interface IAppNotifications {
@@ -29,13 +30,14 @@ export interface IAppLinks {
 
 
 export class NavLink {
-  constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string, data?: any) {
+  constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string, data?: any, queryParams?: Params) {
     this.text = text;
     this.path = path;
     this.exact = exact;
     this.external = external;
     this.icon = icon;
     this.data = data;
+    this.queryParams = queryParams;
   }
   public text: string;
   public path: string;
@@ -44,6 +46,7 @@ export class NavLink {
   public icon: string | undefined;
   public type = 'router';
   public data: any | undefined;
+  public queryParams: Params | undefined;
 }
 
 export class ExternalNavLink extends NavLink {

@@ -8,6 +8,7 @@
           [routerLink]="[link.path]"
           [routerLinkActive]="navLinkActiveClass"
           [routerLinkActiveOptions]="{ exact: link.exact }"
+          [queryParams]="link.queryParams"
           [class]="navLinkClass"
           [class.min-nav-link-text-width]="showText">
           <div class="inline-flex items-center">
