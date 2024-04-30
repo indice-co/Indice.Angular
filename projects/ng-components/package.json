@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.2.173-beta.82",
+  "version": "0.3.0-beta.0",
   "description": "Indice common components for Angular v12",
   "repository": {
     "type": "git",
@@ -21,27 +21,27 @@
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
   "peerDependencies": {
-    "@angular/common": ">=12.0.4",
-    "@angular/core": ">=12.0.4",
-    "@angular/router": ">=12.0.4",
-    "@indice/ng-auth": "^0.2.6",
+    "@angular/common": ">=17.0.2",
+    "@angular/core": ">=17.0.2",
+    "@angular/router": ">=17.0.2",
+    "@indice/ng-auth": "^0.3.0",
     "oidc-client-ts": "^3.0.1",
-    "rxjs": "^6.6.7",
+    "rxjs": "^7.8.1",
     "tailwindcss": ">=2.1.2",
-    "uuid": "8.3.2"
+    "uuid": "9.0.1"
   },
   "devDependencies": {
-    "@angular/common": ">=12.0.4",
-    "@angular/core": ">=12.0.4",
-    "@angular/router": ">=12.0.4",
+    "@angular/common": ">=17.0.2",
+    "@angular/core": ">=17.0.2",
+    "@angular/router": ">=17.0.2",
     "@indice/ng-auth": "^0.2.6",
-    "@types/uuid": "8.3.4",
+    "@types/uuid": "9.0.8",
     "oidc-client-ts": "^3.0.1",
     "patch-package": "^6.4.7",
-    "postcss": "^8.4.12",
-    "rxjs": "^6.6.7",
+    "postcss": "^8.4.38",
+    "rxjs": "^7.8.1",
     "scss-bundle": "^3.1.2",
     "tailwindcss": ">=2.1.2",
-    "tslib": "^2.4.0"
+    "tslib": "^2.6.2"
   }
 }

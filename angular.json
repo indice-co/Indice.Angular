@@ -12,14 +12,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ng-auth/tsconfig.lib.json",
             "project": "projects/ng-auth/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "projects/ng-auth/tsconfig.lib.prod.json"
             },
-            "development": {}
+            "development": {
+              "tsConfig": "projects/ng-auth/tsconfig.lib.json"
+            }
           },
           "defaultConfiguration": "production"
         },
