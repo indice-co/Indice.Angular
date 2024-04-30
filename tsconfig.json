@@ -14,13 +14,7 @@
       ],
       "ng-components": [
         "dist/ng-components"
-      ],
-      // "@indice/ng-auth": [
-      //   "projects/ng-auth/src/public-api.ts"
-      // ],
-      // "@indice/ng-components": [
-      //   "projects/ng-components/src/public-api.ts"
-      // ]
+      ]
     },
     "sourceMap": true,
     "declaration": false,
@@ -28,12 +22,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
