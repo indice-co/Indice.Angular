@@ -1,13 +1,13 @@
 import { ShellLayoutType } from './../../../types';
 import { AuthService } from '@indice/ng-auth';
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
-import { User } from 'oidc-client';
 import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { BehaviorSubject, isObservable, observable, Observable, of } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { User } from 'oidc-client-ts';
 
 @Component({
   // tslint:disable-next-line:component-selector
