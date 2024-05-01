@@ -60,8 +60,8 @@
     </ul>
     <div class="combobox-results"
          *ngIf="noResultsTemplate && items.length === 0 && !busy">
-        <ng-container [ngTemplateOutlet]="noResultsTemplate"
-                      [ngTemplateOutletContext]="{ $implicit: searchTerm }">
+        <ng-container [ngTemplateOutlet]="noResultsTemplate || defaultnoResultsTemplate"
+                      [ngTemplateOutletContext]="searchTermContext">
         </ng-container>
     </div>
 </div>
@@ -75,6 +75,10 @@
         </ng-container>
     </li>
 </ul>
+<ng-template #defaultnoResultsTemplate
+             let-searchTerm>
+    <span class="combobox-default-item-template">No result found for {{ searchTerm }}</span>
+</ng-template>
 <ng-template #defaultItemTemplate
              let-item>
     <span class="combobox-default-item-template">{{ item }}</span>

@@ -25,7 +25,7 @@ import { ContentRef } from './content-ref.class';
  *
  * @internal
  */
-export class ComponentLoader<T> {
+export class ComponentLoader<T extends object> {
   /**
    * Before content is shown event.
    */
@@ -109,7 +109,7 @@ export class ComponentLoader<T> {
     if (!this.componentFactory) {
       throw Error('You must attach a component');
     }
-    this.onBeforeShow.next();
+    this.onBeforeShow.next({});
 
     if (options.content) {
       this.contentRef = this.getContentRef(options.content, options.context, options.initialState);
