@@ -32,7 +32,7 @@ export class SampleComboboxComponent implements OnInit {
     public onAdvancedContactsSearch(searchTerm: string | undefined): void {
         this.advancedContactsLoading = true;
         this._http
-            .get<ContactResultSet>('https://messaging.indice.gr/api/sample-contacts', {
+            .get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
                 params: {
                     page: 1,
                     size: 100,
@@ -53,7 +53,7 @@ export class SampleComboboxComponent implements OnInit {
     public onContactsSearch(searchTerm: string | undefined): void {
         this.contactsLoading = true;
         this._http
-            .get<ContactResultSet>('https://messaging.indice.gr/api/sample-contacts', {
+            .get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
                 params: {
                     page: 1,
                     size: 100,

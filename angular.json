@@ -12,14 +12,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/ng-auth/tsconfig.lib.json",
             "project": "projects/ng-auth/ng-package.json"
           },
           "configurations": {
             "production": {
               "tsConfig": "projects/ng-auth/tsconfig.lib.prod.json"
             },
-            "development": {}
+            "development": {
+              "tsConfig": "projects/ng-auth/tsconfig.lib.json"
+            }
           },
           "defaultConfiguration": "production"
         },
@@ -136,10 +137,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "buildTarget": "app:build:production"
             },
             "development": {
-              "browserTarget": "app:build:development"
+              "buildTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -147,7 +148,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           }
         },
         "test": {
