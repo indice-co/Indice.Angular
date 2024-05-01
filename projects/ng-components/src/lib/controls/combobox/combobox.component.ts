@@ -51,8 +51,10 @@ export class ComboboxComponent implements OnInit {
     public value: string | undefined;
     protected searchTerm: string = '';
 
-    protected searchTermContext: any = { $implicit: this.searchTerm };
-    
+    protected getSearchTermContext(): any  {
+        return { $implicit: this.searchTerm };
+    }
+
     public ngOnInit(): void {
         if (this.itemTemplate && !this.multiple) {
             this.multiple = true;
