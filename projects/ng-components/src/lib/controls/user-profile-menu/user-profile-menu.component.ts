@@ -1,9 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@indice/ng-auth';
-import { User } from 'oidc-client';
 import { Subscription } from 'rxjs';
 import { APP_LINKS } from '../../tokens';
+import { User } from 'oidc-client-ts';
 
 @Component({
   selector: 'lib-user-profile-menu',

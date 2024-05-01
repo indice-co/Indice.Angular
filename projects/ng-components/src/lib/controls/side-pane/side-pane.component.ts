@@ -9,10 +9,13 @@ import { DOCUMENT } from '@angular/common';
 })
 export class SidePaneComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
-  @Input('visible') showPane = false;
+  @Input('visible')
+  protected showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
   @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onOpen: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
   
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
 
@@ -23,7 +26,6 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   }
 
   public onSidePaneActivated(component: any): void  {
-    this.document.body.classList.add('modal-active');
     let sizeStyleSuffix = '';
     const state = this.router.getCurrentNavigation()?.extras.state;
     if (state) {
@@ -47,13 +49,26 @@ export class SidePaneComponent implements OnInit, OnDestroy {
       }
     }
     this.sizeContainerStyle = `side-pane-box-size${sizeStyleSuffix}`;
-    this.showPane = true;
+    this.show();
   }
 
   public onSidePaneDeactivated($event: any): void  {  
-    this.document.body.classList.remove('modal-active');
+    this.hide();
+  }
+
+  public show(): void {
+    this.document.body.classList.add('modal-active');
+    this.showPane = true;
+    this.onOpen.emit(true);
+  }
+
+  public hide(): void {
     this.showPane = false;
+    this.document.body.classList.remove('modal-active');
+    this.onClose.emit(false);
+    // prepei na allaxei auto!
     this.onComplete.emit(true);
+
   }
 
 }

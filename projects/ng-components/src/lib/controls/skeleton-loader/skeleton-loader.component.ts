@@ -6,8 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './skeleton-loader.component.html'
 })
 export class SkeletonLoaderComponent implements OnInit {
-  @Input() count = 5;
+  @Input() count = 7;
   @Input() type = 'tiles'; // 'large-tile', 'table'
+  @Input('deck-class') deckClass = 'cards-deck-4'; // 'large-tile', 'table'
   constructor() { }
 
   ngOnInit(): void {

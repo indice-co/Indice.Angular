@@ -10,6 +10,7 @@ export class ProgressBarComponent implements OnChanges {
   @Input() total: number = 0;
   @Input('total-text') totalText: string | undefined;
   @Input() text: string | undefined = undefined;
+  @Input() busy: boolean = false;
   public percentage: number = 0;
 
   constructor() {

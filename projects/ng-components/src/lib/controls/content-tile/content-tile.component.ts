@@ -27,7 +27,6 @@ export class ContentTileComponent implements OnInit {
   }
 
   @ContentChild(ContentTileHeaderComponent) header: ContentTileHeaderComponent | undefined = undefined;
-  
   constructor(private router: Router) { }
 
   ngOnInit(): void {

@@ -2,14 +2,14 @@
   <div class="card-body">
     <div class="kpi-tile-title-container flex align-top">
       <a *ngIf="!header" href="#"
-         class="kpi-tile-action flex-1" (click)="emitTileAction($event)">{{title || '-'}}</a>
-      <ng-container *ngIf="header">
+         class="kpi-tile-action flex-1" (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title || title) || '-'}}</a>
+      <ng-container *ngIf="header && header.template">
         <div class="flex-1">
           <ng-template [ngTemplateOutlet]="header.template"></ng-template>
         </div>
       </ng-container>
       <div *ngIf="showAction" class="float-right align-top">
-        <a href="#" class="text-xs" (click)="emitTileAction($event)">{{actionText}}</a>
+        <a href="#" class="kpi-tile-action text-xs" (click)="emitTileAction($event)">{{actionText}}</a>
       </div>
     </div>
     <div class="flex items-center" *ngIf="itemTemplates">
@@ -21,14 +21,12 @@
         <div class="flex items-center justify-between px-2">
           <ng-container *ngFor="let item of itemTemplates; index as i">
             <button type="button"
+                    title="details"
                     (click)="selectedIndex=i"
                     [disabled]="selectedIndex===i"
-                    class="inline-flex mx-1 items-center rounded-full border border-transparent p-1 text-white shadow-sm hover:bg-slate-700 focus:outline-none"
-                    [class.bg-slate-500]="selectedIndex!==i"
-                    [class.bg-slate-700]="selectedIndex===i"
-                    [class.ring-slate-700]="selectedIndex===i"
-                    [class.ring-offset-1]="selectedIndex===i"
-                    [class.ring-1]="selectedIndex===i">
+                    class="tile-card-item-btn"
+                    [class.tile-card-item-btn-available]="selectedIndex!==i"
+                    [class.tile-card-item-btn-selected]="selectedIndex===i">
             </button>
           </ng-container>
         </div>

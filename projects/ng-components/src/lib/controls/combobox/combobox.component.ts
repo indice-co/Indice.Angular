@@ -49,7 +49,11 @@ export class ComboboxComponent implements OnInit {
     public showResults: boolean = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
-    protected searchTerm: string | undefined;
+    protected searchTerm: string = '';
+
+    protected getSearchTermContext(): any  {
+        return { $implicit: this.searchTerm };
+    }
 
     public ngOnInit(): void {
         if (this.itemTemplate && !this.multiple) {

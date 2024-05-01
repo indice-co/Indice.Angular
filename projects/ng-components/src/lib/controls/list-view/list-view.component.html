@@ -1,6 +1,7 @@
 <div>
   <lib-advanced-search *ngIf="searchOptions && searchOptions.length > 0"
                        [search-options]="searchOptions"
+                       [operators-disabled]="operatorsDisabled"
                        [filters]="filters"
                        (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
   </lib-advanced-search>
@@ -24,17 +25,14 @@
 <ng-container [ngSwitch]="view">
 
   <ng-container *ngSwitchCase="'tiles'">
-    <div [class]="tilesDeckClass">
+    <div [class]="busy ? 'cards-deck-1' : tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy"
-                           [count]="5"
-                           [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy" [deck-class]="tilesDeckClass" [count]="7" [type]="'tiles'"></lib-skeleton-loader>
 
-      <ng-container *ngIf="items && items.length > 0">
+      <ng-container *ngIf="!busy && items && items.length > 0">
         <ng-container *ngFor="let item of items">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
-          <ng-template [ngTemplateOutlet]="tileTemplate.template"
-                       [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+          <ng-template [ngTemplateOutlet]="tileTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
         </ng-container>
       </ng-container>
 
@@ -44,18 +42,14 @@
 
   <!-- *ngSwitchCase="'gallery'" -->
   <ng-container *ngSwitchCase="'gallery'">
-    <ul role="list"
-        [class]="tilesDeckClass">
+    <ul role="list" role="list" [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy"
-                           [count]="5"
-                           [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
 
       <ng-container *ngIf="!busy && items && items.length > 0">
-        <ng-container *ngFor="let item of items">
+        <ng-container *ngFor="let item of items" role="listitem">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
-          <ng-template [ngTemplateOutlet]="tileTemplate.template"
-                       [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+          <ng-template [ngTemplateOutlet]="tileTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
         </ng-container>
       </ng-container>
     </ul>
@@ -88,6 +82,7 @@
                   <td class="list-view-td-details"
                       *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
                     <button disabled
+                            title="expand-collapse"
                             type="button"
                             class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->
@@ -122,6 +117,7 @@
                   <td class="list-view-td-details"
                       *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
                     <button (click)="toggleDetails(item)"
+                            title="toggleDetails"
                             type="button"
                             class="expand-collapse-button">
                       <!-- Heroicon name: solid/plus -->

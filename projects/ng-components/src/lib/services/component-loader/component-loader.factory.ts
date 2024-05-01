@@ -21,7 +21,7 @@ export class ComponentLoaderFactory {
    *
    * @public
    */
-  createLoader<T>(viewContainerRef?: ViewContainerRef): ComponentLoader<T> {
+  createLoader<T extends object>(viewContainerRef?: ViewContainerRef): ComponentLoader<T> {
     return new ComponentLoader<T>(viewContainerRef, this.componentFactoryResolver, this.applicationRef, this.injector);
   }
 }

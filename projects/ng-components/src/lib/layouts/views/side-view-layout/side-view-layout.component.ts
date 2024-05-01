@@ -24,6 +24,7 @@ export class SideViewLayoutComponent implements OnInit {
   @Input('cancel-show') cancelShow = true;
   // tslint:disable-next-line:no-input-rename
   @Input('force-location-back') forceLocationBack = false;
+  @Input('redirect-on-close') redirectOnClose = true;
   // @Output() close = new EventEmitter<any>();
   @Output() cancel: EventEmitter<boolean> = new EventEmitter();
   @Output() ok: EventEmitter<boolean> = new EventEmitter();
@@ -49,17 +50,21 @@ export class SideViewLayoutComponent implements OnInit {
 
   public emitClose(): void {
     this.cancel.emit(false);
-    this.closeSidePane();
+    if(this.redirectOnClose) {
+      this.closeSidePane();
+    }
   }
 
   public emitCancel(): void {
     this.cancel.emit(false);
-    this.closeSidePane();
+    if(this.redirectOnClose) {
+      this.closeSidePane();
+    }
   }
 
   public emitOK(): void {
     this.ok.emit(true);
-    if (this.closeOnOk) {
+    if (this.closeOnOk && this.redirectOnClose) {
       this.closeSidePane();
     }
   }

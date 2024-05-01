@@ -1,13 +1,18 @@
 <div class="form-layout-container">
   <div class="form-header" *ngIf="title || subTitle || actions">
-    <div class="form-header-inner">
-      <h3 class="form-title">
-        {{ title }}
-      </h3>
-      <p class="form-subtitle">
-        {{ subTitle }}
-      </p>
+    <div class="flex">
+      <div class="mr-4 flex-shrink-0" *ngIf="image">
+        <img alt="form tab image" class="form-header-image" [src]="image">
+      </div>
+      <div class="mr-4 flex-shrink-0" *ngIf="icon">
+        <i [class]="icon" class="form-header-icon"></i>
+      </div>
+      <div class="form-header-inner">
+        <h3 class="form-title">{{ title }}</h3>
+        <p class="form-subtitle">{{ subTitle }}</p>
+      </div>
     </div>
+    
     <div class="form-header-actions">
       <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
         <ng-container *ngSwitchCase="'search'">

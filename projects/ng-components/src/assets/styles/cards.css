@@ -68,3 +68,20 @@
   .gallery-deck-4 {
     @apply grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 p-4;
   }
+
+  .tile-card-footer {
+    @apply absolute bottom-0 inset-x-0 bg-gradient-to-b from-transparent to-gray-50 px-2 pb-4 sm:px-4;
+  }
+
+  .tile-card-item-btn {
+    @apply inline-flex mx-1 items-center rounded-full border border-transparent p-1 text-white shadow-sm focus:outline-none;
+  }
+  
+  .tile-card-item-btn-selected {
+    @apply bg-slate-700 ring-slate-700 ring-1 ring-offset-1;
+  }
+
+  .tile-card-item-btn-available {
+    @apply bg-slate-500 hover:bg-slate-700 ring-0;
+  }
+

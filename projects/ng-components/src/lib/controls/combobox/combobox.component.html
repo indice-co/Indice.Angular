@@ -2,6 +2,7 @@
     <form autocomplete="off"
           [id]="id + '-form'">
         <input [id]="id"
+               title="combobox input"
                type="text"
                (click)="onInputClick()"
                (clickOutside)="onInputClickOutside()"
@@ -60,8 +61,8 @@
     </ul>
     <div class="combobox-results"
          *ngIf="noResultsTemplate && items.length === 0 && !busy">
-        <ng-container [ngTemplateOutlet]="noResultsTemplate"
-                      [ngTemplateOutletContext]="{ $implicit: searchTerm }">
+        <ng-container [ngTemplateOutlet]="noResultsTemplate || defaultnoResultsTemplate"
+                      [ngTemplateOutletContext]="getSearchTermContext()">
         </ng-container>
     </div>
 </div>
@@ -75,6 +76,10 @@
         </ng-container>
     </li>
 </ul>
+<ng-template #defaultnoResultsTemplate
+             let-searchTerm>
+    <span class="combobox-default-item-template">No results found for <i>{{ searchTerm }}</i></span>
+</ng-template>
 <ng-template #defaultItemTemplate
              let-item>
     <span class="combobox-default-item-template">{{ item }}</span>

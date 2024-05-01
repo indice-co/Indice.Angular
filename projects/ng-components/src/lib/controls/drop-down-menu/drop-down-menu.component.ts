@@ -9,7 +9,7 @@ import { MenuOption } from '../../types';
 export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input() options: MenuOption[] | undefined = [];
   // tslint:disable-next-line:no-input-rename
-  @Input('selected') selectedValue: any | null = null;
+  @Input('selected') selectedValue: any | null | undefined = undefined;
   @Input() multiple = false;
   @Input() placeholder: string = 'Παρακαλώ επιλέξτε...';
   @Input('show-icons') showIcons = true;

@@ -38,6 +38,8 @@ export * from './lib/controls/content-tile/content-tile-item/content-tile-item.c
 export * from './lib/controls/content-tile/content-tile.component';
 export * from './lib/controls/stats-grid/stats-grid.component';
 export * from './lib/controls/progress-bar/progress-bar.component';
+export * from './lib/controls/advanced-search/advanced-search.component';
+export * from './lib/controls/advanced-search/models';
 
 // shell layout
 export * from './lib/layouts/shell/shell-layout/shell-layout.component';
