@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import  '../../../dist/ng-components/_styles.scss';
+@import  '../../../dist/ng-components/styles';
 
 @layer components {
   .modal-active {
