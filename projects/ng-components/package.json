@@ -12,7 +12,8 @@
     "typescript",
     "tailwind",
     "components",
-    "controls"
+    "controls",
+    "indice"
   ],
   "author": "INDICE",
   "license": "MIT",

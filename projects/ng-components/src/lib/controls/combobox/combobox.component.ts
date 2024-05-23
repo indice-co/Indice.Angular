@@ -40,7 +40,7 @@ export class ComboboxComponent implements OnInit {
     @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
     @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
-    @Input() public noResultsTemplate: TemplateRef<HTMLElement> | undefined = undefined;
+    @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
     @Input() public busy: boolean = false;
     @Input() public multiple: boolean = true;
     @Input() public debounceMs: number = 1000;
@@ -50,10 +50,6 @@ export class ComboboxComponent implements OnInit {
     public selectedItems: any[] = [];
     public value: string | undefined;
     protected searchTerm: string = '';
-
-    protected getSearchTermContext(): any  {
-        return { $implicit: this.searchTerm };
-    }
 
     public ngOnInit(): void {
         if (this.itemTemplate && !this.multiple) {
