@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { MenuOption } from '../../types';
 import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions } from './models';
 
@@ -6,7 +6,7 @@ import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions
   selector: 'lib-advanced-search',
   templateUrl: './advanced-search.component.html'
 })
-export class AdvancedSearchComponent implements OnInit {
+export class AdvancedSearchComponent implements OnInit, OnChanges {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
   @Input('search-options') searchOptions: SearchOption[] = [];
   @Input('operators-disabled') operatorsDisabled: boolean = false;
@@ -25,7 +25,14 @@ export class AdvancedSearchComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.searchOptions.forEach((searchOption) => {
+  }
+
+  public ngOnChanges() {
+    this.setSearchOptions();
+  }
+
+  public setSearchOptions() {
+    for (const searchOption of this.searchOptions) {
       this.menuOptions.push({
         text: searchOption.name,
         value: searchOption.field,
@@ -33,20 +40,16 @@ export class AdvancedSearchComponent implements OnInit {
         description: searchOption.placeholder,
         icon: undefined
       });
-      if (searchOption.dataType === 'array') {
-        let menuOpts: MenuOption[] = [];
-        searchOption.options?.forEach((selectInputOption) => {
-          menuOpts.push({
-            text: selectInputOption.label,
-            value: selectInputOption.value,
-            data: undefined,
-            description: selectInputOption.description,
-            icon: undefined
-          });
-        })
-        this.menuOptionsDictionary[searchOption.field] = menuOpts;
+      if (searchOption.dataType === 'array' && searchOption.options) {
+        this.menuOptionsDictionary[searchOption.field] = searchOption.options.map(option => ({
+          text: option.label,
+          value: option.value,
+          data: undefined,
+          description: option.description,
+          icon: undefined
+        }));
       }
-    });
+    }
   }
 
   public selectedFieldChanged(field: string) {
