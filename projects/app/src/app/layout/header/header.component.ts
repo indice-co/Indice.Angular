@@ -1,5 +1,3 @@
-import { APP_LINKS, IAppLinks, ShellHeaderComponent } from '@indice/ng-components';
-import { AuthService } from '@indice/ng-auth';
 import {
   Component,
   ChangeDetectorRef,
@@ -9,6 +7,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '@indice/ng-auth';
+import { APP_LINKS, IAppLinks, ShellHeaderComponent } from 'dist/ng-components/public-api';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent
 {
   private headerUserSub$: Subscription | null = null;
   // private userSub$: Subscription | null = null;
-  constructor(@Inject(AuthService) authService: AuthService,
+  constructor(@Inject(AuthService) protected authService: AuthService,
               @Inject(Router) router: Router,
               @Inject(ActivatedRoute) protected route: ActivatedRoute,
               @Inject(APP_LINKS) links: IAppLinks,
@@ -44,7 +44,7 @@ export class HeaderComponent
       }, 1000);
     });
     // Or add a subscription to existing Subscription(userSub$ here)
-    this.userSub$?.add(
+    this.headerUserSub$?.add(
       observable.subscribe((num) => {
         //   console.log('HeaderComponent add subscription to ShellHeaderComponent user subscription');
         //   console.log(num);

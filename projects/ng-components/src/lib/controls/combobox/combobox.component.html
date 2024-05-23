@@ -1,11 +1,11 @@
-<div class="combobox-wrapper">
+<div class="combobox-wrapper" (clickOutside)="onClickOutside()">
     <form autocomplete="off"
           [id]="id + '-form'">
         <input [id]="id"
                title="combobox input"
                type="text"
                (click)="onInputClick()"
-               (clickOutside)="onInputClickOutside()"
+               (clickOutside)="onClickOutside()"
                (keyup)="onInputKeyUp($event)"
                class="combobox-input"
                role="combobox"
