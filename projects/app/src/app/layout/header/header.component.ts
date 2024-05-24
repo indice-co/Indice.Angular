@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '@indice/ng-auth';
-import { APP_LINKS, IAppLinks, ShellHeaderComponent } from 'dist/ng-components/public-api';
+import { APP_LINKS, IAppLinks, ShellHeaderComponent } from '@indice/ng-components';
 
 @Component({
   selector: 'app-header',

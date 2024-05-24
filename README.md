@@ -4,6 +4,22 @@
 
 Indice extensions for Angular 2+ 
 
+## Add reference to an internal library
+In order to add reference to an internal library from the sample application one must add a referece via
+
+`npm install "file://./dist/ng-auth"`
+
+this will add to the root package.json that is tied with the sample app named 'app' a local reference to `@indice/ng-auth` like so:
+
+```json
+ "dependencies": {
+    //...
+    "@indice/ng-auth": "file:dist/ng-auth",
+    "@indice/ng-components": "file:dist/ng-components",
+    //...
+  },
+```
+
 ## To export a new component
 1. Declare component in NgModule declarations.
 2. Declare component in NgModule exports.
