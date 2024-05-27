@@ -5,13 +5,14 @@ import { ListColumnComponent } from './list-column.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
 import { Icons } from '../../icons';
 import { FilterClause, SearchOption } from '../advanced-search/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
-  @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
   @Input() filters: FilterClause[] = [];
   // BUSY STATE
   @Input() busy = false;

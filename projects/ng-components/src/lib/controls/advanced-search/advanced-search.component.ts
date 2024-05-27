@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MenuOption } from '../../types';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 
@@ -9,15 +9,8 @@ import { SearchOption, FilterClause, Operators, OperatorOptions } from './models
 })
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  @Input('search-options') set searchOptions(options: SearchOption[]) {
-    this._searchOptions = options;
-    this.searchOptionsSubject.next(options);
-  }
-  get searchOptions(): SearchOption[] {
-    return this._searchOptions;
-  }
-  private _searchOptions: SearchOption[] = [];
-  private searchOptionsSubject: Subject<SearchOption[]> = new Subject<SearchOption[]>();
+  searchOptions: SearchOption[] = [];
+  @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
   @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
@@ -34,16 +27,15 @@ export class AdvancedSearchComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.setSearchOptions();
-    // Subscribe to the searchOptionsSubject to handle updates
-    this.searchOptionsSubject.subscribe(options => {
-      this.setSearchOptions();
-    });
+    this.searchOptions$?.subscribe(options => {
+      this.searchOptions = options;
+      this.setSearchOptions(options);
+    })
   }
 
-  public setSearchOptions() {
+  public setSearchOptions(options: SearchOption[]) {
     const updatedSearchOptions = [];
-    for (const searchOption of this.searchOptions) {
+    for (const searchOption of options) {
       updatedSearchOptions.push({
         text: searchOption.name,
         value: searchOption.field,
