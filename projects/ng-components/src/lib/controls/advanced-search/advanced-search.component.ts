@@ -1,14 +1,23 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject } from 'rxjs';
 import { MenuOption } from '../../types';
-import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions } from './models';
+import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 
 @Component({
   selector: 'lib-advanced-search',
   templateUrl: './advanced-search.component.html'
 })
-export class AdvancedSearchComponent implements OnInit, OnChanges {
+export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input('search-options') set searchOptions(options: SearchOption[]) {
+    this._searchOptions = options;
+    this.searchOptionsSubject.next(options);
+  }
+  get searchOptions(): SearchOption[] {
+    return this._searchOptions;
+  }
+  private _searchOptions: SearchOption[] = [];
+  private searchOptionsSubject: Subject<SearchOption[]> = new Subject<SearchOption[]>();
   @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
@@ -25,10 +34,11 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
   constructor() { }
 
   public ngOnInit(): void {
-  }
-
-  public ngOnChanges() {
     this.setSearchOptions();
+    // Subscribe to the searchOptionsSubject to handle updates
+    this.searchOptionsSubject.subscribe(options => {
+      this.setSearchOptions();
+    });
   }
 
   public setSearchOptions() {
@@ -157,5 +167,4 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
     this.filters = [];
     this.advancedSearchChanged.emit(this.filters);
   }
-
 }
