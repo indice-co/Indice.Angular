@@ -11,6 +11,7 @@ In order to add reference to an internal library from the sample application one
 
 this will add to the root package.json that is tied with the sample app named 'app' a local reference to `@indice/ng-auth` like so:
 
+[read more here](https://dev.to/jsanddotnet/create-an-angular-library-and-consume-it-locally-with-debugging-cma).
 ```json
  "dependencies": {
     //...
