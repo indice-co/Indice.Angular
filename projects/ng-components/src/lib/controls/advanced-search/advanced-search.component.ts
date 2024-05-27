@@ -32,8 +32,9 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
   }
 
   public setSearchOptions() {
+    const updatedSearchOptions = [];
     for (const searchOption of this.searchOptions) {
-      this.menuOptions.push({
+      updatedSearchOptions.push({
         text: searchOption.name,
         value: searchOption.field,
         data: searchOption.dataType,
@@ -50,6 +51,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
         }));
       }
     }
+    this.menuOptions = updatedSearchOptions;
   }
 
   public selectedFieldChanged(field: string) {
