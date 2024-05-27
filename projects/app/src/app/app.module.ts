@@ -8,7 +8,6 @@ import { AppLanguagesService } from './services/app-languages.service';
 import { AppLinks } from './app.links';
 import { AppNotificationsService } from './services/app-notifications.service';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
@@ -37,6 +36,8 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
+import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
+import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
 
 @NgModule({
   declarations: [

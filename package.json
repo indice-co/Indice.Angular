@@ -32,7 +32,8 @@
     "@angular/platform-browser": "17.3.6",
     "@angular/platform-browser-dynamic": "17.3.6",
     "@angular/router": "17.3.6",
-    "@indice/ng-auth": ">=0.3.0",
+    "@indice/ng-auth": "file:dist/ng-auth",
+    "@indice/ng-components": "file:dist/ng-components",
     "@tailwindcss/aspect-ratio": ">=0.4.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
@@ -51,9 +52,12 @@
     "@angular-devkit/build-angular": "^17.3.6",
     "@angular/cli": "17.3.6",
     "@angular/compiler-cli": "17.3.6",
+    "@types/jasmine": "~5.1.0",
     "@types/node": "^12.11.1",
     "@types/uuid": "^9.0.8",
-    "@types/jasmine": "~5.1.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "ini": "^1.3.7",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -61,12 +65,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^17.3.0",
-    "cross-env": "^7.0.3",
-    "dotenv": "^8.2.0",
-    "ini": "^1.3.7",
     "postcss-import": "^15.0.0",
     "postcss-nesting": "^12.1.2",
-    "typescript": "~5.4.5",
-    "ts-node": "~10.9.2"
+    "ts-node": "~10.9.2",
+    "typescript": "~5.4.5"
   }
 }
