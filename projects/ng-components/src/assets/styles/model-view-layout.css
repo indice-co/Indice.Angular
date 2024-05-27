@@ -16,15 +16,15 @@
   }
 
   .model-view-aside-header-container {
-    @apply bg-white shadow rounded-sm;
+    @apply bg-white shadow-sm border border-gray-200 rounded-xl;
   }
 
   .model-view-aside-header-container-inner {
-    @apply flex flex-col justify-self-stretch bg-gray-50 border-b;
+    @apply flex flex-col bg-gray-50 justify-self-stretch rounded-t-xl h-24;
   }
 
   .model-view-menu-container {
-    @apply mt-2 px-4 py-4 flow-root hidden sm:block;
+    @apply bg-white px-4 py-4 flow-root hidden sm:block rounded-b-xl;
   }
 
   .model-view-menu-container-mobile {

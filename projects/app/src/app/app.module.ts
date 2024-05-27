@@ -37,6 +37,7 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
+import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from 'ng-components';
 
 @NgModule({
   declarations: [
@@ -50,12 +51,10 @@ import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-li
     HeaderComponent,
     InboxComponent,
     InboxItemComponent,
-    ModalPlayGroundComponent,
     MoreDetailsComponent,
     MoreDetailsSubComponent,
     SampleComboboxComponent,
     SampleInfoComponent,
-    SampleModalComponent,
     SampleStepperComponent,
     SampleTabsComponent,
     ShellSamplesListComponent,

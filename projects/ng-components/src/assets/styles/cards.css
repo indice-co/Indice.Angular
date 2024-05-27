@@ -20,7 +20,7 @@
   }
 
   .card {
-    @apply relative h-full border border-gray-200 bg-white shadow-sm rounded-sm overflow-hidden;
+    @apply relative h-full border border-gray-200 bg-gray-50 shadow-sm rounded-lg sm:rounded-3xl overflow-hidden;;
   }
 
   .card-body {
@@ -32,11 +32,11 @@
   }
 
   .card-header {
-    @apply inset-x-0 bg-gray-50 px-4 py-4 sm:px-6 border-b border-gray-200;
+    @apply inset-x-0 px-4 py-6 sm:py-4 sm:px-6 border-b bg-white border-gray-200;
   }
 
   .card-footer {
-    @apply absolute bottom-0 inset-x-0 bg-gray-50 px-4 py-4 sm:px-6 border-t border-gray-200;
+    @apply absolute bottom-0 inset-x-0 bg-white px-4 py-4 sm:px-6 border-t border-gray-200;
   }
 
   .kpi-tile-title-container {
@@ -59,12 +59,10 @@
     @apply grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 p-4;
   }
   
-
   .gallery-deck-3 {
     @apply grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 p-4;
   }
   
-
   .gallery-deck-4 {
     @apply grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 p-4;
   }

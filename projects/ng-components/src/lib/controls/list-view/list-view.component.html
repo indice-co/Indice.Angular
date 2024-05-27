@@ -64,18 +64,16 @@
           <thead class="list-view-thead">
             <tr>
               <ng-container *ngIf="detailsSectionSupported">
-                <th class="list-view-th-details"></th>
+                <th aria-label="details button" class="list-view-th-details"></th>
               </ng-container>
               <ng-container *ngFor="let col of columns">
-                <th scope="col"
-                    [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
+                <th scope="col" [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
                   {{col.title}}
                 </th>
               </ng-container>
             </tr>
           </thead>
-          <tbody class="list-view-tbody"
-                 *ngIf="busy">
+          <tbody class="list-view-tbody" *ngIf="busy">
             <ng-container *ngFor="let item of loaderItems;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">

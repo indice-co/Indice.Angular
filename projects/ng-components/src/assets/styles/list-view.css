@@ -1,10 +1,10 @@
 
   .list-view-container {
-    @apply flex flex-col border border-gray-200;
+    @apply flex flex-col border border-gray-200 rounded-lg;
   }
 
   .list-view-container-inner {
-    @apply overflow-hidden;
+    @apply overflow-y-hidden overflow-x-auto rounded-lg;
   }
 
   .list-view-table {

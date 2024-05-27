@@ -1,10 +1,10 @@
 
   .form-layout-container {
-    @apply bg-white shadow-sm border border-gray-200 rounded-sm;
+    @apply bg-white shadow-sm border border-gray-200 rounded-xl;
   }
 
   .form-header {
-    @apply px-4 py-5 sm:px-6 bg-gray-50 sm:flex sm:items-center sm:justify-between;
+    @apply px-4 py-4 bg-gray-50 rounded-t-xl h-24 sm:flex sm:items-center sm:justify-between;
   }
 
   .form-header-inner {
@@ -28,7 +28,7 @@
   }
 
   .form-content-container {
-    @apply border-t border-gray-200 px-4 py-5 sm:p-0;
+    @apply px-4 py-4;
   }
 
   .form-content-container-inner {
@@ -36,7 +36,7 @@
   }
 
   .form-header-search-input {
-    @apply block w-60 bg-gray-50 rounded-sm text-sm text-gray-900 placeholder-gray-500 outline-none;
+    @apply block w-60 bg-gray-50 rounded-md text-sm text-gray-900 placeholder-gray-500 outline-none;
   }
 
   .field-label {
@@ -48,5 +48,5 @@
   }
 
   .form-actions {
-    @apply px-4 py-3 bg-gray-100 text-gray-700 text-right sm:px-6 flex justify-end;
+    @apply -mx-4 -mb-4 mt-4 px-4 sm:px-6 py-3 bg-gray-100 text-gray-700 text-right flex justify-end rounded-b-xl;
   }
