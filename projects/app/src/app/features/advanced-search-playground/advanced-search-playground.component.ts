@@ -1,7 +1,7 @@
 import { delay } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
 import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
 import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-list.component';
@@ -14,6 +14,10 @@ import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src
 export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;
   public full = true;
+  searchOptions$: Observable<SearchOption[]> | undefined;
+  _searchOptionsSubject = new BehaviorSubject<SearchOption[]>([]);
+  searchOptionsObservable$ = this._searchOptionsSubject.asObservable();
+
   searchOptions: SearchOption[] = [
     {
       field: 'title',
@@ -59,6 +63,7 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
   ngOnInit(): void {
     super.ngOnInit();
     this.actions = [];
+    this._searchOptionsSubject.next(this.searchOptions);
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {

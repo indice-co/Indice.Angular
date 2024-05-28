@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MenuOption } from '../../types';
-import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions } from './models';
+import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 
 @Component({
   selector: 'lib-advanced-search',
@@ -8,7 +9,8 @@ import { SearchOption, FilterClause, QueryParameters, Operators, OperatorOptions
 })
 export class AdvancedSearchComponent implements OnInit {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  @Input('search-options') searchOptions: SearchOption[] = [];
+  searchOptions: SearchOption[] = [];
+  @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
   @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
@@ -25,28 +27,33 @@ export class AdvancedSearchComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.searchOptions.forEach((searchOption) => {
-      this.menuOptions.push({
+    this.searchOptions$?.subscribe(options => {
+      this.searchOptions = options;
+      this.setSearchOptions(options);
+    })
+  }
+
+  public setSearchOptions(options: SearchOption[]) {
+    const updatedSearchOptions = [];
+    for (const searchOption of options) {
+      updatedSearchOptions.push({
         text: searchOption.name,
         value: searchOption.field,
         data: searchOption.dataType,
         description: searchOption.placeholder,
         icon: undefined
       });
-      if (searchOption.dataType === 'array') {
-        let menuOpts: MenuOption[] = [];
-        searchOption.options?.forEach((selectInputOption) => {
-          menuOpts.push({
-            text: selectInputOption.label,
-            value: selectInputOption.value,
-            data: undefined,
-            description: selectInputOption.description,
-            icon: undefined
-          });
-        })
-        this.menuOptionsDictionary[searchOption.field] = menuOpts;
+      if (searchOption.dataType === 'array' && searchOption.options) {
+        this.menuOptionsDictionary[searchOption.field] = searchOption.options.map(option => ({
+          text: option.label,
+          value: option.value,
+          data: undefined,
+          description: option.description,
+          icon: undefined
+        }));
       }
-    });
+    }
+    this.menuOptions = updatedSearchOptions;
   }
 
   public selectedFieldChanged(field: string) {
@@ -152,5 +159,4 @@ export class AdvancedSearchComponent implements OnInit {
     this.filters = [];
     this.advancedSearchChanged.emit(this.filters);
   }
-
 }

@@ -1,6 +1,6 @@
-<div>
+<div *ngIf="searchOptions$ | async as searchOptions">
   <lib-advanced-search *ngIf="searchOptions && searchOptions.length > 0"
-                       [search-options]="searchOptions"
+                       [search-options$]="searchOptions$"
                        [operators-disabled]="operatorsDisabled"
                        [filters]="filters"
                        (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
