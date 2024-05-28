@@ -25,7 +25,7 @@
     }
 
     .toggle-buttons-list-button {
-        @apply relative inline-flex items-center p-2 first:border-l first:rounded-l-sm last:rounded-r-sm border-t border-b border-r border-gray-300 bg-white text-xs text-gray-700 hover:text-gray-900 focus:z-10 focus:outline-none;
+        @apply relative inline-flex items-center p-2 first:border-l first:rounded-l-lg last:rounded-r-lg border-t border-b border-r border-gray-300 bg-white text-xs text-gray-700 hover:text-gray-900 focus:z-10 focus:outline-none;
     }
 
     .toggle-buttons-list-button-selected {
