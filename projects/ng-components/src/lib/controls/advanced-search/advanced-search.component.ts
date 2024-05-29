@@ -12,7 +12,8 @@ export class AdvancedSearchComponent implements OnInit {
   searchOptions: SearchOption[] = [];
   @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
   @Input('operators-disabled') operatorsDisabled: boolean = false;
-  @Input() filters: FilterClause[] = [];
+  filters: FilterClause[] = [];
+  @Input('filters$') filters$: Observable<FilterClause[]> | undefined;
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
   public operatorOptions = OperatorOptions;
@@ -30,6 +31,10 @@ export class AdvancedSearchComponent implements OnInit {
     this.searchOptions$?.subscribe(options => {
       this.searchOptions = options;
       this.setSearchOptions(options);
+    })
+
+    this.filters$?.subscribe(filters => {
+      this.filters = filters;
     })
   }
 

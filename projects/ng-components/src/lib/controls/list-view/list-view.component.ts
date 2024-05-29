@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class ListViewComponent implements OnChanges {
   @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
-  @Input() filters: FilterClause[] = [];
+  @Input('filters$') filters$: Observable<FilterClause[]> | undefined;
   // BUSY STATE
   @Input() busy = false;
   // DATA SOURCE!
