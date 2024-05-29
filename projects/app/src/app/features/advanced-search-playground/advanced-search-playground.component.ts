@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
-import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
+import { FilterClause, SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
 import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-list.component';
 import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src/public-api';
 
@@ -17,6 +17,9 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
   searchOptions$: Observable<SearchOption[]> | undefined;
   _searchOptionsSubject = new BehaviorSubject<SearchOption[]>([]);
   searchOptionsObservable$ = this._searchOptionsSubject.asObservable();
+  filters$: Observable<FilterClause[]> | undefined;
+  _filtersSubject = new BehaviorSubject<FilterClause[]>([]);
+  filtersObservable$ = this._filtersSubject.asObservable();
 
   searchOptions: SearchOption[] = [
     {
