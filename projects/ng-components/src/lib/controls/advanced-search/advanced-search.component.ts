@@ -1,19 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MenuOption } from '../../types';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
+import { MenuOption } from '@indice/ng-components';
 
 @Component({
   selector: 'lib-advanced-search',
   templateUrl: './advanced-search.component.html'
 })
-export class AdvancedSearchComponent implements OnInit {
+export class AdvancedSearchComponent implements OnInit, OnChanges {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  searchOptions: SearchOption[] = [];
-  @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
   @Input('operators-disabled') operatorsDisabled: boolean = false;
-  filters: FilterClause[] = [];
-  @Input('filters$') filters$: Observable<FilterClause[]> | undefined;
+  @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input() filters: FilterClause[] = [];
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
   public operatorOptions = OperatorOptions;
@@ -28,19 +25,17 @@ export class AdvancedSearchComponent implements OnInit {
   constructor() { }
 
   public ngOnInit(): void {
-    this.searchOptions$?.subscribe(options => {
-      this.searchOptions = options;
-      this.setSearchOptions(options);
-    })
-
-    this.filters$?.subscribe(filters => {
-      this.filters = filters;
-    })
   }
 
-  public setSearchOptions(options: SearchOption[]) {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchOptions']) {
+      this.setSearchOptions();
+    }
+  }
+
+  public setSearchOptions() {
     const updatedSearchOptions = [];
-    for (const searchOption of options) {
+    for (const searchOption of this.searchOptions) {
       updatedSearchOptions.push({
         text: searchOption.name,
         value: searchOption.field,

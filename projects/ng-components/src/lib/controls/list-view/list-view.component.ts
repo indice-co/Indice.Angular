@@ -1,19 +1,13 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { MenuOption, ListViewType, PagerPosition } from '../../types';
-import { ListTileComponent } from './list-tile.component';
-import { ListColumnComponent } from './list-column.component';
-import { ListDetailsSectionComponent } from './list-details-section.component';
-import { Icons } from '../../icons';
-import { FilterClause, SearchOption } from '../advanced-search/models';
-import { Observable } from 'rxjs';
+import { FilterClause, Icons, ListColumnComponent, ListDetailsSectionComponent, ListTileComponent, ListViewType, MenuOption, PagerPosition, SearchOption } from '@indice/ng-components';
 
 @Component({
   selector: 'lib-list-view',
   templateUrl: './list-view.component.html'
 })
 export class ListViewComponent implements OnChanges {
-  @Input('search-options$') searchOptions$: Observable<SearchOption[]> | undefined;
-  @Input('filters$') filters$: Observable<FilterClause[]> | undefined;
+  @Input('search-options') searchOptions: SearchOption[] = [];
+  @Input() filters: FilterClause[] = [];
   // BUSY STATE
   @Input() busy = false;
   // DATA SOURCE!
@@ -150,5 +144,4 @@ export class ListViewComponent implements OnChanges {
             : 'gallery-deck';
     }
   }
-
 }
