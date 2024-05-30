@@ -1,105 +1,108 @@
 <div class="advanced-search-container">
-    <div class="advanced-search-filter">
-        <!--SEARCH FIELDS-->
-        <div class="advanced-search-filter-field-container">
-            <label class="advanced-search-filter-field-label"
-                   for="selectedField">
-                Αναζήτηση ανά:
-            </label>
-            <lib-drop-down-menu [options]="menuOptions"
-                                (selectedChanged)="selectedFieldChanged($event)"></lib-drop-down-menu>
-        </div>
-        <!--SEARCH FIELDS OPERATOR MENU-->
-        <div *ngIf="!operatorsDisabled && selectedField"
-             class="advanced-search-filter-operator-container">
-            <div *ngIf="selectedField.dataType === 'array' || selectedField.dataType === 'string'">
-                <label class="advanced-search-filter-operator-label"
-                       for="selectedOperator">
-                    &nbsp;
-                </label>
-                <lib-drop-down-menu [options]="operatorMenuOptions"
-                                    [selected]="selectedOperator"
-                                    (selectedChanged)="selectedOperatorChanged($event)"></lib-drop-down-menu>
-            </div>
-        </div>
-        <!--SEARCH FIELDS INPUT-->
-        <div *ngIf="selectedField"
-             class="advanced-search-filter-value-container">
-            <div *ngIf="selectedField.dataType === 'array'">
-                <label class="advanced-search-filter-value-label"
-                       for="fieldValue">
-                    &nbsp;
-                </label>
-                <lib-drop-down-menu [options]="menuOptionsDictionary[selectedField.field]"
-                                    [selected]="fieldValue"
-                                    (selectedChanged)="selectedFieldValueChanged($event)"></lib-drop-down-menu>
-            </div>
-            <div *ngIf="selectedField.dataType === 'string'">
-                <label class="advanced-search-filter-value-label"
-                       for="fieldValue">
-                    &nbsp;
-                </label>
-                <input (keyup.enter)="search()"
-                       [(ngModel)]="fieldValue"
-                       name="fieldValue"
-                       type="text"
-                       placeholder="Αναζήτηση"
-                       maxlength="300"
-                       class="advanced-search-filter-value-input">
-            </div>
-            <ng-container *ngIf="selectedField.dataType === 'daterange'">
-                <div>
-                    <span class="advanced-search-filter-value-input-daterange-from">
-                        Από:
-                    </span>
-                    <lib-date-picker [maxDate]="fieldValueDateTo"
-                                     [(ngModel)]="fieldValueDateFrom"
-                                     [placeholder]="'01/01/2022'"></lib-date-picker>
-                </div>
-                <div *ngIf="selectedField.dataType === 'daterange'">
-                    <span class="advanced-search-filter-value-input-daterange-to">
-                        Έως:
-                    </span>
-                    <lib-date-picker [minDate]="fieldValueDateFrom"
-                                     [(ngModel)]="fieldValueDateTo"
-                                     [placeholder]="'01/01/2022'"></lib-date-picker>
-                </div>
-            </ng-container>
-        </div>
-        <ng-container *ngIf="selectedField">
-            <!--DO SEARCH-->
-            <button type="button"
-                    [ngClass]="{'opacity-50 cursor-not-allowed': isDateValueUnpicked() && isFieldAndOperatorUnpicked()}"
-                    [disabled]="isDateValueUnpicked() && isFieldAndOperatorUnpicked()"
-                    (click)="search()">
-                <i [class]="'ms-Icon ms-Icon--Search'"></i>
-            </button>
-            <!--CLEAR-->
-            <button type="button"
-                    (click)="clear()">
-                <i [class]="'ms-Icon ms-Icon--Cancel'"></i>
-            </button>
-        </ng-container>
-    </div>
-    <!--FILTER CHIPS-->
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <ng-container *ngFor="let filter of filters; let i = index">
-        <span *ngIf="filter && filter.member"
-              class="advanced-search-chips">
-            {{ filter.uiName }} {{ filter.uiOperator }} '{{ filter.uiValue }}'
-            <button (click)="removeFilter(i)"
-                    type="button"
-                    class="advanced-search-chips-remove-filter">
-                <span class="sr-only">Remove large option</span>
-                <svg class="h-2 w-2"
-                     stroke="currentColor"
-                     fill="none"
-                     viewBox="0 0 8 8">
-                    <path stroke-linecap="round"
-                          stroke-width="1.5"
-                          d="M1 1l6 6m0-6L1 7" />
-                </svg>
-            </button>
-        </span>
+  <div class="advanced-search-filter">
+      <!--SEARCH FIELDS-->
+      <div class="advanced-search-filter-field-container">
+          <label class="advanced-search-filter-field-label"
+                 for="selectedField">
+              Αναζήτηση ανά:
+          </label>
+          <lib-drop-down-menu [options]="menuOptions"
+                              (selectedChanged)="selectedFieldChanged($event)"></lib-drop-down-menu>
+      </div>
+      <!--SEARCH FIELDS OPERATOR MENU-->
+      <div *ngIf="!operatorsDisabled && selectedField"
+           class="advanced-search-filter-operator-container">
+          <div *ngIf="selectedField.dataType === 'array' || selectedField.dataType === 'string'">
+              <label class="advanced-search-filter-operator-label"
+                     for="selectedOperator">
+                  &nbsp;
+              </label>
+              <lib-drop-down-menu [options]="operatorMenuOptions"
+                                  [selected]="selectedOperator"
+                                  (selectedChanged)="selectedOperatorChanged($event)"></lib-drop-down-menu>
+          </div>
+      </div>
+      <!--SEARCH FIELDS INPUT-->
+      <div *ngIf="selectedField"
+           class="advanced-search-filter-value-container">
+          <div *ngIf="selectedField.dataType === 'array'">
+              <label class="advanced-search-filter-value-label"
+                     for="fieldValue">
+                  &nbsp;
+              </label>
+              <lib-drop-down-menu [options]="menuOptionsDictionary[selectedField.field]"
+                                  [selected]="fieldValue"
+                                  (selectedChanged)="selectedFieldValueChanged($event)"></lib-drop-down-menu>
+          </div>
+          <div *ngIf="selectedField.dataType === 'string'">
+              <label class="advanced-search-filter-value-label"
+                     for="fieldValue">
+                  &nbsp;
+              </label>
+              <input (keyup.enter)="search()"
+                     [(ngModel)]="fieldValue"
+                     name="fieldValue"
+                     type="text"
+                     placeholder="Αναζήτηση"
+                     maxlength="300"
+                     class="advanced-search-filter-value-input">
+          </div>
+          <ng-container *ngIf="selectedField.dataType === 'daterange'">
+              <div>
+                  <span class="advanced-search-filter-value-input-daterange-from">
+                      Από:
+                  </span>
+                  <lib-date-picker [maxDate]="fieldValueDateTo"
+                                   [(ngModel)]="fieldValueDateFrom"
+                                   [placeholder]="'01/01/2022'"></lib-date-picker>
+              </div>
+              <div *ngIf="selectedField.dataType === 'daterange'">
+                  <span class="advanced-search-filter-value-input-daterange-to">
+                      Έως:
+                  </span>
+                  <lib-date-picker [minDate]="fieldValueDateFrom"
+                                   [(ngModel)]="fieldValueDateTo"
+                                   [placeholder]="'01/01/2022'"></lib-date-picker>
+              </div>
+          </ng-container>
+      </div>
+      <ng-container *ngIf="selectedField">
+          <!--DO SEARCH-->
+          <button type="button"
+                  [ngClass]="{'opacity-50 cursor-not-allowed': isDateValueUnpicked() && isFieldAndOperatorUnpicked()}"
+                  [disabled]="isDateValueUnpicked() && isFieldAndOperatorUnpicked()"
+                  (click)="search()">
+              <i [class]="'ms-Icon ms-Icon--Search'"></i>
+          </button>
+          <!--CLEAR-->
+          <button type="button"
+                  (click)="clear()">
+              <i [class]="'ms-Icon ms-Icon--Cancel'"></i>
+          </button>
+      </ng-container>
+  </div>
+  <!--FILTER CHIPS-->
+  <!-- In order for our changes to be reflected everytime searchOptions change -->
+  <!-- We are looping searchOptions in order to display the proper name -->
+  <ng-container *ngFor="let searchOption of searchOptions">
+    <ng-container *ngFor="let filter of filters; let j = index">
+      <span *ngIf="filter && filter.member && searchOption.field === filter.member"
+      class="advanced-search-chips">
+    {{ searchOption.name }} {{ filter.uiOperator }} '{{ filter.uiValue }}'
+    <button (click)="removeFilter(j)"
+            type="button"
+            class="advanced-search-chips-remove-filter">
+        <span class="sr-only">Remove large option</span>
+        <svg class="h-2 w-2"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 8 8">
+            <path stroke-linecap="round"
+                  stroke-width="1.5"
+                  d="M1 1l6 6m0-6L1 7" />
+        </svg>
+    </button>
+    </span>
     </ng-container>
+  </ng-container>
 </div>

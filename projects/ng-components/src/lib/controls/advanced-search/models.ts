@@ -85,7 +85,7 @@ export class FilterClause {
         });
       }
 
-      if (fo) {
+      if (fo && fo?.name?.length > 0) {
         this.uiName = fo.name;
       }
     }
@@ -147,5 +147,4 @@ export class FilterClause {
       return `${this.member}::${this.operator}::${this.value}`;
     }
   }
-
 }
