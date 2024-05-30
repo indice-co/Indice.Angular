@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
-import { MenuOption } from '@indice/ng-components';
+import { MenuOption } from '../../types';
 
 @Component({
   selector: 'lib-advanced-search',

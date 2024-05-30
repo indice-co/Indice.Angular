@@ -1,5 +1,11 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { FilterClause, Icons, ListColumnComponent, ListDetailsSectionComponent, ListTileComponent, ListViewType, MenuOption, PagerPosition, SearchOption } from '@indice/ng-components';
+import { FilterClause, SearchOption } from '../advanced-search/models';
+import { ListViewType, MenuOption, PagerPosition } from '../../types';
+import { ListColumnComponent } from './list-column.component';
+import { ListTileComponent } from './list-tile.component';
+import { ListDetailsSectionComponent } from './list-details-section.component';
+import { Icons } from '../../icons';
+;
 
 @Component({
   selector: 'lib-list-view',
