@@ -1,5 +1,5 @@
-import { Icons } from './../../../ng-components/src/lib/icons';
 import { Injectable } from '@angular/core';
+import { Icons } from './../../../ng-components/src/lib/icons';
 import { ExternalNavLink, IAppLinks, NavLink } from 'projects/ng-components/src/lib/types';
 import { Observable, of } from 'rxjs';
 
