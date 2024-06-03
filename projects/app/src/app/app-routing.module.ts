@@ -2,17 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuardService } from '@indice/ng-auth';
-import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, PageNotFoundComponent, ShellLayoutType, UnauthorizedComponent } from '@indice/ng-components';
 import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DepthComponent } from './components/depth/depth.component';
 import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
-import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
-import { IShellConfig } from './../../../ng-components/src/lib/types';
+import { IShellConfig, ShellLayoutType } from './../../../ng-components/src/lib/types';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
 import { MoreDetailsComponent } from './components/depth/more-details/more-details.component';
 import { MoreDetailsSubComponent } from './components/depth/more-details/sub/more-details-sub.component';
@@ -29,12 +27,12 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
+import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, UnauthorizedComponent } from 'projects/ng-components/src/public-api';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
   appLogoAlt: '',
   breadcrumb: true,
-  customHeaderComponent: HeaderComponent,
   fluid: false,
   showFooter: false,
   showHeader: true,

@@ -1,16 +1,16 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
   constructor(@Inject(AuthService) private authService: AuthService, @Inject(Router) private router: Router) { }
-
-  public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authRequest = null;
     if (request.url.indexOf('i18n') >= 0) {
       authRequest = request;
@@ -21,8 +21,8 @@ export class AuthHttpInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(authRequest).pipe(
-      tap((httpEvent: HttpEvent<any>) => {
-        if (httpEvent instanceof HttpResponse) { }
+      map((httpEvent: any) => {
+        return httpEvent;
       }),
       catchError((error: any) => {
         if (error?.status === 401) {

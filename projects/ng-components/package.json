@@ -27,7 +27,7 @@
     "@angular/router": ">=17.0.2",
     "@indice/ng-auth": "^0.3.0",
     "oidc-client-ts": "^3.0.1",
-    "rxjs": "^7.8.1",
+    "rxjs": "^7.5.0",
     "tailwindcss": ">=2.1.2",
     "uuid": "9.0.1"
   },
@@ -40,7 +40,7 @@
     "oidc-client-ts": "^3.0.1",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.38",
-    "rxjs": "^7.8.1",
+    "rxjs": "^7.5.0",
     "scss-bundle": "^3.1.2",
     "tailwindcss": ">=2.1.2",
     "tslib": "^2.6.2"

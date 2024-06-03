@@ -9,7 +9,7 @@ import { TenantService } from './tenant/tenant-service';
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule]
+  imports: []
 })
 export class IndiceAuthModule {
   // tslint:disable-next-line:typedef

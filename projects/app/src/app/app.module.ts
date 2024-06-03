@@ -14,7 +14,6 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DepthComponent } from './components/depth/depth.component';
 import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
 import { environment } from './../environments/environment';
-import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
@@ -36,8 +35,8 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
-import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
+import { AUTH_SETTINGS, AuthGuardService, AuthHttpInterceptor, AuthService, IndiceAuthModule } from 'projects/ng-auth/src/public-api';
+import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from 'projects/ng-components/src/public-api';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, Mo
     DashboardComponent,
     DepthComponent,
     DepthDetailsComponent,
-    HeaderComponent,
     InboxComponent,
     InboxItemComponent,
     ModalPlayGroundComponent,
