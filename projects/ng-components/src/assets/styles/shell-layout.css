@@ -117,11 +117,11 @@
   }
 
   .shell-header-profile-dropdown {
-    @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+    @apply z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-lg shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
   .shell-header-profile-dropdown-with-username {
-    @apply z-50 origin-top-right absolute right-0 mt-24 w-48 rounded-sm shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+    @apply z-50 origin-top-right absolute right-0 mt-24 w-48 rounded-lg shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
   }
 
 
@@ -130,7 +130,7 @@
   }
 
   .mobile-menu-button {
-    @apply inline-flex items-center justify-center p-2 rounded-sm outline-none text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
+    @apply inline-flex items-center justify-center p-2 rounded-lg outline-none text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-white;
   }
 
   .mobile-menu-container {

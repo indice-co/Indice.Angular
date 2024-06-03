@@ -1,6 +1,6 @@
 
     .datepicker-input {
-        @apply block w-full rounded-sm border-0 py-1.5 pr-10 ring-1 ring-inset ring-gray-200 placeholder:text-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 
+        @apply block w-full rounded-lg border-0 py-1.5 pr-10 ring-1 ring-inset ring-gray-200 placeholder:text-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 
         disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200;
     }
     .datepicker-button {
@@ -8,7 +8,7 @@
     }
 
     .datepicker-background {
-        @apply bg-gray-100 mt-10 rounded-sm shadow-md p-4 left-0 z-50 w-full;
+        @apply bg-gray-100 mt-10 rounded-lg shadow-md p-4 left-0 z-50 w-full;
     }
     .datepicker-btn-wrapper {
         @apply flex justify-between items-center mb-2;
