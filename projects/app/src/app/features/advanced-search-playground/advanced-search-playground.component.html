@@ -4,10 +4,10 @@
                 [meta-items]="metaItems">
     <lib-list-view [items]="items"
                   [show-pager]="true"
-                  [search-options$]="searchOptionsObservable$"
+                  [search-options]="searchOptions"
                   [pager-position]="'both'"
                   [page]="page"
-                  [filters$]="filtersObservable$"
+                  [filters]="filters"
                   [page-size]="pageSize"
                   [count]="count"
                   [sort-options]="sortOptions"
