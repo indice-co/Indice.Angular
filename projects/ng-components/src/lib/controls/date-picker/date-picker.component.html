@@ -1,9 +1,6 @@
-<div class="flex"
-     [ngClass]="{'relative': !inline}"
-     (clickOutside)="closeCalendar()">
-
-  <input type="text"
-         *ngIf="!inline"
+<div [class.relative]="!inline">
+<div class="datepicker-container" (clickOutside)="closeCalendar()">
+  <input *ngIf="!inline"
          #dateInput
          [readonly]="readonly"
          name="dateInput"
@@ -12,9 +9,9 @@
          title="dateInput"
          (focus)="showCalendar = false"
          [value]="value | date: displayFormat"
-         class="detapicker-input"
+         class="datepicker-input"
          [ngClass]="{'cursor-not-allowed': disabled}"
-         [placeholder]="disabled ? '' : placeholder">
+         [placeholder]="placeholder">
 
   <button type="button"
           *ngIf="!inline"
@@ -24,16 +21,15 @@
           [ngClass]="{'cursor-not-allowed': disabled}">
     <i class="ms-Icon ms-Icon--DateTime2"></i>
   </button>
-
-  <div *ngIf="showCalendar || inline"
-       [ngClass]="{'absolute': !inline}"
+</div>
+<div *ngIf="showCalendar || inline"
+       [class.absolute]="!inline"
        class="datepicker-background"
        style="height:18rem;min-width:16rem;"
        name="calendar">
     <div class="datepicker-btn-wrapper">
       <div>
-        <button type="button"
-                (click)="openYears()">
+        <button type="button"(click)="openYears()">
           <span class="datepicker-selected-month">
             {{monthNames[month]}}
           </span>
@@ -117,20 +113,13 @@
       </div>
     </ng-template>
 
-    <div class="datepicker-content-wrapper"
-         *ngIf="!showYears">
-      <div *ngFor="let blankday of blankDays"
-           style="width: 14.28%"
-           class="datepicker-blank-days">{{blankday}}</div>
-      <div *ngFor="let date of calendarDates;"
-           style="width: 14.28%"
-           class="px-1 mb-1">
-        <div (click)="selectDateValue(date)"
-             class="datepicker-days"
-             [ngClass]="{'out-of-range': outOfRangeDate(date),'selected': date.selected, 'not-selected':!date.selected }">
-          {{date.day}}</div>
+    <div class="datepicker-content-wrapper" *ngIf="!showYears">
+      <div *ngFor="let blankday of blankDays" style="width: 14.28%" class="datepicker-blank-days">{{blankday}}</div>
+      <div *ngFor="let date of calendarDates;" style="width: 14.28%" class="px-1 mb-1">
+        <div (click)="selectDateValue(date)" class="datepicker-days" [ngClass]="{'out-of-range': outOfRangeDate(date),'selected': date.selected, 'not-selected':!date.selected }">
+          {{date.day}}
+        </div>
       </div>
     </div>
   </div>
-
 </div>

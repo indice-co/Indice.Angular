@@ -1,65 +1,68 @@
+.datepicker-container {
+    @apply relative rounded-lg inline-flex items-center bg-white text-gray-400 focus-within:text-gray-600 border border-gray-300;
+}
 
-    .datepicker-input {
-        @apply block w-full rounded-lg border-0 py-1.5 pr-10 ring-1 ring-inset ring-gray-200 placeholder:text-gray-300 focus:ring-1 focus:ring-inset focus:ring-gray-500 sm:text-sm sm:leading-6 
-        disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200;
-    }
-    .datepicker-button {
-        @apply relative inline-flex items-center px-1.5 py-1.5 border-t border-b border-r border-gray-300 text-sm rounded-r-sm text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-0;
-    }
+.datepicker-input {
+    @apply w-full rounded-lg text-sm text-gray-900 pt-2 pl-2 pb-2 placeholder-gray-500 outline-none border-0 focus:outline-none focus:ring-0;
+}
 
-    .datepicker-background {
-        @apply bg-gray-100 mt-10 rounded-lg shadow-md p-4 left-0 z-50 w-full;
-    }
-    .datepicker-btn-wrapper {
-        @apply flex justify-between items-center mb-2;
-    }
+.datepicker-button {
+    @apply mr-1 text-xs focus:outline-none inline-flex items-center justify-center w-6 h-6 text-gray-800 hover:text-gray-900;
+}
 
-    .datepicker-selected-month {
-        @apply text-lg font-bold text-gray-800;
-    }
-    .datepicker-selected-year {
-        @apply ml-1 text-lg text-gray-600 font-normal;
-    }
-    .datepicker-nav-btn {
-        @apply transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25;
-    }
-    .datepicker-nav-btn svg {
-        @apply h-6 w-6 text-gray-500 inline-flex;
-    }
-    .datepicker-wrapper {
-        @apply flex flex-wrap mb-3 -mx-1;
-    }
-    .datepicker-day-name {
-        @apply text-gray-800 font-medium text-center text-sm uppercase;
-    }
-    .datepicker-content-wrapper {
-        @apply flex flex-wrap -mx-1 items-center;
-    }
-    .datepicker-year {
-        @apply cursor-pointer text-center hover:text-white text-sm rounded-md leading-loose transition ease-in-out duration-100;
-    }
-    .datepicker-year.selected {
-        @apply bg-gray-700 text-white font-medium;
-    }
-    .datepicker-year.not-selected {
-        @apply text-gray-800 hover:bg-gray-800;
-    }
+.datepicker-background {
+    @apply bg-gray-100 mt-10 rounded-lg shadow-md p-4 left-0 z-50 w-full;
+}
+.datepicker-btn-wrapper {
+    @apply flex justify-between items-center mb-2;
+}
 
-    .datepicker-blank-days {
-        @apply text-center border p-1 border-transparent text-sm opacity-50;
-    }
+.datepicker-selected-month {
+    @apply text-lg font-bold text-gray-800;
+}
+.datepicker-selected-year {
+    @apply ml-1 text-lg text-gray-600 font-normal;
+}
+.datepicker-nav-btn {
+    @apply transition ease-in-out duration-100 inline-flex cursor-pointer hover:bg-gray-200 p-1 rounded-full disabled:opacity-25;
+}
+.datepicker-nav-btn svg {
+    @apply h-6 w-6 text-gray-500 inline-flex;
+}
+.datepicker-wrapper {
+    @apply flex flex-wrap mb-3 -mx-1;
+}
+.datepicker-day-name {
+    @apply text-gray-800 font-medium text-center text-sm uppercase;
+}
+.datepicker-content-wrapper {
+    @apply flex flex-wrap -mx-1 items-center;
+}
+.datepicker-year {
+    @apply cursor-pointer text-center hover:text-white text-sm rounded-md leading-loose transition ease-in-out duration-100;
+}
+.datepicker-year.selected {
+    @apply bg-gray-700 text-white font-medium;
+}
+.datepicker-year.not-selected {
+    @apply text-gray-800 hover:bg-gray-800;
+}
 
-    .datepicker-days {
-        @apply cursor-pointer text-center hover:text-white text-sm rounded-md leading-loose transition ease-in-out duration-100;
-    }
+.datepicker-blank-days {
+    @apply text-center border p-1 border-transparent text-sm opacity-50;
+}
 
-    .datepicker-days.selected {
-        @apply bg-gray-700 text-white font-medium;
-    }
-    .datepicker-days.not-selected {
-        @apply text-gray-800 hover:bg-gray-800;
-    }
+.datepicker-days {
+    @apply cursor-pointer text-center hover:text-white text-sm rounded-md leading-loose transition ease-in-out duration-100;
+}
 
-    .datepicker-days.out-of-range{
-        @apply cursor-not-allowed opacity-25;
-    }
+.datepicker-days.selected {
+    @apply bg-gray-700 text-white font-medium;
+}
+.datepicker-days.not-selected {
+    @apply text-gray-800 hover:bg-gray-800;
+}
+
+.datepicker-days.out-of-range{
+    @apply cursor-not-allowed opacity-25;
+}
