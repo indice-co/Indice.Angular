@@ -45,8 +45,8 @@ export class UserProfileMenuComponent implements OnInit {
 
   private setCurrentUser(user: any): void {
     this.user = user;
-    if (this.user && this.user.profile) {
-      this.avatarName = `${this.user.profile.given_name?.charAt(0)}${this.user.profile.family_name?.charAt(0)}`.toUpperCase();
+    if (user && user.profile && user.profile.given_name && user.profile.family_name) {
+      this.avatarName = `${user.profile.given_name.charAt(0)}${user.profile.family_name.charAt(0)}`.toUpperCase();
     }
   }
 
