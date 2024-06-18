@@ -19,7 +19,8 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
     {
       field: 'title',
       name: 'Τίτλος',
-      dataType: 'string'
+      dataType: 'string',
+      readonly: true
     },
     {
       field: 'description',
