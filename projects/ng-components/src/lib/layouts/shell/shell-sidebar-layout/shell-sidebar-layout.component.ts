@@ -8,14 +8,14 @@ import { UserSettingsService } from '../../../services/user-settings.service';
   templateUrl: './shell-sidebar-layout.component.html'
 })
 export class ShellSidebarLayoutComponent implements OnInit {
-  constructor(
-    private _userSettings: UserSettingsService
-  ) {
+  @Input() config: IShellConfig | undefined;
+  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
+  @Input() busy: boolean = false;
+  
+  constructor(private _userSettings: UserSettingsService) {
     this.showMobileSidebar = this._userSettings.get('MobileSideBar');
   }
 
-  @Input() config: IShellConfig | undefined;
-  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
   public showMobileSidebar: boolean;
 
   public ngOnInit(): void { }

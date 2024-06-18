@@ -1,6 +1,6 @@
 <div [class]="deckClass" *ngIf="type === 'tiles'">
   <div class="relative p-4 w-80 bg-white overflow-hidden shadow hover:shadow-md rounded-xl"  *ngFor="let i of counter(count)">
-    <div class="animate-pulse flex flex-col">
+    <div class="animate-pulse flex flex-col rounded-xl">
       <div class="rounded w-full h-32 bg-gray-200"></div>
       
       <div class="flex flex-col mt-5 rounded-xl">
@@ -9,7 +9,7 @@
         <div class="mt-2 w-8/12 h-3 bg-gray-200 rounded"></div>
       </div>
 
-      <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1">
+      <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1 rounded-xl">
         <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
         <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
       </div>

@@ -1,14 +1,11 @@
-<div [class.hidden]="!loaded"
-     [class.block]="loaded">
+<div [class.hidden]="!loaded" [class.block]="loaded">
   <!-- STACKED LAYOUT -->
-  <div *ngIf="(activeConfig.layout === 'Stacked' || !activeConfig.layout)"
-       class="shell-container active-side-pane">
-    <lib-shell-stacked-layout [config]="activeConfig"></lib-shell-stacked-layout>
+  <div *ngIf="(activeConfig.layout === 'Stacked' || !activeConfig.layout)" class="shell-container active-side-pane">
+    <lib-shell-stacked-layout [config]="activeConfig" [busy]="busy"></lib-shell-stacked-layout>
   </div>
   <!-- SIDEBAR LAYOUT -->
-  <div *ngIf="activeConfig.layout === 'Sidebar'"
-       class="sidebar shell-container active-side-pane">
-    <lib-shell-sidebar-layout [config]="activeConfig"
+  <div *ngIf="activeConfig.layout === 'Sidebar'" class="sidebar shell-container active-side-pane">
+    <lib-shell-sidebar-layout [config]="activeConfig" [busy]="busy"
                               [sidebarFooterTemplate]="sidebarFooterTemplate">
     </lib-shell-sidebar-layout>
   </div>

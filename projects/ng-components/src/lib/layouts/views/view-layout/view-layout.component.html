@@ -1,10 +1,12 @@
 <header *ngIf="header" class="view-layout-paddings">
   <div class="view-layout-title-container">
     <div class="view-layout-title-container-inner">
+      
       <div class="flex items-center">
         <i *ngIf="icon" [class]="icon + ' title-icon'" aria-hidden="true"></i>
-        <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title}}</h1>
+        <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title || ' '}}</h1>
       </div>
+      
       <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
         <ng-container *ngFor="let meta of metaItems">
           <div class="meta-item-container">
@@ -13,6 +15,7 @@
           </div>
         </ng-container>
       </div>
+
     </div>
     <div class="view-layout-title-container-far">
       <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
@@ -39,39 +42,23 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="'switch-view'">
-          <button [disabled]="view === action.param"
-                  type="button"
-                  href="#"
-                  class="p-2 disabled:opacity-75 btn-view-header"
-                  (click)="switchViewActionClick(action)">
+          <button [disabled]="view === action.param" type="button" href="#" class="p-2 disabled:opacity-75 btn-view-header" (click)="switchViewActionClick(action)">
             <span class="inline-block relative">
-              <i [class]="action.icon"></i>
-              <span *ngIf="view === action.param"
-                    class="selected-view-indicator">
-              </span>
+              <i [class]="action.icon"></i><span *ngIf="view === action.param" class="selected-view-indicator"></span>
             </span>
           </button>
         </ng-container>
 
         <ng-container *ngSwitchCase="'router-link'">
-          <button type="button"
-                  href="#"
-                  class="p-2 btn-view-header"
-                  [title]="action.tooltip"
-                  (click)="routerLinkActionClick(action)">
-            <i [class]="action.icon"
-               [ngClass]="{'pr-1': action.text}"></i>
+          <button type="button" href="#" class="p-2 btn-view-header" [title]="action.tooltip" (click)="routerLinkActionClick(action)">
+            <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
             {{ action.text }}
           </button>
         </ng-container>
 
         <ng-container *ngSwitchDefault>
-          <button type="button"
-                  class="p-2 btn-view-header"
-                  [title]="action.tooltip"
-                  (click)="emitActionClick(action)">
-            <i [class]="action.icon"
-               [ngClass]="{'pr-1': action.text}"></i>
+          <button type="button" class="p-2 btn-view-header" [title]="action.tooltip" (click)="emitActionClick(action)">
+            <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
             {{ action.text }}
           </button>
         </ng-container>

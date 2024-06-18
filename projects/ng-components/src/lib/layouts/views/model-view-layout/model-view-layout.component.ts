@@ -41,7 +41,10 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
           this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
-      this.selectedTab = this._options[0].value; 
+      
+      if(this._options && this._options.length > 0) {
+        this.selectedTab = this._options[0].value; 
+      }
     }
     return this._options;
   }

@@ -13,7 +13,7 @@
   }
 
   .dropdown-button-icon {
-    @apply absolute inset-y-0 right-0 flex items-center pointer-events-none;
+    @apply absolute inset-y-0 right-1 flex items-center pointer-events-none;
   }
 
   .dropdown-arrow {

@@ -8,26 +8,20 @@ import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 
-@Component({
-  selector: 'lib-shell-layout',
-  templateUrl: './shell-layout.component.html',
-})
+@Component({ selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html' })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
+  @Input() busy: boolean = false;
+  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
   private _routerSub$: Subscription | null = null;
 
-  constructor(
-    private _router: Router,
-    private _componentLoaderFactory: ComponentLoaderFactory,
-    @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined
-  ) {
+  constructor(private _router: Router, private _componentLoaderFactory: ComponentLoaderFactory, @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined) {
     if (!_config) {
       _config = new DefaultShellConfig();
     }
     this.activeConfig = _config;
   }
 
-  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
   public showRightPaneSM = false;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public loaded = false;
@@ -38,24 +32,21 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   }
 
   public ngOnInit(): void {
-    this._routerSub$ = this._router
-      .events
-      .pipe(
-        filter((event) => event instanceof ActivationStart)
-      ).subscribe((event) => {
-        if ((event as ActivationStart)?.snapshot) {
-          if ((event as ActivationStart)?.snapshot?.data) {
-            if ((event as ActivationStart)?.snapshot?.data.shell) {
-              this.activeConfig = (event as ActivationStart)?.snapshot.data.shell as IShellConfig;
-              if (this.activeConfig.customHeaderComponent) {
-                this.initCustomComponents();
-              }
-            } else {
-              this.activeConfig = this._config ? this._config : new DefaultShellConfig();
+    this._routerSub$ = this._router.events.pipe(filter((event) => event instanceof ActivationStart))
+    .subscribe((event) => {
+      if ((event as ActivationStart)?.snapshot) {
+        if ((event as ActivationStart)?.snapshot?.data) {
+          if ((event as ActivationStart)?.snapshot?.data.shell) {
+            this.activeConfig = (event as ActivationStart)?.snapshot.data.shell as IShellConfig;
+            if (this.activeConfig.customHeaderComponent) {
+              this.initCustomComponents();
             }
+          } else {
+            this.activeConfig = this._config ? this._config : new DefaultShellConfig();
           }
         }
-      });
+      }
+    });
   }
 
   public ngAfterViewInit(): void {

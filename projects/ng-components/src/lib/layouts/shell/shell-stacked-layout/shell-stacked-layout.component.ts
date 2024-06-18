@@ -10,6 +10,7 @@ export class ShellStackedLayoutComponent implements OnInit {
   constructor() { }
 
   @Input() config: IShellConfig | undefined;
+  @Input() busy: boolean = false;
 
   public ngOnInit(): void { }
 }

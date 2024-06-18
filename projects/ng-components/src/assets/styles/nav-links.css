@@ -51,14 +51,15 @@
   .nav-link-mobile-active {
     @apply cursor-default bg-gray-900 text-sky-300 block px-3 py-2 rounded-lg text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
   }
-
+  
   .view-nav-link {
     @apply cursor-pointer rounded-md text-gray-600 hover:border-gray-50 border-transparent border-l-2 hover:bg-gray-50 hover:text-gray-900 py-2 px-4 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
   }
-
+  
   .view-nav-link-active {
-    @apply cursor-default rounded-md bg-gray-50 border-gray-600 hover:border-gray-600 text-gray-900 border-l-2 py-2 px-3 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+    @apply cursor-default bg-gray-100 border-gray-600 hover:border-gray-600 text-gray-900;
   }
+  
 
   .min-nav-link-text-width {
     width: 220px;

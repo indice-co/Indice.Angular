@@ -1,7 +1,7 @@
 <nav>
   <div class="shell-header-paddings">
     <div class="shell-header-border">
-      <div class="shell-header-menu-container">
+      <div class="shell-header-menu-container" [class.busy]="busy">
         <div class="shell-header-logo-container">
           <div>
             <a href="#" [routerLink]="['/']"><img alt="app logo" class="app-logo" [src]="config.appLogo" [alt]="config.appLogoAlt" /></a>

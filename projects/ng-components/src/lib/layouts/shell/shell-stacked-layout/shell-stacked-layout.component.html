@@ -5,6 +5,7 @@
             <div appDynamicComponentHost="Header"></div>
         </ng-container>
         <lib-shell-header *ngIf="!config?.customHeaderComponent"
+                          [busy]="busy"
                           [show-userName]="config?.showUserNameOnHeader"
                           [show-alerts]="config?.showAlertsOnHeader"
                           [show-langs]="config?.showLangsOnHeader">
