@@ -31,6 +31,7 @@ export interface SearchOption {
   multiTerm?: boolean;
   options?: SelectInputOption[];
   placeholder?: string;
+  readonly?: boolean;
 }
 
 export interface SelectInputOption {

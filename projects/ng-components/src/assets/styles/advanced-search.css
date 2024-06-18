@@ -21,7 +21,7 @@
   }
 
   .advanced-search-filter-value-label {
-    @apply block; 
+    @apply block;
   }
 
   .advanced-search-filter-operator-container {
@@ -29,7 +29,7 @@
   }
 
   .advanced-search-filter-operator-label {
-    @apply block; 
+    @apply block;
   }
 
   .advanced-search-filter-value-input {

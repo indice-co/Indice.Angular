@@ -84,25 +84,28 @@
   <!--FILTER CHIPS-->
   <!-- In order for our changes to be reflected everytime searchOptions change -->
   <!-- We are looping searchOptions in order to display the proper name -->
-  <ng-container *ngFor="let searchOption of searchOptions">
-    <ng-container *ngFor="let filter of filters; let j = index">
-      <span *ngIf="filter && filter.member && searchOption.field === filter.member"
-      class="advanced-search-chips">
-    {{ searchOption.name }} {{ filter.uiOperator }} '{{ filter.uiValue }}'
-    <button (click)="removeFilter(j)"
-            type="button"
-            class="advanced-search-chips-remove-filter">
+<ng-container *ngFor="let searchOption of searchOptions">
+  <ng-container *ngFor="let filter of filters; let j = index">
+    <span *ngIf="filter && filter.member && searchOption.field === filter.member"
+          class="advanced-search-chips"
+          [ngClass]="{'disabled': searchOption?.readonly ?? false}">
+      {{ searchOption.name }} {{ filter.uiOperator }} '{{ filter.uiValue }}'
+      <button (click)="removeFilter(j)"
+              [disabled]="searchOption?.readonly ?? false"
+              type="button"
+              class="advanced-search-chips-remove-filter">
         <span class="sr-only">Remove large option</span>
         <svg class="h-2 w-2"
-            stroke="currentColor"
-            fill="none"
-            viewBox="0 0 8 8">
-            <path stroke-linecap="round"
-                  stroke-width="1.5"
-                  d="M1 1l6 6m0-6L1 7" />
+             stroke="currentColor"
+             fill="none"
+             viewBox="0 0 8 8">
+          <path stroke-linecap="round"
+                stroke-width="1.5"
+                d="M1 1l6 6m0-6L1 7" />
         </svg>
-    </button>
+      </button>
     </span>
-    </ng-container>
   </ng-container>
+</ng-container>
+
 </div>
