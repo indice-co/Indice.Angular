@@ -82,9 +82,13 @@ export class BreadcrumbService {
         return breadcrumb.map((route: BreadcrumbItem) => {
             const routeSegments = route.url?.split('/') || [];
             routeSegments.forEach((segment: string, index: number) => {
-                if (segment.startsWith(':')) {
-                    route.url = route.url?.replace(segment, url.split('/')[index + 1]);
+              if (segment.startsWith(':')) {
+                const dynamicValue = url.split('/')[index + 1];
+                route.url = route.url?.replace(segment, dynamicValue);
+                if (segment == ":caseTypeCode") {
+                  route.title = dynamicValue;
                 }
+              }
             });
             return route;
         });
