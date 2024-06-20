@@ -53,9 +53,5 @@
   }
 
   .advanced-search-chips.disabled .advanced-search-chips-remove-filter:active {
-    transform: none;
-  }
-
-  .advanced-search-chips.disabled:hover, .advanced-search-chips-remove-filter:hover {
-    cursor: not-allowed;
+    @apply transform-none;
   }
