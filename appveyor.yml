@@ -6,7 +6,8 @@ branches:
   
 # Test against this version of Node.js
 environment:
-  nodejs_version: "Stable"
+  nodejs_version: "20"
+  angular_version: "17"
   
 build: off
 
@@ -14,7 +15,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
   - npm whoami
-  - npm install -g @angular/cli@latest
+  - npm install -g @angular/cli@$env:angular_version
   - npm install --force
 
 before_build:
@@ -23,9 +24,9 @@ before_build:
 #  - ng test --watch false --single-run true
 build_script:
 # Publish ng-auth
-#   - cd projects/ng-auth && npm version patch && cd ../..
-#   - npm run build-auth
-#   - cd dist/ng-auth && npm publish
+   - cd projects/ng-auth && npm version patch && cd ../..
+   - npm run build-auth
+   - cd dist/ng-auth && npm publish
 # Publish ng-components
   - cd projects/ng-components && npm version patch && cd ../..
   - npm run build-components
@@ -48,8 +49,8 @@ notifications:
 - provider: Email
   to:
   - itsenes@indice.gr
-  - s.palaiologos@indice.gr
-  - g.manoltzas@indice.gr
+  - d.karkanas@indice.gr
+  - e.travlos@indice.gr
   on_build_success: true
   on_build_failure: true
   on_build_status_changed: true
