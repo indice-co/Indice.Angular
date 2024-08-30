@@ -7,7 +7,7 @@ branches:
 # Test against this version of Node.js
 environment:
   nodejs_version: "20"
-  angular_version: "17"
+  angular_version: "17.3.6"
   
 build: off
 
