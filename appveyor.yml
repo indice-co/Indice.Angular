@@ -24,9 +24,9 @@ before_build:
 #  - ng test --watch false --single-run true
 build_script:
 # Publish ng-auth
-   - cd projects/ng-auth && npm version patch && cd ../..
-   - npm run build-auth
-   - cd dist/ng-auth && npm publish
+  - cd projects/ng-auth && npm version patch && cd ../..
+  - npm run build-auth
+  - cd dist/ng-auth && npm publish
 # Publish ng-components
   - cd projects/ng-components && npm version patch && cd ../..
   - npm run build-components
