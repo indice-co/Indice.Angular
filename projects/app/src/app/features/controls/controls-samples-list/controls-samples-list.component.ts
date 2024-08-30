@@ -1,11 +1,10 @@
-import { BaseListComponent, Icons, ListViewType, MenuOption } from '@indice/ng-components';
 import { Component, OnInit } from '@angular/core';
-import { IResultSet, SwitchViewAction } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
-import { RouterViewAction } from 'projects/ng-components/src/lib/types';
+import { IResultSet, ListViewType, MenuOption, RouterViewAction, SwitchViewAction } from 'projects/ng-components/src/lib/types';
+import { BaseListComponent, Icons } from 'projects/ng-components/src/public-api';
 
 export const ControlsSamples = [
   new SampleViewModel(

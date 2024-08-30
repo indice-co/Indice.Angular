@@ -18,7 +18,7 @@ export class AuthService {
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
     this._userManager = new UserManager(authSettings);
     this.loadUser().subscribe();
-    
+
     this._userManager.events.addUserLoaded(() => {
       this._userManager.getUser().then((user: User | null) => {
         if (user) {
@@ -34,7 +34,7 @@ export class AuthService {
     this._userManager.events.addAccessTokenExpiring(() => {
       this._userManager.signinSilent();
     });
-       
+
     this._userManager.events.addUserSignedOut(() => {
       this._userManager.clearStaleState();
       this._userManager.removeUser();
@@ -135,7 +135,7 @@ export class AuthService {
   public signinRedirect(signInRedirectOptions?: SignInRedirectOptions): void {
     const authorizeArgs: any = {};
     if (signInRedirectOptions?.location) {
-      authorizeArgs['data'] = { url: signInRedirectOptions.location };
+      authorizeArgs['url_state'] =  signInRedirectOptions.location;
     }
     if (signInRedirectOptions?.promptRegister === true) {
       authorizeArgs['extraQueryParams'] = { operation: 'register' };

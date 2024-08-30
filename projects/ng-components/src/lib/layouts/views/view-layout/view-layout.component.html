@@ -1,38 +1,28 @@
-<header *ngIf="header"
-        class="view-layout-paddings">
+<header *ngIf="header" class="view-layout-paddings">
   <div class="view-layout-title-container">
     <div class="view-layout-title-container-inner">
       <div class="flex items-center">
-        <i *ngIf="icon"
-           [class]="icon + ' title-icon'"
-           aria-hidden="true"></i>
+        <i *ngIf="icon" [class]="icon + ' title-icon'" aria-hidden="true"></i>
         <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title}}</h1>
       </div>
-      <div *ngIf="metaItems && metaItems.length > 0"
-           class="meta-container">
+      <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
         <ng-container *ngFor="let meta of metaItems">
           <div class="meta-item-container">
-            <i *ngIf="meta.icon"
-               [class]="meta.icon + ' meta-icon'"
-               aria-hidden="true">
-            </i>
+            <i *ngIf="meta.icon" [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
             <span class="meta-text">{{meta.text}}</span>
           </div>
         </ng-container>
       </div>
     </div>
     <div class="view-layout-title-container-far">
-      <ng-container *ngFor="let action of actions"
-                    [ngSwitch]="action.type">
+      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
 
         <ng-container *ngSwitchCase="'search'">
-          <label for="search"
-                 class="sr-only">
-            Search
-          </label>
+          <label for="search" class="sr-only">Search</label>
           <div class="search-container mr-1">
             <input id="text"
                    #search
+                   title="search"
                    class="search-input"
                    [placeholder]="searchPlaceholder"
                    name="search"

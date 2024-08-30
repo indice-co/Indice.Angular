@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
-import { SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
+import { FilterClause, Operators, SearchOption } from 'projects/ng-components/src/lib/controls/advanced-search/models';
 import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-list.component';
 import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src/public-api';
 
@@ -14,11 +14,13 @@ import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src
 export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;
   public full = true;
+
   searchOptions: SearchOption[] = [
     {
       field: 'title',
       name: 'Τίτλος',
-      dataType: 'string'
+      dataType: 'string',
+      readonly: true
     },
     {
       field: 'description',
@@ -64,8 +66,8 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
     let title = this.filters?.find(f => f.member === 'title')?.value;
     let description = this.filters?.find(f => f.member === 'description')?.value;
-    let from = new Date(this.filters?.find(f => f.member === 'from')?.value);
-    let to = new Date(this.filters?.find(f => f.member === 'to')?.value);
+    let from = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.GREATER_THAN_EQUAL.value as FilterClause.Op)?.value);
+    let to = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.LESS_THAN_EQUAL.value as FilterClause.Op)?.value);
     let status: string[] = [];
     this.filters?.filter(f => f.member === 'status')?.forEach(f => status.push(f.value));
     console.log('title: ' + title);

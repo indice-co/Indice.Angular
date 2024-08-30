@@ -1,10 +1,11 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, OnChanges, SimpleChanges } from '@angular/core';
-import { MenuOption, ListViewType, PagerPosition } from '../../types';
-import { ListTileComponent } from './list-tile.component';
+import { FilterClause, SearchOption } from '../advanced-search/models';
+import { ListViewType, MenuOption, PagerPosition } from '../../types';
 import { ListColumnComponent } from './list-column.component';
+import { ListTileComponent } from './list-tile.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
 import { Icons } from '../../icons';
-import { FilterClause, SearchOption } from '../advanced-search/models';
+;
 
 @Component({
   selector: 'lib-list-view',
@@ -149,5 +150,4 @@ export class ListViewComponent implements OnChanges {
             : 'gallery-deck';
     }
   }
-
 }

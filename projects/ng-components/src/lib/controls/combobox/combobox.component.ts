@@ -72,7 +72,7 @@ export class ComboboxComponent implements OnInit {
         this.showResults = true;
     }
 
-    public onInputClickOutside(): void {
+    public onClickOutside(): void {
         this.showResults = false;
     }
 

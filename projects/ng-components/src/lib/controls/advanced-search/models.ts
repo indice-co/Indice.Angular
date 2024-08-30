@@ -31,6 +31,7 @@ export interface SearchOption {
   multiTerm?: boolean;
   options?: SelectInputOption[];
   placeholder?: string;
+  readonly?: boolean;
 }
 
 export interface SelectInputOption {
@@ -85,7 +86,7 @@ export class FilterClause {
         });
       }
 
-      if (fo) {
+      if (fo && fo?.name?.length > 0) {
         this.uiName = fo.name;
       }
     }
@@ -147,5 +148,4 @@ export class FilterClause {
       return `${this.member}::${this.operator}::${this.value}`;
     }
   }
-
 }

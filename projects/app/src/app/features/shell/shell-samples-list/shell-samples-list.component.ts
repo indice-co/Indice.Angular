@@ -1,10 +1,9 @@
-import { IResultSet, SwitchViewAction } from '@indice/ng-components';
 import { Component, OnInit } from '@angular/core';
-import { BaseListComponent, Icons, RouterViewAction, ViewAction, ListViewType } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { delay, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseListComponent, Icons, IResultSet, ListViewType, RouterViewAction, SwitchViewAction, ViewAction } from 'projects/ng-components/src/public-api';
 
 export const ShellLayoutsListSamples = [
   new SampleViewModel(

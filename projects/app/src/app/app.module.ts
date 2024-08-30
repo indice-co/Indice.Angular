@@ -2,21 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from '@indice/ng-components';
 import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 import { AppComponent } from './app.component';
 import { AppLanguagesService } from './services/app-languages.service';
 import { AppLinks } from './app.links';
 import { AppNotificationsService } from './services/app-notifications.service';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthGuardService, AuthHttpInterceptor, AuthService, AUTH_SETTINGS, IndiceAuthModule } from '@indice/ng-auth';
 import { ControlsSamplesListComponent } from './features/controls/controls-samples-list/controls-samples-list.component';
 import { CustomHeaderSampleComponent } from './features/shell/custom-header-sample/custom-header-sample.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DepthComponent } from './components/depth/depth.component';
 import { DepthDetailsComponent } from './components/depth/depth-details/depth-details.component';
 import { environment } from './../environments/environment';
-import { HeaderComponent } from './layout/header/header.component';
 import { InboxComponent } from './components/inbox/inbox.component';
 import { InboxItemComponent } from './components/inbox-item/inbox-item.component';
 import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-playground.componet';
@@ -38,6 +35,8 @@ import { DemoViewFormComponent } from './components/demo-view-form/demo-view-for
 import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-sample/drop-down-menu-sample.component';
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
+import { AUTH_SETTINGS, AuthGuardService, AuthHttpInterceptor, AuthService, IndiceAuthModule } from 'projects/ng-auth/src/public-api';
+import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from 'projects/ng-components/src/public-api';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,6 @@ import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-li
     DashboardComponent,
     DepthComponent,
     DepthDetailsComponent,
-    HeaderComponent,
     InboxComponent,
     InboxItemComponent,
     ModalPlayGroundComponent,

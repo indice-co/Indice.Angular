@@ -1,8 +1,8 @@
 <div>
   <lib-advanced-search *ngIf="searchOptions && searchOptions.length > 0"
                        [search-options]="searchOptions"
-                       [operators-disabled]="operatorsDisabled"
                        [filters]="filters"
+                       [operators-disabled]="operatorsDisabled"
                        (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
   </lib-advanced-search>
 
