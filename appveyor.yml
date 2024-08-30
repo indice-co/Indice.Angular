@@ -7,7 +7,7 @@ branches:
 # Test against this version of Node.js
 environment:
   nodejs_version: "20"
-  angular_version: "17.3.6"
+  angular_version: "17.3.9"
   
 build: off
 
@@ -21,6 +21,7 @@ install:
 before_build:
   - node --version
   - npm --version
+  - ng version
 #  - ng test --watch false --single-run true
 build_script:
 # Publish ng-auth
