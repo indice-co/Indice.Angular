@@ -16,8 +16,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - ps: '"//registry.npmjs.org/:_authToken=$env:npm_auth_token`n" | out-file "$env:userprofile\.npmrc" -Encoding ASCII'
   - ps: npm whoami
-  - ps: npm cache clean --force
-  - ps: npm install -g @angular/cli@$env:angular_version
+  - ps: npm install @angular/cli@$env:angular_version
   - ps: npm install --force
 
 before_build:
