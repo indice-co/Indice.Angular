@@ -26,7 +26,11 @@
               <nav class="model-view-menu-nav">
                 <div class="model-view-menu-item">
                   <ng-container *ngFor="let section of primary">
-                    <a href="#"
+                    <div class="h-3" *ngIf="section.type === 'separator'">
+                      
+                    </div>
+                    <a *ngIf="section.type !== 'separator'"
+                       href="#"
                        [routerLinkActive]="['view-nav-link-active']"
                        [routerLink]="section.link"
                        [routerLinkActiveOptions]="{ exact: false }"
@@ -38,7 +42,8 @@
                 </div>
                 <div class="model-view-menu-item-far">
                   <ng-container *ngFor="let section of secondary">
-                    <a href="#"
+                    <div class="h-3" *ngIf="section.type === 'separator'"></div>
+                    <a *ngIf="section.type !== 'separator'"
                        [routerLinkActive]="['view-nav-link-active']"
                        [routerLink]="section.link"
                        [routerLinkActiveOptions]="{ exact: false }"

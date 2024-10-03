@@ -13,9 +13,9 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;
   @Input() title = 'no title';
   // tslint:disable-next-line:no-input-rename
-  @Input('primary-links') primary: { text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
+  @Input('primary-links') primary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
   // tslint:disable-next-line:no-input-rename
-  @Input('secondary-links') secondary: { text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
+  @Input('secondary-links') secondary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
     // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }

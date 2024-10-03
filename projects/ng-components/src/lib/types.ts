@@ -69,6 +69,13 @@ export class NotificationNavLink extends NavLink {
   }
 }
 
+export class NavLinkSeparator extends NavLink {
+  constructor(text: string, path: string, public isRead: boolean, public creationDate?: Date) {
+    super('', '');
+   }
+   public type = 'separator';
+  }
+
 export class ViewAction {
   public type: string;
   public key: string | null;

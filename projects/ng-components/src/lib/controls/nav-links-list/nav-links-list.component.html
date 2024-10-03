@@ -3,6 +3,7 @@
   <div class="nav-link-list-container-inner" [class.icons-only]="!showText">
     <ng-container *ngFor="let link of links | async">
       <ng-container [ngSwitch]="link.type">
+        <div *ngSwitchCase="'sparator'" class="h-2"></div>
         <a *ngSwitchCase="'router'"
           href="#"
           [routerLink]="[link.path]"

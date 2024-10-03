@@ -13,6 +13,7 @@ export class SidePaneComponent implements OnInit, OnDestroy {
   protected showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
+  @Input('size') size: SidePaneSize | undefined;
   @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onOpen: EventEmitter<any> = new EventEmitter<any>();
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
