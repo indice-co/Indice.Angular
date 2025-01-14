@@ -44,8 +44,10 @@ export class ComboboxComponent implements OnInit {
     @Input() public busy: boolean = false;
     @Input() public multiple: boolean = true;
     @Input() public debounceMs: number = 1000;
+    @Input() public displayShowMoreOption: boolean = false;
     @Output() public onSearch: EventEmitter<string | undefined> = new EventEmitter();
     @Output() public onItemSelected: EventEmitter<any> = new EventEmitter();
+    @Output() public onShowMore: EventEmitter<any> = new EventEmitter();
     public showResults: boolean = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
@@ -98,5 +100,9 @@ export class ComboboxComponent implements OnInit {
 
     private emitSearchEvent(searchTerm: string | undefined = undefined): void {
         this.onSearch.emit(searchTerm);
+    }
+
+    public emitShowMoreEvent(): void {
+        this.onShowMore.emit();
     }
 }
