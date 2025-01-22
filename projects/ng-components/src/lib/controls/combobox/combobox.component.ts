@@ -102,7 +102,8 @@ export class ComboboxComponent implements OnInit {
         this.onSearch.emit(searchTerm);
     }
 
-    public emitShowMoreEvent(): void {
+    public emitShowMoreEvent(event: MouseEvent): void {
+        event.stopPropagation();
         this.onShowMore.emit();
     }
 }

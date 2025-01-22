@@ -90,7 +90,7 @@
     <span class="combobox-default-item-template">{{ item }}</span>
 </ng-template>
 <ng-template #showMoreItemTemplate>
-    <span (click)="emitShowMoreEvent()" class="btn btn-link text-blue-600 hover:bg-gray-100 flex justify-center relative cursor-pointer select-none py-2 pl-3 pr-3 block truncate">Show More</span>
+    <span (click)="emitShowMoreEvent($event)" class="btn btn-link text-blue-600 hover:bg-gray-100 flex justify-center relative cursor-pointer select-none py-2 pl-3 pr-3 block truncate">Show More</span>
 </ng-template>
 <ng-template #defaultSelectedItemTemplate
              let-item>
