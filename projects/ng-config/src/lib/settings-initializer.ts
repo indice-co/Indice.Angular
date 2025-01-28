@@ -31,7 +31,7 @@ export function provideAppSettings(config: AppProvidersArray = {}): EnvironmentP
   return makeEnvironmentProviders([
     {
       provide: APP_SETTINGS_MANIFEST_URL,
-      useValue: '/assets/app-settings.manifest.json'
+      useValue: '/app-settings.manifest.json'
     },
     {
       provide: APP_PROVIDERS_ARRAY,
