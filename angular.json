@@ -92,7 +92,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/app/src/favicon.ico",
-              "projects/app/src/assets"
+              "projects/app/src/assets",
+              "projects/app/src/app-settings.manifest.json"
             ],
             "styles": [
               "projects/app/src/styles.scss"
