@@ -4,6 +4,7 @@ import { AuthService } from '@indice/ng-auth';
 import { APP_LINKS } from '../../tokens';
 import { User } from 'oidc-client-ts';
 import { Subscription } from 'rxjs';
+import { ImgUserPictureDirective } from 'ng-auth';
 
 @Component({
   selector: 'lib-user-profile-menu',

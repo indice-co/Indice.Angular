@@ -94,7 +94,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   private setCurrentUser(user: any): void {
     this.user = user;
-    if (user && user.profile && user.profile.given_name && user.profile.family_name) {
+    if (user && user.profile && user.profile.given_name && user.profile.given_name !== undefined && user.profile.family_name && user.profile.family_name !== undefined) {
       this.avatarName = `${user.profile.given_name.charAt(0)}${user.profile.family_name.charAt(0)}`.toUpperCase();
     }
   }
