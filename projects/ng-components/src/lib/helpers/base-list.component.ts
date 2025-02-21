@@ -85,15 +85,15 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
         this.pageSize = size;
       }
 
-      if (params.get('search') !== this.search) {
+      if (params.get('search') && (params.get('search') !== this.search)) {
         this.search = params.get('search');
       }
 
-      if (params.get('sort') !== this.sort) {
+      if (params.get('sort') && (params.get('sort') !== this.sort)) {
         this.sort = params.get('sort');
       }
 
-      if (params.get('dir') !== this.sortdir) {
+      if (params.get('dir') && (params.get('dir') !== this.sortdir)) {
         this.sortdir = params.get('dir');
       }
       // initialize filters that may reside in the query string
