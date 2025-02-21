@@ -1,7 +1,6 @@
-
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA , ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AddressPipe } from './pipes/address.pipe';
@@ -20,7 +19,7 @@ import { DurationFormatPipe } from './pipes/duration-format.pipe';
 import { DynamicComponentHostDirective } from './directives/dynamic-component-host.directive';
 import { ErrorComponent } from './pages/http-status/error/error.component';
 import { FormLayoutComponent } from './layouts/views/form-layout/form-layout.component';
-import { ImgUserPictureDirective, IndiceAuthModule } from '@indice/ng-auth';
+import { IndiceAuthModule } from '@indice/ng-auth';
 import { KpiTileComponent } from './controls/kpi-tile/kpi-tile.component';
 import { LanguageSelectionComponent } from './controls/language-selection/language-selection.component';
 import { LibStepComponent } from './controls/stepper/lib-step.component';
@@ -184,7 +183,8 @@ import { ProgressBarComponent } from './controls/progress-bar/progress-bar.compo
     ContentTileHeaderComponent,
     StatsGridComponent,
     ProgressBarComponent
-  ]
+  ], 
+  schemas: [NO_ERRORS_SCHEMA ]
 })
 export class IndiceComponentsModule {
   static forRoot(): ModuleWithProviders<IndiceComponentsModule> {

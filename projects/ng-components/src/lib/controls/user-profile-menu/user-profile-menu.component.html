@@ -12,14 +12,14 @@
       <button type="button" 
               *ngIf="user"
               class="shell-header-profile-dropdown-button"
-              id="user-menu"
+              id="user-menu-authenticated"
               aria-expanded="false"
               aria-haspopup="true"
               (click)="userMenuExpanded = !userMenuExpanded">
         <span class="sr-only">Open user menu</span>
         <span class="avatar-container">
           <span *ngIf="!showPicture" class="avatar-text">{{this.avatarName}}</span>
-          <img *ngIf="showPicture" [userPicture]="user.profile.sub" [displayName]="user.profile" [size]="32" />
+          <img title="profile-image" *ngIf="showPicture" [userPicture]="user.profile.sub" [displayName]="user.profile" [size]="32" />
         </span>
       </button>
 
