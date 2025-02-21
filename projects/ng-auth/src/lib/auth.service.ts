@@ -19,6 +19,8 @@ export class AuthService {
     this._userManager = new UserManager(authSettings);
     this.loadUser().subscribe();
 
+    this._userManager.clearStaleState();
+
     this._userManager.events.addUserLoaded(() => {
       this._userManager.getUser().then((user: User | null) => {
         if (user) {
@@ -32,7 +34,9 @@ export class AuthService {
     });
 
     this._userManager.events.addAccessTokenExpiring(() => {
-      this._userManager.signinSilent();
+      console.info('Access token expiring event occurred.');
+      // No need to call this._userManager.signinSilent() since automaticSilentRenew is set to true.
+      // check your environment.ts for auth_settings 
     });
 
     this._userManager.events.addUserSignedOut(() => {
@@ -95,7 +99,11 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    return this.getUserProfile()?.admin === true || this.hasRole('Administrator');
+    const profile = this.getUserProfile();
+    if (!profile) {
+      return false;
+    }
+    return profile["admin"] === true || this.hasRole('Administrator');
   }
 
   public getAuthorizationHeaderValue(): string {
@@ -186,7 +194,11 @@ export class AuthService {
   }
 
   public hasRole(roleName: string): boolean {
-    const roleClaim = this.getUserProfile()?.role as string;
+    const profile = this.getUserProfile();
+    if (!profile) {
+      return false;
+    }
+    const roleClaim = profile["role"] as string;
     if (roleClaim && Array.isArray(roleClaim)) {
       const roles = Array.from(roleClaim);
       return roles.indexOf(roleName) !== -1;
