@@ -11,13 +11,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: |
+          npm i --package-lock-only
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
       - uses: actions/setup-node@v4
         with:
           cache: 'npm'
-          cache-dependency-path: 'package.json'
+          cache-dependency-path: 'package-lock.json'
           check-latest: true
           node-version: 20
           registry-url: https://registry.npmjs.org/
+
       - run: |
           npm install
           npm run publish-auth
