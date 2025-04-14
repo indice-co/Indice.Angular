@@ -1,0 +1,15 @@
+<div class="combobox-demo">
+    <h2>Select a Contact</h2>
+
+    <app-enhanced-combobox [fetchData]="fetchContacts.bind(this)"
+                           [labelKey]="'fullName'"
+                           (itemSelected)="onContactSelected($event)">
+    </app-enhanced-combobox>
+
+    <div *ngIf="selectedContact" class="selected-contact">
+        <h3>Selected Contact:</h3>
+        <p><strong>Name:</strong> {{ selectedContact.fullName }}</p>
+        <p><strong>Email:</strong> {{ selectedContact.email }}</p>
+        <p><strong>Phone:</strong> {{ selectedContact.phoneNumber }}</p>
+    </div>
+</div>

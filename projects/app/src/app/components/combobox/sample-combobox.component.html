@@ -66,9 +66,11 @@
                               [itemTemplate]="itemTemplate"
                               [selectedItemTemplate]="selectedItemTemplate"
                               [busy]="advancedContactsLoading"
+                              [displayShowMoreOption]="displayShowMoreOption"
                               (onSearch)="onAdvancedContactsSearch($event)"
                               (onItemSelected)="onAdvancedContactSelected($event)"
-                              [selectedItemsFilter]="advancedContactsFilter"
+                              (onShowMore)="onShowMore()"
+                              [equalityPredicate]="advancedContactsPredicate"
                               [noResultsTemplate]="noResultsTemplate"
                               #advancedContactsCombobox>
                 </lib-combobox>

@@ -11,8 +11,8 @@ export class ComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();
     private _items: any[] = [];
 
-    private _defaultItemsFilter = (item: any) => {
-        const selectedItem = this.selectedItems.find(x => x == item);
+    private _selectedItemsFilter = (item: any, selectedItems: any[]) => {
+        const selectedItem = selectedItems.find(this.equalityPredicate);
         return selectedItem == null || selectedItem == undefined;
     };
 
@@ -22,23 +22,15 @@ export class ComboboxComponent implements OnInit {
     @Input() public placeholder: string | undefined;
 
     @Input('items') public set items(items: any[]) {
-        if (!this.itemTemplate) {
-            this._items = items.filter(this._defaultItemsFilter);
-        } else {
-            this._items = items.filter(this.selectedItemsFilter);
-        }
+        this._items = items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
     }
 
     public get items(): any[] {
-        if (!this.itemTemplate) {
-            return this._items.filter(this._defaultItemsFilter);
-        } else {
-            return this._items.filter(this.selectedItemsFilter);
-        }
+        return this._items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
     }
 
     @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
-    @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
+    @Input() public equalityPredicate: (item: any, otherItem: any) => boolean | null = (x, y) => x === y;
     @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
     @Input() public busy: boolean = false;
@@ -85,7 +77,10 @@ export class ComboboxComponent implements OnInit {
     public onListItemSelected(item: any): void {
         this.onItemSelected.emit(item);
         if (this.multiple) {
-            this.selectedItems.push(item);
+            const index = this.selectedItems.indexOf(item);
+            if (index < 0) {
+                this.selectedItems.push(item);
+            }
         } else {
             this.value = item;
         }

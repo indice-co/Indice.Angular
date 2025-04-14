@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 
 import { ComboboxComponent } from 'projects/ng-components/src/public-api';
 import { Contact, ContactResultSet } from './contact';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
     selector: 'app-sample-combobox',
@@ -21,30 +22,60 @@ export class SampleComboboxComponent implements OnInit {
     public contactNames: string[] = [];
     public advancedContactsLoading: boolean = false;
     public contactsLoading: boolean = false;
+    public displayShowMoreOption: boolean = false;
 
-    public advancedContactsFilter = (item: any) => {
-        const selectedItem = this._advancedContactsCombobox.selectedItems.find(x => x.id == item.id);
-        return selectedItem == null || selectedItem == undefined;
-    };
+    private _page: number = 1;
+    private _pageSize: number = 3;
+    private _lastSearchTerm: string | undefined = undefined;
 
     public ngOnInit(): void { }
 
-    public onAdvancedContactsSearch(searchTerm: string | undefined): void {
+    public advancedContactsPredicate = (x: any, y: any) => x.id == y.id;
+
+    public async onAdvancedContactsSearch(searchTerm: string | undefined): Promise<void> {
+        this._page = 1;
+        this._lastSearchTerm = searchTerm;
         this.advancedContactsLoading = true;
-        this._http
-            .get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
+
+        try {
+            const fetchedContacts = await this._fetchContacts(this._lastSearchTerm);
+            this.contacts = fetchedContacts.items;
+            this.displayShowMoreOption = fetchedContacts.items.length === this._pageSize;
+        } catch (error) {
+            console.error('Error fetching contacts:', error);
+        } finally {
+            this.advancedContactsLoading = false;
+        }
+    }
+
+    public async onShowMore(): Promise<void> {
+        this._page++;
+        this.advancedContactsLoading = true;
+
+        try {
+            const fetchedContacts = await this._fetchContacts(this._lastSearchTerm);
+            this.contacts = [...this.contacts, ...fetchedContacts.items];
+            this.displayShowMoreOption = fetchedContacts.items.length === this._pageSize;
+        } catch (error) {
+            console.error('Error fetching more contacts:', error);
+        } finally {
+            this.advancedContactsLoading = false;
+        }
+    }
+
+    private _fetchContacts(searchTerm: string | undefined): Promise<ContactResultSet> {
+        return lastValueFrom(
+            this._http.get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
                 params: {
-                    page: 1,
-                    size: 100,
+                    page: this._page,
+                    size: this._pageSize,
                     sort: 'fullName+',
                     search: searchTerm || ''
                 }
             })
-            .subscribe((contacts: ContactResultSet) => {
-                this.contacts = contacts.items;
-                this.advancedContactsLoading = false;
-            });
+        );
     }
+
 
     public onAdvancedContactSelected(contact: Contact): void {
         console.log(contact);

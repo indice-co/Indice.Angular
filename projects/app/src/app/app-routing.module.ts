@@ -15,6 +15,7 @@ import { ModalPlayGroundComponent } from './features/modal-play-ground/modal-pla
 import { MoreDetailsComponent } from './components/depth/more-details/more-details.component';
 import { MoreDetailsSubComponent } from './components/depth/more-details/sub/more-details-sub.component';
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
+import { SampleEnhancedComboboxComponent } from './components/sample-enhanced-combobox/sample-enhanced-combobox.component';
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
 import { SampleStepperComponent } from './components/stepper/stepper-sample.component';
 import { SampleTabsComponent } from './components/tabs/sample-tabs.component';
@@ -28,6 +29,7 @@ import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
 import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, UnauthorizedComponent } from 'projects/ng-components/src/public-api';
+import { EnhancedComboboxComponent } from './components/enhanced-combobox/enhanced-combobox.component';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
@@ -84,7 +86,7 @@ const routes: Routes = [
 
   { path: 'samples/modal-playground', pathMatch: 'full', component: ModalPlayGroundComponent },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
-  { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
+  { path: 'samples/combobox', pathMatch: 'full', component: SampleEnhancedComboboxComponent },
   { path: 'samples/stepper', pathMatch: 'full', component: SampleStepperComponent },
   { path: 'samples/advanced-search-playground', pathMatch: 'full', component: AdvancedSearchPlaygroundComponent },
   {
