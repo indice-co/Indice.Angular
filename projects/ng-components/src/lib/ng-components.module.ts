@@ -14,6 +14,7 @@ import { BreadcrumbService } from './services/breadcrumb.service';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { CollapsiblePanelComponent } from './controls/collapsible-panel/collapsible-panel.component';
 import { ComboboxComponent } from './controls/combobox/combobox.component';
+import { EnhancedComboboxComponent } from './controls/enhanced-combobox/enhanced-combobox.component';
 import { DatepickerComponent } from './controls/date-picker/date-picker.component';
 import { DropDownMenuComponent } from './controls/drop-down-menu/drop-down-menu.component';
 import { DurationFormatPipe } from './pipes/duration-format.pipe';
@@ -76,6 +77,7 @@ import { ProgressBarComponent } from './controls/progress-bar/progress-bar.compo
     ClickOutsideDirective,
     CollapsiblePanelComponent,
     ComboboxComponent,
+    EnhancedComboboxComponent,
     DatepickerComponent,
     DropDownMenuComponent,
     DurationFormatPipe,
@@ -143,6 +145,7 @@ import { ProgressBarComponent } from './controls/progress-bar/progress-bar.compo
     ClickOutsideDirective,
     CollapsiblePanelComponent,
     ComboboxComponent,
+    EnhancedComboboxComponent,
     DatepickerComponent,
     DropDownMenuComponent,
     DurationFormatPipe,

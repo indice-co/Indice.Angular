@@ -29,7 +29,6 @@ import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
 import { AuthCallbackComponent, AuthRenewComponent, ErrorComponent, LoggedOutComponent, UnauthorizedComponent } from 'projects/ng-components/src/public-api';
-import { EnhancedComboboxComponent } from './components/enhanced-combobox/enhanced-combobox.component';
 
 const customHeaderShellConfig: IShellConfig = {
   appLogo: '',
