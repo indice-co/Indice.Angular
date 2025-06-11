@@ -85,7 +85,8 @@ const routes: Routes = [
 
   { path: 'samples/modal-playground', pathMatch: 'full', component: ModalPlayGroundComponent },
   { path: 'samples/tab-group', pathMatch: 'full', component: SampleTabsComponent },
-  { path: 'samples/combobox', pathMatch: 'full', component: SampleEnhancedComboboxComponent },
+  { path: 'samples/combobox', pathMatch: 'full', component: SampleComboboxComponent },
+  { path: 'samples/enhanced-combobox', pathMatch: 'full', component: SampleEnhancedComboboxComponent },
   { path: 'samples/stepper', pathMatch: 'full', component: SampleStepperComponent },
   { path: 'samples/advanced-search-playground', pathMatch: 'full', component: AdvancedSearchPlaygroundComponent },
   {

@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
       { text: 'Stepper', count: 1, path: 'samples/stepper' },
       { text: 'Sample inbox view', count: 1, path: 'samples/inbox' },
       { text: 'Combobox', count: 1, path: 'samples/combobox' },
+      { text: 'Enhanced Combobox', count: 1, path: 'samples/enhanced-combobox' },
       { text: 'Advanced Search Playground', count: 1, path: 'samples/advanced-search-playground' },
 
       // { text: 'Directives', count: 2, path: '' },
