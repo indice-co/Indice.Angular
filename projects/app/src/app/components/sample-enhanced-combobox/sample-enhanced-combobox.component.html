@@ -12,6 +12,7 @@
                     (onItemSelected)="onAdvancedContactSelected($event)"
                     (onShowMore)="onShowMore()"
                     [equalityPredicate]="advancedContactsPredicate"
+                    [selectedItemsFilter]="enhancedContactsFilter"
                     [noResultsTemplate]="noResultsTemplate"
                     #advancedContactsCombobox>
     </app-enhanced-combobox>

@@ -32,6 +32,11 @@ export class SampleEnhancedComboboxComponent implements OnInit {
 
     public advancedContactsPredicate = (x: any, y: any) => x.id == y.id;
 
+    public enhancedContactsFilter = (item: any) => {
+        const selectedItem = this._advancedContactsCombobox.selectedItems.find((x: any) => this.advancedContactsPredicate(x, item));
+        return selectedItem == null || selectedItem == undefined;
+    };
+
     public async onAdvancedContactsSearch(searchTerm: string | undefined): Promise<void> {
         this._page = 1;
         this._lastSearchTerm = searchTerm;
