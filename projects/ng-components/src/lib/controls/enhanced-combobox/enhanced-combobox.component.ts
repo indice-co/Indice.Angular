@@ -1,46 +1,102 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
     selector: 'app-enhanced-combobox',
     templateUrl: './enhanced-combobox.component.html'
 })
-export class EnhancedComboboxComponent<T> {
-    @Input() pageSize: number = 5;
-    @Input() labelKey: keyof T | undefined; // Property to display in UI
-    @Input() fetchData!: (page: number, searchTerm?: string) => Promise<T[]>; // Parent fetches data
+export class EnhancedComboboxComponent implements OnInit {
+    private _debouncer: Subject<string> = new Subject<string>();
+    private _items: any[] = [];
 
-    @Output() itemSelected = new EventEmitter<T>();
+    private _selectedItemsFilter = (item: any, selectedItems: any[]) => {
+        const selectedItem = selectedItems.find(this.equalityPredicate);
+        return selectedItem == null || selectedItem == undefined;
+    };
 
-    public items: T[] = [];
-    public isLoading = false;
-    private _page = 1;
-    private _searchTerm: string | undefined;
+    constructor() { }
 
-    async onSearch(searchTerm?: string) {
-        this._searchTerm = searchTerm;
-        this._page = 1;
-        this.items = await this.loadData(true);
+    @Input() public id: string = 'combobox';
+    @Input() public placeholder: string | undefined;
+
+    @Input('items') public set items(items: any[]) {
+        this._items = items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
     }
 
-    async onShowMore() {
-        this._page++;
-        const newItems = await this.loadData(false);
-        this.items = [...this.items, ...newItems];
+    public get items(): any[] {
+        return this._items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
     }
 
-    async loadData(reset: boolean): Promise<T[]> {
-        this.isLoading = true;
-        try {
-            return await this.fetchData(this._page, this._searchTerm);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return [];
-        } finally {
-            this.isLoading = false;
+    @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
+    @Input() public equalityPredicate: (item: any, otherItem: any) => boolean | null = (x, y) => x === y;
+    @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
+    @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
+    @Input() public busy: boolean = false;
+    @Input() public multiple: boolean = true;
+    @Input() public debounceMs: number = 1000;
+    @Input() public displayShowMoreOption: boolean = false;
+    @Output() public onSearch: EventEmitter<string | undefined> = new EventEmitter();
+    @Output() public onItemSelected: EventEmitter<any> = new EventEmitter();
+    @Output() public onShowMore: EventEmitter<any> = new EventEmitter();
+    public showResults: boolean = false;
+    public selectedItems: any[] = [];
+    public value: string | undefined;
+    protected searchTerm: string = '';
+
+    public ngOnInit(): void {
+        if (this.itemTemplate && !this.multiple) {
+            this.multiple = true;
+            console.warn('You cannot have a custom item template with single selection.');
+        }
+        this.emitSearchEvent();
+        this._debouncer
+            .pipe(
+                debounceTime(this.debounceMs),
+                distinctUntilChanged()
+            )
+            .subscribe((value: string) => {
+                this.searchTerm = value;
+                this.emitSearchEvent(value);
+            });
+    }
+
+    public onInputClick(): void {
+        this.showResults = true;
+    }
+
+    public onClickOutside(): void {
+        this.showResults = false;
+    }
+
+    public onInputKeyUp(event: any): void {
+        this._debouncer.next(event.currentTarget.value);
+    }
+
+    public onListItemSelected(item: any): void {
+        this.onItemSelected.emit(item);
+        if (this.multiple) {
+            const index = this.selectedItems.indexOf(item);
+            if (index < 0) {
+                this.selectedItems.push(item);
+            }
+        } else {
+            this.value = item;
         }
     }
 
-    selectItem(item: T) {
-        this.itemSelected.emit(item);
+    public removeItem(item: any): void {
+        const index = this.selectedItems.indexOf(item);
+        if (index > -1) {
+            this.selectedItems.splice(index, 1);
+        }
+    }
+
+    private emitSearchEvent(searchTerm: string | undefined = undefined): void {
+        this.onSearch.emit(searchTerm);
+    }
+
+    public emitShowMoreEvent(event: MouseEvent): void {
+        event.stopPropagation();
+        this.onShowMore.emit();
     }
 }

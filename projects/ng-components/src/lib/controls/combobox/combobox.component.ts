@@ -11,8 +11,8 @@ export class ComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();
     private _items: any[] = [];
 
-    private _selectedItemsFilter = (item: any, selectedItems: any[]) => {
-        const selectedItem = selectedItems.find(this.equalityPredicate);
+    private _defaultItemsFilter = (item: any) => {
+        const selectedItem = this.selectedItems.find(x => x == item);
         return selectedItem == null || selectedItem == undefined;
     };
 
@@ -22,24 +22,30 @@ export class ComboboxComponent implements OnInit {
     @Input() public placeholder: string | undefined;
 
     @Input('items') public set items(items: any[]) {
-        this._items = items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
+        if (!this.itemTemplate) {
+            this._items = items.filter(this._defaultItemsFilter);
+        } else {
+            this._items = items.filter(this.selectedItemsFilter);
+        }
     }
 
     public get items(): any[] {
-        return this._items.filter(x => this._selectedItemsFilter(x, this.selectedItems));
+        if (!this.itemTemplate) {
+            return this._items.filter(this._defaultItemsFilter);
+        } else {
+            return this._items.filter(this.selectedItemsFilter);
+        }
     }
 
     @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
-    @Input() public equalityPredicate: (item: any, otherItem: any) => boolean | null = (x, y) => x === y;
+    @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
     @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
     @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
     @Input() public busy: boolean = false;
     @Input() public multiple: boolean = true;
     @Input() public debounceMs: number = 1000;
-    @Input() public displayShowMoreOption: boolean = false;
     @Output() public onSearch: EventEmitter<string | undefined> = new EventEmitter();
     @Output() public onItemSelected: EventEmitter<any> = new EventEmitter();
-    @Output() public onShowMore: EventEmitter<any> = new EventEmitter();
     public showResults: boolean = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
@@ -77,10 +83,7 @@ export class ComboboxComponent implements OnInit {
     public onListItemSelected(item: any): void {
         this.onItemSelected.emit(item);
         if (this.multiple) {
-            const index = this.selectedItems.indexOf(item);
-            if (index < 0) {
-                this.selectedItems.push(item);
-            }
+            this.selectedItems.push(item);
         } else {
             this.value = item;
         }
@@ -95,10 +98,5 @@ export class ComboboxComponent implements OnInit {
 
     private emitSearchEvent(searchTerm: string | undefined = undefined): void {
         this.onSearch.emit(searchTerm);
-    }
-
-    public emitShowMoreEvent(event: MouseEvent): void {
-        event.stopPropagation();
-        this.onShowMore.emit();
     }
 }
