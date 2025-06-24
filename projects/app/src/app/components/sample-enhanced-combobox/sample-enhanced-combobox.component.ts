@@ -20,7 +20,6 @@ export class SampleEnhancedComboboxComponent implements OnInit {
     public submitInProgress = false;
     public contacts: Contact[] = [];
     public contactNames: string[] = [];
-    public advancedContactsLoading: boolean = false;
     public contactsLoading: boolean = false;
     public displayShowMoreOption: boolean = false;
 
@@ -30,17 +29,21 @@ export class SampleEnhancedComboboxComponent implements OnInit {
 
     public ngOnInit(): void { }
 
-    public advancedContactsPredicate = (x: any, y: any) => x.id == y.id;
+    public ngAfterViewInit(): void {
+        this._changeDetector.detectChanges();
+    }
+
+    public contactsPredicate = (x: any, y: any) => x.id == y.id;
 
     public enhancedContactsFilter = (item: any) => {
-        const selectedItem = this._advancedContactsCombobox.selectedItems.find((x: any) => this.advancedContactsPredicate(x, item));
+        const selectedItem = this._advancedContactsCombobox.selectedItems.find((x: any) => this.contactsPredicate(x, item));
         return selectedItem == null || selectedItem == undefined;
     };
 
-    public async onAdvancedContactsSearch(searchTerm: string | undefined): Promise<void> {
+    public async onContactsSearch(searchTerm: string | undefined): Promise<void> {
         this._page = 1;
         this._lastSearchTerm = searchTerm;
-        this.advancedContactsLoading = true;
+        this.contactsLoading = true;
 
         try {
             const fetchedContacts = await this._fetchContacts(this._lastSearchTerm);
@@ -49,13 +52,13 @@ export class SampleEnhancedComboboxComponent implements OnInit {
         } catch (error) {
             console.error('Error fetching contacts:', error);
         } finally {
-            this.advancedContactsLoading = false;
+            this.contactsLoading = false;
         }
     }
 
     public async onShowMore(): Promise<void> {
         this._page++;
-        this.advancedContactsLoading = true;
+        this.contactsLoading = true;
 
         try {
             const fetchedContacts = await this._fetchContacts(this._lastSearchTerm);
@@ -64,13 +67,15 @@ export class SampleEnhancedComboboxComponent implements OnInit {
         } catch (error) {
             console.error('Error fetching more contacts:', error);
         } finally {
-            this.advancedContactsLoading = false;
+            this.contactsLoading = false;
         }
     }
 
     private _fetchContacts(searchTerm: string | undefined): Promise<ContactResultSet> {
         return lastValueFrom(
-            this._http.get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
+            //TODO revert to correct url
+            //this._http.get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
+            this._http.get<ContactResultSet>('https://localhost:2001/api/distribution-lists/sample-contacts', {
                 params: {
                     page: this._page,
                     size: this._pageSize,
@@ -81,33 +86,8 @@ export class SampleEnhancedComboboxComponent implements OnInit {
         );
     }
 
-
-    public onAdvancedContactSelected(contact: Contact): void {
+    public onContactSelected(contact: Contact): void {
         console.log(contact);
     }
 
-    public onContactsSearch(searchTerm: string | undefined): void {
-        this.contactsLoading = true;
-        this._http
-            .get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
-                params: {
-                    page: 1,
-                    size: 100,
-                    sort: 'fullName+',
-                    search: searchTerm || ''
-                }
-            })
-            .subscribe((contacts: ContactResultSet) => {
-                this.contactNames = contacts.items.map(x => x.fullName!);
-                this.contactsLoading = false;
-            });
-    }
-
-    public onContactSelected(contact: string): void {
-        console.log(contact);
-    }
-
-    public ngAfterViewInit(): void {
-        this._changeDetector.detectChanges();
-    }
 }
