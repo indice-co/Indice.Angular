@@ -73,9 +73,7 @@ export class SampleEnhancedComboboxComponent implements OnInit {
 
     private _fetchContacts(searchTerm: string | undefined): Promise<ContactResultSet> {
         return lastValueFrom(
-            //TODO revert to correct url
-            //this._http.get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
-            this._http.get<ContactResultSet>('https://localhost:2001/api/distribution-lists/sample-contacts', {
+            this._http.get<ContactResultSet>('https://messaging.indice.gr/sample-contacts', {
                 params: {
                     page: this._page,
                     size: this._pageSize,
