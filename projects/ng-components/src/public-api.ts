@@ -23,6 +23,7 @@ export * from './lib/controls/toggle/toggle.component';
 export * from './lib/controls/side-pane/side-pane.component';
 export * from './lib/controls/nav-links-list/nav-links-list.component';
 export * from './lib/controls/combobox/combobox.component';
+export * from './lib/controls/enhanced-combobox/enhanced-combobox.component';
 export * from './lib/controls/tabs/lib-tab.component';
 export * from './lib/controls/tabs/lib-tab-group.component';
 export * from './lib/controls/tabs/lib-tab-label.directive';

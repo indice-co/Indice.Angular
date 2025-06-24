@@ -58,6 +58,11 @@
                           [ngTemplateOutletContext]="{ $implicit: item }">
             </ng-container>
         </li>
+        <li *ngIf="displayShowMoreOption"
+            role="option"
+            tabindex="-1">
+            <ng-container [ngTemplateOutlet]="showMoreItemTemplate" />
+        </li>
     </ul>
     <div class="combobox-results"
          *ngIf="noResultsTemplate && items.length === 0 && !busy">
@@ -83,6 +88,9 @@
 <ng-template #defaultItemTemplate
              let-item>
     <span class="combobox-default-item-template">{{ item }}</span>
+</ng-template>
+<ng-template #showMoreItemTemplate>
+    <span (click)="emitShowMoreEvent($event)" class="btn btn-link text-blue-600 hover:bg-gray-100 flex justify-center relative cursor-pointer select-none py-2 pl-3 pr-3 block truncate">Show More</span>
 </ng-template>
 <ng-template #defaultSelectedItemTemplate
              let-item>

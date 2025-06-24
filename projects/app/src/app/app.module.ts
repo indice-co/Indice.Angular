@@ -21,6 +21,7 @@ import { MoreDetailsComponent } from './components/depth/more-details/more-detai
 import { ReactiveFormsModule } from '@angular/forms';
 import { SampleAppShellConfig } from './app-shell-config';
 import { SampleComboboxComponent } from './components/combobox/sample-combobox.component';
+import { SampleEnhancedComboboxComponent } from './components/sample-enhanced-combobox/sample-enhanced-combobox.component';
 import { SampleInfoComponent } from './components/sample-info/sample-info.component';
 import { SampleModalComponent } from './components/sample-modals/sample-modal.component';
 import { SampleStepperComponent } from './components/stepper/stepper-sample.component';
@@ -56,6 +57,7 @@ import { IAppSettings } from 'projects/ng-config/src/lib/types';
     MoreDetailsComponent,
     MoreDetailsSubComponent,
     SampleComboboxComponent,
+    SampleEnhancedComboboxComponent,
     SampleInfoComponent,
     SampleStepperComponent,
     SampleTabsComponent,
