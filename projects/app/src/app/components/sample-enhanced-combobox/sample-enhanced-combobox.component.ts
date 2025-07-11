@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from './contact';
 import { ContactResultSet } from '../combobox/contact';
-import { ComboboxComponent } from '../../../../../ng-components/src/public-api';
+import { EnhancedComboboxComponent } from 'projects/ng-components/src/public-api';
 
 @Component({
     selector: 'app-sample-enhanced-combobox',
     templateUrl: './sample-enhanced-combobox.component.html'
 })
 export class SampleEnhancedComboboxComponent implements OnInit {
-    @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: ComboboxComponent;
+    @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: EnhancedComboboxComponent;
 
     constructor(
         private _changeDetector: ChangeDetectorRef,
