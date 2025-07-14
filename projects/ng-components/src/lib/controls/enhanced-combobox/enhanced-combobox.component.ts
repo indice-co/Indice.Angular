@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@an
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
-    selector: 'app-enhanced-combobox',
+    selector: 'lib-enhanced-combobox',
     templateUrl: './enhanced-combobox.component.html'
 })
 export class EnhancedComboboxComponent implements OnInit {

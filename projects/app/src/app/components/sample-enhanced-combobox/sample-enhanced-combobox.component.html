@@ -2,7 +2,7 @@
 
     <label for="contacts-combobox-advanced"
             class="field-label">Όνομα (*)</label>
-    <app-enhanced-combobox id="contacts-combobox-advanced"
+    <lib-enhanced-combobox id="contacts-combobox-advanced"
                     [items]="contacts"
                     [itemTemplate]="itemTemplate"
                     [selectedItemTemplate]="selectedItemTemplate"
@@ -15,7 +15,7 @@
                     [selectedItemsFilter]="enhancedContactsFilter"
                     [noResultsTemplate]="noResultsTemplate"
                     #advancedContactsCombobox>
-    </app-enhanced-combobox>
+    </lib-enhanced-combobox>
 </div>
 <ng-template #noResultsTemplate
              let-searchTerm>
