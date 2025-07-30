@@ -28,7 +28,7 @@ export class BreadcrumbService {
                     distinctUntilChanged()
                 )
                 .subscribe(_ => {
-                    const breadcrumb = [...this._buildBreadcrumb()];
+          			const breadcrumb = this._buildBreadcrumb();
                     this._breadcrumb$.next(breadcrumb);
                 });
         }
@@ -91,7 +91,16 @@ export class BreadcrumbService {
     }
 
     private _findRouteFromUrl(url: string): Route | undefined {
-        const urlSegments = url.split('/').filter((segment: string) => segment !== '');
+    let urlSegments = url.replace(/\(.+\)/, '') // remove any secondary outlet segments and focus on primary outlet that is the main route
+                           .split('/') // split the URL into segments
+      .filter((segment: string) => segment !== '');
+
+    const outletRegex = new RegExp("\\(([^()]+)\\)");
+    var outletPart = url.match(outletRegex)?.[1];
+    if (outletPart) {
+      //urlSegments = outletPart.replace(/.+:/, '').split('/') // split the URL into segments
+      //                        .filter((segment: string) => segment !== '');
+    }
         const routerConfig = this._router.config;
         const flattenedRouterConfig = this._flattenRoutes(routerConfig);
         const filteredRouterConfig = flattenedRouterConfig.filter((route: Route) => {
@@ -128,8 +137,7 @@ export class BreadcrumbService {
         if (route) {
             const routeData = this._getBreadcrumbRouteData(route);
             if (routeData._level > 0 || (!route.children || route.children.length === 0)) {
-                items.push(new BreadcrumbItem(this._getRouteTitle(route), routeData._fullPath || route.path));
-                this._findParentRoutes(route, [...items]);
+                items = this._findParentRoutes(route, [new BreadcrumbItem(this._getRouteTitle(route), routeData._fullPath || route.path), ...items]);
             }
         }
         return [...items];
