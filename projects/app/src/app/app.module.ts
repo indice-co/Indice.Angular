@@ -1,6 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AdvancedSearchPlaygroundComponent } from './features/advanced-search-playground/advanced-search-playground.component';
 import { AppComponent } from './app.component';
@@ -42,57 +42,51 @@ import { provideAppSettings } from 'projects/ng-config/src/lib/settings-initiali
 import { APP_ENVIRONMENT, APP_SETTINGS } from 'projects/ng-config/src/public-api';
 import { IAppSettings } from 'projects/ng-config/src/lib/types';
 
-@NgModule({
-  declarations: [
-    AdvancedSearchPlaygroundComponent,
-    AppComponent,
-    ControlsSamplesListComponent,
-    CustomHeaderSampleComponent,
-    DashboardComponent,
-    DepthComponent,
-    DepthDetailsComponent,
-    InboxComponent,
-    InboxItemComponent,
-    ModalPlayGroundComponent,
-    MoreDetailsComponent,
-    MoreDetailsSubComponent,
-    SampleComboboxComponent,
-    SampleEnhancedComboboxComponent,
-    SampleInfoComponent,
-    SampleStepperComponent,
-    SampleTabsComponent,
-    ShellSamplesListComponent,
-    ToasterSampleComponent,
-    ViewLayoutsListComponent,
-    ModelViewLayoutSampleComponent,
-    DemoViewContentsComponent,
-    DemoViewFormComponent,
-    DropDownMenuSampleComponent,
-    ToggleButtonSampleComponent,
-    ToggleButtonsListSampleComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    HttpClientModule,
-    IndiceAuthModule,
-    IndiceComponentsModule.forRoot(),
-    ReactiveFormsModule
-  ],
-  providers: [
-    provideAppSettings(),
-    AuthService,
-    AuthGuardService,
-    ToasterService,
-    ModalService,
-    { provide: APP_LINKS, useFactory: () => new AppLinks() },
-    { provide: SHELL_CONFIG, useFactory: () => SampleAppShellConfig },
-    { provide: APP_ENVIRONMENT, useValue: environment },
-    { provide: AUTH_SETTINGS, useFactory: (appSettings: IAppSettings) => ({...appSettings.auth_settings}), deps: [APP_SETTINGS] },
-    { provide: APP_LANGUAGES, useClass: AppLanguagesService },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
-    { provide: APP_NOTIFICATIONS, useClass: AppNotificationsService },
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AdvancedSearchPlaygroundComponent,
+        AppComponent,
+        ControlsSamplesListComponent,
+        CustomHeaderSampleComponent,
+        DashboardComponent,
+        DepthComponent,
+        DepthDetailsComponent,
+        InboxComponent,
+        InboxItemComponent,
+        ModalPlayGroundComponent,
+        MoreDetailsComponent,
+        MoreDetailsSubComponent,
+        SampleComboboxComponent,
+        SampleEnhancedComboboxComponent,
+        SampleInfoComponent,
+        SampleStepperComponent,
+        SampleTabsComponent,
+        ShellSamplesListComponent,
+        ToasterSampleComponent,
+        ViewLayoutsListComponent,
+        ModelViewLayoutSampleComponent,
+        DemoViewContentsComponent,
+        DemoViewFormComponent,
+        DropDownMenuSampleComponent,
+        ToggleButtonSampleComponent,
+        ToggleButtonsListSampleComponent
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
+        BrowserModule,
+        IndiceAuthModule,
+        IndiceComponentsModule.forRoot(),
+        ReactiveFormsModule], providers: [
+        provideAppSettings(),
+        AuthService,
+        AuthGuardService,
+        ToasterService,
+        ModalService,
+        { provide: APP_LINKS, useFactory: () => new AppLinks() },
+        { provide: SHELL_CONFIG, useFactory: () => SampleAppShellConfig },
+        { provide: APP_ENVIRONMENT, useValue: environment },
+        { provide: AUTH_SETTINGS, useFactory: (appSettings: IAppSettings) => ({ ...appSettings.auth_settings }), deps: [APP_SETTINGS] },
+        { provide: APP_LANGUAGES, useClass: AppLanguagesService },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+        { provide: APP_NOTIFICATIONS, useClass: AppNotificationsService },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule { }

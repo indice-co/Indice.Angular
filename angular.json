@@ -98,7 +98,12 @@
             "styles": [
               "projects/app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "lodash/cloneDeep",
+              "lodash/merge"
+            ]
           },
           "configurations": {
             "production": {
