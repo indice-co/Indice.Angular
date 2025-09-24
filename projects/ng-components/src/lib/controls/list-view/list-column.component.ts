@@ -1,6 +1,9 @@
 import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 
-@Component({selector: 'lib-list-column', template: '<ng-content></ng-content>'})
+@Component({
+    selector: 'lib-list-column', template: '<ng-content></ng-content>',
+    standalone: false
+})
 export class ListColumnComponent {
   @Input() title: string | null = null;
   // tslint:disable-next-line:no-input-rename

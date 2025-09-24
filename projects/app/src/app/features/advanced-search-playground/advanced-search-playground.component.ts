@@ -8,8 +8,9 @@ import { BaseListComponent } from 'projects/ng-components/src/lib/helpers/base-l
 import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src/public-api';
 
 @Component({
-  selector: 'app-advanced-search-playground',
-  templateUrl: './advanced-search-playground.component.html'
+    selector: 'app-advanced-search-playground',
+    templateUrl: './advanced-search-playground.component.html',
+    standalone: false
 })
 export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;

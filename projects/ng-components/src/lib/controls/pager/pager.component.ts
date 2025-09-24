@@ -4,8 +4,9 @@ import { Icons } from '../../icons';
 import { MenuOption } from '../../types';
 
 @Component({
-  selector: 'lib-pager',
-  templateUrl: './pager.component.html'
+    selector: 'lib-pager',
+    templateUrl: './pager.component.html',
+    standalone: false
 })
 export class PagerComponent implements OnInit, OnChanges {
   // BUSY STATE

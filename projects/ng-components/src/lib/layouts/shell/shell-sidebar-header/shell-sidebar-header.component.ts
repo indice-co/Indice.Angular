@@ -7,8 +7,9 @@ import { ShellHeaderComponent } from '../shell-header/shell-header.component';
 import { ShellLayoutType } from '../../../types';
 
 @Component({
-  selector: 'lib-shell-sidebar-header',
-  templateUrl: './shell-sidebar-header.component.html'
+    selector: 'lib-shell-sidebar-header',
+    templateUrl: './shell-sidebar-header.component.html',
+    standalone: false
 })
 export class ShellSidebarHeaderComponent extends ShellHeaderComponent {
   constructor(@Inject(AuthService) protected authService: AuthService,

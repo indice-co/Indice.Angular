@@ -4,8 +4,9 @@ import { IShellConfig } from '../../../types';
 import { UserSettingsService } from '../../../services/user-settings.service';
 
 @Component({
-  selector: 'lib-shell-sidebar-layout',
-  templateUrl: './shell-sidebar-layout.component.html'
+    selector: 'lib-shell-sidebar-layout',
+    templateUrl: './shell-sidebar-layout.component.html',
+    standalone: false
 })
 export class ShellSidebarLayoutComponent implements OnInit {
   @Input() config: IShellConfig | undefined;

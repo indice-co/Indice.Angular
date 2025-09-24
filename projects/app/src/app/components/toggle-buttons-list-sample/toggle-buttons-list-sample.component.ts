@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MenuOption } from '@indice/ng-components';
 
 @Component({
-  selector: 'app-toggle-buttons-list-sample',
-  templateUrl: './toggle-buttons-list-sample.component.html',
-  styleUrls: ['./toggle-buttons-list-sample.component.scss']
+    selector: 'app-toggle-buttons-list-sample',
+    templateUrl: './toggle-buttons-list-sample.component.html',
+    styleUrls: ['./toggle-buttons-list-sample.component.scss'],
+    standalone: false
 })
 export class ToggleButtonsListSampleComponent implements OnInit {
 

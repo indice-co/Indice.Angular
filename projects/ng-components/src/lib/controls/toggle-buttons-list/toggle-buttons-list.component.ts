@@ -3,8 +3,9 @@ import { MenuOption } from '../../types';
 
 
 @Component({
-  selector: 'lib-toggle-buttons-list',
-  templateUrl: './toggle-buttons-list.component.html'
+    selector: 'lib-toggle-buttons-list',
+    templateUrl: './toggle-buttons-list.component.html',
+    standalone: false
 })
 export class ToggleButtonsListComponent implements OnInit {
   @Input() icon: string | undefined = undefined;

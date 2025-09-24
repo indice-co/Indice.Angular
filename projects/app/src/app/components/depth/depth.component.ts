@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-depth',
-    templateUrl: './depth.component.html'
+    templateUrl: './depth.component.html',
+    standalone: false
 })
 export class DepthComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute) { }

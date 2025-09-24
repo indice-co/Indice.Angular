@@ -8,9 +8,10 @@ import { Observable, Subscription, of } from 'rxjs';
 import { User } from 'oidc-client-ts';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'lib-shell-header',
-  templateUrl: './shell-header.component.html',
+    // tslint:disable-next-line:component-selector
+    selector: 'lib-shell-header',
+    templateUrl: './shell-header.component.html',
+    standalone: false
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename

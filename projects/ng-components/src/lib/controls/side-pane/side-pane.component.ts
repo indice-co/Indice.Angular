@@ -4,8 +4,9 @@ import { Component, Input, OnInit, OnDestroy, Inject, EventEmitter, Output, OnCh
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-  selector: 'lib-side-pane',
-  templateUrl: './side-pane.component.html'
+    selector: 'lib-side-pane',
+    templateUrl: './side-pane.component.html',
+    standalone: false
 })
 export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   // tslint:disable-next-line:no-input-rename

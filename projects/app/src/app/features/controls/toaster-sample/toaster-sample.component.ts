@@ -3,9 +3,10 @@ import { ToasterService } from '@indice/ng-components';
 import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-toaster-sample',
-  templateUrl: './toaster-sample.component.html',
-  styleUrls: ['./toaster-sample.component.css']
+    selector: 'lib-toaster-sample',
+    templateUrl: './toaster-sample.component.html',
+    styleUrls: ['./toaster-sample.component.css'],
+    standalone: false
 })
 export class ToasterSampleComponent implements OnInit {
 

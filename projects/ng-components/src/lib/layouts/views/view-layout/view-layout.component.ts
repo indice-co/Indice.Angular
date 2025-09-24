@@ -6,8 +6,9 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
 
 @Component({
-  selector: 'lib-view-layout',
-  templateUrl: './view-layout.component.html'
+    selector: 'lib-view-layout',
+    templateUrl: './view-layout.component.html',
+    standalone: false
 })
 export class ViewLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename

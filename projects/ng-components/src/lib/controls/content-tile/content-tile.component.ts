@@ -1,14 +1,20 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({selector: 'lib-content-tile-header', template: '<ng-content></ng-content>'})
+@Component({
+    selector: 'lib-content-tile-header', template: '<ng-content></ng-content>',
+    standalone: false
+})
 export class ContentTileHeaderComponent {
   @ContentChild(TemplateRef) template: any | undefined = undefined;
   constructor() { }
 }
 
 
-@Component({selector: 'lib-content-tile-item',  template: '<ng-content></ng-content>'})
+@Component({
+    selector: 'lib-content-tile-item', template: '<ng-content></ng-content>',
+    standalone: false
+})
 export class ContentTileItemComponent {
   @Input() title: string | undefined;
   @ContentChild(TemplateRef) template: any | undefined = undefined;
@@ -16,8 +22,9 @@ export class ContentTileItemComponent {
 }
 
 @Component({
-  selector: 'lib-content-tile',
-  templateUrl: './content-tile.component.html'
+    selector: 'lib-content-tile',
+    templateUrl: './content-tile.component.html',
+    standalone: false
 })
 export class ContentTileComponent implements OnInit {
 

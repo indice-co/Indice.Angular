@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-avatar-initials',
-  templateUrl: './avatar-initials.component.html'
+    selector: 'lib-avatar-initials',
+    templateUrl: './avatar-initials.component.html',
+    standalone: false
 })
 export class AvatarInitialsComponent implements OnInit {
   @Input()

@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { MenuOption } from '../../types';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'lib-drop-down-menu',
-  templateUrl: './drop-down-menu.component.html',
+    // tslint:disable-next-line:component-selector
+    selector: 'lib-drop-down-menu',
+    templateUrl: './drop-down-menu.component.html',
+    standalone: false
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input() options: MenuOption[] | undefined = [];

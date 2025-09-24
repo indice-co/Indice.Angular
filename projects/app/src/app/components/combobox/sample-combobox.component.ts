@@ -6,7 +6,8 @@ import { Contact, ContactResultSet } from './contact';
 
 @Component({
     selector: 'app-sample-combobox',
-    templateUrl: './sample-combobox.component.html'
+    templateUrl: './sample-combobox.component.html',
+    standalone: false
 })
 export class SampleComboboxComponent implements OnInit {
     @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: ComboboxComponent;

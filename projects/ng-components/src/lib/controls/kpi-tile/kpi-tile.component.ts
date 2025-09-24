@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'lib-kpi-tile',
-  templateUrl: './kpi-tile.component.html'
+    selector: 'lib-kpi-tile',
+    templateUrl: './kpi-tile.component.html',
+    standalone: false
 })
 export class KpiTileComponent implements OnInit {
 

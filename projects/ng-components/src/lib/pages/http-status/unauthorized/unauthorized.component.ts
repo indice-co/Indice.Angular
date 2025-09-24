@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-unauthorized',
-  templateUrl: './unauthorized.component.html'
+    selector: 'lib-unauthorized',
+    templateUrl: './unauthorized.component.html',
+    standalone: false
 })
 export class UnauthorizedComponent implements OnInit {
   constructor() { }

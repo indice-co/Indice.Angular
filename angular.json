@@ -82,12 +82,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/app",
+            "outputPath": {
+              "base": "dist/app"
+            },
             "index": "projects/app/src/index.html",
-            "main": "projects/app/src/main.ts",
-            "polyfills": "projects/app/src/polyfills.ts",
+            "polyfills": [
+              "projects/app/src/polyfills.ts"
+            ],
             "tsConfig": "projects/app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -103,7 +106,8 @@
               "lodash",
               "lodash/cloneDeep",
               "lodash/merge"
-            ]
+            ],
+            "browser": "projects/app/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -128,9 +132,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,

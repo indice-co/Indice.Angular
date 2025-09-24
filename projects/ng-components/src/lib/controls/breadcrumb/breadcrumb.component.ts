@@ -5,7 +5,8 @@ import { BreadcrumbItem } from './breadcrumb-item';
 
 @Component({
     selector: 'lib-breadcrumb',
-    templateUrl: './breadcrumb.component.html'
+    templateUrl: './breadcrumb.component.html',
+    standalone: false
 })
 export class BreadcrumbComponent implements OnInit {
     constructor(

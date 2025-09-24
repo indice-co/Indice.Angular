@@ -4,8 +4,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons } from '@indice/ng-components';
 
 @Component({
-  selector: 'app-inbox-item',
-  templateUrl: './inbox-item.component.html'
+    selector: 'app-inbox-item',
+    templateUrl: './inbox-item.component.html',
+    standalone: false
 })
 export class InboxItemComponent implements OnInit {
   constructor(

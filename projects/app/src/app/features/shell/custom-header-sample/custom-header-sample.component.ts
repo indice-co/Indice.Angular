@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-custom-header-sample',
-  templateUrl: './custom-header-sample.component.html',
-  styleUrls: ['./custom-header-sample.component.css']
+    selector: 'lib-custom-header-sample',
+    templateUrl: './custom-header-sample.component.html',
+    styleUrls: ['./custom-header-sample.component.css'],
+    standalone: false
 })
 export class CustomHeaderSampleComponent implements OnInit {
 

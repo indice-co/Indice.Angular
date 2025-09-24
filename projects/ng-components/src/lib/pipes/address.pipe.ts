@@ -3,7 +3,8 @@ import { IAddress } from '../types';
 
 @Pipe({
     name: 'address',
-    pure: false
+    pure: false,
+    standalone: false
 })
 export class AddressPipe implements PipeTransform {
 

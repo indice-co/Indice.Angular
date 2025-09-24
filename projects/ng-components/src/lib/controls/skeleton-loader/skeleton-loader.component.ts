@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'lib-skeleton-loader',
-  templateUrl: './skeleton-loader.component.html'
+    // tslint:disable-next-line:component-selector
+    selector: 'lib-skeleton-loader',
+    templateUrl: './skeleton-loader.component.html',
+    standalone: false
 })
 export class SkeletonLoaderComponent implements OnInit {
   @Input() count = 7;

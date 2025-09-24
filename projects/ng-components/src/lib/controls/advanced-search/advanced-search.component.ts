@@ -3,8 +3,9 @@ import { SearchOption, FilterClause, Operators, OperatorOptions } from './models
 import { MenuOption } from '../../types';
 
 @Component({
-  selector: 'lib-advanced-search',
-  templateUrl: './advanced-search.component.html'
+    selector: 'lib-advanced-search',
+    templateUrl: './advanced-search.component.html',
+    standalone: false
 })
 export class AdvancedSearchComponent implements OnInit, OnChanges {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();

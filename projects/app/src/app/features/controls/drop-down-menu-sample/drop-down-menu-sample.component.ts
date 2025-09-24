@@ -3,9 +3,10 @@ import { Icons } from 'projects/ng-components/src/lib/icons';
 import { MenuOption } from 'projects/ng-components/src/lib/types';
 
 @Component({
-  selector: 'app-drop-down-menu-sample',
-  templateUrl: './drop-down-menu-sample.component.html',
-  styleUrls: ['./drop-down-menu-sample.component.scss']
+    selector: 'app-drop-down-menu-sample',
+    templateUrl: './drop-down-menu-sample.component.html',
+    styleUrls: ['./drop-down-menu-sample.component.scss'],
+    standalone: false
 })
 export class DropDownMenuSampleComponent implements OnInit {
 

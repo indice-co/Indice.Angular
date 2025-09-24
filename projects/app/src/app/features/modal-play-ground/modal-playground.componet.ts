@@ -27,8 +27,9 @@ export const ViewLayoutsListSamples = [
   new SampleViewModel('From component with initial data', 'You can also pass initial data to modal component! Check the title! (animations are disabled for this one)', undefined, ''),
 ];
 @Component({
-  selector: 'app-modal-playground',
-  templateUrl: './modal-playground.component.html',
+    selector: 'app-modal-playground',
+    templateUrl: './modal-playground.component.html',
+    standalone: false
 })
 export class ModalPlayGroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;

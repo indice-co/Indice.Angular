@@ -6,8 +6,9 @@ import { User } from 'oidc-client-ts';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'lib-user-profile-menu',
-  templateUrl: './user-profile-menu.component.html'
+    selector: 'lib-user-profile-menu',
+    templateUrl: './user-profile-menu.component.html',
+    standalone: false
 })
 export class UserProfileMenuComponent implements OnInit {
 

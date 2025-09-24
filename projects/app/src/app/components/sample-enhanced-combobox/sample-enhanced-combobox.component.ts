@@ -7,7 +7,8 @@ import { EnhancedComboboxComponent } from 'projects/ng-components/src/public-api
 
 @Component({
     selector: 'app-sample-enhanced-combobox',
-    templateUrl: './sample-enhanced-combobox.component.html'
+    templateUrl: './sample-enhanced-combobox.component.html',
+    standalone: false
 })
 export class SampleEnhancedComboboxComponent implements OnInit {
     @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: EnhancedComboboxComponent;

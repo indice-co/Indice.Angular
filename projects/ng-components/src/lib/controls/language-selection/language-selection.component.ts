@@ -4,8 +4,9 @@ import { APP_LANGUAGES } from '../../tokens';
 import { IAppLanguagesService } from '../../types';
 
 @Component({
-  selector: 'lib-language-selection',
-  templateUrl: './language-selection.component.html'
+    selector: 'lib-language-selection',
+    templateUrl: './language-selection.component.html',
+    standalone: false
 })
 export class LanguageSelectionComponent implements OnInit {
 

@@ -6,7 +6,8 @@ import { StepperType } from 'projects/ng-components/src/lib/controls/stepper/typ
 
 @Component({
     selector: 'app-sample-stepper',
-    templateUrl: './stepper-sample.component.html'
+    templateUrl: './stepper-sample.component.html',
+    standalone: false
 })
 export class SampleStepperComponent implements OnInit, AfterViewChecked {
     constructor(private _changeDetectorRef: ChangeDetectorRef) { }

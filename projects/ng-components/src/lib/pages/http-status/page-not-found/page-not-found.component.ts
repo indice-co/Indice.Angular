@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-page-not-found',
-  templateUrl: './page-not-found.component.html'
+    selector: 'lib-page-not-found',
+    templateUrl: './page-not-found.component.html',
+    standalone: false
 })
 export class PageNotFoundComponent implements OnInit {
 

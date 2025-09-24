@@ -7,8 +7,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { share } from 'rxjs/operators';
 
 @Component({
-  selector: 'lib-shell-sidebar',
-  templateUrl: './shell-sidebar.component.html'
+    selector: 'lib-shell-sidebar',
+    templateUrl: './shell-sidebar.component.html',
+    standalone: false
 })
 export class ShellSidebarComponent implements OnInit {
   constructor(

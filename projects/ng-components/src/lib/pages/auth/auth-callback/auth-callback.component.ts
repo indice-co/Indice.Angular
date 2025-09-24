@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '@indice/ng-auth';
 
 @Component({
-  selector: 'lib-auth-callback',
-  templateUrl: './auth-callback.component.html'
+    selector: 'lib-auth-callback',
+    templateUrl: './auth-callback.component.html',
+    standalone: false
 })
 export class AuthCallbackComponent implements OnInit {
   constructor(@Inject(AuthService) private authService: AuthService, private router: Router) { }

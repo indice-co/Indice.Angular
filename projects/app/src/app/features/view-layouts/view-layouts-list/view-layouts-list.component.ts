@@ -13,9 +13,10 @@ export const ViewLayoutsListSamples = [
 ];
 
 @Component({
-  selector: 'lib-view-layouts-list',
-  templateUrl: './view-layouts-list.component.html',
-  styleUrls: ['./view-layouts-list.component.css']
+    selector: 'lib-view-layouts-list',
+    templateUrl: './view-layouts-list.component.html',
+    styleUrls: ['./view-layouts-list.component.css'],
+    standalone: false
 })
 export class ViewLayoutsListComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;
