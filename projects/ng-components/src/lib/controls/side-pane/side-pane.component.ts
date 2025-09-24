@@ -1,7 +1,7 @@
 import { SidePaneOverlayType, SidePaneSize } from './../../types';
 import { Router } from '@angular/router';
-import { Component, Input, OnInit, OnDestroy, Inject, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, Input, OnInit, OnDestroy, Inject, EventEmitter, Output, OnChanges, SimpleChanges, DOCUMENT } from '@angular/core';
+
 
 @Component({
     selector: 'lib-side-pane',

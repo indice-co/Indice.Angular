@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { ComponentRef, Inject, Injectable, OnDestroy, Optional, Renderer2, RendererFactory2, TemplateRef } from '@angular/core';
+import { ComponentRef, Inject, Injectable, OnDestroy, Optional, Renderer2, RendererFactory2, TemplateRef, DOCUMENT } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ComponentLoader } from '../component-loader/component-loader.class';
 import { animationTime, cssClassNames } from './modal-styles.class';
