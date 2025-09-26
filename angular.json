@@ -84,7 +84,6 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "preserveSymlinks": true,
             "outputPath": {
               "base": "dist/app"
             },
