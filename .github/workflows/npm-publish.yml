@@ -41,8 +41,8 @@ jobs:
         run: |
           npm run build-config
 
-      # - name: publish to npm registry
-      #   run: |
-      #     npm run publish-auth
-      #     npm run publish-components
-      #     npm run publish-config
+      - name: publish to npm registry
+        run: |
+          npm run publish-auth
+          npm run publish-components
+          npm run publish-config
