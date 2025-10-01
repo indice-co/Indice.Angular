@@ -22,7 +22,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
           check-latest: true
-          node-version: 22
+          node-version: '20.19.5'
           registry-url: https://registry.npmjs.org/
 
       - name: npm install
