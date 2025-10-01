@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - run: |
+      - name: generate package-lock.json
+        run: |
           npm i --package-lock-only
 
       - uses: actions/setup-node@v4
@@ -21,7 +22,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
           check-latest: true
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org/
 
       - name: npm install
@@ -40,7 +41,8 @@ jobs:
         run: |
           npm run build-config
 
-      # - run: |
-      #     npm run publish-auth
-      #     npm run publish-components
-      #     npm run publish-config    
+      - name: publish to npm registry
+        run: |
+          npm run publish-auth
+          npm run publish-components
+          npm run publish-config
