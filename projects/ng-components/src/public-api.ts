@@ -32,6 +32,7 @@ export * from './lib/controls/stepper/lib-step.component';
 export * from './lib/controls/stepper/lib-step-label.directive';
 export * from './lib/controls/stepper/lib-step-info.directive';
 export * from './lib/controls/stepper/types/stepper-type';
+export * from './lib/controls/stepper/types/step-selected-event';
 export * from './lib/controls/toggle-button/toggle-button.component';
 export * from './lib/controls/toggle-buttons-list/toggle-buttons-list.component';
 export * from './lib/controls/content-tile/content-tile.component';
