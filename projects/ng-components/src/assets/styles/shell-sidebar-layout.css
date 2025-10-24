@@ -1,4 +1,4 @@
-
+@reference tailwindcss;
 
   .sidebar-off-canvas-menu-container {
     @apply relative z-40 md:hidden;
@@ -7,11 +7,11 @@
   
   
   .sidebar-off-canvas-menu-backdrop {
-    @apply fixed inset-0 transition-opacity ease-linear opacity-0 duration-300 pointer-events-none bg-gray-600 bg-opacity-75;
+    @apply fixed inset-0 transition-opacity ease-linear opacity-0 duration-300 pointer-events-none bg-gray-600 bg-black/75;
   }
 
   .sidebar-off-canvas-menu-backdrop-opacity-100 {
-    @apply fixed inset-0 transition-opacity ease-linear duration-300 pointer-events-none bg-gray-600 bg-opacity-75 opacity-100;
+    @apply fixed inset-0 transition-opacity ease-linear duration-300 pointer-events-none bg-gray-600 bg-black/75 opacity-100;
   }
 
   .sidebar-off-canvas-menu-container-inner {
