@@ -6,5 +6,10 @@
     "styleIncludePaths": [
       "./src/assets/styles/*.*"
     ]
-  }
+  },
+  "assets": [
+    "src/assets/styles",
+    "src/styles.css",
+    "src/tailwindcss.css"
+  ]
 }

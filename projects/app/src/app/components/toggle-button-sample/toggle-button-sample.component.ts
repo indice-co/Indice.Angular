@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'app-toggle-button-sample',
     templateUrl: './toggle-button-sample.component.html',
-    styleUrls: ['./toggle-button-sample.component.scss'],
     standalone: false
 })
 export class ToggleButtonSampleComponent implements OnInit {
