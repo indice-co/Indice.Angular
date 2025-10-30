@@ -1,6 +1,6 @@
 {
   "name": "indice-ng-lib",
-  "version": "0.4.0-beta.4",
+  "version": "0.4.0-beta.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -16,10 +16,10 @@
     "build:prod": "cross-env NODE_ENV=production ng build --prod",
     "e2e": "ng e2e",
     "ts-node": "ts-node",
-    "publish-components": "cd projects/ng-components && cd ../.. && ng build ng-components --configuration=production && ts-node ./projects/ng-components/scripts/css-bundle.ts && cd dist/ng-components && npm publish",
+    "publish-components": "cd projects/ng-components && cd ../.. && ng build ng-components --configuration=production && cd dist/ng-components && npm publish",
     "publish-auth": "cd projects/ng-auth && cd ../.. && ng build ng-auth --configuration=production && cd dist/ng-auth && npm publish",
     "publish-config": "cd projects/ng-config && cd ../.. && ng build ng-config --configuration=production && cd dist/ng-config && npm publish",
-    "publish-components-beta": "cd projects/ng-components && npm version prerelease --preid beta && cd ../.. && ng build ng-components --configuration=production && ts-node ./projects/ng-components/scripts/css-bundle.ts && cd dist/ng-components && npm publish",
+    "publish-components-beta": "cd projects/ng-components && npm version prerelease --preid beta && cd ../.. && ng build ng-components --configuration=production && cd dist/ng-components && npm publish",
     "publish-auth-beta": "cd projects/ng-auth && npm version prerelease --preid beta && cd ../.. && ng build ng-auth --configuration=production && cd dist/ng-auth && npm publish"
   },
   "private": false,
