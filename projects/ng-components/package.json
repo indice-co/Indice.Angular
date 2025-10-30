@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.4.0-beta.3",
+  "version": "0.4.0-beta.4",
   "description": "Indice common components for Angular v18",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0",
     "@angular/router": ">=20.0.0",
-    "@indice/ng-auth": ">=0.3.5 || 0.4.0-beta.1",
+    "@indice/ng-auth": ">=0.3.5 || 0.4.0-beta.4",
     "oidc-client-ts": "^3.0.1",
     "rxjs": ">=7.8.1",
     "tailwindcss": "^4.1.16",
