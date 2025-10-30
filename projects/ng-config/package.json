@@ -16,6 +16,9 @@
     "url": "https://github.com/indice-co/Indice.Angular/issues"
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
   "peerDependencies": {
     "@angular/common": ">=20.0.0",
     "@angular/core": ">=20.0.0"
