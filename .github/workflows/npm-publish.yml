@@ -1,38 +1,48 @@
-name: Node.js Package
+name: Publish Indice.Angular
 
 on:
   workflow_dispatch:
-  release:
-    types: [created]
 
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     steps:
       - uses: actions/checkout@v4
 
-      - run: |
+      - name: generate package-lock.json
+        run: |
           npm i --package-lock-only
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
       - uses: actions/setup-node@v4
         with:
           cache: 'npm'
           cache-dependency-path: 'package-lock.json'
           check-latest: true
-          node-version: 20
+          node-version: '22.19'
           registry-url: https://registry.npmjs.org/
 
-      - run: |
+      - name: npm install
+        run: |
           npm install
+
+      - name: npm run build-auth
+        run: |
           npm run build-auth
-          npm run build-config
+
+      - name: npm run build-components
+        run: |
           npm run build-components
 
-      - run: |
+      - name: npm run build-config
+        run: |
+          npm run build-config
+
+      - name: publish to npm registry
+        run: |
           npm run publish-auth
-          npm run publish-config
           npm run publish-components
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          npm run publish-config
