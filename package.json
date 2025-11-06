@@ -66,8 +66,6 @@
     "postcss-nesting": "^13.0.2",
     "ts-node": "~10.9.2",
     "typescript": "~5.9.2",
-    "@types/lodash": "^4.17.20",
-    "@types/lodash.merge": "^4.17.20",
-    "@types/lodash.clonedeep": "^4.17.20"
+    "@types/lodash": "^4.17.20"
   }
 }
