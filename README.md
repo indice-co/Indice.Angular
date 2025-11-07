@@ -15,7 +15,7 @@ A collection of Angular libraries providing authentication, configuration, and r
 ## Prerequisites
 
 - Angular 20+
-- Node.js 20.19+
+- Node.js 22.19+
 - TypeScript 5.9+
 
 ## Installation
