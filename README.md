@@ -1,6 +1,6 @@
 ![alt text](icon/icon-64.png "Indice logo")
 # Indice.Angular 
-[![publish](https://github.com/indice-co/Indice.Angular/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/indice-co/Indice.Platform/actions/workflows/npm-publish.yml)
+[![publish](https://github.com/indice-co/Indice.Angular/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/indice-co/Indice.Angular/actions/workflows/npm-publish.yml)
 
 A collection of Angular libraries providing authentication, configuration, and reusable components for Angular v20+ applications.
 
