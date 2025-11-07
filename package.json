@@ -35,7 +35,7 @@
     "@angular/router": "20.3.1",
     "@indice/ng-auth": "file:dist/ng-auth",
     "@indice/ng-components": "file:dist/ng-components",
-    "@indice/ng-conf": "file:dist/ng-conf",
+    "@indice/ng-config": "file:dist/ng-config",
     "autoprefixer": ">=10.2.6",
     "core-js": ">=3.11.0",
     "lodash": "^4.17.21",
