@@ -1,4 +1,4 @@
-name: Publish Indice.Angular
+name: NPM Publish
 
 on:
   workflow_dispatch:
