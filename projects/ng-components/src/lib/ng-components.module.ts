@@ -135,6 +135,7 @@ import { ProgressBarComponent } from './controls/progress-bar/progress-bar.compo
     FormsModule
   ],
   exports: [
+    RouterModule,
     AddressPipe,
     AdvancedSearchComponent,
     AuthCallbackComponent,

@@ -5,7 +5,10 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
-@Component({ template: '' })
+@Component({
+    template: '',
+    standalone: false
+})
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public items: T[] | null | undefined = null;
   public view: string = ListViewType.Tiles;

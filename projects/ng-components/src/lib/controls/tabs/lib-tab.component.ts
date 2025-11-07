@@ -12,7 +12,8 @@ import { LibTabLabelDirective } from './lib-tab-label.directive';
         </ng-template>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class LibTabComponent implements OnInit {
     private _isActive: boolean = false;

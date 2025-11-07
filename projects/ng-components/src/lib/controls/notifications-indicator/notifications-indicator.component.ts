@@ -4,8 +4,9 @@ import { Observable, of, Subscription } from 'rxjs';
 import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
 
 @Component({
-  selector: 'lib-notifications-indicator',
-  templateUrl: './notifications-indicator.component.html'
+    selector: 'lib-notifications-indicator',
+    templateUrl: './notifications-indicator.component.html',
+    standalone: false
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
 

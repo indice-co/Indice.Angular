@@ -8,8 +8,9 @@ import { Icons } from '../../icons';
 ;
 
 @Component({
-  selector: 'lib-list-view',
-  templateUrl: './list-view.component.html'
+    selector: 'lib-list-view',
+    templateUrl: './list-view.component.html',
+    standalone: false
 })
 export class ListViewComponent implements OnChanges {
   @Input('search-options') searchOptions: SearchOption[] = [];

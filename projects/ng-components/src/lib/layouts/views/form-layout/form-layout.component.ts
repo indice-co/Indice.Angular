@@ -5,8 +5,9 @@ import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { RouterViewAction, ViewAction } from '../../../types';
 
 @Component({
-  selector: 'lib-form-layout',
-  templateUrl: './form-layout.component.html'
+    selector: 'lib-form-layout',
+    templateUrl: './form-layout.component.html',
+    standalone: false
 })
 export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename

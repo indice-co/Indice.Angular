@@ -3,8 +3,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavLink } from '../../types';
 
 @Component({
-  selector: 'lib-nav-links-list',
-  templateUrl: './nav-links-list.component.html'
+    selector: 'lib-nav-links-list',
+    templateUrl: './nav-links-list.component.html',
+    standalone: false
 })
 export class NavLinksListComponent implements OnInit, OnDestroy {
 

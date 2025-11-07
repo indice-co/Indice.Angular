@@ -8,7 +8,10 @@ import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 
-@Component({ selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html' })
+@Component({
+    selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
+    standalone: false
+})
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
   @Input() busy: boolean = false;

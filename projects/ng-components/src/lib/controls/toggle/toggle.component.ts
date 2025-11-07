@@ -2,15 +2,16 @@ import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@ang
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'lib-toggle',
-  templateUrl: './toggle.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ToggleComponent),
-      multi: true
-    }
-  ]
+    selector: 'lib-toggle',
+    templateUrl: './toggle.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ToggleComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
   @Input()

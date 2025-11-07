@@ -5,8 +5,8 @@ import { IAppSettings } from "projects/ng-config/src/lib/types";
 
 
 @Component({
-  selector: 'app-root',
-  template: `
+    selector: 'app-root',
+    template: `
     <lib-shell-layout [sidebarFooterTemplate]="sidebarFooter"></lib-shell-layout>
     <ng-template #sidebarFooter>
       <span>
@@ -15,6 +15,7 @@ import { IAppSettings } from "projects/ng-config/src/lib/types";
       </span> v6.0.3
     </ng-template>
   `,
+    standalone: false
 })
 export class AppComponent {
   title = 'app';

@@ -10,7 +10,8 @@ import { StepSelectedEvent } from './types/step-selected-event';
     templateUrl: './lib-stepper.component.html',
     providers: [
         { provide: LIBSTEPPER_ACCESSOR, useExisting: forwardRef(() => LibStepperComponent) }
-    ]
+    ],
+    standalone: false
 })
 export class LibStepperComponent implements OnInit, AfterViewChecked {
     // Private properties.

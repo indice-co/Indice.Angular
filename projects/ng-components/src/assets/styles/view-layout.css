@@ -1,4 +1,4 @@
-
+@reference tailwindcss;
 
   .view-container {
     @apply mt-4 sm:mt-5 flex flex-col;

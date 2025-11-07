@@ -3,8 +3,9 @@ import { ToasterService } from '../../services/toaster.service';
 import { Toast } from '../../types';
 
 @Component({
-  selector: 'lib-toaster-container',
-  templateUrl: './toaster-container.component.html'
+    selector: 'lib-toaster-container',
+    templateUrl: './toaster-container.component.html',
+    standalone: false
 })
 export class ToasterContainerComponent implements OnInit {
 

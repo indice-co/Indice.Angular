@@ -18,9 +18,10 @@ export const ShellLayoutsListSamples = [
 ];
 
 @Component({
-  selector: 'lib-shell-samples-list',
-  templateUrl: './shell-samples-list.component.html',
-  styleUrls: ['./shell-samples-list.component.css']
+    selector: 'lib-shell-samples-list',
+    templateUrl: './shell-samples-list.component.html',
+    styleUrls: ['./shell-samples-list.component.css'],
+    standalone: false
 })
 export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;

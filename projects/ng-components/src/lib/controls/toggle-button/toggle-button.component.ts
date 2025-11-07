@@ -2,15 +2,16 @@ import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@ang
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'lib-toggle-button',
-  templateUrl: './toggle-button.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ToggleButtonComponent),
-      multi: true
-    }
-  ]
+    selector: 'lib-toggle-button',
+    templateUrl: './toggle-button.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ToggleButtonComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class ToggleButtonComponent implements OnInit {
   @Input() value: boolean = false;

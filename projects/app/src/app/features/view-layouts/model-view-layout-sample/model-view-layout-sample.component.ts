@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderMetaItem, Icons, RouterViewAction, ViewAction } from '@indice/ng-components';
 
 @Component({
-  selector: 'app-model-view-layout-sample',
-  templateUrl: './model-view-layout-sample.component.html'
+    selector: 'app-model-view-layout-sample',
+    templateUrl: './model-view-layout-sample.component.html',
+    standalone: false
 })
 export class ModelViewLayoutSampleComponent implements OnInit {
 

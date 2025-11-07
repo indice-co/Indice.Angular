@@ -21,7 +21,7 @@
   }
 
   .dropdown-ul {
-    @apply absolute z-50 mt-1 w-auto bg-white shadow max-h-60 rounded-lg py-1 text-xs ring-1 ring-gray-300 ring-opacity-5 focus:outline-none overflow-x-hidden;
+    @apply absolute z-50 mt-1 w-auto bg-white shadow max-h-60 rounded-lg py-1 text-xs ring-1 ring-gray-300 ring-black/5 focus:outline-none overflow-x-hidden;
   }
 
   .dropdown-li {

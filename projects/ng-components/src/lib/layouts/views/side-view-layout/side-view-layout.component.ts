@@ -3,8 +3,9 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'lib-side-view-layout',
-  templateUrl: './side-view-layout.component.html'
+    selector: 'lib-side-view-layout',
+    templateUrl: './side-view-layout.component.html',
+    standalone: false
 })
 export class SideViewLayoutComponent implements OnInit {
   @Input() title: string | null = 'Πληροφορίες';

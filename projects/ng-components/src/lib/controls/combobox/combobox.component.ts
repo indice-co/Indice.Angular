@@ -5,7 +5,8 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     selector: 'lib-combobox',
-    templateUrl: './combobox.component.html'
+    templateUrl: './combobox.component.html',
+    standalone: false
 })
 export class ComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();

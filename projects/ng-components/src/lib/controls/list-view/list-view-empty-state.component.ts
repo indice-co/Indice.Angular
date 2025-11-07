@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-list-view-empty-state',
-  templateUrl: './list-view-empty-state.component.html'
+    selector: 'lib-list-view-empty-state',
+    templateUrl: './list-view-empty-state.component.html',
+    standalone: false
 })
 export class ListViewEmptyStateComponent implements OnInit {
 

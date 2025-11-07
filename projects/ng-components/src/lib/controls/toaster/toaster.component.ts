@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Toast } from '../../types';
 
 @Component({
-  selector: 'lib-toaster',
-  templateUrl: './toaster.component.html'
+    selector: 'lib-toaster',
+    templateUrl: './toaster.component.html',
+    standalone: false
 })
 export class ToasterComponent implements OnInit {
 

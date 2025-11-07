@@ -6,7 +6,8 @@ import { LibTabComponent } from 'projects/ng-components/src/lib/controls/tabs/li
 
 @Component({
     selector: 'app-sample-tabs',
-    templateUrl: './sample-tabs.component.html'
+    templateUrl: './sample-tabs.component.html',
+    standalone: false
 })
 export class SampleTabsComponent implements OnInit {
     public ngOnInit(): void {

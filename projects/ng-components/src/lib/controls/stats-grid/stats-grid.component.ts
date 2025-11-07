@@ -2,8 +2,9 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 
 @Component({
-  selector: 'lib-stats-grid',
-  templateUrl: './stats-grid.component.html'
+    selector: 'lib-stats-grid',
+    templateUrl: './stats-grid.component.html',
+    standalone: false
 })
 export class StatsGridComponent implements OnChanges {
   @Input() busy = false;

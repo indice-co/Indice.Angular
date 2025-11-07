@@ -11,22 +11,23 @@ import { ModalService } from './modal-service';
  * @internal
  */
 @Component({
-  selector: 'lib-modal-container',
-  template: `
+    selector: 'lib-modal-container',
+    template: `
     <div [class]="'modal-dialog' + (config.class ? ' ' + config.class : '')" role="document" focusTrap>
       <div class="modal-content">
         <ng-content></ng-content>
       </div>
     </div>
   `,
-  host: {
-    class: 'modal',
-    role: 'dialog',
-    tabindex: '-1',
-    '[attr.aria-modal]': 'true',
-    '[attr.aria-labelledby]': 'config.ariaLabelledBy',
-    '[attr.aria-describedby]': 'config.ariaDescribedby',
-  },
+    host: {
+        class: 'modal',
+        role: 'dialog',
+        tabindex: '-1',
+        '[attr.aria-modal]': 'true',
+        '[attr.aria-labelledby]': 'config.ariaLabelledBy',
+        '[attr.aria-describedby]': 'config.ariaDescribedby',
+    },
+    standalone: false
 })
 export class ModalContainerComponent implements OnInit, OnDestroy {
   public level?: number;

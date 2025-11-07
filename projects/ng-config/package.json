@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-config",
-  "version": "0.0.3",
+  "version": "0.4.0",
   "description": "Indice dynamic runtime configuration provider for applications",
   "repository": {
     "type": "git",
@@ -16,13 +16,16 @@
     "url": "https://github.com/indice-co/Indice.Angular/issues"
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
   "peerDependencies": {
-    "@angular/common": ">=17.3.0",
-    "@angular/core": ">=17.3.0"
+    "@angular/common": ">=20.0.0",
+    "@angular/core": ">=20.0.0"
   },
   "devDependencies": {
-    "tslib": "^2.3.0"
+    "@types/lodash": "^4.17.20",
+    "tslib": "^2.8.1"
   },
-  "dependencies": {},
   "sideEffects": false
 }

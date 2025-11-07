@@ -3,9 +3,9 @@ import { APP_LINKS } from '../../../tokens';
 import { IAppLinks } from '../../../types';
 
 @Component({
-  selector: 'lib-shell-footer',
-  templateUrl: './shell-footer.component.html'
-
+    selector: 'lib-shell-footer',
+    templateUrl: './shell-footer.component.html',
+    standalone: false
 })
 
 export class ShellFooterComponent {

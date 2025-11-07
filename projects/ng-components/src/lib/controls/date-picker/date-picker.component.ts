@@ -4,15 +4,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // freaksly simple date picker : https://tailwind-elements.com/docs/standard/forms/datepicker/
 @Component({
-  selector: 'lib-date-picker',
-  templateUrl: './date-picker.component.html',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DatepickerComponent),
-      multi: true
-    }
-  ]
+    selector: 'lib-date-picker',
+    templateUrl: './date-picker.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => DatepickerComponent),
+            multi: true
+        }
+    ],
+    standalone: false
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() readonly: boolean = false;

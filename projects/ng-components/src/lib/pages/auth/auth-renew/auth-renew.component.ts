@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '@indice/ng-auth';
 
 @Component({
-  selector: 'lib-auth-renew',
-  template: ''
+    selector: 'lib-auth-renew',
+    template: '',
+    standalone: false
 })
 export class AuthRenewComponent implements OnInit {
   constructor(@Inject(AuthService) private authService: AuthService, private router: Router) { }

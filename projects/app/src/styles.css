@@ -1,8 +1,5 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@import  '../../../dist/ng-components/styles';
+@import "tailwindcss";
+@import '../../../dist/ng-components/src/styles.css';
 
 @layer components {
   .modal-active {
@@ -36,5 +33,4 @@
   .card-body {
     @apply h-60;
   }
-
 }

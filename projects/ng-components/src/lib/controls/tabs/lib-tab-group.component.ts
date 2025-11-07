@@ -8,7 +8,8 @@ import { LibTabComponent } from './lib-tab.component';
     templateUrl: './lib-tab-group.component.html',
     providers: [
         { provide: LIBTABGROUP_ACCESSOR, useExisting: forwardRef(() => LibTabGroupComponent) }
-    ]
+    ],
+    standalone: false
 })
 export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked {
     constructor() { }

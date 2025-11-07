@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'lib-progress-bar',
-  templateUrl: './progress-bar.component.html'
+    selector: 'lib-progress-bar',
+    templateUrl: './progress-bar.component.html',
+    standalone: false
 })
 export class ProgressBarComponent implements OnChanges {
   @Input() value: number = 0;

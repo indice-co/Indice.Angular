@@ -3,7 +3,8 @@ import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
     selector: 'lib-enhanced-combobox',
-    templateUrl: './enhanced-combobox.component.html'
+    templateUrl: './enhanced-combobox.component.html',
+    standalone: false
 })
 export class EnhancedComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();

@@ -9,12 +9,13 @@ import { animationTime, cssClassNames } from './modal-styles.class';
  * @internal
  */
 @Component({
-  selector: 'lib-modal-backdrop',
-  encapsulation: ViewEncapsulation.None,
-  template: '',
-  host: {
-    class: cssClassNames.backdrop,
-  },
+    selector: 'lib-modal-backdrop',
+    encapsulation: ViewEncapsulation.None,
+    template: '',
+    host: {
+        class: cssClassNames.backdrop,
+    },
+    standalone: false
 })
 export class ModalBackdropComponent implements OnInit {
   private animationsEnabled = false;

@@ -5,9 +5,10 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 import { Subscription } from 'rxjs';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'lib-model-view-layout',
-  templateUrl: './model-view-layout.component.html'
+    // tslint:disable-next-line:component-selector
+    selector: 'lib-model-view-layout',
+    templateUrl: './model-view-layout.component.html',
+    standalone: false
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;

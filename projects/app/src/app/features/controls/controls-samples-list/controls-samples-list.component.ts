@@ -30,9 +30,10 @@ export const ControlsSamples = [
 ];
 
 @Component({
-  selector: 'lib-controls-samples-list',
-  templateUrl: './controls-samples-list.component.html',
-  styleUrls: ['./controls-samples-list.component.css']
+    selector: 'lib-controls-samples-list',
+    templateUrl: './controls-samples-list.component.html',
+    styleUrls: ['./controls-samples-list.component.css'],
+    standalone: false
 })
 export class ControlsSamplesListComponent extends BaseListComponent<SampleViewModel> implements OnInit {
   newItemLink: string | null = null;

@@ -3,9 +3,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'lib-logged-out',
-  templateUrl: './logged-out.component.html'
+    // tslint:disable-next-line:component-selector
+    selector: 'lib-logged-out',
+    templateUrl: './logged-out.component.html',
+    standalone: false
 })
 export class LoggedOutComponent implements OnInit {
   constructor(@Inject(AuthService) private authService: AuthService) { }
