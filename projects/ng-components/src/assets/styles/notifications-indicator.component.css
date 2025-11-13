@@ -1,33 +1,31 @@
+.notifications-nav-link {
+  @apply block py-3 pl-3 pr-2 text-xs text-gray-700 hover:bg-gray-50;
+}
 
+.header-notifications {
+  @apply flex gap-3 items-center;
+}
 
-  .notifications-nav-link {
-    @apply block py-3 pl-3 pr-2 text-xs text-gray-700 hover:bg-gray-50;
-  }
+.header-notifications-dropdown-button {
+  @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
+  focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
+}
 
-  .header-notifications {
-    @apply flex gap-3 items-center;
-  }
+.header-notifications-dropdown {
+  @apply z-50 origin-top-right absolute right-0 pt-3 pl-2 mt-2 w-80 rounded-lg shadow-lg bg-white ring-1 ring-black ring-black/5 focus:outline-none;
+}
 
-  .header-notifications-dropdown-button {
-    @apply max-w-xs focus:outline-none rounded-full flex items-center text-sm ring-1 ring-blue-300 focus:ring-offset-1
-    focus:ring-offset-blue-800 focus:ring-blue-400 transition ease-in duration-100;
-  }
+.header-notifications-dropdown-with-username {
+  @apply z-50 origin-top-right absolute right-0 pt-3 pl-1.5 mt-1 w-80 rounded-lg shadow-lg bg-white ring-1 ring-black ring-black/5 focus:outline-none;
+}
 
-  .header-notifications-dropdown {
-    @apply z-50 origin-top-right absolute right-0 pt-3 pl-2 mt-2 w-80 rounded-lg shadow-lg bg-white ring-1 ring-black ring-black/5 focus:outline-none;
-  }
+.header-notifications-dropdown-view-all-button{
+  @apply items-center align-text-bottom font-medium w-full px-2.5 py-2.5 text-xs text-gray-600 focus:outline-none;
+}
 
-  .header-notifications-dropdown-with-username {
-    @apply z-50 origin-top-right absolute right-0 pt-3 pl-1.5 mt-1 w-80 rounded-lg shadow-lg bg-white ring-1 ring-black ring-black/5 focus:outline-none;
-  }
-
-  .header-notifications-dropdown-view-all-button{
-    @apply items-center align-text-bottom font-medium w-full px-2.5 py-2.5 text-xs text-gray-600 focus:outline-none;
-  }
-
-  .notification-messages::-webkit-scrollbar-thumb {
-    @apply bg-gray-600 hover:bg-gray-700;
-  }
+.notification-messages::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 hover:bg-gray-700;
+}
 
 
 .notification-messages::-webkit-scrollbar {
