@@ -2,7 +2,7 @@
 module.exports = {
   prefix: '',
   content: [
-    './projects/ng-components/src/**/*.{html,ts,css,scss}',
+    './projects/ng-components/src/**/*.{html,ts,css}',
   ],
   darkMode: 'class',
   theme: {

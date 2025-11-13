@@ -88,7 +88,6 @@
     @apply h-8 w-auto;
   }
 
-  /* !!!! malakai onoma !!!! */
   .sidebar-static-menu-wrapper {
     @apply flex flex-col md:pl-20;
   }

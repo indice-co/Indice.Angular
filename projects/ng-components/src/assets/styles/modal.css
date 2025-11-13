@@ -1,10 +1,12 @@
 .modal-open {
   overflow: hidden;
 }
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+
+  .modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
 .modal {
   position: fixed;
   top: 0;
@@ -16,12 +18,14 @@
   overflow: hidden;
   outline: 0;
 }
+
 .modal-dialog {
   position: relative;
   width: auto;
   margin: 0.5rem;
   pointer-events: none;
 }
+
 .modal.fade .modal-dialog {
   transition: transform 0.3s ease-out;
   transform: translate(0, -50px);
@@ -30,58 +34,72 @@
 .fade {
   transition: opacity 0.15s linear;
 }
-.fade:not(.show) {
-  opacity: 0;
-}
+
+  .fade:not(.show) {
+    opacity: 0;
+  }
+
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
     transition: none;
   }
 }
+
 .modal.show .modal-dialog {
   transform: none;
 }
+
 .modal.modal-static .modal-dialog {
   transform: scale(1.02);
 }
+
 .modal-dialog-scrollable {
   display: flex;
-  max-height: subtract(100%, 1rem);
+  max-height: calc(100% - 1rem);
 }
-.modal-dialog-scrollable .modal-content {
-  max-height: subtract(100vh, 1rem);
-  overflow: hidden;
-}
-.modal-dialog-scrollable .modal-header,
-.modal-dialog-scrollable .modal-footer {
-  flex-shrink: 0;
-}
-.modal-dialog-scrollable .modal-body {
-  overflow-y: auto;
-}
+
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 1rem);
+    overflow: hidden;
+  }
+
+  .modal-dialog-scrollable .modal-header,
+  .modal-dialog-scrollable .modal-footer {
+    flex-shrink: 0;
+  }
+
+  .modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+  }
+
 .modal-dialog-centered {
   display: flex;
   align-items: center;
-  min-height: subtract(100%, 1rem);
+  min-height: calc(100% - 1rem);
 }
-.modal-dialog-centered::before {
-  display: block;
-  height: subtract(100vh, 1rem);
-  height: -webkit-min-content;
-  height: min-content;
-  content: "";
-}
-.modal-dialog-centered.modal-dialog-scrollable {
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-.modal-dialog-centered.modal-dialog-scrollable .modal-content {
-  max-height: none;
-}
-.modal-dialog-centered.modal-dialog-scrollable::before {
-  content: none;
-}
+
+  .modal-dialog-centered::before {
+    display: block;
+    height: calc(100vh - 1rem);
+    height: -webkit-min-content;
+    height: min-content;
+    content: "";
+  }
+
+  .modal-dialog-centered.modal-dialog-scrollable {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+    .modal-dialog-centered.modal-dialog-scrollable .modal-content {
+      max-height: none;
+    }
+
+    .modal-dialog-centered.modal-dialog-scrollable::before {
+      content: none;
+    }
+
 .modal-content {
   position: relative;
   display: flex;
@@ -94,6 +112,7 @@
   border-radius: 0.3rem;
   outline: 0;
 }
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -103,12 +122,15 @@
   height: 100vh;
   background-color: #000;
 }
-.modal-backdrop.fade {
-  opacity: 0;
-}
-.modal-backdrop.show {
-  opacity: 0.5;
-}
+
+  .modal-backdrop.fade {
+    opacity: 0;
+  }
+
+  .modal-backdrop.show {
+    opacity: 0.5;
+  }
+
 .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;
@@ -116,6 +138,7 @@
   height: 50px;
   overflow: scroll;
 }
+
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 500px;
@@ -123,31 +146,35 @@
   }
 
   .modal-dialog-scrollable {
-    max-height: subtract(100%, 3.5rem);
-  }
-  .modal-dialog-scrollable .modal-content {
-    max-height: subtract(100vh, 3.5rem);
+    max-height: calc(100% - 3.5rem);
   }
 
+    .modal-dialog-scrollable .modal-content {
+      max-height: calc(100vh - 3.5rem);
+    }
+
   .modal-dialog-centered {
-    min-height: subtract(100%, 3.5rem);
+    min-height: calc(100% - 3.5rem);
   }
-  .modal-dialog-centered::before {
-    height: subtract(100vh, 3.5rem);
-    height: -webkit-min-content;
-    height: min-content;
-  }
+
+    .modal-dialog-centered::before {
+      height: calc(100vh - 3.5rem);
+      height: -webkit-min-content;
+      height: min-content;
+    }
 
   .modal-sm {
     max-width: 300px;
   }
 }
+
 @media (min-width: 992px) {
   .modal-lg,
   .modal-xl {
     max-width: 800px;
   }
 }
+
 @media (min-width: 1200px) {
   .modal-xl {
     max-width: 1140px;
