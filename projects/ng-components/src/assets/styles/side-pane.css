@@ -3,15 +3,15 @@
 }
 
 .side-pane-overlay {
-  @apply absolute bg-gray-500 bg-black/25 inset-0;
+  @apply absolute bg-black opacity-25 inset-0;
 }
 
 .side-pane-overlay-opacity-0 {
-  @apply absolute bg-gray-500 bg-black/0 inset-0;
+  @apply absolute bg-black opacity-0 inset-0;
 }
 
 .side-pane-overlay-opacity-50 {
-  @apply absolute bg-gray-500 bg-black/50 inset-0;
+  @apply absolute bg-black opacity-50 inset-0;
 }
 
 .side-pane-container {
