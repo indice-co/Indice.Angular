@@ -1,66 +1,64 @@
+.nav-link {
+  @apply cursor-pointer text-white hover:bg-gray-700 hover:text-white hover:shadow-sm px-3 py-2 rounded-lg text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
 
+.sidebar .nav-link {
+  @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+}
 
-  .nav-link {
-    @apply cursor-pointer text-white hover:bg-gray-700 hover:text-white hover:shadow-sm px-3 py-2 rounded-lg text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.nav-link-profile {
+  @apply flex items-center cursor-pointer px-4 py-2 rounded-md text-xs text-gray-700 hover:bg-gray-100 whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
 
-  .sidebar .nav-link {
-    @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
-  }
+.nav-link-mobile {
+  @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
 
-  .nav-link-profile {
-    @apply flex items-center cursor-pointer px-4 py-2 rounded-md text-xs text-gray-700 hover:bg-gray-100 whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.sidebar .nav-link-list-container {
+  @apply flex-1 flex flex-col overflow-y-auto;
+}
 
-  .nav-link-mobile {
-    @apply cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.sidebar .nav-link-list-container-inner {
+  @apply flex-1 px-2 py-4 space-y-2;
+}
 
-  .sidebar .nav-link-list-container {
-    @apply flex-1 flex flex-col overflow-y-auto;
-  }
+.sidebar .nav-link-list-container-inner .icons-only {
+  @apply flex-1 px-2 py-4 space-y-4;
+}
 
-  .sidebar .nav-link-list-container-inner {
-    @apply flex-1 px-2 py-4 space-y-2;
-  }
+.nav-link-active {
+  @apply cursor-default text-sky-600 bg-gray-900 hover:bg-gray-900 px-3 py-2 rounded-lg text-xs shadow-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
 
-  .sidebar .nav-link-list-container-inner .icons-only {
-    @apply flex-1 px-2 py-4 space-y-4;
-  }
+.sidebar .nav-link-active {
+  @apply cursor-default bg-gray-900 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+}
 
-  .nav-link-active {
-    @apply cursor-default text-sky-600 bg-gray-900 hover:bg-gray-900 px-3 py-2 rounded-lg text-xs shadow-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.sidebar .nav-link-active-b {
+  @apply cursor-default bg-gray-900 border-b border-sky-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+}
 
-  .sidebar .nav-link-active {
-    @apply cursor-default bg-gray-900 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
-  }
+.sidebar .nav-link-active-l {
+  @apply cursor-default  bg-gray-900 border-l border-sky-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
+}
 
-  .sidebar .nav-link-active-b {
-    @apply cursor-default bg-gray-900 border-b border-sky-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
-  }
+.nav-link-profile-active {
+  @apply cursor-default rounded-md block px-4 py-2 text-xs text-sky-900 shadow-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
 
-  .sidebar .nav-link-active-l {
-    @apply cursor-default  bg-gray-900 border-l border-sky-400 text-white flex items-center px-2 py-2 text-sm font-medium rounded-md;
-  }
-
-  .nav-link-profile-active {
-    @apply cursor-default rounded-md block px-4 py-2 text-xs text-sky-900 shadow-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
-
-  .nav-link-mobile-active {
-    @apply cursor-default bg-gray-900 text-sky-300 block px-3 py-2 rounded-lg text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.nav-link-mobile-active {
+  @apply cursor-default bg-gray-900 text-sky-300 block px-3 py-2 rounded-lg text-xs whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
   
-  .view-nav-link {
-    @apply cursor-pointer rounded-md text-gray-600 hover:border-gray-50 border-transparent border-l-2 hover:bg-gray-50 hover:text-gray-900 py-2 px-4 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
-  }
+.view-nav-link {
+  @apply cursor-pointer rounded-md text-gray-600 hover:border-gray-50 border-transparent border-l-2 hover:bg-gray-50 hover:text-gray-900 py-2 px-4 flex items-center text-sm whitespace-nowrap overflow-ellipsis overflow-hidden;
+}
   
-  .view-nav-link-active {
-    @apply cursor-default bg-gray-100 border-gray-600 hover:border-gray-600 text-gray-900;
-  }
+.view-nav-link-active {
+  @apply cursor-default bg-gray-100 border-gray-600 hover:border-gray-600 text-gray-900;
+}
   
 
-  .min-nav-link-text-width {
-    width: 220px;
-  }
+.min-nav-link-text-width {
+  width: 220px;
+}

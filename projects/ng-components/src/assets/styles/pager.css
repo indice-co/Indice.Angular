@@ -1,32 +1,31 @@
+.pager-container {
+  @apply flex flex-col sm:flex-row mb-2 justify-start;
+}
 
-  .pager-container {
-    @apply flex flex-col sm:flex-row mb-2 justify-start;
-  }
+.pager-container-near {
+  @apply sm:flex-1 justify-start items-center mb-1 sm:mb-0;
+}
 
-  .pager-container-near {
-    @apply sm:flex-1 justify-start items-center mb-1 sm:mb-0;
-  }
+.pager-container-far {
+  @apply justify-start flex-nowrap items-center;
+}
 
-  .pager-container-far {
-    @apply justify-start flex-nowrap items-center;
-  }
+.pager-icon-button {
+  @apply inline-flex relative ml-1 mr-2 items-center px-2 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
 
-  .pager-icon-button {
-    @apply inline-flex relative ml-1 mr-2 items-center px-2 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
-  }
+.pager-pages-container {
+  @apply relative inline-flex rounded-sm;
+}
 
-  .pager-pages-container {
-    @apply relative inline-flex rounded-sm;
-  }
+.pager-button {
+  @apply relative ml-1 inline-flex items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
+}
 
-  .pager-button {
-    @apply relative ml-1 inline-flex items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 hover:bg-gray-50;
-  }
+.pager-arrow-button-left {
+  @apply inline-flex relative ml-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
+}
 
-  .pager-arrow-button-left {
-    @apply inline-flex relative ml-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
-  }
-
-  .pager-arrow-button-right {
-    @apply inline-flex relative mr-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
-  }
+.pager-arrow-button-right {
+  @apply inline-flex relative mr-1 items-center px-1 py-2 rounded-l-sm text-sm font-medium text-gray-500 disabled:text-gray-300 disabled:hover:bg-none hover:bg-gray-50;
+}

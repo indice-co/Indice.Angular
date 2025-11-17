@@ -1,48 +1,47 @@
+.model-view-container {
+  @apply mt-5 min-w-full min-h-screen;
+}
 
-  .model-view-container {
-    @apply mt-5 min-w-full min-h-screen;
-  }
+.model-view-container-inner {
+  @apply lg:grid lg:grid-cols-12 lg:gap-x-5;
+}
 
-  .model-view-container-inner {
-    @apply lg:grid lg:grid-cols-12 lg:gap-x-5;
-  }
+.model-view-aside {
+  @apply py-6 px-2 sm:px-6 lg:py-0 lg:px-0 md:col-span-3;
+}
 
-  .model-view-aside {
-    @apply py-6 px-2 sm:px-6 lg:py-0 lg:px-0 md:col-span-3;
-  }
+.model-view-aside-header-section {
+  @apply min-w-full;
+}
 
-  .model-view-aside-header-section {
-    @apply min-w-full;
-  }
+.model-view-aside-header-container {
+  @apply bg-white shadow-sm border border-gray-200 rounded-xl;
+}
 
-  .model-view-aside-header-container {
-    @apply bg-white shadow-sm border border-gray-200 rounded-xl;
-  }
+.model-view-aside-header-container-inner {
+  @apply flex flex-col bg-gray-50 justify-self-stretch rounded-t-xl h-24;
+}
 
-  .model-view-aside-header-container-inner {
-    @apply flex flex-col bg-gray-50 justify-self-stretch rounded-t-xl h-24;
-  }
+.model-view-menu-container {
+  @apply bg-white px-4 py-4 flow-root hidden sm:block rounded-b-xl;
+}
 
-  .model-view-menu-container {
-    @apply bg-white px-4 py-4 flow-root hidden sm:block rounded-b-xl;
-  }
+.model-view-menu-container-mobile {
+  @apply mt-2 px-4 py-2 flow-root sm:hidden;
+}
 
-  .model-view-menu-container-mobile {
-    @apply mt-2 px-4 py-2 flow-root sm:hidden;
-  }
+.model-view-menu-nav {
+  @apply h-full flex flex-col;
+}
 
-  .model-view-menu-nav {
-    @apply h-full flex flex-col;
-  }
+.model-view-menu-item {
+  @apply space-y-1;
+}
 
-  .model-view-menu-item {
-    @apply space-y-1;
-  }
+.model-view-menu-item-far {
+  @apply mt-auto pt-10 space-y-1;
+}
 
-  .model-view-menu-item-far {
-    @apply mt-auto pt-10 space-y-1;
-  }
-
-  .model-view-details-container {
-    @apply sm:px-6 lg:px-2 lg:col-span-9 md:col-span-10;
-  }
+.model-view-details-container {
+  @apply sm:px-6 lg:px-2 lg:col-span-9 md:col-span-10;
+}
