@@ -21,7 +21,7 @@ export class ViewLayoutComponent implements OnInit {
   @Input() actions: ViewAction[] | null = null;
   @Input() busy = false;
   // tslint:disable-next-line:no-input-rename
-  @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση';
+  @Input('search-placeholder') searchPlaceholder: string | null = 'search';
   @Input() view: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];

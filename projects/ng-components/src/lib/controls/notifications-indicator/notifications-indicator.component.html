@@ -28,13 +28,13 @@
   <div tabindex="1" *ngIf="menuExpanded" class="header-notifications-dropdown-with-username" role="menu" aria-orientation="vertical" aria-labelledby="messages-menu">
     <div class="max-h-64 overflow-y-auto notification-messages min-h">
       <ng-container *ngIf="!items; else messagesDropDown" class="py-5">
-        <div class="notifications-nav-link hover:bg-transparent">Δεν έχετε νέες ειδοποιήσεις</div>
+        <div class="notifications-nav-link hover:bg-transparent">{{noNotifications}}</div>
       </ng-container>
       <ng-template #messagesDropDown>
         <ul class="pr-1.5">
           <ng-container *ngIf="items; else loading">
             <ng-container *ngIf="items.length <= 0" class="py-5">
-              <div class="notifications-nav-link hover:bg-transparent">Δεν έχετε νέες ειδοποιήσεις</div>
+              <div class="notifications-nav-link hover:bg-transparent">{{noNotifications}}</div>
             </ng-container>
             <ng-container *ngFor="let message of items; let i = index">
               <li class="mb-2" [ngClass]="{ 'border-l-2 border-blue-500 bg-blue-50 hover:bg-blue-50': !message.data.isRead }">
@@ -71,7 +71,7 @@
     </div>
     <div class="p-1 rounded-lg">
       <a [routerLink]="allNotificationsLink!.path" (click)="onClickOutside($event)">
-        <button type="button" class="header-notifications-dropdown-view-all-button">{{allNotificationsLink!.text}}</button>
+        <button type="button" class="header-notifications-dropdown-view-all-button">{{showNotificationsText}}</button>
       </a>
     </div>
   </div>

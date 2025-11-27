@@ -12,6 +12,7 @@ export class ToggleButtonsListComponent implements OnInit {
   @Input() options: MenuOption[] | undefined;
   @Input() value: any | undefined;
   @Input() compact: boolean = true;
+  @Input() dropDownMenuPlaceholder = 'Please select...'; // to set it from the outside
   @Output() valueChange: EventEmitter<any> = new EventEmitter(undefined);
   constructor() { }
 

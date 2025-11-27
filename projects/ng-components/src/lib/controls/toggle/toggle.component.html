@@ -8,7 +8,7 @@
         (blur)="onBlur($event)"
         value="{{value}}"
         [disabled]="disabled"
-        [title]="disabled ? 'Το αρχείο πρέπει να είναι ιδωτικό' : 'Ιδιωτικό'">
+        [title]="disabled ? publicLabel : privateLabel">
     <span aria-hidden="true"
           [ngClass]="value ? 'enabled-anim' : 'disabled-anim'"
           class="toggle-span"></span>

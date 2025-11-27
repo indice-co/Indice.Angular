@@ -17,7 +17,9 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
   @Input()
   public value: boolean | null | undefined;
   @Input()
-  public disabled:boolean | null | undefined;
+  public disabled: boolean | null | undefined;
+  @Input() privateLabel: string = 'Private';
+  @Input() publicLabel: string = 'The file should be private'; 
   @Output() valueChange: EventEmitter<Boolean> = new EventEmitter<Boolean>();
 
   private onChange$: any | undefined = undefined;
