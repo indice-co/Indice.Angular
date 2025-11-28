@@ -6,7 +6,7 @@ import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { BreadcrumbItem } from '../controls/breadcrumb/breadcrumb-item';
 import { BREADCRUMB_LABEL_RESOLVER, SHELL_CONFIG } from '../tokens';
 import { UtilitiesService } from './utilities.service';
-import { IBreadcrumbLabelProcessor } from '../types';
+import { BreadcrumbContext, IBreadcrumbLabelProcessor } from '../types';
 
 @Injectable({
     providedIn: 'root'
@@ -65,8 +65,12 @@ export class BreadcrumbService {
 
   private _getRouteTitle(route: Route) {
       if (this.breadcrumbLabelResolver) {
-        return this.breadcrumbLabelResolver.process(route);
-      }
+        const context: BreadcrumbContext = {
+          //will have to change things for additional info from route snapshot
+          route: route
+        };
+          return this.breadcrumbLabelResolver.process(context);
+        }
       else {
         return route?.data?.breadcrumb?.title || route.component?.name.replace('Component', '');
       }

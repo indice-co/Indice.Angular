@@ -177,7 +177,13 @@ export interface IShellConfig {
 }
 
 export interface IBreadcrumbLabelProcessor {
-  process(route: Route): string;
+  process(context: BreadcrumbContext): string | Observable<string>;
+}
+
+export interface BreadcrumbContext {
+  routeSnapshot?: ActivatedRouteSnapshot;
+  route?: Route;
+  defaultValue?: string;
 }
 
 export enum ShellLayoutType {
