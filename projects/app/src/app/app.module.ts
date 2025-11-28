@@ -37,10 +37,11 @@ import { DropDownMenuSampleComponent } from './features/controls/drop-down-menu-
 import { ToggleButtonSampleComponent } from './components/toggle-button-sample/toggle-button-sample.component';
 import { ToggleButtonsListSampleComponent } from './components/toggle-buttons-list-sample/toggle-buttons-list-sample.component';
 import { AUTH_SETTINGS, AuthGuardService, AuthHttpInterceptor, AuthService, IndiceAuthModule } from 'projects/ng-auth/src/public-api';
-import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from 'projects/ng-components/src/public-api';
+import { APP_LANGUAGES, APP_LINKS, APP_NOTIFICATIONS, BREADCRUMB_LABEL_RESOLVER, IndiceComponentsModule, ModalService, SHELL_CONFIG, ToasterService } from 'projects/ng-components/src/public-api';
 import { provideAppSettings } from 'projects/ng-config/src/lib/settings-initializer';
 import { APP_ENVIRONMENT, APP_SETTINGS } from 'projects/ng-config/src/public-api';
 import { IAppSettings } from 'projects/ng-config/src/lib/types';
+import { BreadcrumbLabelResolver } from './services/BreadcrumbLabelResolver.service';
 
 @NgModule({ declarations: [
         AdvancedSearchPlaygroundComponent,
@@ -87,6 +88,7 @@ import { IAppSettings } from 'projects/ng-config/src/lib/types';
         { provide: APP_LANGUAGES, useClass: AppLanguagesService },
         { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
         { provide: APP_NOTIFICATIONS, useClass: AppNotificationsService },
+        { provide: BREADCRUMB_LABEL_RESOLVER, useClass: BreadcrumbLabelResolver },
         provideHttpClient(withInterceptorsFromDi()),
     ] })
 export class AppModule { }

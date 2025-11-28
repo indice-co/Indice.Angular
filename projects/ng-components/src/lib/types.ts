@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Icons } from './icons';
-import { Params } from '@angular/router';
+import { ActivatedRouteSnapshot, Params, Route } from '@angular/router';
 
 
 export interface IAppNotifications {
@@ -174,6 +174,10 @@ export interface IShellConfig {
   showLangsOnHeader?: boolean;
   showUserNameOnHeader?: boolean;
   showPictureOnHeader?: boolean;
+}
+
+export interface IBreadcrumbLabelProcessor {
+  process(route: Route): string;
 }
 
 export enum ShellLayoutType {
