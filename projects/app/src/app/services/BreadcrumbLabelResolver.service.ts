@@ -10,6 +10,6 @@ export class BreadcrumbLabelResolver implements IBreadcrumbLabelProcessor  {
     public process(context: BreadcrumbContext): string | Observable<string> {
       // Custom logic to process the breadcrumb label
       // Right now the route snapshot is undefined, so we use the route data
-      return of(`${context.routeSnapshot?.data?.breadcrumb?.title || context.routeSnapshot?.component?.name.replace('Component', '') }`);
+      return of(`${context.route?.data?.breadcrumb?.title || context.route?.component?.name.replace('Component', '')}`);
     }
 }
