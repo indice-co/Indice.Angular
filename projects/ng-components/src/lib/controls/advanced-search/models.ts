@@ -1,14 +1,14 @@
 import { formatDate } from "@angular/common";
 
 export namespace Operators {
-  export const EQUALS = { label: '=', value: 'eq', description: 'Ίσο με' };
-  export const NOT_EQUALS = { label: '≠', value: 'neq', description: 'Διάφορο του' };
-  export const GREATER_THAN = { label: '>', value: 'gt', description: 'Μεγαλύτερο από' };
-  export const LESS_THAN = { label: '<', value: 'lt', description: 'Μικρότερο από' };
-  export const GREATER_THAN_EQUAL = { label: '≥', value: 'gte', description: 'Μεγαλύτερο ή ίσο με' };
-  export const LESS_THAN_EQUAL = { label: '≤', value: 'lte', description: 'Μικρότερο ή ίσο με' };
-  export const CONTAINS = { label: '∋', value: 'contains', description: 'Περιέχει' };
-  export const IN = { label: '1..n', value: 'in', description: 'Μέσα σε' };
+  export const EQUALS = { label: '=', value: 'eq', description: 'Equal to' };
+  export const NOT_EQUALS = { label: '≠', value: 'neq', description: 'Not equal to' };
+  export const GREATER_THAN = { label: '>', value: 'gt', description: 'Greater than' };
+  export const LESS_THAN = { label: '<', value: 'lt', description: 'Less than' };
+  export const GREATER_THAN_EQUAL = { label: '≥', value: 'gte', description: 'Greater than or equal to' };
+  export const LESS_THAN_EQUAL = { label: '≤', value: 'lte', description: 'Less than or equal to' };
+  export const CONTAINS = { label: '∋', value: 'contains', description: 'Contains' };
+  export const IN = { label: '1..n', value: 'in', description: 'In' };
 }
 
 export enum QueryParameters {
@@ -76,7 +76,7 @@ export class FilterClause {
     this.dataType = dataType === undefined ? 'string' : dataType;
     // uiName
     if (this.dataType === 'datetime') { // special treatment for dates
-      this.uiName = this.member === QueryParameters.FILTER_FROM ? 'Από' : 'Έως';
+      this.uiName = this.member === QueryParameters.FILTER_FROM ? 'From' : 'To';
     } else {
       this.uiName = this.member;
       let fo = <any>{};

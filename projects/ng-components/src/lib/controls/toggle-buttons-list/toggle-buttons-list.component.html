@@ -3,7 +3,7 @@
         <i [class]="icon"></i>
     </div>
     <div class="toggle-buttons-list-drop-down-compact-container" *ngIf="compact">
-        <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options">
+        <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options" [placeholder]="dropDownMenuPlaceholder">
         </lib-drop-down-menu>
     </div>
     <div class="toggle-buttons-list" *ngIf="!compact">

@@ -12,7 +12,7 @@ export class DropDownMenuComponent implements OnInit, OnChanges {
   // tslint:disable-next-line:no-input-rename
   @Input('selected') selectedValue: any | null | undefined = undefined;
   @Input() multiple = false;
-  @Input() placeholder: string = 'Παρακαλώ επιλέξτε...';
+  @Input() placeholder: string = 'Please select...';
   @Input('show-icons') showIcons = true;
 
   private selectedOption$: MenuOption | null = null;

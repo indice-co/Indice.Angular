@@ -1,5 +1,7 @@
+import { Observable } from "rxjs";
+
 export class BreadcrumbItem {
-    constructor(public title?: string, public url?: string) {
+    constructor(public title?: string | Observable<string>, public url?: string) {
         this.level = 0;
     }
 

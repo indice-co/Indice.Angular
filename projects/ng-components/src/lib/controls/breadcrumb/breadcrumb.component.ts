@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { BreadcrumbItem } from './breadcrumb-item';
+import { isObservable } from 'rxjs';
 
 @Component({
     selector: 'lib-breadcrumb',
@@ -19,7 +20,10 @@ export class BreadcrumbComponent implements OnInit {
             .subscribe((breadcrumb: BreadcrumbItem[]) => {
                 this.breadcrumb = [...breadcrumb, new BreadcrumbItem('', '')];
             });
-    }
+  }
+  isAsync(value: any): boolean {
+    return isObservable(value);
+  } 
 
     public breadcrumb: BreadcrumbItem[] = [];
 }

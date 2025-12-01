@@ -4,8 +4,9 @@ import { Data, NavigationEnd, Route, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 import { BreadcrumbItem } from '../controls/breadcrumb/breadcrumb-item';
-import { SHELL_CONFIG } from '../tokens';
+import { BREADCRUMB_LABEL_RESOLVER, SHELL_CONFIG } from '../tokens';
 import { UtilitiesService } from './utilities.service';
+import { BreadcrumbContext, IBreadcrumbLabelProcessor } from '../types';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +17,9 @@ export class BreadcrumbService {
 
     constructor(
         private _router: Router,
-        private _utilities: UtilitiesService,
-        @Optional() @Inject(SHELL_CONFIG) public _shellConfig?: any
+      private _utilities: UtilitiesService,
+      @Optional() @Inject(BREADCRUMB_LABEL_RESOLVER) public breadcrumbLabelResolver?: IBreadcrumbLabelProcessor,
+      @Optional() @Inject(SHELL_CONFIG) public _shellConfig?: any
     ) {
         if (_shellConfig?.breadcrumb) {
             this._defaultHome = this._getDefaultHomeItem();
@@ -61,8 +63,17 @@ export class BreadcrumbService {
         return new BreadcrumbItem(this._getRouteTitle(homeRoute), homeRoute.path || '');
     }
 
-    private _getRouteTitle(route: Route) {
+  private _getRouteTitle(route: Route) {
+      if (this.breadcrumbLabelResolver) {
+        const context: BreadcrumbContext = {
+          //will have to change things for additional info from route snapshot
+          route: route
+        };
+          return this.breadcrumbLabelResolver.process(context);
+        }
+      else {
         return route?.data?.breadcrumb?.title || route.component?.name.replace('Component', '');
+      }
     }
 
     private _buildBreadcrumb(): BreadcrumbItem[] {

@@ -12,6 +12,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
   @Input('operators-disabled') operatorsDisabled: boolean = false;
   @Input('search-options') searchOptions: SearchOption[] = [];
   @Input() filters: FilterClause[] = [];
+  @Input() searchCriteriaLabel: string = 'Search Criteria:';
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
   public operatorOptions = OperatorOptions;

@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-import { IAppLinks, IAppLanguagesService, IAppNotifications, IShellConfig } from './types';
+import { IAppLinks, IAppLanguagesService, IAppNotifications, IShellConfig, IBreadcrumbLabelProcessor } from './types';
 import { LibStepperComponent } from './controls/stepper/lib-stepper.component';
 import { LibTabGroupComponent } from './controls/tabs/lib-tab-group.component';
 
@@ -10,3 +10,4 @@ export const APP_NOTIFICATIONS = new InjectionToken<IAppNotifications>('APP_NOTI
 export const LIBSTEPPER_ACCESSOR = new InjectionToken<LibStepperComponent>('LibStepperAccessor');
 export const LIBTABGROUP_ACCESSOR = new InjectionToken<LibTabGroupComponent>('LibTabGroupAccessor');
 export const SHELL_CONFIG = new InjectionToken<IShellConfig>('SHELL_CONFIG');
+export const BREADCRUMB_LABEL_RESOLVER = new InjectionToken<IBreadcrumbLabelProcessor>('BREADCRUMB_LABEL_PROCESSOR');

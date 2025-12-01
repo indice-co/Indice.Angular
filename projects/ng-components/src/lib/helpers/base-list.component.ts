@@ -25,6 +25,8 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public searchOptions: SearchOption[] = [];
   public sortOptions: MenuOption[] = [];
   public metaItems: HeaderMetaItem[] = [];
+  public singularResult = 'result';
+  public pluralResults = 'results';
   public abstract newItemLink: string | null;
   private routeSub$: Subscription | undefined;
   private loadSub$: Subscription | undefined;
@@ -44,11 +46,11 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
   public getViewActions(): Observable<ViewAction[]> {
     const actions = [
-      new ViewAction('search', null, null, Icons.Search, 'αναζήτηση'),
-      new ViewAction('refresh', null, null, Icons.Refresh, 'ανανέωση στοιχείων')
+      new ViewAction('search', null, null, Icons.Search, 'search'),
+      new ViewAction('refresh', null, null, Icons.Refresh, 'refresh')
     ];
     if (this.newItemLink) {
-      actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'προσθήκη νέας εγγραφής;'));
+      actions.push(new RouterViewAction(Icons.Add, this.newItemLink, 'rightpane', 'add a new record'));
     }
     return of(actions);
   }
@@ -59,7 +61,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     });
 
     this.metaItems = [
-      { key: 'count', icon: Icons.ItemsCount, text: 'παρακαλώ περιμένετε...' }
+      { key: 'count', icon: Icons.ItemsCount, text: 'please wait...' }
     ];
 
     // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
@@ -179,7 +181,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   private updateHeaderMeta(): void {
     const count = this.metaItems?.filter(m => m.key === 'count')[0];
     if (count) {
-      this.count === 1 ? count.text = `${this.count} αποτέλεσμα` : count.text = `${this.count} αποτελέσματα`;
+      this.count === 1 ? count.text = `${this.count} ${this.singularResult}` : count.text = `${this.count} ${this.pluralResults}`;
     }
   }
 

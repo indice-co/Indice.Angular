@@ -7,11 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ListViewEmptyStateComponent implements OnInit {
 
-  @Input() title = 'Δεν βρέθηκαν εγγραφές.';
+  @Input() title = 'No records found.';
   // tslint:disable-next-line:no-input-rename
-  @Input('sub-title') subTitle = 'Παρακαλώ αλλάξτε τα κριτήρια αναζήτησης σας ή ξεκινήστε προσθέτοντας μια νέα εγγραφή';
+  @Input('sub-title') subTitle = 'Please change your search criteria or start by adding a new record';
   // tslint:disable-next-line:no-input-rename
-  @Input('new-item-label') newItemLabel = 'Νέα εγγραφή';
+  @Input('new-item-label') newItemLabel = 'New record';
   constructor() { }
 
   ngOnInit(): void {

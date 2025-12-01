@@ -32,7 +32,7 @@ export class ContentTileComponent implements OnInit {
   @Input() busy = false;
   @Input('show-action') showAction: boolean | undefined = true;
   @Input('show-footer') showFooter: boolean | undefined = true;
-  @Input('action-text') actionText: string = 'Περισσότερα';
+  @Input('action-text') actionText: string = 'More';
   // tslint:disable-next-line:no-output-rename
   @Output('tile-action') tileAction: EventEmitter<any> = new EventEmitter<any>();
   public selectedIndex = 0;
