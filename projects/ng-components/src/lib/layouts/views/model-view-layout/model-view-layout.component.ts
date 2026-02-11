@@ -1,8 +1,8 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -24,6 +24,7 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   @Input() icon: string | null = null;
   @Input() busy = false;
   @Input() actions: ViewAction[] | null = null;
+  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
   private optionsLoaded = false;
   private _options: MenuOption[] = [];
   public selectedTab: any;
@@ -86,5 +87,9 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
 
   public navigateLink(link: any): void {
     this.router.navigate([link], {relativeTo: this.route});
+  }
+
+  public emitActionClick(action: ViewAction): void {
+    this.onAction.emit(action);
   }
 }

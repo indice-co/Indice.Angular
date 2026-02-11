@@ -1,125 +1,78 @@
-<div [class.relative]="!inline">
-<div class="datepicker-container" (clickOutside)="closeCalendar()">
-  <input *ngIf="!inline"
-         #dateInput
-         [readonly]="readonly"
-         name="dateInput"
-         (blur)="onBlur($event)"
-         id="dateInput"
-         title="dateInput"
-         (focus)="showCalendar = false"
-         [value]="value | date: displayFormat"
-         class="datepicker-input"
-         [ngClass]="{'cursor-not-allowed': disabled}"
-         [placeholder]="placeholder">
-
-  <button type="button"
-          *ngIf="!inline"
-          class="datepicker-button"
-          [disabled]="disabled"
-          (click)="openCalendar()"
-          [ngClass]="{'cursor-not-allowed': disabled}">
-    <i class="ms-Icon ms-Icon--DateTime2"></i>
-  </button>
-</div>
-<div *ngIf="showCalendar || inline"
-       [class.absolute]="!inline"
-       class="datepicker-background"
-       style="height:18rem;min-width:16rem;"
-       name="calendar">
-    <div class="datepicker-btn-wrapper">
-      <div>
-        <button type="button"(click)="openYears()">
-          <span class="datepicker-selected-month">
-            {{monthNames[month]}}
-          </span>
-          <span class="datepicker-selected-year">
-            {{year}}</span>
-        </button>
-      </div>
-      <div *ngIf="!showYears; else showYearsPickerTmpl">
-        <button type="button"
-                class="datepicker-nav-btn"
-                (click)="previousMonth();">
-          <svg fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
-            <path stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button type="button"
-                class="datepicker-nav-btn"
-                (click)="nextMonth()">
-          <svg fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor">
-            <path stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-      <ng-template #showYearsPickerTmpl>
-        <div>
-          <button type="button"
-                  class="datepicker-nav-btn"
-                  (click)="previousYear();">
-            <svg fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button type="button"
-                  class="datepicker-nav-btn"
-                  (click)="nextYear()">
-            <svg fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor">
-              <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </ng-template>
-    </div>
-
-    <div class="datepicker-wrapper"
-         *ngIf="!showYears; else showCalYearsTmpl">
-      <div *ngFor="let day of dayNames"
-           class="datepicker-day-name"
-           style="width: 14.28%">{{day}}</div>
-    </div>
-
-    <ng-template #showCalYearsTmpl>
-      <div class="datepicker-content-wrapper">
-        <div *ngFor="let year of showCalendarYears"
-             style="width: 18.28%"
-             class="px-1 mb-1">
-          <div (click)="selectYearValue(year)"
-               class="datepicker-year"
-               [class]="year.selected  ? 'selected' : 'not-selected'">
-            {{year.year}}</div>
-        </div>
-      </div>
-    </ng-template>
-
-    <div class="datepicker-content-wrapper" *ngIf="!showYears">
-      <div *ngFor="let blankday of blankDays" style="width: 14.28%" class="datepicker-blank-days">{{blankday}}</div>
-      <div *ngFor="let date of calendarDates;" style="width: 14.28%" class="px-1 mb-1">
-        <div (click)="selectDateValue(date)" class="datepicker-days" [ngClass]="{'out-of-range': outOfRangeDate(date),'selected': date.selected, 'not-selected':!date.selected }">
-          {{date.day}}
-        </div>
-      </div>
-    </div>
+<div [class.relative]="!inline" (clickOutside)="closeCalendar()">
+  <div class="datepicker-container">
+    @if(!inline) {
+      <input #dateInput [readonly]="readonly" name="dateInput" (blur)="onBlur($event)" id="dateInput" title="dateInput" (focus)="showCalendar = false" [value]="value | date: displayFormat"
+            class="datepicker-input" [class.cursor-not-allowed]="disabled" [placeholder]="placeholder">
+      <button type="button" class="datepicker-button" [disabled]="disabled" (click)="openCalendar()" [class.cursor-not-allowed]="disabled">
+        <i class="ms-Icon ms-Icon--DateTime2"></i>
+      </button>
+    }
   </div>
+  @if(showCalendar || inline) {
+    <div [class.absolute]="!inline" class="datepicker-background" style="height:18rem;min-width:16rem;" name="calendar">
+      <div class="datepicker-btn-wrapper">
+        <div>
+          <button type="button" (click)="openYears()">
+            <span class="datepicker-selected-month">{{monthNames[month]}}</span><span class="datepicker-selected-year">{{year}}</span>
+          </button>
+        </div>
+        @if(!showYears) {
+          <div>
+            <button type="button" class="datepicker-nav-btn" (click)="previousMonth();">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round"stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button type="button" class="datepicker-nav-btn" (click)="nextMonth()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        }
+        @if(showYears) {
+          <div>
+            <button type="button" class="datepicker-nav-btn" (click)="previousYear();">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button type="button"  class="datepicker-nav-btn" (click)="nextYear()">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        }
+      </div>
+      @if(!showYears) {
+        <div class="datepicker-wrapper">
+          @for(day of dayNames; track day) {
+            <div class="datepicker-day-name" style="width: 14.28%">{{day}}</div>
+          }
+        </div>
+      }
+      @if(showYears) {
+        <div class="datepicker-content-wrapper">
+          @for(year of showCalendarYears; track year) {
+            <div style="width: 18.28%" class="px-1 mb-1">
+              <div (click)="selectYearValue(year)" class="datepicker-year" [class.selected]="year.selected" [class.not-selected]="!year.selected">{{year.year}}</div>
+            </div>
+          }
+        </div>
+      }
+      @if(!showYears) {
+        <div class="datepicker-content-wrapper">
+          @for(blankday of blankDays; track blankday) {
+            <div style="width: 14.28%" class="datepicker-blank-days">{{blankday}}</div>
+          }
+          @for(date of calendarDates; track date) {
+            <div style="width: 14.28%" class="px-1 mb-1">
+              <div (click)="selectDateValue(date)" class="datepicker-days" [class.out-of-range]="outOfRangeDate(date)" [class.selected]="date.selected" [class.not-selected]="!date.selected">{{date.day}}</div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
 </div>

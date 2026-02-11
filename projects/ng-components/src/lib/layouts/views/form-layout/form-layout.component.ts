@@ -1,17 +1,15 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
-import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { SidePaneComponent } from '../../../controls/side-pane/side-pane.component';
 import { RouterViewAction, ViewAction } from '../../../types';
 
-@Component({
-    selector: 'lib-form-layout',
-    templateUrl: './form-layout.component.html',
-    standalone: false
-})
+@Component({ selector: 'lib-form-layout', templateUrl: './form-layout.component.html', standalone: false })
 export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;
+  @ViewChild('formPane') formPane: SidePaneComponent | undefined;
   @Input() title: string | null = null;
   @Input() image: string | null = null;
   @Input() icon: string | null = null;
@@ -42,10 +40,7 @@ export class FormLayoutComponent implements OnInit {
     }
   }
 
-  public onSidePaneDeactivated($event: any): void {
-    this.onComplete.emit(true);
-  }
-
+  
   public emitActionClick(action: ViewAction): void {
     this.onAction.emit(action);
   }
@@ -64,6 +59,15 @@ export class FormLayoutComponent implements OnInit {
     } else {
       this.router$.navigate([action.link]);
     }
+  }
+
+  public onSidePaneDeactivated($event: any): void {
+    this.formPane?.onSidePaneDeactivated($event);
+    this.onComplete.emit(true);
+  }
+
+  public onSidePaneActivated($event: any): void {
+    this.formPane?.onSidePaneActivated($event);
   }
 
 }

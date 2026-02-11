@@ -1,10 +1,13 @@
-<div *ngIf="showPane" class="side-pane-outer-container" aria-labelledby="slide-over" role="dialog" aria-modal="true">
+@if(showPane) {
+<div class="side-pane-outer-container" aria-labelledby="slide-over" role="dialog" aria-modal="true">
   <div [class]="showPane ? overlayStyle : 'hidden'" aria-hidden="true"></div>
-  <div [class]="showPane ? 'side-pane-container' : 'hidden'">
-    <div [class]="sizeContainerStyle">
-      <div class="side-pane">
-        <ng-content></ng-content>
-      </div>
+    <div [class]="showPane ? 'side-pane-container' : 'hidden'">
+      <div [class]="sizeContainerStyle">
+        <div class="side-pane">
+            @if(template) { <ng-container *ngTemplateOutlet="template; context: {params: params}"></ng-container> }
+            <ng-content></ng-content>
+        </div>
     </div>
-  </div>
+    </div>
 </div>
+}

@@ -1,15 +1,8 @@
-import { SidePaneOverlayType, SidePaneSize } from './../../types';
+import { Component, DOCUMENT, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Component, Input, OnInit, OnDestroy, Inject, EventEmitter, Output, OnChanges, SimpleChanges, DOCUMENT } from '@angular/core';
-
-
-@Component({
-    selector: 'lib-side-pane',
-    templateUrl: './side-pane.component.html',
-    standalone: false
-})
+import { SidePaneOverlayType, SidePaneSize } from '../../types';
+@Component({ selector: 'lib-side-pane', templateUrl: './side-pane.component.html', standalone: false })
 export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
-  // tslint:disable-next-line:no-input-rename
   @Input('visible')
   protected showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
@@ -18,14 +11,13 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onOpen: EventEmitter<any> = new EventEmitter<any>();
   @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
+  @Input('params') params: any | undefined;
+  @Input() template: TemplateRef<any> | undefined;
   
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
   
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes && changes.size) {
-      console.log('ngOnChanges ',changes);
-      this.initPane();
-    }
+    if(changes && changes['size']) this.initPane();
   }
 
   ngOnDestroy(): void {
@@ -41,9 +33,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
 
   private initPane(state?: any) {
     //priority to property for size
-    console.log('initPane', 'size:', this.size, 'state size', state?.paneSize);
     this.sizeContainerStyle = this.sizeToClass(this.size ?? state?.paneSize);
-    console.log('calculated sizeContainerStyle', this.sizeContainerStyle);
     this.overlayStyle = this.overlayToClass(state?.paneOverlay);
   }
 
@@ -66,7 +56,8 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
       sizeStyleSuffix = '-50';
     } else if (size === SidePaneSize.Large75) {
       sizeStyleSuffix = '-75';
-    }else if (size === SidePaneSize.Fullscreen) {
+    }
+    else if (size === SidePaneSize.Fullscreen) {
       sizeStyleSuffix = '-100';
     }
     return `side-pane-box-size${sizeStyleSuffix}`;
@@ -88,7 +79,5 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
     this.onClose.emit(false);
     // prepei na allaxei auto!
     this.onComplete.emit(true);
-
   }
-
 }
