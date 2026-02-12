@@ -31,8 +31,7 @@
       "ES2022",
       "dom"
     ],
-    "useDefineForClassFields": false,
-    "ignoreDeprecations": "5.0"
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
