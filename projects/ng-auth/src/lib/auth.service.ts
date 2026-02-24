@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { IdTokenClaims, SignoutResponse, User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
 import { IAuthSettings, SignInRedirectOptions } from './types';
 
@@ -14,6 +14,7 @@ export class AuthService {
   private _userManager: UserManager;
   private _user: User = null as any;
   private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public user$ = this._userSubject.asObservable();
 
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
     this._userManager = new UserManager(authSettings);
@@ -21,22 +22,15 @@ export class AuthService {
 
     this._userManager.clearStaleState();
 
-    this._userManager.events.addUserLoaded(() => {
-      this._userManager.getUser().then((user: User | null) => {
-        if (user) {
-          this._user = user;
-          this._userSubject.next(user);
-          this._userSubject.complete();
-        } else {
-
-        }
-      });
+    this._userManager.events.addUserLoaded((user: User) => {
+      this._user = user;
+      this._userSubject.next(user);
     });
 
     this._userManager.events.addAccessTokenExpiring(() => {
       console.info('Access token expiring event occurred.');
       // No need to call this._userManager.signinSilent() since automaticSilentRenew is set to true.
-      // check your environment.ts for auth_settings 
+      // check your environment.ts for auth_settings
     });
 
     this._userManager.events.addUserSignedOut(() => {
@@ -45,21 +39,18 @@ export class AuthService {
     });
   }
 
-  public user$ = this._userSubject.asObservable();
-
   public loadUser(): Observable<User | null> {
     return from(this._userManager.getUser()).pipe(map((user: User | null) => {
       if (user) {
         this._user = user;
         this._userSubject.next(user);
-        this._userSubject.complete();
       }
       return user;
     }));
   }
 
   public isLoggedIn(): Observable<boolean> {
-    return from(this._userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
+    return this._userSubject.pipe(take(1), map<User | null, boolean>((user: User | null) => !!user && !user.expired));
   }
 
   public getUserProfile(): IdTokenClaims | undefined {
@@ -133,7 +124,6 @@ export class AuthService {
     return from(this._userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
       this._user = null as any;
       this._userSubject.next(null);
-      this._userSubject.complete();
       return response;
     }, (error: any) => {
       throwError(error);
@@ -163,7 +153,6 @@ export class AuthService {
     return from(this._userManager.signinRedirectCallback()).pipe(map((user: User) => {
       this._user = user;
       this._userSubject.next(this._user);
-      this._userSubject.complete();
       return user;
     }, (error: any) => {
       throwError(error);
@@ -174,7 +163,6 @@ export class AuthService {
   public signinSilent(): Observable<User> {
     return from(this._userManager.signinSilent()).pipe(map((user: any) => {
       this._userSubject.next(user);
-      this._userSubject.complete();
       return user;
     }));
   }
@@ -185,7 +173,6 @@ export class AuthService {
         this._user = user;
       }
       this._userSubject.next(this._user);
-      this._userSubject.complete();
       return user;
     }, (error: any) => {
       throwError(error);
