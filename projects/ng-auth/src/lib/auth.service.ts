@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { IdTokenClaims, SignoutResponse, User, UserManager } from 'oidc-client-ts';
-import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
 import { IAuthSettings, SignInRedirectOptions } from './types';
@@ -12,7 +12,7 @@ import { IAuthSettings, SignInRedirectOptions } from './types';
 })
 export class AuthService {
   private _userManager: UserManager;
-  private _user: User = null as any;
+  private _user: User | null = null;
   private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   public user$ = this._userSubject.asObservable();
 
@@ -34,6 +34,7 @@ export class AuthService {
     });
 
     this._userManager.events.addUserSignedOut(() => {
+      this.clearUser();
       this._userManager.clearStaleState();
       this._userManager.removeUser();
     });
@@ -85,7 +86,7 @@ export class AuthService {
     return this.getFullName() || this.getEmail() || this.getUserName() || '';
   }
 
-  public getCurrentUser(): User {
+  public getCurrentUser(): User | null {
     return this._user;
   }
 
@@ -116,26 +117,22 @@ export class AuthService {
   }
 
   public removeUser(): Observable<void> {
+    this.clearUser();
     this._userManager.clearStaleState();
     return from(this._userManager.removeUser());
   }
 
   public signoutRedirectCallback(): Observable<SignoutResponse> {
     return from(this._userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
-      this._user = null as any;
-      this._userSubject.next(null);
+      this.clearUser();
       return response;
-    }, (error: any) => {
-      throwError(error);
     }));
   }
 
   public signinRedirect(signInRedirectOptions?: SignInRedirectOptions): void {
     const authorizeArgs: any = {};
     if (signInRedirectOptions?.location) {
-      authorizeArgs['url_state'] =  signInRedirectOptions.location;
-    }
-    if (signInRedirectOptions?.location) {
+      authorizeArgs['url_state'] = signInRedirectOptions.location;
       authorizeArgs.state = { url: signInRedirectOptions.location };
     }
     if (signInRedirectOptions?.promptRegister === true) {
@@ -146,7 +143,9 @@ export class AuthService {
     }
     this._userManager
       .signinRedirect(authorizeArgs)
-      .catch((error: any) => { });
+      .catch((error: any) => {
+        console.error('signinRedirect failed:', error);
+      });
   }
 
   public signinRedirectCallback(): Observable<User> {
@@ -154,30 +153,21 @@ export class AuthService {
       this._user = user;
       this._userSubject.next(this._user);
       return user;
-    }, (error: any) => {
-      throwError(error);
-      return null;
     }));
   }
 
-  public signinSilent(): Observable<User> {
-    return from(this._userManager.signinSilent()).pipe(map((user: any) => {
-      this._userSubject.next(user);
-      return user;
-    }));
-  }
-
-  public signinSilentCallback(): Observable<User | undefined> {
-    return from(this._userManager.signinSilentCallback()).pipe(map((user: any) => {
+  public signinSilent(): Observable<User | null> {
+    return from(this._userManager.signinSilent()).pipe(map((user: User | null) => {
       if (user) {
         this._user = user;
+        this._userSubject.next(user);
       }
-      this._userSubject.next(this._user);
       return user;
-    }, (error: any) => {
-      throwError(error);
-      return null;
     }));
+  }
+
+  public signinSilentCallback(): Observable<void> {
+    return from(this._userManager.signinSilentCallback());
   }
 
   public hasRole(roleName: string): boolean {
@@ -185,11 +175,15 @@ export class AuthService {
     if (!profile) {
       return false;
     }
-    const roleClaim = profile["role"] as string;
+    const roleClaim = profile["role"] as string | string[];
     if (roleClaim && Array.isArray(roleClaim)) {
-      const roles = Array.from(roleClaim);
-      return roles.indexOf(roleName) !== -1;
+      return roleClaim.includes(roleName);
     }
     return roleClaim === roleName;
+  }
+
+  private clearUser(): void {
+    this._user = null;
+    this._userSubject.next(null);
   }
 }
