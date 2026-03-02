@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 import { IdTokenClaims, SignoutResponse, User, UserManager } from 'oidc-client-ts';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
 import { IAuthSettings, SignInRedirectOptions } from './types';
 
@@ -13,8 +13,8 @@ import { IAuthSettings, SignInRedirectOptions } from './types';
 export class AuthService {
   private _userManager: UserManager;
   private _user: User | null = null;
-  private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  public user$ = this._userSubject.asObservable();
+  private _userSubject: BehaviorSubject<User | null | undefined> = new BehaviorSubject<User | null | undefined>(undefined);
+  public user$ = this._userSubject.asObservable().pipe(filter((user): user is User | null => user !== undefined));
 
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
     this._userManager = new UserManager(authSettings);
@@ -42,16 +42,18 @@ export class AuthService {
 
   public loadUser(): Observable<User | null> {
     return from(this._userManager.getUser()).pipe(map((user: User | null) => {
-      if (user) {
-        this._user = user;
-        this._userSubject.next(user);
-      }
+      this._user = user;
+      this._userSubject.next(user);
       return user;
     }));
   }
 
   public isLoggedIn(): Observable<boolean> {
-    return this._userSubject.pipe(take(1), map<User | null, boolean>((user: User | null) => !!user && !user.expired));
+    return this._userSubject.pipe(
+      filter((user): user is User | null => user !== undefined),
+      take(1),
+      map((user) => !!user && !user.expired)
+    );
   }
 
   public getUserProfile(): IdTokenClaims | undefined {
@@ -166,8 +168,13 @@ export class AuthService {
     }));
   }
 
-  public signinSilentCallback(): Observable<void> {
-    return from(this._userManager.signinSilentCallback());
+  public signinSilentCallback(): Observable<User | null> {
+    return from(this._userManager.signinSilentCallback()).pipe(
+      switchMap(() => this._userSubject.pipe(
+        filter((user): user is User | null => user !== undefined),
+        take(1)
+      ))
+    );
   }
 
   public hasRole(roleName: string): boolean {
