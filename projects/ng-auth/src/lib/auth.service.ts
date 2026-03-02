@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 
 import { IdTokenClaims, SignoutResponse, User, UserManager } from 'oidc-client-ts';
-import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { AUTH_SETTINGS } from './tokens';
 import { IAuthSettings, SignInRedirectOptions } from './types';
 
@@ -12,8 +12,9 @@ import { IAuthSettings, SignInRedirectOptions } from './types';
 })
 export class AuthService {
   private _userManager: UserManager;
-  private _user: User = null as any;
-  private _userSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private _user: User | null = null;
+  private _userSubject: BehaviorSubject<User | null | undefined> = new BehaviorSubject<User | null | undefined>(undefined);
+  public user$ = this._userSubject.asObservable().pipe(filter((user): user is User | null => user !== undefined));
 
   constructor(@Inject(AUTH_SETTINGS) authSettings: IAuthSettings) {
     this._userManager = new UserManager(authSettings);
@@ -21,45 +22,38 @@ export class AuthService {
 
     this._userManager.clearStaleState();
 
-    this._userManager.events.addUserLoaded(() => {
-      this._userManager.getUser().then((user: User | null) => {
-        if (user) {
-          this._user = user;
-          this._userSubject.next(user);
-          this._userSubject.complete();
-        } else {
-
-        }
-      });
+    this._userManager.events.addUserLoaded((user: User) => {
+      this._user = user;
+      this._userSubject.next(user);
     });
 
     this._userManager.events.addAccessTokenExpiring(() => {
       console.info('Access token expiring event occurred.');
       // No need to call this._userManager.signinSilent() since automaticSilentRenew is set to true.
-      // check your environment.ts for auth_settings 
+      // check your environment.ts for auth_settings
     });
 
     this._userManager.events.addUserSignedOut(() => {
+      this.clearUser();
       this._userManager.clearStaleState();
       this._userManager.removeUser();
     });
   }
 
-  public user$ = this._userSubject.asObservable();
-
   public loadUser(): Observable<User | null> {
     return from(this._userManager.getUser()).pipe(map((user: User | null) => {
-      if (user) {
-        this._user = user;
-        this._userSubject.next(user);
-        this._userSubject.complete();
-      }
+      this._user = user;
+      this._userSubject.next(user);
       return user;
     }));
   }
 
   public isLoggedIn(): Observable<boolean> {
-    return from(this._userManager.getUser()).pipe(map<User | null, boolean>((user: User | null) => user ? true : false));
+    return this._userSubject.pipe(
+      filter((user): user is User | null => user !== undefined),
+      take(1),
+      map((user) => !!user && !user.expired)
+    );
   }
 
   public getUserProfile(): IdTokenClaims | undefined {
@@ -94,7 +88,7 @@ export class AuthService {
     return this.getFullName() || this.getEmail() || this.getUserName() || '';
   }
 
-  public getCurrentUser(): User {
+  public getCurrentUser(): User | null {
     return this._user;
   }
 
@@ -125,27 +119,22 @@ export class AuthService {
   }
 
   public removeUser(): Observable<void> {
+    this.clearUser();
     this._userManager.clearStaleState();
     return from(this._userManager.removeUser());
   }
 
   public signoutRedirectCallback(): Observable<SignoutResponse> {
     return from(this._userManager.signoutRedirectCallback()).pipe(map((response: SignoutResponse) => {
-      this._user = null as any;
-      this._userSubject.next(null);
-      this._userSubject.complete();
+      this.clearUser();
       return response;
-    }, (error: any) => {
-      throwError(error);
     }));
   }
 
   public signinRedirect(signInRedirectOptions?: SignInRedirectOptions): void {
     const authorizeArgs: any = {};
     if (signInRedirectOptions?.location) {
-      authorizeArgs['url_state'] =  signInRedirectOptions.location;
-    }
-    if (signInRedirectOptions?.location) {
+      authorizeArgs['url_state'] = signInRedirectOptions.location;
       authorizeArgs.state = { url: signInRedirectOptions.location };
     }
     if (signInRedirectOptions?.promptRegister === true) {
@@ -156,41 +145,36 @@ export class AuthService {
     }
     this._userManager
       .signinRedirect(authorizeArgs)
-      .catch((error: any) => { });
+      .catch((error: any) => {
+        console.error('signinRedirect failed:', error);
+      });
   }
 
   public signinRedirectCallback(): Observable<User> {
     return from(this._userManager.signinRedirectCallback()).pipe(map((user: User) => {
       this._user = user;
       this._userSubject.next(this._user);
-      this._userSubject.complete();
-      return user;
-    }, (error: any) => {
-      throwError(error);
-      return null;
-    }));
-  }
-
-  public signinSilent(): Observable<User> {
-    return from(this._userManager.signinSilent()).pipe(map((user: any) => {
-      this._userSubject.next(user);
-      this._userSubject.complete();
       return user;
     }));
   }
 
-  public signinSilentCallback(): Observable<User | undefined> {
-    return from(this._userManager.signinSilentCallback()).pipe(map((user: any) => {
+  public signinSilent(): Observable<User | null> {
+    return from(this._userManager.signinSilent()).pipe(map((user: User | null) => {
       if (user) {
         this._user = user;
+        this._userSubject.next(user);
       }
-      this._userSubject.next(this._user);
-      this._userSubject.complete();
       return user;
-    }, (error: any) => {
-      throwError(error);
-      return null;
     }));
+  }
+
+  public signinSilentCallback(): Observable<User | null> {
+    return from(this._userManager.signinSilentCallback()).pipe(
+      switchMap(() => this._userSubject.pipe(
+        filter((user): user is User | null => user !== undefined),
+        take(1)
+      ))
+    );
   }
 
   public hasRole(roleName: string): boolean {
@@ -198,11 +182,15 @@ export class AuthService {
     if (!profile) {
       return false;
     }
-    const roleClaim = profile["role"] as string;
+    const roleClaim = profile["role"] as string | string[];
     if (roleClaim && Array.isArray(roleClaim)) {
-      const roles = Array.from(roleClaim);
-      return roles.indexOf(roleName) !== -1;
+      return roleClaim.includes(roleName);
     }
     return roleClaim === roleName;
+  }
+
+  private clearUser(): void {
+    this._user = null;
+    this._userSubject.next(null);
   }
 }
