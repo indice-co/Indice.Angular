@@ -30,5 +30,12 @@ export class DefaultAuthSettings implements IAuthSettings {
 export class SignInRedirectOptions {
   location?: string;
   promptRegister?: boolean;
-  tenant?: string; 
+  tenant?: string;
+}
+
+import type { AuthService } from './auth.service';
+
+export interface AuthInterceptorConfig {
+  /** Called on 401 after removeUser(). Defaults to signoutRedirect(). */
+  onUnauthorized?: (authService: AuthService) => void;
 }
