@@ -1,4 +1,4 @@
-<lib-view-layout title="Shell layout samples" [busy]="!items" [actions]="actions" [meta-items]="metaItems">
+<lib-view-layout title="Shell layout samples" [busy]="!items" [actions]="actions" [meta-items]="metaItems" (onSearch)="searchChanged($event)">
   <lib-list-view 
     [items]="items" 
     [show-pager]="true" 
