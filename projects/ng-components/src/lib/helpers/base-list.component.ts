@@ -44,10 +44,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     if (this.routeSub$) {
       this.routeSub$.unsubscribe();
     }
-    if(this.loadSub$) {
+    if (this.loadSub$) {
       this.loadSub$.unsubscribe();
     }
-    if(this.searchSub$) {
+    if (this.searchSub$) {
       this.searchSub$.unsubscribe();
     }
   }
