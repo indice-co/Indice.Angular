@@ -48,16 +48,21 @@ jobs:
             local name=$1
             local dir=$2
             local script=$3
+            local beta_script=$4
             local version=$(node -p "require('./projects/${dir}/package.json').version")
             local published=$(npm view "${name}@${version}" version 2>/dev/null || echo "")
             if [ "$published" = "$version" ]; then
               echo "⏭ ${name}@${version} already published, skipping."
             else
               echo "📦 Publishing ${name}@${version}..."
-              npm run ${script}
+              if echo "$version" | grep -q "-" && [ -n "$beta_script" ]; then
+                npm run ${beta_script}
+              else
+                npm run ${script}
+              fi
             fi
           }
 
-          publish_if_new "@indice/ng-auth" "ng-auth" "publish-auth"
-          publish_if_new "@indice/ng-components" "ng-components" "publish-components"
-          publish_if_new "@indice/ng-config" "ng-config" "publish-config"
+          publish_if_new "@indice/ng-auth" "ng-auth" "publish-auth" "publish-auth-beta"
+          publish_if_new "@indice/ng-components" "ng-components" "publish-components" "publish-components-beta"
+          publish_if_new "@indice/ng-config" "ng-config" "publish-config" "publish-config-beta"
