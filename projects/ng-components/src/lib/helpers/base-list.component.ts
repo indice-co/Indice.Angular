@@ -30,7 +30,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public pluralResults = 'results';
   public abstract newItemLink: string | null;
   public minimumSearchCharacters = 3;
-  public searchDebounceTime = 1000;
+  public searchDebounceTime = 300;
   private routeSub$: Subscription | undefined;
   private loadSub$: Subscription | undefined;
   private searchSub$: Subscription | undefined;
