@@ -54,9 +54,9 @@ jobs:
             else
               echo "📦 Publishing ${name}@${version}..."
               if echo "$version" | grep -q "-"; then
-                npm publish --tag beta --prefix dist/${dir}
+                (cd dist/${dir} && npm publish --tag beta)
               else
-                npm publish --prefix dist/${dir}
+                (cd dist/${dir} && npm publish)
               fi
             fi
           }
