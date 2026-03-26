@@ -26,9 +26,9 @@ jobs:
           node-version: '24'
           registry-url: https://registry.npmjs.org/
 
-      - name: npm install
+      - name: npm clean install
         run: |
-          npm install
+          npm ci
 
       - name: npm run build-auth
         run: |
