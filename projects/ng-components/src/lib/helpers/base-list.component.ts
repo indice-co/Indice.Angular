@@ -77,12 +77,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       debounceTime(this.searchDebounceTime),
       distinctUntilChanged()
     ).subscribe(searchText => {
-      this.count = 0;
-      this.page = 1;
-      this.items = null;
-      this.search = searchText;
-      this.setRouteParams();
-      this.load();
+      this.executeSearch(searchText);
     });
 
     // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
@@ -273,5 +268,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
 
   public searchChanged(searchText: string | null): void {
     this.searchSubject$.next(searchText);
+  }
+
+  private executeSearch(searchText: string | null): void {
+    this.count = 0;
+    this.page = 1;
+    this.items = null;
+    this.search = searchText;
+    this.setRouteParams();
+    this.load();
   }
 }
