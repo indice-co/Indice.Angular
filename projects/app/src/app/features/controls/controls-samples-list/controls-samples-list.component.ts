@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
-import { IResultSet, ListViewType, MenuOption, RouterViewAction, SwitchViewAction } from 'projects/ng-components/src/lib/types';
+import { IResultSet, ListViewType, MenuOption, RouterViewAction, SwitchViewAction, ViewAction } from 'projects/ng-components/src/lib/types';
 import { BaseListComponent, Icons } from 'projects/ng-components/src/public-api';
 
 export const ControlsSamples = [
@@ -54,12 +54,17 @@ export class ControlsSamplesListComponent extends BaseListComponent<SampleViewMo
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
     let items = ControlsSamples;
+    if (this.search) {
+      const term = this.search.toLowerCase();
+      items = items.filter(i => i.title?.toLowerCase().includes(term) || i.description?.toLowerCase().includes(term));
+    }
     return of({ count: items.length, items }).pipe(delay(1200));
   }
 
   ngOnInit(): void {
     super.ngOnInit();
     this.actions = [];
+    this.actions.push(new ViewAction('search', null, null, Icons.Search, 'search'));
     this.actions.push(new SwitchViewAction(ListViewType.Tiles, Icons.TilesView, 'switch to tiles view'));
     this.actions.push(new SwitchViewAction(ListViewType.Table, Icons.TableView, 'switch to table (grid) view'));
     this.actions.push(new SwitchViewAction(ListViewType.Gallery, Icons.ItemsCount, 'switch to gallery view'));

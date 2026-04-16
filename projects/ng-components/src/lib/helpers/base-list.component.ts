@@ -1,5 +1,6 @@
 import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subject, Subscription, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
@@ -28,8 +29,12 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public singularResult = 'result';
   public pluralResults = 'results';
   public abstract newItemLink: string | null;
+  public minimumSearchCharacters = 3;
+  public searchDebounceTime = 300;
   private routeSub$: Subscription | undefined;
   private loadSub$: Subscription | undefined;
+  private searchSub$: Subscription | undefined;
+  private searchSubject$ = new Subject<string | null>();
   @Input('auto-load') autoLoad: boolean = true;
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
@@ -39,8 +44,11 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     if (this.routeSub$) {
       this.routeSub$.unsubscribe();
     }
-    if(this.loadSub$) {
+    if (this.loadSub$) {
       this.loadSub$.unsubscribe();
+    }
+    if (this.searchSub$) {
+      this.searchSub$.unsubscribe();
     }
   }
 
@@ -63,6 +71,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     this.metaItems = [
       { key: 'count', icon: Icons.ItemsCount, text: 'please wait...' }
     ];
+
+    this.searchSub$ = this.searchSubject$.pipe(
+      filter(value => (value?.length ?? 0) >= this.minimumSearchCharacters || (value?.length ?? 0) === 0),
+      debounceTime(this.searchDebounceTime),
+      distinctUntilChanged()
+    ).subscribe(searchText => {
+      this.executeSearch(searchText);
+    });
 
     // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
     // until i come up with a solution...
@@ -251,6 +267,10 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   }
 
   public searchChanged(searchText: string | null): void {
+    this.searchSubject$.next(searchText);
+  }
+
+  private executeSearch(searchText: string | null): void {
     this.count = 0;
     this.page = 1;
     this.items = null;
