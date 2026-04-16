@@ -3,6 +3,7 @@ import {
     Inject,
     inject,
     Injectable,
+    isDevMode,
     signal
 } from '@angular/core';
 import cloneDeep from 'lodash/cloneDeep';
@@ -47,6 +48,11 @@ export class SettingsFacadeService {
 
     loadSettings(): Observable<boolean> {
         return this.#settingsDataService.getAppSettings().pipe(
+            tap((settings) => {
+                if (isDevMode()) {
+                    console.log(settings);
+                }
+            }),
             map((settings) => {
                 let runtimeSettings = merge(cloneDeep(this.#environment), settings);
                 // Assign settings directly to the appSettings object
@@ -60,7 +66,6 @@ export class SettingsFacadeService {
             catchError((error) => {
                 // Log the error and provide fallback behavior
                 console.error('Failed to load settings:', error);
-
                 return of(false); // Return false to indicate failure
             })
         );
