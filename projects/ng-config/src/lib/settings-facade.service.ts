@@ -47,7 +47,6 @@ export class SettingsFacadeService {
 
     loadSettings(): Observable<boolean> {
         return this.#settingsDataService.getAppSettings().pipe(
-            tap((settings) => console.log(settings)),
             map((settings) => {
                 let runtimeSettings = merge(cloneDeep(this.#environment), settings);
                 // Assign settings directly to the appSettings object
