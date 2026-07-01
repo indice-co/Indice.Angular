@@ -5,7 +5,7 @@ import { IAuthSettings } from '../types';
 
 @Directive({
     selector: 'img[userPicture]',
-    standalone: false
+    standalone: true
 })
 export class ImgUserPictureDirective implements OnInit {
     private _userId: string | undefined | null;

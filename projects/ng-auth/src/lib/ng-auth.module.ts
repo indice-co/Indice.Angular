@@ -9,8 +9,7 @@ import { TenantService } from './tenant/tenant-service';
 import { ImgUserPictureDirective } from './directives/user-picture.directive';
 
 @NgModule({
-  declarations: [ImgUserPictureDirective],
-  imports: [],
+  imports: [ImgUserPictureDirective],
   exports:[ImgUserPictureDirective]
 })
 export class IndiceAuthModule {
