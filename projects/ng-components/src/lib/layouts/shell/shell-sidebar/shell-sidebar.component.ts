@@ -1,5 +1,5 @@
 import { IShellConfig, NavLink } from './../../../types';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs';
 import { APP_LINKS } from '../../../tokens';
@@ -9,6 +9,7 @@ import { share } from 'rxjs/operators';
 @Component({
     selector: 'lib-shell-sidebar',
     templateUrl: './shell-sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellSidebarComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseListComponent, IResultSet, ListViewType, Modal, ModalService } from '@indice/ng-components';
 import { Observable, of } from 'rxjs';
@@ -29,6 +29,7 @@ export const ViewLayoutsListSamples = [
 @Component({
     selector: 'app-modal-playground',
     templateUrl: './modal-playground.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalPlayGroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {

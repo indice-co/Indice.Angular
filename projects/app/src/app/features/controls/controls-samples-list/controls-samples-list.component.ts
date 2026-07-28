@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +33,7 @@ export const ControlsSamples = [
     selector: 'lib-controls-samples-list',
     templateUrl: './controls-samples-list.component.html',
     styleUrls: ['./controls-samples-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ControlsSamplesListComponent extends BaseListComponent<SampleViewModel> implements OnInit {

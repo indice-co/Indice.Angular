@@ -1,6 +1,6 @@
 import { SwitchViewAction } from '../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
@@ -8,6 +8,7 @@ import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
 @Component({
     selector: 'lib-view-layout',
     templateUrl: './view-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ViewLayoutComponent implements OnInit {

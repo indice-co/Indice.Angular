@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-skeleton-loader',
     templateUrl: './skeleton-loader.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SkeletonLoaderComponent implements OnInit {

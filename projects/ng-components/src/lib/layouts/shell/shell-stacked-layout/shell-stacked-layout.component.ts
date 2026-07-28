@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { IShellConfig } from '../../../types';
 
 @Component({
     selector: 'lib-shell-stacked-layout',
     templateUrl: './shell-stacked-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellStackedLayoutComponent implements OnInit {

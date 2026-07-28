@@ -1,1 +1,3 @@
-<lib-toaster *ngFor="let toast of toasts; let i=index" [toast]="toast" [i]="i" (remove)="remove($event)"></lib-toaster>
+@for (toast of toasts; track toast; let i = $index) {
+  <lib-toaster [toast]="toast" [i]="i" (remove)="remove($event)"></lib-toaster>
+}

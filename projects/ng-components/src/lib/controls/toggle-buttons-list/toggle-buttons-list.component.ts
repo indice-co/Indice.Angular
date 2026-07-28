@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MenuOption } from '../../types';
 
 
 @Component({
     selector: 'lib-toggle-buttons-list',
     templateUrl: './toggle-buttons-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ToggleButtonsListComponent implements OnInit {

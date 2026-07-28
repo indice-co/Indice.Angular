@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ChangeDetectionStrategy } from '@angular/core';
 import { animationTime, cssClassNames } from './modal-styles.class';
 import { ModalOptions } from './modal-options.class';
 import { ModalService } from './modal-service';
@@ -27,6 +27,7 @@ import { ModalService } from './modal-service';
         '[attr.aria-labelledby]': 'config.ariaLabelledBy',
         '[attr.aria-describedby]': 'config.ariaDescribedby',
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalContainerComponent implements OnInit, OnDestroy {
@@ -79,12 +80,13 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:keydown.esc', ['$event'])
-  onEsc(event: KeyboardEvent): void {
+  onEsc(event: Event): void {
     if (!this.isShown) {
       return;
     }
-    if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Esc') {
-      event.preventDefault();
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.keyCode === 27 || keyboardEvent.key === 'Escape' || keyboardEvent.key === 'Esc') {
+      keyboardEvent.preventDefault();
     }
     if (this.config.keyboard && this.config.id === this.modalService?.getActiveModal().config.id) {
       this.hide();

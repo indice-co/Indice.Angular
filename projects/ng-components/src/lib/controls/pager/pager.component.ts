@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Icons } from '../../icons';
 import { MenuOption } from '../../types';
@@ -6,6 +6,7 @@ import { MenuOption } from '../../types';
 @Component({
     selector: 'lib-pager',
     templateUrl: './pager.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PagerComponent implements OnInit, OnChanges {

@@ -1,29 +1,39 @@
-<div class="shell-header-container"
-     *ngIf="config?.showHeader">
+@if (config?.showHeader) {
+  <div class="shell-header-container"
+    >
     <div [class]="config?.fluid ? 'shell-header-container-inner-fluid' : 'shell-header-container-inner'">
-        <ng-container *ngIf="config?.customHeaderComponent">
-            <div appDynamicComponentHost="Header"></div>
-        </ng-container>
-        <lib-shell-header *ngIf="!config?.customHeaderComponent"
-                          [busy]="busy"
-                          [show-userName]="config?.showUserNameOnHeader"
-                          [show-alerts]="config?.showAlertsOnHeader"
-                          [show-langs]="config?.showLangsOnHeader">
+      @if (config?.customHeaderComponent) {
+        <div appDynamicComponentHost="Header"></div>
+      }
+      @if (!config?.customHeaderComponent) {
+        <lib-shell-header
+          [busy]="busy"
+          [show-userName]="$safeNavigationMigration(config?.showUserNameOnHeader)"
+          [show-alerts]="$safeNavigationMigration(config?.showAlertsOnHeader)"
+          [show-langs]="$safeNavigationMigration(config?.showLangsOnHeader)">
         </lib-shell-header>
+      }
     </div>
-</div>
+  </div>
+}
 <main [class]="config?.showHeader ? 'shell-content-container' : 'shell-content-container-no-header'">
-    <div [class]="config?.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
-        <router-outlet *ngIf="(!config || config.layout === 'Stacked' || !config.layout)"></router-outlet>
-    </div>
+  <div [class]="config?.fluid ? 'shell-content-container-inner-fluid' : 'shell-content-container-inner'">
+    @if ((!config || config.layout === 'Stacked' || !config.layout)) {
+      <router-outlet></router-outlet>
+    }
+  </div>
 </main>
-<div class="shell-footer-container"
-     *ngIf="config?.showFooter">
+@if (config?.showFooter) {
+  <div class="shell-footer-container"
+    >
     <div [class]="config?.fluid ? 'shell-footer-container-inner-fluid' : 'shell-footer-container-inner'">
-        <ng-container *ngIf="config?.customFooterComponent">
-            <div appDynamicComponentHost
-                 hostName="Footer"></div>
-        </ng-container>
-        <lib-shell-footer *ngIf="!config?.customFooterComponent"></lib-shell-footer>
+      @if (config?.customFooterComponent) {
+        <div appDynamicComponentHost
+        hostName="Footer"></div>
+      }
+      @if (!config?.customFooterComponent) {
+        <lib-shell-footer></lib-shell-footer>
+      }
     </div>
-</div>
+  </div>
+}

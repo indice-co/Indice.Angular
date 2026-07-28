@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
@@ -8,6 +8,7 @@ import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
     // tslint:disable-next-line:component-selector
     selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {

@@ -1,5 +1,5 @@
 import { delay } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../models/sample.vm';
@@ -10,6 +10,7 @@ import { IResultSet, ListViewType, MenuOption } from 'projects/ng-components/src
 @Component({
     selector: 'app-advanced-search-playground',
     templateUrl: './advanced-search-playground.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleViewModel> implements OnInit {

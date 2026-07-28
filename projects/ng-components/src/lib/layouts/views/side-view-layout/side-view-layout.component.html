@@ -23,14 +23,20 @@
         <!-- /End replace -->
       </div>
     </div>
-    <div *ngIf="showActions" class="side-view-layout-actions-container">
-      <button *ngIf="cancelShow" (click)="emitCancel()" type="button" class="side-view-layout-action-button-cancel">
-        {{cancelLabel}}
-      </button>
-      <button *ngIf="okShow" (click)="emitOK()" class="side-view-layout-action-button-submit" [disabled]="disabled">
-        {{okLabel}}
-      </button>
-    </div>
+    @if (showActions) {
+      <div class="side-view-layout-actions-container">
+        @if (cancelShow) {
+          <button (click)="emitCancel()" type="button" class="side-view-layout-action-button-cancel">
+            {{cancelLabel}}
+          </button>
+        }
+        @if (okShow) {
+          <button (click)="emitOK()" class="side-view-layout-action-button-submit" [disabled]="disabled">
+            {{okLabel}}
+          </button>
+        }
+      </div>
+    }
   </div>
 </div>
 

@@ -1,5 +1,5 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
@@ -11,6 +11,7 @@ import { User } from 'oidc-client-ts';
     // tslint:disable-next-line:component-selector
     selector: 'lib-shell-header',
     templateUrl: './shell-header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {

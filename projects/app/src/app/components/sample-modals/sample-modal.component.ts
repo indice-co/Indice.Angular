@@ -1,9 +1,10 @@
-import { Component, Inject, TemplateRef } from '@angular/core';
+import { Component, Inject, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Modal, ModalService, ModalOptions, MODAL_CONFIG_DEFAULT_OVERRIDE  } from '@indice/ng-components';
 
 @Component({
     selector: 'lib-sample-modal',
     templateUrl: './sample-modal.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleModalComponent {

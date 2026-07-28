@@ -1,6 +1,6 @@
 
 import { AuthService } from '@indice/ng-auth';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { ShellHeaderComponent } from '../shell-header/shell-header.component';
@@ -9,6 +9,7 @@ import { ShellLayoutType } from '../../../types';
 @Component({
     selector: 'lib-shell-sidebar-header',
     templateUrl: './shell-sidebar-header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellSidebarHeaderComponent extends ShellHeaderComponent {

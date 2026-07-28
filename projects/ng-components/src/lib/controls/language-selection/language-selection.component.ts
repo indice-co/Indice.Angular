@@ -1,11 +1,12 @@
 import { MenuOption } from './../../types';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { APP_LANGUAGES } from '../../tokens';
 import { IAppLanguagesService } from '../../types';
 
 @Component({
     selector: 'lib-language-selection',
     templateUrl: './language-selection.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LanguageSelectionComponent implements OnInit {

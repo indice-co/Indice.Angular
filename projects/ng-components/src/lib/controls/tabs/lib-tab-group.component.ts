@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, OnInit, Output, QueryList } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, OnInit, Output, QueryList, ChangeDetectionStrategy } from '@angular/core';
 
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import { LibTabComponent } from './lib-tab.component';
@@ -9,6 +9,7 @@ import { LibTabComponent } from './lib-tab.component';
     providers: [
         { provide: LIBTABGROUP_ACCESSOR, useExisting: forwardRef(() => LibTabGroupComponent) }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked {

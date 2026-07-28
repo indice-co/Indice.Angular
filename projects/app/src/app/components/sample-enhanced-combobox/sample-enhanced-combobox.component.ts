@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from './contact';
@@ -8,6 +8,7 @@ import { EnhancedComboboxComponent } from 'projects/ng-components/src/public-api
 @Component({
     selector: 'app-sample-enhanced-combobox',
     templateUrl: './sample-enhanced-combobox.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleEnhancedComboboxComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentLoader } from '../component-loader/component-loader.class';
 import { animationTime, cssClassNames } from './modal-styles.class';
 
@@ -15,6 +15,7 @@ import { animationTime, cssClassNames } from './modal-styles.class';
     host: {
         class: cssClassNames.backdrop,
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModalBackdropComponent implements OnInit {

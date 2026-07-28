@@ -1,7 +1,8 @@
-import { Component, DOCUMENT, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, DOCUMENT, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidePaneOverlayType, SidePaneSize } from '../../types';
-@Component({ selector: 'lib-side-pane', templateUrl: './side-pane.component.html', standalone: false })
+@Component({ selector: 'lib-side-pane', templateUrl: './side-pane.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+ standalone: false })
 export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   @Input('visible')
   protected showPane = false;

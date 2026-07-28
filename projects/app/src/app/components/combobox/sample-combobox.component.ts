@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { ComboboxComponent } from 'projects/ng-components/src/public-api';
 import { Contact, ContactResultSet } from './contact';
@@ -7,6 +7,7 @@ import { Contact, ContactResultSet } from './contact';
 @Component({
     selector: 'app-sample-combobox',
     templateUrl: './sample-combobox.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleComboboxComponent implements OnInit {

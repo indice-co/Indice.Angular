@@ -1,43 +1,63 @@
 
 <div [class]="containerClass ?? 'nav-link-list-container'">
   <div class="nav-link-list-container-inner" [class.icons-only]="!showText">
-    <ng-container *ngFor="let link of links | async">
-      <ng-container [ngSwitch]="link.type">
-        <div *ngSwitchCase="'sparator'" class="h-2"></div>
-        <a *ngSwitchCase="'router'"
-          href="#"
-          [routerLink]="[link.path]"
-          [routerLinkActive]="navLinkActiveClass"
-          [routerLinkActiveOptions]="{ exact: link.exact }"
-          [queryParams]="link.queryParams"
-          [class]="navLinkClass"
-          [class.min-nav-link-text-width]="showText">
-          <div class="inline-flex items-center">
-            <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
-            <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
-          </div>
-        </a>
-        <a *ngSwitchCase="'external'"
-          [href]="link.path"
-          [attr.target]="link.external ? '_blank' : '_self'"
-          [class]="navLinkClass"
-          [class.min-nav-link-text-width]="showText">
-          <div class="inline-flex items-center">
-          <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
-          <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
-        </div>
-        </a>
-        <a *ngSwitchCase="'fragment'"
-          routerLink="."
-          [fragment]="link.path"
-          [class]="fragmentValue === link.path ? navLinkClass + ' ' + navLinkActiveClass : navLinkClass"
-          [class.min-nav-link-text-width]="showText">
-          <div class="inline-flex items-center">
-            <i *ngIf="showIcons && link.icon" [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
-            <span [class.ml-3]="showIcons && link.icon" *ngIf="showText">{{ link.text }}</span>
-          </div>
-        </a>
-      </ng-container>
-    </ng-container>
+    @for (link of links | async; track link) {
+      @switch (link.type) {
+        @case ('sparator') {
+          <div class="h-2"></div>
+        }
+        @case ('router') {
+          <a
+            href="#"
+            [routerLink]="[link.path]"
+            [routerLinkActive]="navLinkActiveClass"
+            [routerLinkActiveOptions]="{ exact: link.exact }"
+            [queryParams]="link.queryParams"
+            [class]="navLinkClass"
+            [class.min-nav-link-text-width]="showText">
+            <div class="inline-flex items-center">
+              @if (showIcons && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              }
+              @if (showText) {
+                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              }
+            </div>
+          </a>
+        }
+        @case ('external') {
+          <a
+            [href]="link.path"
+            [attr.target]="link.external ? '_blank' : '_self'"
+            [class]="navLinkClass"
+            [class.min-nav-link-text-width]="showText">
+            <div class="inline-flex items-center">
+              @if (showIcons && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              }
+              @if (showText) {
+                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              }
+            </div>
+          </a>
+        }
+        @case ('fragment') {
+          <a
+            routerLink="."
+            [fragment]="link.path"
+            [class]="fragmentValue === link.path ? navLinkClass + ' ' + navLinkActiveClass : navLinkClass"
+            [class.min-nav-link-text-width]="showText">
+            <div class="inline-flex items-center">
+              @if (showIcons && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              }
+              @if (showText) {
+                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              }
+            </div>
+          </a>
+        }
+      }
+    }
   </div>
 </div>

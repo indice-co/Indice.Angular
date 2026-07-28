@@ -1,71 +1,76 @@
-<header *ngIf="header" class="view-layout-paddings">
-  <div class="view-layout-title-container">
-    <div class="view-layout-title-container-inner">
-      
-      <div class="flex items-center">
-        <i *ngIf="icon" [class]="icon + ' title-icon'" aria-hidden="true"></i>
-        <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title || ' '}}</h1>
-      </div>
-      
-      <div *ngIf="metaItems && metaItems.length > 0" class="meta-container">
-        <ng-container *ngFor="let meta of metaItems">
-          <div class="meta-item-container">
-            <i *ngIf="meta.icon" [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
-            <span class="meta-text">{{meta.text}}</span>
+@if (header) {
+  <header class="view-layout-paddings">
+    <div class="view-layout-title-container">
+      <div class="view-layout-title-container-inner">
+        <div class="flex items-center">
+          @if (icon) {
+            <i [class]="icon + ' title-icon'" aria-hidden="true"></i>
+          }
+          <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title || ' '}}</h1>
+        </div>
+        @if (metaItems && metaItems.length > 0) {
+          <div class="meta-container">
+            @for (meta of metaItems; track meta) {
+              <div class="meta-item-container">
+                @if (meta.icon) {
+                  <i [class]="meta.icon + ' meta-icon'" aria-hidden="true"></i>
+                }
+                <span class="meta-text">{{meta.text}}</span>
+              </div>
+            }
           </div>
-        </ng-container>
+        }
       </div>
-
-    </div>
-    <div class="view-layout-title-container-far">
-      <ng-container *ngFor="let action of actions" [ngSwitch]="action.type">
-
-        <ng-container *ngSwitchCase="'search'">
-          <label for="search" class="sr-only">Search</label>
-          <div class="search-container mr-1">
-            <input id="text"
-                   #search
-                   title="search"
-                   class="search-input"
-                   [placeholder]="searchPlaceholder"
-                   name="search"
-                   (input)="searchActionType(search.value)"
-                   (onsearch)="handleClear($event)">
-            <button type="button"
+      <div class="view-layout-title-container-far">
+        @for (action of actions; track action) {
+          @switch (action.type) {
+            @case ('search') {
+              <label for="search" class="sr-only">Search</label>
+              <div class="search-container mr-1">
+                <input id="text"
+                  #search
+                  title="search"
+                  class="search-input"
+                  [placeholder]="searchPlaceholder"
+                  name="search"
+                  (input)="searchActionType(search.value)"
+                  (onsearch)="handleClear($event)">
+                  <button type="button"
                     href="#"
                     class="search-button"
                     [title]="action.tooltip"
                     (click)="searchActionClick(action, search.value)">
-              <i [class]="action.icon"></i>
-            </button>
-          </div>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="'switch-view'">
-          <button [disabled]="view === action.param" type="button" href="#" class="p-2 disabled:opacity-75 btn-view-header" (click)="switchViewActionClick(action)">
-            <span class="inline-block relative">
-              <i [class]="action.icon"></i><span *ngIf="view === action.param" class="selected-view-indicator"></span>
-            </span>
-          </button>
-        </ng-container>
-
-        <ng-container *ngSwitchCase="'router-link'">
-          <button type="button" href="#" class="p-2 btn-view-header" [title]="action.tooltip" (click)="routerLinkActionClick(action)">
-            <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
-            {{ action.text }}
-          </button>
-        </ng-container>
-
-        <ng-container *ngSwitchDefault>
-          <button type="button" class="p-2 btn-view-header" [title]="action.tooltip" (click)="emitActionClick(action)">
-            <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
-            {{ action.text }}
-          </button>
-        </ng-container>
-      </ng-container>
+                    <i [class]="action.icon"></i>
+                  </button>
+                </div>
+              }
+              @case ('switch-view') {
+                <button [disabled]="view === action.param" type="button" href="#" class="p-2 disabled:opacity-75 btn-view-header" (click)="switchViewActionClick(action)">
+                  <span class="inline-block relative">
+                    <i [class]="action.icon"></i>@if (view === action.param) {
+                    <span class="selected-view-indicator"></span>
+                  }
+                </span>
+              </button>
+            }
+            @case ('router-link') {
+              <button type="button" href="#" class="p-2 btn-view-header" [title]="action.tooltip" (click)="routerLinkActionClick(action)">
+                <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
+                {{ action.text }}
+              </button>
+            }
+            @default {
+              <button type="button" class="p-2 btn-view-header" [title]="action.tooltip" (click)="emitActionClick(action)">
+                <i [class]="action.icon" [ngClass]="{'pr-1': action.text}"></i>
+                {{ action.text }}
+              </button>
+            }
+          }
+        }
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+}
 <div [class]="fluid ? 'view-container-fluid' : 'view-container'">
   <ng-content></ng-content>
 </div>

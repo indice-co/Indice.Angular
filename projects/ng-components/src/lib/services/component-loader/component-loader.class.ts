@@ -1,14 +1,14 @@
 import {
-  ComponentFactoryResolver,
   ViewContainerRef,
-  ComponentFactory,
   Type,
   ElementRef,
   StaticProvider,
   TemplateRef,
   ComponentRef,
   ApplicationRef,
+  EnvironmentInjector,
   Injector,
+  createComponent,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ComponentLoaderOptions } from './component-loader-options.class';
@@ -48,7 +48,7 @@ export class ComponentLoader<T extends object> {
 
   public instance?: T;
   public componentRef?: ComponentRef<T>;
-  private componentFactory?: ComponentFactory<T>;
+  private componentType?: Type<T>;
   private container: string | ElementRef | any;
   private providers: StaticProvider[] = [];
   private contentRef?: ContentRef;
@@ -56,7 +56,7 @@ export class ComponentLoader<T extends object> {
   private innerComponent?: ComponentRef<T>;
   constructor(
     private vcr: ViewContainerRef | undefined,
-    private cfr: ComponentFactoryResolver,
+    private environmentInjector: EnvironmentInjector,
     private applicationRef: ApplicationRef,
     private injector: Injector
   ) {}
@@ -67,7 +67,7 @@ export class ComponentLoader<T extends object> {
    * @returns Current instance of {@link ComponentLoader}
    */
   public attach(componentType: Type<T>): ComponentLoader<T> {
-    this.componentFactory = this.cfr.resolveComponentFactory<T>(componentType);
+    this.componentType = componentType;
     return this;
   }
 
@@ -106,7 +106,7 @@ export class ComponentLoader<T extends object> {
     if (this.componentRef) {
       throw Error('Component is already shown');
     }
-    if (!this.componentFactory) {
+    if (!this.componentType) {
       throw Error('You must attach a component');
     }
     this.onBeforeShow.next({});
@@ -172,11 +172,15 @@ export class ComponentLoader<T extends object> {
   }
 
   private createComponentAndAttachToView(options: ComponentLoaderOptions) {
-    const injector = Injector.create({
+    const elementInjector = Injector.create({
       providers: this.providers,
       parent: this.injector,
     });
-    this.componentRef = this.componentFactory!.create(injector, this.contentRef?.nodes);
+    this.componentRef = createComponent(this.componentType!, {
+      environmentInjector: this.environmentInjector,
+      elementInjector,
+      projectableNodes: this.contentRef?.nodes,
+    });
     this.applicationRef.attachView(this.componentRef.hostView);
     this.instance = this.componentRef.instance;
     Object.assign(this.componentRef.instance, options);
@@ -210,12 +214,14 @@ export class ComponentLoader<T extends object> {
 
     //Component case
     if (typeof content === 'function') {
-      const contentCf = this.cfr.resolveComponentFactory(content);
-      const injector = Injector.create({
+      const elementInjector = Injector.create({
         providers: this.providers,
         parent: this.injector,
       });
-      const componentRef = contentCf.create(injector);
+      const componentRef = createComponent(content as Type<any>, {
+        environmentInjector: this.environmentInjector,
+        elementInjector,
+      });
       // Object.assign(componentRef.instance, initialState);
       this.applicationRef.attachView(componentRef.hostView);
       return new ContentRef([[componentRef.location.nativeElement]], componentRef.hostView, componentRef);

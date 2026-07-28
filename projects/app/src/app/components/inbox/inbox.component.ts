@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons, IResultSet, NavLink } from '@indice/ng-components';
@@ -6,6 +6,7 @@ import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons, IResultSet
 @Component({
     selector: 'app-inbox',
     templateUrl: './inbox.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InboxComponent implements OnInit {

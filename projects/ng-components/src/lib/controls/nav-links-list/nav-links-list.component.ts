@@ -1,10 +1,11 @@
 import { Observable, Subscription } from 'rxjs';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { NavLink } from '../../types';
 
 @Component({
     selector: 'lib-nav-links-list',
     templateUrl: './nav-links-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NavLinksListComponent implements OnInit, OnDestroy {

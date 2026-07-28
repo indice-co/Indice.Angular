@@ -1,5 +1,5 @@
 import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames } from '@angular/common';
-import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // freaksly simple date picker : https://tailwind-elements.com/docs/standard/forms/datepicker/
@@ -13,6 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {

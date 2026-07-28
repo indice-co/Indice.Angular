@@ -1,38 +1,46 @@
 <div class="card bg-white" [class.card-deck-busy]="busy">
   <div class="card-body">
     <div class="kpi-tile-title-container flex align-top">
-      <button type="button" *ngIf="!header" class="kpi-tile-action text-left flex-1 uppercase" 
-              (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title ?? title) ?? '-'}}
+      @if (!header) {
+        <button type="button" class="kpi-tile-action text-left flex-1 uppercase"
+          (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title ?? title) ?? '-'}}
         </button>
-      <ng-container *ngIf="header && header.template">
+      }
+      @if (header && header.template) {
         <div class="flex-1">
           <ng-template [ngTemplateOutlet]="header.template"></ng-template>
         </div>
-      </ng-container>
-      <div *ngIf="showAction" class="float-right align-top">
-        <button type="button" class="kpi-tile-action text-xs uppercase" (click)="emitTileAction($event)">{{actionText}}</button>
-      </div>
-    </div>
-    <div class="flex items-center" *ngIf="itemTemplates">
-      <ng-template [ngTemplateOutlet]="itemTemplates[selectedIndex].template"></ng-template>
-    </div>
-    <div class="tile-card-footer opacity-25 hover:opacity-75" *ngIf="itemTemplates && itemTemplates.length>1">
-      <nav class="flex items-center justify-between px-4 sm:px-0">
-        <div class="flex w-0 flex-1"></div>
-        <div class="flex items-center justify-between px-2">
-          <ng-container *ngFor="let item of itemTemplates; index as i">
-            <button type="button"
-                    title="details"
-                    (click)="selectedIndex=i"
-                    [disabled]="selectedIndex===i"
-                    class="tile-card-item-btn"
-                    [class.tile-card-item-btn-available]="selectedIndex!==i"
-                    [class.tile-card-item-btn-selected]="selectedIndex===i">
-            </button>
-          </ng-container>
+      }
+      @if (showAction) {
+        <div class="float-right align-top">
+          <button type="button" class="kpi-tile-action text-xs uppercase" (click)="emitTileAction($event)">{{actionText}}</button>
         </div>
-        <div class="flex w-0 flex-1 justify-end"></div>
-      </nav>
+      }
     </div>
+    @if (itemTemplates) {
+      <div class="flex items-center">
+        <ng-template [ngTemplateOutlet]="itemTemplates[selectedIndex].template"></ng-template>
+      </div>
+    }
+    @if (itemTemplates && itemTemplates.length>1) {
+      <div class="tile-card-footer opacity-25 hover:opacity-75">
+        <nav class="flex items-center justify-between px-4 sm:px-0">
+          <div class="flex w-0 flex-1"></div>
+          <div class="flex items-center justify-between px-2">
+            @for (item of itemTemplates; track item; let i = $index) {
+              <button type="button"
+                title="details"
+                (click)="selectedIndex=i"
+                [disabled]="selectedIndex===i"
+                class="tile-card-item-btn"
+                [class.tile-card-item-btn-available]="selectedIndex!==i"
+                [class.tile-card-item-btn-selected]="selectedIndex===i">
+              </button>
+            }
+          </div>
+          <div class="flex w-0 flex-1 justify-end"></div>
+        </nav>
+      </div>
+    }
   </div>
 </div>

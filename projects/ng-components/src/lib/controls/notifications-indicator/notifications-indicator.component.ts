@@ -1,11 +1,12 @@
 import { IAppNotifications, NavLink } from './../../types';
-import { Component, Inject, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
 
 @Component({
     selector: 'lib-notifications-indicator',
     templateUrl: './notifications-indicator.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {

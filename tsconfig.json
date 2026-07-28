@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -10,13 +11,13 @@
     "paths": {
       "@angular/*": [ "./node_modules/@angular/*" ],
       "ng-auth": [
-        "dist/ng-auth"
+        "./dist/ng-auth"
       ],
       "ng-components": [
-        "dist/ng-components"
+        "./dist/ng-components"
       ],
       "ng-conf": [
-        "dist/ng-config"
+        "./dist/ng-config"
       ]
     },
     "esModuleInterop": true,
@@ -27,10 +28,6 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

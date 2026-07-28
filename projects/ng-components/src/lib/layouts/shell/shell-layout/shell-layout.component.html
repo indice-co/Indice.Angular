@@ -1,18 +1,22 @@
 <div [class.hidden]="!loaded" [class.block]="loaded">
   <!-- STACKED LAYOUT -->
-  <div *ngIf="(activeConfig.layout === 'Stacked' || !activeConfig.layout)" class="shell-container active-side-pane">
-    <lib-shell-stacked-layout [config]="activeConfig" [busy]="busy"></lib-shell-stacked-layout>
-  </div>
+  @if ((activeConfig.layout === 'Stacked' || !activeConfig.layout)) {
+    <div class="shell-container active-side-pane">
+      <lib-shell-stacked-layout [config]="activeConfig" [busy]="busy"></lib-shell-stacked-layout>
+    </div>
+  }
   <!-- SIDEBAR LAYOUT -->
-  <div *ngIf="activeConfig.layout === 'Sidebar'" class="sidebar shell-container active-side-pane">
-    <lib-shell-sidebar-layout [config]="activeConfig" [busy]="busy"
-                              [sidebarFooterTemplate]="sidebarFooterTemplate">
-    </lib-shell-sidebar-layout>
-  </div>
+  @if (activeConfig.layout === 'Sidebar') {
+    <div class="sidebar shell-container active-side-pane">
+      <lib-shell-sidebar-layout [config]="activeConfig" [busy]="busy"
+        [sidebarFooterTemplate]="sidebarFooterTemplate">
+      </lib-shell-sidebar-layout>
+    </div>
+  }
   <lib-side-pane #rightPane>
     <router-outlet name="rightpane"
-                   (activate)="onSidePaneActivated($event)"
-                   (deactivate)="onSidePaneDeactivated($event)">
+      (activate)="onSidePaneActivated($event)"
+      (deactivate)="onSidePaneDeactivated($event)">
     </router-outlet>
   </lib-side-pane>
   <lib-toaster-container></lib-toaster-container>

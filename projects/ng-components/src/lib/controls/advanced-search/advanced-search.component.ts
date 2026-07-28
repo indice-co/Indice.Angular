@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 import { MenuOption } from '../../types';
 
 @Component({
     selector: 'lib-advanced-search',
     templateUrl: './advanced-search.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AdvancedSearchComponent implements OnInit, OnChanges {

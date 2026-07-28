@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { MenuOption } from '../../types';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-drop-down-menu',
     templateUrl: './drop-down-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {

@@ -1,11 +1,12 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-logged-out',
     templateUrl: './logged-out.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class LoggedOutComponent implements OnInit {

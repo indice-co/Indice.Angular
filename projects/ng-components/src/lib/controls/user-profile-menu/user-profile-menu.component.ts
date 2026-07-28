@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, ImgUserPictureDirective } from '@indice/ng-auth';
 import { APP_LINKS } from '../../tokens';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'lib-user-profile-menu',
     templateUrl: './user-profile-menu.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class UserProfileMenuComponent implements OnInit {

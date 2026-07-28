@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { BaseListComponent, HeaderMetaItem, IResultSet, ListViewType } from '@indice/ng-components';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { Observable, of } from 'rxjs';
@@ -16,6 +16,7 @@ export const ViewLayoutsListSamples = [
     selector: 'lib-view-layouts-list',
     templateUrl: './view-layouts-list.component.html',
     styleUrls: ['./view-layouts-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ViewLayoutsListComponent extends BaseListComponent<SampleViewModel> implements OnInit {

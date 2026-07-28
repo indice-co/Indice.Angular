@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Optional, TemplateRef } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { IShellConfig } from '../../../types';
 import { UserSettingsService } from '../../../services/user-settings.service';
@@ -6,6 +6,7 @@ import { UserSettingsService } from '../../../services/user-settings.service';
 @Component({
     selector: 'lib-shell-sidebar-layout',
     templateUrl: './shell-sidebar-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellSidebarLayoutComponent implements OnInit {

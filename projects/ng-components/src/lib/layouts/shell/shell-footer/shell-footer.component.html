@@ -6,11 +6,11 @@
           <img class="shell-footer-logo-h" src="assets/images/branding/indice.png" alt="INDICE logo" />
           <nav class="mt-4">
             <ul class="space-y-2">
-              <ng-container *ngFor="let link of links.brand | async">
+              @for (link of links.brand | async; track link) {
                 <li>
                   <a [href]="link.path" class="shell-footer-link">{{ link.text }}</a>
                 </li>
-              </ng-container>
+              }
             </ul>
           </nav>
         </div>
@@ -18,11 +18,11 @@
           <h5 class="shell-footer-section-title">Legal</h5>
           <nav class="mt-4">
             <ul class="grid lg:grid-cols-2">
-              <ng-container *ngFor="let link of links.legal | async">
+              @for (link of links.legal | async; track link) {
                 <li class="mb-2">
                   <a [href]="link.path" class="shell-footer-link">{{ link.text }}</a>
                 </li>
-              </ng-container>
+              }
             </ul>
           </nav>
         </div>
@@ -63,9 +63,9 @@
       <!--<nav class="flex flex-wrap justify-center space-x-6">
       <a href="#" class="font-normal text-sm hover:text-gray-100 mb-2">Cookie settings</a>
     </nav>-->
-      <p class="text-sm text-center sm:text-right">
-        © 2021 INDICE. All rights reserved.
-      </p>
-    </div>
+    <p class="text-sm text-center sm:text-right">
+      © 2021 INDICE. All rights reserved.
+    </p>
   </div>
+</div>
 </footer>

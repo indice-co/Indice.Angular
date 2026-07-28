@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@indice/ng-auth';
@@ -6,6 +6,7 @@ import { AuthService } from '@indice/ng-auth';
 @Component({
     selector: 'lib-auth-callback',
     templateUrl: './auth-callback.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AuthCallbackComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 
 import { LibTabComponent } from 'projects/ng-components/src/lib/controls/tabs/lib-tab.component';
 
@@ -7,6 +7,7 @@ import { LibTabComponent } from 'projects/ng-components/src/lib/controls/tabs/li
 @Component({
     selector: 'app-sample-tabs',
     templateUrl: './sample-tabs.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleTabsComponent implements OnInit {

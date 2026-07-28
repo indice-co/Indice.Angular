@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { SidePaneComponent } from '../../../../public-api';
 
 @Component({
     selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {

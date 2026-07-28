@@ -32,111 +32,120 @@
 
 
             <!-- Profile dropdown -->
-            <div *ngIf="profileMenuVisible" class="ml-4">
-              <lib-user-profile-menu [show-user-name]="showUserNameOnHeader" [show-picture]="showPictureOnHeader"></lib-user-profile-menu>
-            </div>
+            @if (profileMenuVisible) {
+              <div class="ml-4">
+                <lib-user-profile-menu [show-user-name]="showUserNameOnHeader" [show-picture]="showPictureOnHeader"></lib-user-profile-menu>
+              </div>
+            }
 
             <!-- Notifications dropdown -->
-            <div *ngIf="showAlerts && user" class="ml-4">
-              <lib-notifications-indicator></lib-notifications-indicator>
-            </div>
+            @if (showAlerts && user) {
+              <div class="ml-4">
+                <lib-notifications-indicator></lib-notifications-indicator>
+              </div>
+            }
 
             <!-- languages dropdown -->
-            <div *ngIf="showLangs" class="ml-4">
-              <lib-language-selection></lib-language-selection>
-            </div>
+            @if (showLangs) {
+              <div class="ml-4">
+                <lib-language-selection></lib-language-selection>
+              </div>
+            }
           </div>
         </div>
 
         <div class="mobile-menu-button-container">
           <!-- Mobile menu button -->
           <button type="button"
-                  (click)="mobileMenuExpanded = !mobileMenuExpanded"
-                  class="mobile-menu-button"
-                  aria-controls="mobile-menu"
-                  [attr.aria-expanded]="mobileMenuExpanded">
+            (click)="mobileMenuExpanded = !mobileMenuExpanded"
+            class="mobile-menu-button"
+            aria-controls="mobile-menu"
+            [attr.aria-expanded]="mobileMenuExpanded">
             <span class="sr-only">Open main menu</span>
             <!--Heroicon name: outline/menu  Menu open: "hidden", Menu closed: "block"-->
             <svg xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                 aria-hidden="true"
-                 [class]="mobileMenuExpanded ? 'hidden':'block h-6 w-6'">
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+              [class]="mobileMenuExpanded ? 'hidden':'block h-6 w-6'">
               <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!--Heroicon name: outline/x Menu open: "block", Menu closed: "hidden"-->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                 aria-hidden="true"
-                 [class]="mobileMenuExpanded ? 'block h-6 w-6':'hidden'">
-              <path stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="mobile-menu-container" *ngIf="mobileMenuExpanded" id="mobile-menu">
-    <lib-nav-links-list
-      [links]="sectionLinks"
-      [active-fragment]="activeFragment"
-      [link-class]="'nav-link-mobile'"
-      [link-active-class]="'nav-link-mobile-active'"
-      [container-class]="'mobile-menu-link-container'">
-    </lib-nav-links-list>
-
-    <div *ngIf="!user">
-      <a href="#" (click)="signin($event)" class="nav-link-mobile">
-        <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
-      </a>
-    </div>
-
-    <div class="mobile-menu-user-info-container" *ngIf="user">
-      <div class="mobile-menu-user-info-container-inner">
-        <div class="flex-shrink-0">
-          <span class="mobile-menu-avatar-container">
-            <span class="mobile-menu-avatar-name">{{ this.avatarName }}</span>
-          </span>
-        </div>
-        <div class="ml-3">
-          <div class="mobile-menu-user-name">{{ user.profile.name }}</div>
-          <div class="mobile-menu-user-email">{{ user.profile.email }}</div>
-        </div>
-        <!--
-        <button class="mobile-menu-rounded-button">
-          <span class="sr-only">View notifications</span>
-          <svg class="mobile-menu-rounded-button-icon-style"
-               xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
-               aria-hidden="true">
-            <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <!--Heroicon name: outline/x Menu open: "block", Menu closed: "hidden"-->
+              <svg xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+                [class]="mobileMenuExpanded ? 'block h-6 w-6':'hidden'">
+                <path stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-        </button>
-        -->
+                  d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <lib-nav-links-list
-          [links]="links.profile"
-          [active-fragment]="activeFragment"
-          [link-class]="'nav-link-mobile'"
-          [link-active-class]="'nav-link-mobile-active'"
-          [container-class]="'mobile-menu-link-container'">
-      </lib-nav-links-list>
-  </div>
-</nav>
+      <!-- Mobile menu, show/hide based on menu state. -->
+      @if (mobileMenuExpanded) {
+        <div class="mobile-menu-container" id="mobile-menu">
+          <lib-nav-links-list
+            [links]="sectionLinks"
+            [active-fragment]="activeFragment"
+            [link-class]="'nav-link-mobile'"
+            [link-active-class]="'nav-link-mobile-active'"
+            [container-class]="'mobile-menu-link-container'">
+          </lib-nav-links-list>
+          @if (!user) {
+            <div>
+              <a href="#" (click)="signin($event)" class="nav-link-mobile">
+                <i class="ms-Icon ms-Icon--Signin mr-2"></i>Σύνδεση
+              </a>
+            </div>
+          }
+          @if (user) {
+            <div class="mobile-menu-user-info-container">
+              <div class="mobile-menu-user-info-container-inner">
+                <div class="flex-shrink-0">
+                  <span class="mobile-menu-avatar-container">
+                    <span class="mobile-menu-avatar-name">{{ this.avatarName }}</span>
+                  </span>
+                </div>
+                <div class="ml-3">
+                  <div class="mobile-menu-user-name">{{ user.profile.name }}</div>
+                  <div class="mobile-menu-user-email">{{ user.profile.email }}</div>
+                </div>
+                <!--
+                <button class="mobile-menu-rounded-button">
+                  <span class="sr-only">View notifications</span>
+                  <svg class="mobile-menu-rounded-button-icon-style"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true">
+                    <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                  </button>
+                  -->
+                </div>
+              </div>
+            }
+            <lib-nav-links-list
+              [links]="links.profile"
+              [active-fragment]="activeFragment"
+              [link-class]="'nav-link-mobile'"
+              [link-active-class]="'nav-link-mobile-active'"
+              [container-class]="'mobile-menu-link-container'">
+            </lib-nav-links-list>
+          </div>
+        }
+      </nav>
