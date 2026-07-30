@@ -1,7 +1,7 @@
 {
   "name": "@indice/ng-components",
-  "version": "0.5.1",
-  "description": "Indice common components for Angular v20",
+  "version": "0.6.0",
+  "description": "Indice common components for Angular v22",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/indice-co/Indice.Angular.git"
@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/indice-co/Indice.Angular#readme",
   "peerDependencies": {
-    "@angular/common": ">=20.0.0",
-    "@angular/core": ">=20.0.0",
-    "@angular/router": ">=20.0.0",
+    "@angular/common": ">=22.0.0",
+    "@angular/core": ">=22.0.0",
+    "@angular/router": ">=22.0.0",
     "@indice/ng-auth": ">=0.4.2",
     "oidc-client-ts": "^3.0.1",
     "rxjs": ">=7.8.1",
@@ -32,9 +32,9 @@
     "uuid": ">=13.0.0"
   },
   "devDependencies": {
-    "@angular/common": ">=20.0.0",
-    "@angular/core": ">=20.0.0",
-    "@angular/router": ">=20.0.0",
+    "@angular/common": ">=22.0.0",
+    "@angular/core": ">=22.0.0",
+    "@angular/router": ">=22.0.0",
     "@indice/ng-auth": ">=0.4.0",
     "oidc-client-ts": ">=3.3.0",
     "patch-package": "^8.0.0",

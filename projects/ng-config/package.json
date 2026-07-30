@@ -1,6 +1,6 @@
 {
   "name": "@indice/ng-config",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Indice dynamic runtime configuration provider for applications",
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
     "lodash": "^4.17.21"
   },
   "peerDependencies": {
-    "@angular/common": ">=20.0.0",
-    "@angular/core": ">=20.0.0"
+    "@angular/common": ">=22.0.0",
+    "@angular/core": ">=22.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.20",
