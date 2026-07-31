@@ -1,11 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { FormsModule } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'lib-enhanced-combobox',
     templateUrl: './enhanced-combobox.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ClickOutsideDirective, FormsModule, NgTemplateOutlet]
 })
 export class EnhancedComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();

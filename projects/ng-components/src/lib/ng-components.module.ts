@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA , ModuleWithProviders, NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA , EnvironmentProviders, ModuleWithProviders, NgModule, makeEnvironmentProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AddressPipe } from './pipes/address.pipe';
@@ -65,140 +65,165 @@ import { ShortNumberPipe } from './pipes/short-number.pipe';
 import { StatsGridComponent } from './controls/stats-grid/stats-grid.component';
 import { ProgressBarComponent } from './controls/progress-bar/progress-bar.component';
 
+/**
+ * The Indice components services, shared by {@link provideIndiceComponents} and
+ * {@link IndiceComponentsModule.forRoot}.
+ */
+const COMPONENTS_PROVIDERS = [
+  BreadcrumbService,
+  ToasterService,
+  UserSettingsService
+];
+
+/**
+ * Registers the Indice components services for a standalone application.
+ *
+ * @remarks
+ * Prefer this in a standalone bootstrap (`ApplicationConfig.providers`) and import the individual
+ * standalone components/directives/pipes where needed, instead of importing
+ * {@link IndiceComponentsModule}. This is the standalone-native replacement for
+ * {@link IndiceComponentsModule.forRoot}.
+ *
+ * Note: `ModalService` is intentionally not registered here (unchanged from `forRoot()`) — provide
+ * it in the consuming application where modals are used.
+ */
+export function provideIndiceComponents(): EnvironmentProviders {
+  return makeEnvironmentProviders([...COMPONENTS_PROVIDERS]);
+}
+
+/**
+ * @deprecated Compatibility shim for NgModule-based consumers. Prefer importing the standalone
+ * components/directives/pipes directly and calling {@link provideIndiceComponents}. This module
+ * will be removed in a future major.
+ */
 @NgModule({
-  declarations: [
-    AddressPipe,
-    AdvancedSearchComponent,
-    AuthCallbackComponent,
-    AuthRenewComponent,
-    AvatarInitialsComponent,
-    BreadcrumbComponent,
-    ClickOutsideDirective,
-    CollapsiblePanelComponent,
-    ComboboxComponent,
-    EnhancedComboboxComponent,
-    DatepickerComponent,
-    DropDownMenuComponent,
-    DurationFormatPipe,
-    ShortNumberPipe,
-    DynamicComponentHostDirective,
-    ErrorComponent,
-    FormLayoutComponent,
-    KpiTileComponent,
-    LanguageSelectionComponent,
-    LibStepComponent,
-    LibStepInfoDirective,
-    LibStepLabelDirective,
-    LibStepperComponent,
-    LibTabComponent,
-    LibTabGroupComponent,
-    LibTabLabelDirective,
-    ListColumnComponent,
-    ListDetailsSectionComponent,
-    ListTileComponent,
-    ListViewComponent,
-    ListViewEmptyStateComponent,
-    LoggedOutComponent,
-    ModelViewLayoutComponent,
-    NavLinksListComponent,
-    NotificationsIndicatorComponent,
-    PageNotFoundComponent,
-    PagerComponent,
-    ShellFooterComponent,
-    ShellHeaderComponent,
-    ShellLayoutComponent,
-    ShellSidebarComponent,
-    ShellSidebarHeaderComponent,
-    ShellSidebarLayoutComponent,
-    ShellStackedLayoutComponent,
-    SidePaneComponent,
-    SideViewLayoutComponent,
-    SkeletonLoaderComponent,
-    ToasterComponent,
-    ToasterContainerComponent,
-    ToggleComponent,
-    UnauthorizedComponent,
-    UserProfileMenuComponent,
-    ViewLayoutComponent,
-    ToggleButtonComponent,
-    ToggleButtonsListComponent,
-    ContentTileComponent,
-    ContentTileItemComponent,
-    ContentTileHeaderComponent,
-    StatsGridComponent,
-    ProgressBarComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    IndiceAuthModule,
-    FormsModule
-  ],
-  exports: [
-    RouterModule,
-    AddressPipe,
-    AdvancedSearchComponent,
-    AuthCallbackComponent,
-    AuthRenewComponent,
-    AvatarInitialsComponent,
-    BreadcrumbComponent,
-    ClickOutsideDirective,
-    CollapsiblePanelComponent,
-    ComboboxComponent,
-    EnhancedComboboxComponent,
-    DatepickerComponent,
-    DropDownMenuComponent,
-    DurationFormatPipe,
-    ShortNumberPipe,
-    ErrorComponent,
-    FormLayoutComponent,
-    KpiTileComponent,
-    LibStepComponent,
-    LibStepInfoDirective,
-    LibStepLabelDirective,
-    LibStepperComponent,
-    LibTabComponent,
-    LibTabGroupComponent,
-    LibTabLabelDirective,
-    ListColumnComponent,
-    ListDetailsSectionComponent,
-    ListTileComponent,
-    ListViewComponent,
-    ListViewEmptyStateComponent,
-    LoggedOutComponent,
-    ModelViewLayoutComponent,
-    PageNotFoundComponent,
-    PagerComponent,
-    ShellFooterComponent,
-    ShellHeaderComponent,
-    ShellLayoutComponent,
-    SidePaneComponent,
-    SideViewLayoutComponent,
-    SkeletonLoaderComponent,
-    ToasterComponent,
-    ToasterContainerComponent,
-    ToggleComponent,
-    UnauthorizedComponent,
-    ViewLayoutComponent,
-    ToggleButtonComponent,
-    ToggleButtonsListComponent,
-    ContentTileComponent,
-    ContentTileItemComponent,
-    ContentTileHeaderComponent,
-    StatsGridComponent,
-    ProgressBarComponent
-  ], 
-  schemas: [NO_ERRORS_SCHEMA ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        IndiceAuthModule,
+        FormsModule,
+        AddressPipe,
+        AdvancedSearchComponent,
+        AuthCallbackComponent,
+        AuthRenewComponent,
+        AvatarInitialsComponent,
+        BreadcrumbComponent,
+        ClickOutsideDirective,
+        CollapsiblePanelComponent,
+        ComboboxComponent,
+        EnhancedComboboxComponent,
+        DatepickerComponent,
+        DropDownMenuComponent,
+        DurationFormatPipe,
+        ShortNumberPipe,
+        DynamicComponentHostDirective,
+        ErrorComponent,
+        FormLayoutComponent,
+        KpiTileComponent,
+        LanguageSelectionComponent,
+        LibStepComponent,
+        LibStepInfoDirective,
+        LibStepLabelDirective,
+        LibStepperComponent,
+        LibTabComponent,
+        LibTabGroupComponent,
+        LibTabLabelDirective,
+        ListColumnComponent,
+        ListDetailsSectionComponent,
+        ListTileComponent,
+        ListViewComponent,
+        ListViewEmptyStateComponent,
+        LoggedOutComponent,
+        ModelViewLayoutComponent,
+        NavLinksListComponent,
+        NotificationsIndicatorComponent,
+        PageNotFoundComponent,
+        PagerComponent,
+        ShellFooterComponent,
+        ShellHeaderComponent,
+        ShellLayoutComponent,
+        ShellSidebarComponent,
+        ShellSidebarHeaderComponent,
+        ShellSidebarLayoutComponent,
+        ShellStackedLayoutComponent,
+        SidePaneComponent,
+        SideViewLayoutComponent,
+        SkeletonLoaderComponent,
+        ToasterComponent,
+        ToasterContainerComponent,
+        ToggleComponent,
+        UnauthorizedComponent,
+        UserProfileMenuComponent,
+        ViewLayoutComponent,
+        ToggleButtonComponent,
+        ToggleButtonsListComponent,
+        ContentTileComponent,
+        ContentTileItemComponent,
+        ContentTileHeaderComponent,
+        StatsGridComponent,
+        ProgressBarComponent
+    ],
+    exports: [
+        RouterModule,
+        AddressPipe,
+        AdvancedSearchComponent,
+        AuthCallbackComponent,
+        AuthRenewComponent,
+        AvatarInitialsComponent,
+        BreadcrumbComponent,
+        ClickOutsideDirective,
+        CollapsiblePanelComponent,
+        ComboboxComponent,
+        EnhancedComboboxComponent,
+        DatepickerComponent,
+        DropDownMenuComponent,
+        DurationFormatPipe,
+        ShortNumberPipe,
+        ErrorComponent,
+        FormLayoutComponent,
+        KpiTileComponent,
+        LibStepComponent,
+        LibStepInfoDirective,
+        LibStepLabelDirective,
+        LibStepperComponent,
+        LibTabComponent,
+        LibTabGroupComponent,
+        LibTabLabelDirective,
+        ListColumnComponent,
+        ListDetailsSectionComponent,
+        ListTileComponent,
+        ListViewComponent,
+        ListViewEmptyStateComponent,
+        LoggedOutComponent,
+        ModelViewLayoutComponent,
+        PageNotFoundComponent,
+        PagerComponent,
+        ShellFooterComponent,
+        ShellHeaderComponent,
+        ShellLayoutComponent,
+        SidePaneComponent,
+        SideViewLayoutComponent,
+        SkeletonLoaderComponent,
+        ToasterComponent,
+        ToasterContainerComponent,
+        ToggleComponent,
+        UnauthorizedComponent,
+        ViewLayoutComponent,
+        ToggleButtonComponent,
+        ToggleButtonsListComponent,
+        ContentTileComponent,
+        ContentTileItemComponent,
+        ContentTileHeaderComponent,
+        StatsGridComponent,
+        ProgressBarComponent
+    ],
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class IndiceComponentsModule {
   static forRoot(): ModuleWithProviders<IndiceComponentsModule> {
     return {
       ngModule: IndiceComponentsModule,
-      providers: [
-        BreadcrumbService,
-        ToasterService,
-        UserSettingsService
-      ]
+      providers: [...COMPONENTS_PROVIDERS]
     };
   }
 }

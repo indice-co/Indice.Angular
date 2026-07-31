@@ -2,12 +2,13 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Router } from '@angular/router';
 import { Icons } from '../../icons';
 import { MenuOption } from '../../types';
+import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.component';
 
 @Component({
     selector: 'lib-pager',
     templateUrl: './pager.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [DropDownMenuComponent]
 })
 export class PagerComponent implements OnInit, OnChanges {
   // BUSY STATE

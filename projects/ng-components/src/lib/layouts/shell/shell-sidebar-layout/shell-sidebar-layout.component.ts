@@ -2,12 +2,17 @@ import { Component, Inject, Input, OnInit, Optional, TemplateRef, ChangeDetectio
 
 import { IShellConfig } from '../../../types';
 import { UserSettingsService } from '../../../services/user-settings.service';
+import { ShellSidebarComponent } from '../shell-sidebar/shell-sidebar.component';
+import { NgTemplateOutlet } from '@angular/common';
+import { ShellSidebarHeaderComponent } from '../shell-sidebar-header/shell-sidebar-header.component';
+import { BreadcrumbComponent } from '../../../controls/breadcrumb/breadcrumb.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'lib-shell-sidebar-layout',
     templateUrl: './shell-sidebar-layout.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ShellSidebarComponent, NgTemplateOutlet, ShellSidebarHeaderComponent, BreadcrumbComponent, RouterOutlet]
 })
 export class ShellSidebarLayoutComponent implements OnInit {
   @Input() config: IShellConfig | undefined;

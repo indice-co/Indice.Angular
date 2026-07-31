@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { MenuOption } from '../../types';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-drop-down-menu',
     templateUrl: './drop-down-menu.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ClickOutsideDirective]
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input() options: MenuOption[] | undefined = [];

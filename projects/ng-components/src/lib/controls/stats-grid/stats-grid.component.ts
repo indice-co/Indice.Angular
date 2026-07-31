@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 
 
 @Component({
     selector: 'lib-stats-grid',
     templateUrl: './stats-grid.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [DecimalPipe]
 })
 export class StatsGridComponent implements OnChanges {
   @Input() busy = false;

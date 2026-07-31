@@ -11,8 +11,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ToggleButtonComponent implements OnInit {
   @Input() value: boolean = false;

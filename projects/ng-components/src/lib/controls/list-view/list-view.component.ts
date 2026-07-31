@@ -5,13 +5,18 @@ import { ListColumnComponent } from './list-column.component';
 import { ListTileComponent } from './list-tile.component';
 import { ListDetailsSectionComponent } from './list-details-section.component';
 import { Icons } from '../../icons';
+import { NgIf, NgSwitch, NgSwitchCase, NgFor, NgTemplateOutlet, NgSwitchDefault } from '@angular/common';
+import { AdvancedSearchComponent } from '../advanced-search/advanced-search.component';
+import { PagerComponent } from '../pager/pager.component';
+import { SkeletonLoaderComponent } from '../skeleton-loader/skeleton-loader.component';
+import { ListViewEmptyStateComponent } from './list-view-empty-state.component';
 ;
 
 @Component({
     selector: 'lib-list-view',
     templateUrl: './list-view.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgIf, AdvancedSearchComponent, PagerComponent, NgSwitch, NgSwitchCase, SkeletonLoaderComponent, NgFor, NgTemplateOutlet, NgSwitchDefault, ListViewEmptyStateComponent]
 })
 export class ListViewComponent implements OnChanges {
   @Input('search-options') searchOptions: SearchOption[] = [];

@@ -15,8 +15,7 @@ import { animationTime, cssClassNames } from './modal-styles.class';
     host: {
         class: cssClassNames.backdrop,
     },
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ModalBackdropComponent implements OnInit {
   private animationsEnabled = false;

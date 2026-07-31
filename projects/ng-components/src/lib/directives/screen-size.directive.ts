@@ -4,8 +4,7 @@ import { IScreenSize, SCREEN_SIZE } from '../types';
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[visibleForScreen]',
-    standalone: false
+    selector: '[visibleForScreen]'
 })
 export class ScreenSizeDirective implements AfterViewInit {
   private hasView = false;

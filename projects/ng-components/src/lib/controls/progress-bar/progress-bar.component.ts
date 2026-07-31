@@ -3,8 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } f
 @Component({
     selector: 'lib-progress-bar',
     templateUrl: './progress-bar.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ProgressBarComponent implements OnChanges {
   @Input() value: number = 0;

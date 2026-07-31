@@ -8,8 +8,8 @@ describe('ShellLayoutTemplateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShellLayoutTemplateComponent ]
-    })
+    imports: [ShellLayoutTemplateComponent]
+})
     .compileComponents();
   });
 

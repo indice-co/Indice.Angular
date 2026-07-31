@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Toast } from '../../types';
+import { NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf } from '@angular/common';
 
 @Component({
     selector: 'lib-toaster',
     templateUrl: './toaster.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf]
 })
 export class ToasterComponent implements OnInit {
 

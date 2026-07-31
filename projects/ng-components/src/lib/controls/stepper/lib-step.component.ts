@@ -19,8 +19,7 @@ export enum StepState {
         </ng-template>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LibStepComponent {
     constructor(

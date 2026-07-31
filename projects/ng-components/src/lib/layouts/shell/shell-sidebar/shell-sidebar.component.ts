@@ -5,12 +5,13 @@ import { of } from 'rxjs';
 import { APP_LINKS } from '../../../tokens';
 import { ActivatedRoute, Router } from '@angular/router';
 import { share } from 'rxjs/operators';
+import { NavLinksListComponent } from '../../../controls/nav-links-list/nav-links-list.component';
 
 @Component({
     selector: 'lib-shell-sidebar',
     templateUrl: './shell-sidebar.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NavLinksListComponent]
 })
 export class ShellSidebarComponent implements OnInit {
   constructor(

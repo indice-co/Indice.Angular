@@ -1,12 +1,15 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { SidePaneComponent } from '../../../controls/side-pane/side-pane.component';
 import { RouterViewAction, ViewAction } from '../../../types';
+import { NgClass } from '@angular/common';
 
-@Component({ selector: 'lib-form-layout', templateUrl: './form-layout.component.html', changeDetection: ChangeDetectionStrategy.Eager,
- standalone: false })
+@Component({
+    selector: 'lib-form-layout', templateUrl: './form-layout.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [NgClass, SidePaneComponent, RouterOutlet]
+})
 export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;

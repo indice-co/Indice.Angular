@@ -2,12 +2,15 @@ import { IAppNotifications, NavLink } from './../../types';
 import { Component, Inject, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { NgClass, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'lib-notifications-indicator',
     templateUrl: './notifications-indicator.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ClickOutsideDirective, NgClass, RouterLink, DatePipe]
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
 

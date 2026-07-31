@@ -2,6 +2,8 @@ import { AfterContentChecked, AfterContentInit, Component, ContentChildren, Even
 
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import { LibTabComponent } from './lib-tab.component';
+import { FormsModule } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'lib-tab-group',
@@ -10,7 +12,7 @@ import { LibTabComponent } from './lib-tab.component';
         { provide: LIBTABGROUP_ACCESSOR, useExisting: forwardRef(() => LibTabGroupComponent) }
     ],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [FormsModule, NgTemplateOutlet]
 })
 export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked {
     constructor() { }

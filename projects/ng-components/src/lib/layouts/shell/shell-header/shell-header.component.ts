@@ -1,18 +1,23 @@
 import { AuthService } from '@indice/ng-auth';
 import { Component, OnInit, OnDestroy, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationStart, Router, RouterLink } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { Observable, Subscription, of } from 'rxjs';
 import { User } from 'oidc-client-ts';
+import { NavLinksListComponent } from '../../../controls/nav-links-list/nav-links-list.component';
+import { ClickOutsideDirective } from '../../../directives/click-outside.directive';
+import { UserProfileMenuComponent } from '../../../controls/user-profile-menu/user-profile-menu.component';
+import { NotificationsIndicatorComponent } from '../../../controls/notifications-indicator/notifications-indicator.component';
+import { LanguageSelectionComponent } from '../../../controls/language-selection/language-selection.component';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-shell-header',
     templateUrl: './shell-header.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [RouterLink, NavLinksListComponent, ClickOutsideDirective, UserProfileMenuComponent, NotificationsIndicatorComponent, LanguageSelectionComponent]
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename

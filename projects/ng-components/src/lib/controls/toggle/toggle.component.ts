@@ -1,5 +1,6 @@
 import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'lib-toggle',
@@ -12,7 +13,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
         }
     ],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgClass]
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
   @Input()

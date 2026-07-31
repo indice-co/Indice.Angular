@@ -1,12 +1,16 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 import { MenuOption } from '../../types';
+import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.component';
+import { FormsModule } from '@angular/forms';
+import { DatepickerComponent } from '../date-picker/date-picker.component';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'lib-advanced-search',
     templateUrl: './advanced-search.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [DropDownMenuComponent, FormsModule, DatepickerComponent, NgClass]
 })
 export class AdvancedSearchComponent implements OnInit, OnChanges {
   @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();

@@ -1,10 +1,10 @@
 import { Component, ContentChild, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'lib-content-tile-header', template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ContentTileHeaderComponent {
   @ContentChild(TemplateRef) template: any | undefined = undefined;
@@ -14,8 +14,7 @@ export class ContentTileHeaderComponent {
 
 @Component({
     selector: 'lib-content-tile-item', template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ContentTileItemComponent {
   @Input() title: string | undefined;
@@ -27,7 +26,7 @@ export class ContentTileItemComponent {
     selector: 'lib-content-tile',
     templateUrl: './content-tile.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgTemplateOutlet]
 })
 export class ContentTileComponent implements OnInit {
 

@@ -1,15 +1,17 @@
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
+import { ViewLayoutComponent } from '../view-layout/view-layout.component';
+import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-down-menu.component';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ViewLayoutComponent, DropDownMenuComponent, RouterLinkActive, RouterLink, RouterOutlet]
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;

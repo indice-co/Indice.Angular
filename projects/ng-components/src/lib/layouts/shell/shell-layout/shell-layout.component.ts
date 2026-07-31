@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { ActivationStart, Router } from '@angular/router';
+import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -8,11 +8,15 @@ import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 import { SidePaneComponent } from '../../../../public-api';
+import { ShellStackedLayoutComponent } from '../shell-stacked-layout/shell-stacked-layout.component';
+import { ShellSidebarLayoutComponent } from '../shell-sidebar-layout/shell-sidebar-layout.component';
+import { SidePaneComponent as SidePaneComponent_1 } from '../../../controls/side-pane/side-pane.component';
+import { ToasterContainerComponent } from '../../../controls/toaster/toaster-container.component';
 
 @Component({
     selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ShellStackedLayoutComponent, ShellSidebarLayoutComponent, SidePaneComponent_1, RouterOutlet, ToasterContainerComponent]
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;

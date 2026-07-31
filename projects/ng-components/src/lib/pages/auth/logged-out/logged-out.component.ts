@@ -1,5 +1,6 @@
 import { AuthService } from '@indice/ng-auth';
 import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-layout.component';
 
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/cor
     selector: 'lib-logged-out',
     templateUrl: './logged-out.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ViewLayoutComponent]
 })
 export class LoggedOutComponent implements OnInit {
   constructor(@Inject(AuthService) private authService: AuthService) { }

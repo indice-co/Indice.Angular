@@ -4,12 +4,13 @@ import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, 
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'lib-view-layout',
     templateUrl: './view-layout.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgClass]
 })
 export class ViewLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename

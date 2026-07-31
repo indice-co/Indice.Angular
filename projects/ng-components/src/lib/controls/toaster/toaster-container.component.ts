@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ToasterService } from '../../services/toaster.service';
 import { Toast } from '../../types';
+import { ToasterComponent } from './toaster.component';
 
 @Component({
     selector: 'lib-toaster-container',
     templateUrl: './toaster-container.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ToasterComponent]
 })
 export class ToasterContainerComponent implements OnInit {
 

@@ -8,8 +8,8 @@ describe('ContentTileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContentTileComponent ]
-    })
+    imports: [ContentTileComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ContentTileComponent);

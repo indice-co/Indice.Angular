@@ -1,9 +1,6 @@
 import { Directive, ViewContainerRef, Input } from '@angular/core';
 
-@Directive({
-    selector: '[appDynamicComponentHost]',
-    standalone: false
-})
+@Directive({ selector: '[appDynamicComponentHost]' })
 export class DynamicComponentHostDirective {
   @Input() hostName: string = '';
   constructor(public viewContainerRef: ViewContainerRef) {}

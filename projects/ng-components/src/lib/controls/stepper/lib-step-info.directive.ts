@@ -1,9 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({
-    selector: '[libStepInfo]',
-    standalone: false
-})
+@Directive({ selector: '[libStepInfo]' })
 export class LibStepInfoDirective {
     constructor(public template: TemplateRef<any>) { }
 }

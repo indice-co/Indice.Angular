@@ -1,6 +1,7 @@
-import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames } from '@angular/common';
+import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames, DatePipe } from '@angular/common';
 import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
 // freaksly simple date picker : https://tailwind-elements.com/docs/standard/forms/datepicker/
 @Component({
@@ -14,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         }
     ],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ClickOutsideDirective, DatePipe]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
   @Input() readonly: boolean = false;

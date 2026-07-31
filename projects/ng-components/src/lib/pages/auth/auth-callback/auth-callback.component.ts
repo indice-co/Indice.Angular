@@ -2,12 +2,13 @@ import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/cor
 import { Router } from '@angular/router';
 
 import { AuthService } from '@indice/ng-auth';
+import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-layout.component';
 
 @Component({
     selector: 'lib-auth-callback',
     templateUrl: './auth-callback.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [ViewLayoutComponent]
 })
 export class AuthCallbackComponent implements OnInit {
   constructor(@Inject(AuthService) private authService: AuthService, private router: Router) { }

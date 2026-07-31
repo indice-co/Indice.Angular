@@ -8,8 +8,8 @@ describe('ShellSidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShellSidebarComponent ]
-    })
+    imports: [ShellSidebarComponent]
+})
     .compileComponents();
   });
 

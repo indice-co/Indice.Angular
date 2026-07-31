@@ -4,6 +4,7 @@ import { LibStepComponent, StepState } from './lib-step.component';
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
 import { StepperType } from './types/stepper-type';
 import { StepSelectedEvent } from './types/step-selected-event';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'lib-stepper',
@@ -12,7 +13,7 @@ import { StepSelectedEvent } from './types/step-selected-event';
         { provide: LIBSTEPPER_ACCESSOR, useExisting: forwardRef(() => LibStepperComponent) }
     ],
     changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+    imports: [NgTemplateOutlet]
 })
 export class LibStepperComponent implements OnInit, AfterViewChecked {
     // Private properties.

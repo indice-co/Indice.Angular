@@ -19,10 +19,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 // tslint:disable-next-line:directive-selector
-@Directive({
-    selector: '[clickOutside]',
-    standalone: false
-})
+@Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   @Input() clickOutsideEnabled = true;
