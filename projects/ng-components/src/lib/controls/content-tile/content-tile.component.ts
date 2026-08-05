@@ -1,4 +1,4 @@
-import { Component, ContentChild, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ContentChild, ContentChildren, OnInit, QueryList, TemplateRef, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgTemplateOutlet } from '@angular/common';
 
@@ -17,7 +17,7 @@ export class ContentTileHeaderComponent {
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ContentTileItemComponent {
-  @Input() title: string | undefined;
+  readonly title = input<string>();
   @ContentChild(TemplateRef) template: any | undefined = undefined;
   constructor() { }
 }
@@ -30,13 +30,13 @@ export class ContentTileItemComponent {
 })
 export class ContentTileComponent implements OnInit {
 
-  @Input() title: string | undefined = undefined;
-  @Input() busy = false;
-  @Input('show-action') showAction: boolean | undefined = true;
-  @Input('show-footer') showFooter: boolean | undefined = true;
-  @Input('action-text') actionText: string = 'More';
+  readonly title = input<string>();
+  readonly busy = input(false);
+  readonly showAction = input<boolean | undefined>(true, { alias: "show-action" });
+  readonly showFooter = input<boolean | undefined>(true, { alias: "show-footer" });
+  readonly actionText = input<string>('More', { alias: "action-text" });
   // tslint:disable-next-line:no-output-rename
-  @Output('tile-action') tileAction: EventEmitter<any> = new EventEmitter<any>();
+  readonly tileAction = output<any>({ alias: 'tile-action' });
   public selectedIndex = 0;
 
   public itemTemplates: any[] = [];

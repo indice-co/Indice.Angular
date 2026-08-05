@@ -31,14 +31,14 @@
       <div class="max-h-64 overflow-y-auto notification-messages min-h">
         @if (!items) {
           <ng-container class="py-5">
-            <div class="notifications-nav-link hover:bg-transparent">{{noNotifications}}</div>
+            <div class="notifications-nav-link hover:bg-transparent">{{noNotifications()}}</div>
           </ng-container>
         } @else {
           <ul class="pr-1.5">
             @if (items) {
               @if (items.length <= 0) {
                 <ng-container class="py-5">
-                  <div class="notifications-nav-link hover:bg-transparent">{{noNotifications}}</div>
+                  <div class="notifications-nav-link hover:bg-transparent">{{noNotifications()}}</div>
                 </ng-container>
               }
               @for (message of items; track message; let i = $index) {
@@ -74,7 +74,7 @@
       </div>
       <div class="p-1 rounded-lg">
         <a [routerLink]="allNotificationsLink!.path" (click)="onClickOutside($event)">
-          <button type="button" class="header-notifications-dropdown-view-all-button">{{showNotificationsText}}</button>
+          <button type="button" class="header-notifications-dropdown-view-all-button">{{showNotificationsText()}}</button>
         </a>
       </div>
     </div>

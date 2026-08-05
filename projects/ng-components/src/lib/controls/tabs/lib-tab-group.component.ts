@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, Component, ContentChildren, EventEmitter, forwardRef, OnInit, Output, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, ContentChildren, forwardRef, OnInit, QueryList, ChangeDetectionStrategy, output } from '@angular/core';
 
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
 import { LibTabComponent } from './lib-tab.component';
@@ -20,7 +20,7 @@ export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterCont
     /** The inner tabs of the group. */
     @ContentChildren(LibTabComponent, { descendants: true }) public tabs: QueryList<LibTabComponent> | undefined = undefined;
     /** Emmited when a step change occurs. */
-    @Output() protected tabChanged: EventEmitter<LibTabComponent> = new EventEmitter<LibTabComponent>();
+    protected readonly tabChanged = output<LibTabComponent>();
 
     /** The current tab. */
     public get currentTab(): LibTabComponent | undefined {
@@ -47,7 +47,10 @@ export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterCont
             return;
         }
         this.tabs?.forEach((tab: LibTabComponent, index: number) => tab.isActive = index === selectedTabIndex);
-        this.tabChanged.emit(this.tabs?.get(selectedTabIndex));
+        const selectedTab = this.tabs?.get(selectedTabIndex);
+        if (selectedTab) {
+            this.tabChanged.emit(selectedTab);
+        }
     }
 
     public ngAfterContentInit(): void {

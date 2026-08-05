@@ -4,7 +4,7 @@
       <div class="side-view-layout-header-margins">
         <div class="side-view-layout-header-container">
           <h2 class="side-view-layout-header-title" id="slide-over-title">
-            {{title}}
+            {{title()}}
           </h2>
           <div class="side-view-layout-close-button-container">
             <button (click)="emitClose()" class="side-view-layout-close-button">
@@ -23,16 +23,16 @@
         <!-- /End replace -->
       </div>
     </div>
-    @if (showActions) {
+    @if (showActions()) {
       <div class="side-view-layout-actions-container">
-        @if (cancelShow) {
+        @if (cancelShow()) {
           <button (click)="emitCancel()" type="button" class="side-view-layout-action-button-cancel">
-            {{cancelLabel}}
+            {{cancelLabel()}}
           </button>
         }
-        @if (okShow) {
-          <button (click)="emitOK()" class="side-view-layout-action-button-submit" [disabled]="disabled">
-            {{okLabel}}
+        @if (okShow()) {
+          <button (click)="emitOK()" class="side-view-layout-action-button-submit" [disabled]="disabled()">
+            {{okLabel()}}
           </button>
         }
       </div>

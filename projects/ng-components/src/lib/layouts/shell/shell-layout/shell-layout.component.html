@@ -2,14 +2,14 @@
   <!-- STACKED LAYOUT -->
   @if ((activeConfig.layout === 'Stacked' || !activeConfig.layout)) {
     <div class="shell-container active-side-pane">
-      <lib-shell-stacked-layout [config]="activeConfig" [busy]="busy"></lib-shell-stacked-layout>
+      <lib-shell-stacked-layout [config]="activeConfig" [busy]="busy()"></lib-shell-stacked-layout>
     </div>
   }
   <!-- SIDEBAR LAYOUT -->
   @if (activeConfig.layout === 'Sidebar') {
     <div class="sidebar shell-container active-side-pane">
-      <lib-shell-sidebar-layout [config]="activeConfig" [busy]="busy"
-        [sidebarFooterTemplate]="sidebarFooterTemplate">
+      <lib-shell-sidebar-layout [config]="activeConfig" [busy]="busy()"
+        [sidebarFooterTemplate]="sidebarFooterTemplate()">
       </lib-shell-sidebar-layout>
     </div>
   }

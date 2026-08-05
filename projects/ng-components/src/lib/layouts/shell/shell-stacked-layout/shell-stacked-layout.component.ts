@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 import { IShellConfig } from '../../../types';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
@@ -16,7 +16,7 @@ export class ShellStackedLayoutComponent implements OnInit {
   constructor() { }
 
   @Input() config: IShellConfig | undefined;
-  @Input() busy: boolean = false;
+  readonly busy = input<boolean>(false);
 
   public ngOnInit(): void { }
 }

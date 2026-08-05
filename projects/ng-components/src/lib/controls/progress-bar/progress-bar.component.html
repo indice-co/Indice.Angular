@@ -1,8 +1,8 @@
 <div class="progress-bar-container">
-  @if (!busy) {
-    <div class="progress-bar-label">{{text}} {{valueText ?? value}}/{{totalText ?? total}}</div>
+  @if (!busy()) {
+    <div class="progress-bar-label">{{text()}} {{valueText() ?? value()}}/{{totalText() ?? total()}}</div>
   }
-  @if (busy) {
+  @if (busy()) {
     <div class="progress-bar-backdrop progress-bar-label w-2/3"></div>
   }
   <div class="progress-bar-backdrop">

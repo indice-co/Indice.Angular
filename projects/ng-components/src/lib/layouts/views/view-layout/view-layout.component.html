@@ -1,4 +1,4 @@
-@if (header) {
+@if (header()) {
   <header class="view-layout-paddings">
     <div class="view-layout-title-container">
       <div class="view-layout-title-container-inner">
@@ -6,7 +6,7 @@
           @if (icon) {
             <i [class]="icon + ' title-icon'" aria-hidden="true"></i>
           }
-          <h1 [class]="busy ? 'view-layout-title-busy' : 'view-layout-title'">{{title || ' '}}</h1>
+          <h1 [class]="busy() ? 'view-layout-title-busy' : 'view-layout-title'">{{title() || ' '}}</h1>
         </div>
         @if (metaItems && metaItems.length > 0) {
           <div class="meta-container">
@@ -22,7 +22,7 @@
         }
       </div>
       <div class="view-layout-title-container-far">
-        @for (action of actions; track action) {
+        @for (action of actions(); track action) {
           @switch (action.type) {
             @case ('search') {
               <label for="search" class="sr-only">Search</label>
@@ -31,7 +31,7 @@
                   #search
                   title="search"
                   class="search-input"
-                  [placeholder]="searchPlaceholder"
+                  [placeholder]="searchPlaceholder()"
                   name="search"
                   (input)="searchActionType(search.value)"
                   (onsearch)="handleClear($event)">
@@ -71,6 +71,6 @@
     </div>
   </header>
 }
-<div [class]="fluid ? 'view-container-fluid' : 'view-container'">
+<div [class]="fluid() ? 'view-container-fluid' : 'view-container'">
   <ng-content></ng-content>
 </div>

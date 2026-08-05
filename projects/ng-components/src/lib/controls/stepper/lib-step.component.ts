@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Optional, TemplateRef, ViewChild, ViewEncapsulation, input } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -33,9 +33,9 @@ export class LibStepComponent {
     /** The info of the step displayed in header, if applicable. */
     @ContentChild(LibStepInfoDirective) public stepInfo: LibStepInfoDirective | undefined;
     /** An optional CSS class for the step header. */
-    @Input() public class: string | undefined;
+    public readonly class = input<string>();
     /** The abstract control of the step. */
-    @Input() public stepControl: AbstractControl | undefined;
+    public readonly stepControl = input<AbstractControl>();
 
     /** Indicates the index of the step. */
     public get index(): number {
@@ -49,10 +49,11 @@ export class LibStepComponent {
 
     /** Indicates whether you can navigate to the step or not. */
     public get isValid(): boolean {
-        if (!this.stepControl) {
+        const stepControl = this.stepControl();
+        if (!stepControl) {
             return true;
         }
-        return this.stepControl.valid;
+        return stepControl.valid;
     }
 
     /** Shows the current state of the step. */

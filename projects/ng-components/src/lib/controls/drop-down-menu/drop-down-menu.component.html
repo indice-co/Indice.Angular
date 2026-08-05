@@ -1,10 +1,10 @@
 <div class="dropdown-container" (clickOutside)="onClickOutside($event)">
   <button type="button" (click)="expanded = !expanded" class="dropdown-button" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
     <span class="dropdown-selected-text">
-      @if (selectedOption?.icon && showIcons) {
+      @if (selectedOption?.icon && showIcons()) {
         <i [class]="selectedOption?.icon"
         [class.mr-2]="selectedOption?.icon"></i>
-        }{{ selectedOption?.text || placeholder }}
+        }{{ selectedOption?.text || placeholder() }}
       </span>
       <span class="dropdown-button-icon">
         <!-- Heroicon name: solid/selector -->
@@ -20,7 +20,7 @@
           @for (option of options; track option) {
             <li [class]="isSelected(option) ? 'dropdown-li-selected' : 'dropdown-li'" (click)="selectOption(option)" id="listbox-option-0" role="option">
               <span [class]="isSelected(option) ? 'dropdown-li-selected-text' : 'dropdown-li-text'">
-                @if (option.icon && showIcons) {
+                @if (option.icon && showIcons()) {
                   <i [class]="option.icon" [class.mr-2]="option.icon"></i>
                   }{{ option.text }}
                 </span>

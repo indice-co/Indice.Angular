@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -7,9 +7,9 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class SkeletonLoaderComponent implements OnInit {
-  @Input() count = 7;
-  @Input() type = 'tiles'; // 'large-tile', 'table'
-  @Input('deck-class') deckClass = 'cards-deck-4'; // 'large-tile', 'table'
+  readonly count = input(7);
+  readonly type = input('tiles'); // 'large-tile', 'table'
+  readonly deckClass = input('cards-deck-4', { alias: "deck-class" }); // 'large-tile', 'table'
   constructor() { }
 
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -15,15 +15,15 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ToggleButtonComponent implements OnInit {
   @Input() value: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() icon: boolean = true;
+  readonly disabled = input<boolean>(false);
+  readonly icon = input<boolean>(true);
   @Input('text') text: string | null | undefined;
-  @Input('text-true') textTrue: string | null | undefined;
-  @Input('text-false') textFalse: string | null | undefined;
+  readonly textTrue = input<string | null>(undefined, { alias: "text-true" });
+  readonly textFalse = input<string | null>(undefined, { alias: "text-false" });
   @Input('description') description: string | null | undefined;
-  @Input('description-true') descriptionTrue: string | null | undefined;
-  @Input('description-false') descriptionFalse: string | null | undefined;
-  @Output() valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  readonly descriptionTrue = input<string | null>(undefined, { alias: "description-true" });
+  readonly descriptionFalse = input<string | null>(undefined, { alias: "description-false" });
+  readonly valueChange = output<boolean>();
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;

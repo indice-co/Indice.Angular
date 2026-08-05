@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { MenuOption } from '../../types';
 import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.component';
 
@@ -11,11 +11,11 @@ import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.componen
 })
 export class ToggleButtonsListComponent implements OnInit {
   @Input() icon: string | undefined = undefined;
-  @Input() options: MenuOption[] | undefined;
+  readonly options = input<MenuOption[]>();
   @Input() value: any | undefined;
-  @Input() compact: boolean = true;
-  @Input() dropDownMenuPlaceholder = 'Please select...'; // to set it from the outside
-  @Output() valueChange: EventEmitter<any> = new EventEmitter(undefined);
+  readonly compact = input<boolean>(true);
+  readonly dropDownMenuPlaceholder = input('Please select...'); // to set it from the outside
+  readonly valueChange = output<any>();
   constructor() { }
 
   ngOnInit(): void {

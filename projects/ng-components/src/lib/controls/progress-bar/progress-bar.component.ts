@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     selector: 'lib-progress-bar',
@@ -6,12 +6,12 @@ import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } f
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ProgressBarComponent implements OnChanges {
-  @Input() value: number = 0;
-  @Input('value-text') valueText: string | undefined;
-  @Input() total: number = 0;
-  @Input('total-text') totalText: string | undefined;
-  @Input() text: string | undefined = undefined;
-  @Input() busy: boolean = false;
+  readonly value = input<number>(0);
+  readonly valueText = input<string>(undefined, { alias: "value-text" });
+  readonly total = input<number>(0);
+  readonly totalText = input<string>(undefined, { alias: "total-text" });
+  readonly text = input<string>();
+  readonly busy = input<boolean>(false);
   public percentage: number = 0;
 
   constructor() {
@@ -24,8 +24,8 @@ export class ProgressBarComponent implements OnChanges {
   }
 
   private calcPercentage() {
-    if (this.total > 0) {
-      this.percentage = (this.value / this.total) * 100;
+    if (this.total() > 0) {
+      this.percentage = (this.value() / this.total()) * 100;
     } else {
       this.percentage = 0;
     }

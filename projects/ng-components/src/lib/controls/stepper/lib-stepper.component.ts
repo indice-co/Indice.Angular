@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ContentChildren, EventEmitter, forwardRef, Input, OnInit, Output, QueryList, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ContentChildren, forwardRef, OnInit, QueryList, ChangeDetectionStrategy, input, output } from '@angular/core';
 
 import { LibStepComponent, StepState } from './lib-step.component';
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -25,13 +25,13 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
     /** The inner steps of the wizard. */
     @ContentChildren(LibStepComponent, { descendants: true }) public steps!: QueryList<LibStepComponent>;
     /** Emmited when a step change occurs. */
-    @Output() public readonly stepChanged = new EventEmitter<StepSelectedEvent>();
+    public readonly stepChanged = output<StepSelectedEvent>();
     /** Emmited when the stepper navigates away from the final step. Only emits once. */
-    @Output() public readonly completed = new EventEmitter<void>();
+    public readonly completed = output<void>();
     /** Indicates whether each step has to be validated before proceeding to the next. */
-    @Input() public linear: boolean = false;
+    public readonly linear = input<boolean>(false);
     /** The type of the stepper. */
-    @Input() public type: StepperType = StepperType.Panels;
+    public readonly type = input<StepperType>(StepperType.Panels);
     public StepState = StepState;
     public StepperType = StepperType;
 
@@ -93,7 +93,7 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
     private updateCurrentStepIndex(newIndex: number): void {
         const stepsArray = this.steps.toArray();
         const currentStep = stepsArray[this.currentStepIndex];
-        const shouldStop = this.linear && (
+        const shouldStop = this.linear() && (
             (!currentStep.isValid && newIndex >= this.currentStepIndex) || // If current step is invalid and want to go forward, then stop.
             (currentStep.isValid && newIndex > this.currentStepIndex + 1 && stepsArray.slice(this.currentStepIndex + 1, newIndex).some(x => !x.isValid)) // If going forward (more than 1 steps), check if there are any invalid steps in between.
         );

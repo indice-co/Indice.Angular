@@ -1,5 +1,5 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, OnInit, OnDestroy, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input } from '@angular/core';
 import { ActivatedRoute, Event, NavigationStart, Router, RouterLink } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
@@ -21,19 +21,19 @@ import { LanguageSelectionComponent } from '../../../controls/language-selection
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:no-input-rename
-  @Input('section-links') sectionLinksPath = 'main';
+  readonly sectionLinksPath = input('main', { alias: "section-links" });
   // tslint:disable-next-line:no-input-rename
-  @Input('profile-menu') profileMenuVisible = true;
+  readonly profileMenuVisible = input(true, { alias: "profile-menu" });
   // tslint:disable-next-line:no-input-rename
-  @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
+  readonly showUserNameOnHeader = input<boolean | undefined>(false, { alias: "show-userName" });
   // tslint:disable-next-line:no-input-rename
-  @Input('show-picture') showPictureOnHeader: boolean | undefined = true;
+  readonly showPictureOnHeader = input<boolean | undefined>(true, { alias: "show-picture" });
   // tslint:disable-next-line:no-input-rename
-  @Input('show-alerts') showAlerts: boolean | undefined = false;
+  readonly showAlerts = input<boolean | undefined>(false, { alias: "show-alerts" });
   // tslint:disable-next-line:no-input-rename
-  @Input('show-langs') showLangs: boolean | undefined = false;
-  @Input() border = true;
-  @Input() busy: boolean = false;
+  readonly showLangs = input<boolean | undefined>(false, { alias: "show-langs" });
+  readonly border = input(true);
+  readonly busy = input<boolean>(false);
   public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
@@ -56,7 +56,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activeFragment = this.route.fragment.pipe(share());
-    this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
+    this.sectionLinks = this.links[this.sectionLinksPath()] as Observable<NavLink[]>;
     this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
@@ -15,19 +15,31 @@ import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-dow
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;
-  @Input() title = 'no title';
+  readonly title = input('no title');
   // tslint:disable-next-line:no-input-rename
-  @Input('primary-links') primary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
+  readonly primary = input<{
+    type?: string;
+    text: string;
+    link: string;
+    icon?: string;
+    exact?: boolean;
+}[] | null>(null, { alias: "primary-links" });
   // tslint:disable-next-line:no-input-rename
-  @Input('secondary-links') secondary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
+  readonly secondary = input<{
+    type?: string;
+    text: string;
+    link: string;
+    icon?: string;
+    exact?: boolean;
+}[] | null>(null, { alias: "secondary-links" });
   // tslint:disable-next-line:no-input-rename
-  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
-    // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
-  ];
-  @Input() icon: string | null = null;
-  @Input() busy = false;
-  @Input() actions: ViewAction[] | null = null;
-  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
+  readonly metaItems = input<HeaderMetaItem[] | null>([
+// { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
+], { alias: "meta-items" });
+  readonly icon = input<string | null>(null);
+  readonly busy = input(false);
+  readonly actions = input<ViewAction[] | null>(null);
+  readonly onAction = output<ViewAction>();
   private optionsLoaded = false;
   private _options: MenuOption[] = [];
   public selectedTab: any;
@@ -35,14 +47,16 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public get tabsOptions(): MenuOption[] {
     if(!this.optionsLoaded) {
       this.optionsLoaded = true;
-      if(this.primary) {
-        this.primary.forEach(p => {
+      const primary = this.primary();
+      if(primary) {
+        primary.forEach(p => {
           this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
 
-      if(this.secondary) {
-        this.secondary.forEach(p => {
+      const secondary = this.secondary();
+      if(secondary) {
+        secondary.forEach(p => {
           this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }

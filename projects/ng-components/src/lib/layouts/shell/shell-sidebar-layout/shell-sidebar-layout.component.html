@@ -62,7 +62,7 @@
     </div>
     <div class="sidebar-static-menu-wrapper" [class.sidebar-static-menu-wrapper-expanded]="!showMobileSidebar">
       @if (config?.showHeader) {
-        <div class="sidebar-static-menu-sticky-header-container" [class.busy]="busy">
+        <div class="sidebar-static-menu-sticky-header-container" [class.busy]="busy()">
           @if (showMobileSidebar) {
             <button type="button" class="sidebar-static-menu-toggle-button-md" (click)="toggleMobileSidebar()">
               <span class="sr-only">Toggle sidebar</span>
@@ -79,20 +79,20 @@
               </svg>
             </button>
           }
-          <div class="sidebar-static-menu-header-container" [class.busy]="busy">
-            <div class="sidebar-static-menu-header-near-container" [class.busy]="busy">
+          <div class="sidebar-static-menu-header-container" [class.busy]="busy()">
+            <div class="sidebar-static-menu-header-near-container" [class.busy]="busy()">
               @if (showMobileSidebar) {
                 <div class="sidebar-static-menu-header-app-logo-container">
                   <img alt="image" class="shell-sidebar-logo" [src]="$safeNavigationMigration(config?.appLogo)" [alt]="$safeNavigationMigration(config?.appLogoAlt)">
                 </div>
               }
             </div>
-            <div class="sidebar-static-menu-header-between-container" [class.busy]="busy"></div>
-            <div class="sidebar-static-menu-header-far-container" [class.busy]="busy">
+            <div class="sidebar-static-menu-header-between-container" [class.busy]="busy()"></div>
+            <div class="sidebar-static-menu-header-far-container" [class.busy]="busy()">
               <lib-shell-sidebar-header [show-userName]="$safeNavigationMigration(config?.showUserNameOnHeader)"
                 [show-alerts]="$safeNavigationMigration(config?.showAlertsOnHeader)"
                 [show-langs]="$safeNavigationMigration(config?.showLangsOnHeader)"
-                [busy]="busy"
+                [busy]="busy()"
                 [show-picture]="$safeNavigationMigration(config?.showPictureOnHeader)">
               </lib-shell-sidebar-header>
             </div>
@@ -100,11 +100,11 @@
         </div>
       }
       <div flex-1>
-        <main class="shell-content-container-fluid" [class.busy]="busy">
+        <main class="shell-content-container-fluid" [class.busy]="busy()">
           @if (config?.breadcrumb || false) {
             <lib-breadcrumb></lib-breadcrumb>
           }
-          <div class="shell-content-container-inner" [class.busy]="busy">
+          <div class="shell-content-container-inner" [class.busy]="busy()">
             @if ((config && config.layout === 'Sidebar')) {
               <router-outlet></router-outlet>
             }

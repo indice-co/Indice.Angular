@@ -5,8 +5,8 @@
   <div class="pager-container-far">
     @if (sortOptions && sortOptions.length > 0) {
       <div class="inline-flex">
-        <lib-drop-down-menu [options]="sortOptions" [selected]="sort" (selectedChanged)="sortOptionChanged($event)"></lib-drop-down-menu>
-        <button (click)="toggleSortdir()" [disabled]="!sort || busy" class="pager-icon-button">
+        <lib-drop-down-menu [options]="sortOptions" [selected]="sort()" (selectedChanged)="sortOptionChanged($event)"></lib-drop-down-menu>
+        <button (click)="toggleSortdir()" [disabled]="!sort() || busy()" class="pager-icon-button">
           <span class="sr-only">sort direction</span>
           <span class="inline-block relative">
             <i [class]="sortdirIcon"></i>
@@ -15,9 +15,9 @@
       </div>
     }
     <div class="pager-pages-container">
-      <lib-drop-down-menu [options]="pageSizeOptions" [selected]="pageSize" (selectedChanged)="pageSizeOptionChanged($event)"></lib-drop-down-menu>
+      <lib-drop-down-menu [options]="pageSizeOptions()" [selected]="pageSize()" (selectedChanged)="pageSizeOptionChanged($event)"></lib-drop-down-menu>
       <div class="mx-1">
-        <button [disabled]="!canPreviousPage || busy"  (click)="previousPage()"
+        <button [disabled]="!canPreviousPage || busy()"  (click)="previousPage()"
           class="pager-arrow-button-left">
           <span class="sr-only">Previous</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -25,7 +25,7 @@
           </svg>
         </button>
         <button type="button"
-          [disabled]="!canNextPage || busy"  (click)="nextPage()"
+          [disabled]="!canNextPage || busy()"  (click)="nextPage()"
           class="pager-arrow-button-right">
           <span class="sr-only">Next</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

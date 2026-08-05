@@ -1,9 +1,9 @@
-<div class="card bg-white" [class.card-deck-busy]="busy">
+<div class="card bg-white" [class.card-deck-busy]="busy()">
   <div class="card-body">
     <div class="kpi-tile-title-container flex align-top">
       @if (!header) {
         <button type="button" class="kpi-tile-action text-left flex-1 uppercase"
-          (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title ?? title) ?? '-'}}
+          (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title ?? title()) ?? '-'}}
         </button>
       }
       @if (header && header.template) {
@@ -11,9 +11,9 @@
           <ng-template [ngTemplateOutlet]="header.template"></ng-template>
         </div>
       }
-      @if (showAction) {
+      @if (showAction()) {
         <div class="float-right align-top">
-          <button type="button" class="kpi-tile-action text-xs uppercase" (click)="emitTileAction($event)">{{actionText}}</button>
+          <button type="button" class="kpi-tile-action text-xs uppercase" (click)="emitTileAction($event)">{{actionText()}}</button>
         </div>
       }
     </div>

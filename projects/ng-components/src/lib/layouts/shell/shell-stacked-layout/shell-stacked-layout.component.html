@@ -7,7 +7,7 @@
       }
       @if (!config?.customHeaderComponent) {
         <lib-shell-header
-          [busy]="busy"
+          [busy]="busy()"
           [show-userName]="$safeNavigationMigration(config?.showUserNameOnHeader)"
           [show-alerts]="$safeNavigationMigration(config?.showAlertsOnHeader)"
           [show-langs]="$safeNavigationMigration(config?.showLangsOnHeader)">

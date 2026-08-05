@@ -1,5 +1,5 @@
 import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames, DatePipe } from '@angular/common';
-import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, ViewChild, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
@@ -18,16 +18,16 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
     imports: [ClickOutsideDirective, DatePipe]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
+  readonly readonly = input<boolean>(false);
+  readonly disabled = input<boolean>(false);
   @Input() inline: boolean = false;
-  @Input('display-format') displayFormat: string | undefined = 'dd/MM/yyyy';
-  @Input() placeholder: string | undefined = '';
+  readonly displayFormat = input<string | undefined>('dd/MM/yyyy', { alias: "display-format" });
+  readonly placeholder = input<string | undefined>('');
   @Input() value: Date | undefined | null = null;
-  @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
+  readonly valueChange = output<Date | undefined | null>();
   @ViewChild('dateInput') dateInput: ElementRef | undefined;
-  @Input() minDate: Date | undefined = undefined;
-  @Input() maxDate: Date | undefined = undefined;
+  readonly minDate = input<Date>();
+  readonly maxDate = input<Date>();
   public showCalendar = false;
   public showYears = false;
   public monthNames = getLocaleMonthNames(this.locale, FormStyle.Standalone, TranslationWidth.Wide);
@@ -270,18 +270,20 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
 
   outOfRangeDate(date: any): boolean {
     let outOfRange: boolean = false;
-    if (this.minDate || this.maxDate) {
+    const minDateValue = this.minDate();
+    const maxDateValue = this.maxDate();
+    if (minDateValue || maxDateValue) {
       const d = new Date(this.year, this.month, date.day);
       const dateInMillis = d.getTime();
-      if (this.minDate) {
-        let minDate: number = this.minDate.getTime();
-        if (dateInMillis < minDate && this.minDate.toDateString() !== d.toDateString()) {
+      if (minDateValue) {
+        let minDate: number = minDateValue.getTime();
+        if (dateInMillis < minDate && minDateValue.toDateString() !== d.toDateString()) {
           outOfRange = true;
         }
       }
-      if (this.maxDate) {
-        let maxDate: number = this.maxDate.getTime();
-        if (dateInMillis > maxDate && this.maxDate.toDateString() !== d.toDateString()) {
+      if (maxDateValue) {
+        let maxDate: number = maxDateValue.getTime();
+        if (dateInMillis > maxDate && maxDateValue.toDateString() !== d.toDateString()) {
           outOfRange = true;
         }
       }

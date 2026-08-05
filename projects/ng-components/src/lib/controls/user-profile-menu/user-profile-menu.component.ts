@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, ImgUserPictureDirective } from '@indice/ng-auth';
 import { APP_LINKS } from '../../tokens';
@@ -17,8 +17,8 @@ import { NavLinksListComponent } from '../nav-links-list/nav-links-list.componen
 export class UserProfileMenuComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
-  @Input('show-user-name') showUserName: boolean | undefined = false;
-  @Input('show-picture') showPicture: boolean | undefined = false;
+  readonly showUserName = input<boolean | undefined>(false, { alias: "show-user-name" });
+  readonly showPicture = input<boolean | undefined>(false, { alias: "show-picture" });
   protected userSub$: Subscription | null = null;
   protected statusSub$: Subscription | null = null;
   public user: User | null = null;

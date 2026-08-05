@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
@@ -18,11 +18,10 @@ import { NgClass } from '@angular/common';
 export class ToggleComponent implements OnInit, ControlValueAccessor {
   @Input()
   public value: boolean | null | undefined;
-  @Input()
-  public disabled: boolean | null | undefined;
-  @Input() privateLabel: string = 'Private';
-  @Input() publicLabel: string = 'The file should be private'; 
-  @Output() valueChange: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+  public readonly disabled = input<boolean | null>();
+  readonly privateLabel = input<string>('Private');
+  readonly publicLabel = input<string>('The file should be private'); 
+  readonly valueChange = output<Boolean>();
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;

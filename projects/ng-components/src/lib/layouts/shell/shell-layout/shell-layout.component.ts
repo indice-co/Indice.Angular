@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, ViewChild, ChangeDetectionStrategy, input } from '@angular/core';
 import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -21,8 +21,8 @@ import { ToasterContainerComponent } from '../../../controls/toaster/toaster-con
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
   @ViewChild('rightPane') rightPane: SidePaneComponent | undefined;
-  @Input() busy: boolean = false;
-  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
+  readonly busy = input<boolean>(false);
+  public readonly sidebarFooterTemplate = input<TemplateRef<any>>();
   private _routerSub$: Subscription | null = null;
   public showRightPaneSM = false;
   public activeConfig: IShellConfig = new DefaultShellConfig();
@@ -64,7 +64,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
 
   private initCustomComponents(): void {
     if (this._dynamicComponentHosts && this._dynamicComponentHosts.length > 0) {
-      this.loadCustomComponent(this._dynamicComponentHosts.find((_) => _.hostName === 'Header'));
+      this.loadCustomComponent(this._dynamicComponentHosts.find((_) => _.hostName() === 'Header'));
     }
   }
 

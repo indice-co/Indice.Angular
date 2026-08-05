@@ -2,14 +2,14 @@
 <div class="flex items-center">
   <button type="button"
     (click)="changeValue()"
-    [disabled]="disabled"
+    [disabled]="disabled()"
     class="toggle-button-button"
     [class.toggle-button-bg-false] = "!value"
     [class.toggle-button-bg-true] = "value"
-    [class.toggle-button-button-disabled]="disabled"
+    [class.toggle-button-button-disabled]="disabled()"
     role="switch"
     aria-checked="false">
-    <span class="sr-only">{{value ? textTrue : textFalse}}</span>
+    <span class="sr-only">{{value ? textTrue() : textFalse()}}</span>
     <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
     <span
       class="toggle-button-icon-container"
@@ -21,7 +21,7 @@
         [class.toggle-button-container-inner-false]="!value"
         class="toggle-button-icon-container-inner"
         aria-hidden="true">
-        @if (icon) {
+        @if (icon()) {
           <svg class="toggle-button-icon" fill="none" viewBox="0 0 12 12">
             <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -33,7 +33,7 @@
         [class.toggle-button-container-inner-false]="value"
         class="toggle-button-icon-container-inner"
         aria-hidden="true">
-        @if (icon) {
+        @if (icon()) {
           <svg class="toggle-button-icon" fill="currentColor" viewBox="0 0 12 12">
             <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
           </svg>
@@ -42,13 +42,13 @@
     </span>
   </button>
   <span class="ml-3" id="toggle-button-labels">
-    <div class="toggle-button-text">{{value ? textTrue : textFalse}}</div>
+    <div class="toggle-button-text">{{value ? textTrue() : textFalse()}}</div>
     @if (text) {
       <div class="toggle-button-text">{{text}}</div>
     }
     @if (description) {
       <div class="toggle-button-description">{{description}}</div>
     }
-    <div class="toggle-button-description">{{value ? descriptionTrue : descriptionFalse}}</div>
+    <div class="toggle-button-description">{{value ? descriptionTrue() : descriptionFalse()}}</div>
   </span>
 </div>

@@ -1,19 +1,19 @@
 <div>
   <lib-advanced-search *ngIf="searchOptions && searchOptions.length > 0"
                        [search-options]="searchOptions"
-                       [filters]="filters"
-                       [operators-disabled]="operatorsDisabled"
+                       [filters]="filters()"
+                       [operators-disabled]="operatorsDisabled()"
                        (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
   </lib-advanced-search>
 
-  <lib-pager *ngIf="showPager && (pagerPosition == 'top' || pagerPosition == 'both')"
-             [page]="page"
-             [page-size]="pageSize"
-             [count]="count"
-             [sort-options]="sortOptions"
-             [sort]="sort"
-             [sort-dir]="sortdir"
-             [busy]="busy"
+  <lib-pager *ngIf="showPager() && (pagerPosition == 'top' || pagerPosition == 'both')"
+             [page]="page()"
+             [page-size]="pageSize()"
+             [count]="count()"
+             [sort-options]="sortOptions()"
+             [sort]="sort()"
+             [sort-dir]="sortdir()"
+             [busy]="busy()"
              (pageChanged)="emitPageChanged($event)"
              (pageSizeChanged)="emitPageSizeChanged($event)"
              (sortChanged)="emitSortChanged($event)"
@@ -22,14 +22,14 @@
   </lib-pager>
 </div>
 
-<ng-container [ngSwitch]="view">
+<ng-container [ngSwitch]="view()">
 
   <ng-container *ngSwitchCase="'tiles'">
-    <div [class]="busy ? 'cards-deck-1' : tilesDeckClass">
+    <div [class]="busy() ? 'cards-deck-1' : tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy" [deck-class]="tilesDeckClass" [count]="7" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy()" [deck-class]="tilesDeckClass" [count]="7" [type]="'tiles'"></lib-skeleton-loader>
 
-      <ng-container *ngIf="!busy && items && items.length > 0">
+      <ng-container *ngIf="!busy() && items && items.length > 0">
         <ng-container *ngFor="let item of items">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
           <ng-template [ngTemplateOutlet]="tileTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
@@ -44,9 +44,9 @@
   <ng-container *ngSwitchCase="'gallery'">
     <ul role="list" role="list" [class]="tilesDeckClass">
 
-      <lib-skeleton-loader *ngIf="busy" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
+      <lib-skeleton-loader *ngIf="busy()" [count]="5" [type]="'tiles'"></lib-skeleton-loader>
 
-      <ng-container *ngIf="!busy && items && items.length > 0">
+      <ng-container *ngIf="!busy() && items && items.length > 0">
         <ng-container *ngFor="let item of items" role="listitem">
           <span *ngIf="!tileTemplate || !tileTemplate.template">template missing..</span>
           <ng-template [ngTemplateOutlet]="tileTemplate.template" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
@@ -73,12 +73,12 @@
               </ng-container>
             </tr>
           </thead>
-          <tbody class="list-view-tbody" *ngIf="busy">
+          <tbody class="list-view-tbody" *ngIf="busy()">
             <ng-container *ngFor="let item of loaderItems;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
                   <td class="list-view-td-details"
-                      *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
+                      *ngIf="detailsSectionPropertyCount() !== null ? item[detailsSectionPropertyCount()!] !== 0 : true; else hiddenDetailsButton">
                     <button disabled
                             title="expand-collapse"
                             type="button"
@@ -108,12 +108,12 @@
             </ng-container>
           </tbody>
           <tbody class="list-view-tbody"
-                 *ngIf="!busy">
+                 *ngIf="!busy()">
             <ng-container *ngFor="let item of items;let i=index">
               <tr class="list-view-tr">
                 <ng-container *ngIf="detailsSectionSupported">
                   <td class="list-view-td-details"
-                      *ngIf="detailsSectionPropertyCount !== null ? item[detailsSectionPropertyCount] !== 0 : true; else hiddenDetailsButton">
+                      *ngIf="detailsSectionPropertyCount() !== null ? item[detailsSectionPropertyCount()!] !== 0 : true; else hiddenDetailsButton">
                     <button (click)="toggleDetails(item)"
                             title="toggleDetails"
                             type="button"
@@ -148,7 +148,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!busy && items && items.length === 0">
+  <ng-container *ngIf="!busy() && items && items.length === 0">
     <div class="cards-deck-1">
       <lib-list-view-empty-state></lib-list-view-empty-state>
     </div>
@@ -158,14 +158,14 @@
 <ng-content></ng-content>
 
 <div class="px-2 mt-2"
-     *ngIf="items && items.length !== 0 && showPager && (pagerPosition == 'bottom' || pagerPosition == 'both')">
-  <lib-pager [page]="page"
-             [page-size]="pageSize"
-             [count]="count"
-             [sort-options]="sortOptions"
-             [sort]="sort"
-             [sort-dir]="sortdir"
-             [busy]="busy"
+     *ngIf="items && items.length !== 0 && showPager() && (pagerPosition == 'bottom' || pagerPosition == 'both')">
+  <lib-pager [page]="page()"
+             [page-size]="pageSize()"
+             [count]="count()"
+             [sort-options]="sortOptions()"
+             [sort]="sort()"
+             [sort-dir]="sortdir()"
+             [busy]="busy()"
              (pageChanged)="emitPageChanged($event)"
              (pageSizeChanged)="emitPageSizeChanged($event)"
              (sortChanged)="emitSortChanged($event)"

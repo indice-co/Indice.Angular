@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { SearchOption, FilterClause, Operators, OperatorOptions } from './models';
 import { MenuOption } from '../../types';
 import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.component';
@@ -13,11 +13,11 @@ import { NgClass } from '@angular/common';
     imports: [DropDownMenuComponent, FormsModule, DatepickerComponent, NgClass]
 })
 export class AdvancedSearchComponent implements OnInit, OnChanges {
-  @Output() advancedSearchChanged: EventEmitter<FilterClause[]> = new EventEmitter<FilterClause[]>();
-  @Input('operators-disabled') operatorsDisabled: boolean = false;
-  @Input('search-options') searchOptions: SearchOption[] = [];
+  readonly advancedSearchChanged = output<FilterClause[]>();
+  readonly operatorsDisabled = input<boolean>(false, { alias: "operators-disabled" });
+  readonly searchOptions = input<SearchOption[]>([], { alias: "search-options" });
   @Input() filters: FilterClause[] = [];
-  @Input() searchCriteriaLabel: string = 'Search Criteria:';
+  readonly searchCriteriaLabel = input<string>('Search Criteria:');
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
   public operatorOptions = OperatorOptions;
@@ -42,7 +42,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
 
   public setSearchOptions() {
     const updatedSearchOptions = [];
-    for (const searchOption of this.searchOptions) {
+    for (const searchOption of this.searchOptions()) {
       updatedSearchOptions.push({
         text: searchOption.name,
         value: searchOption.field,
@@ -64,7 +64,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
   }
 
   public selectedFieldChanged(field: string) {
-    this.selectedField = this.searchOptions.find((searchOption) => searchOption.field === field);
+    this.selectedField = this.searchOptions().find((searchOption) => searchOption.field === field);
     this.selectedOperator = undefined;
     // Since we have special UI handling for the daterange, we don't need to fill the operatorMenuOptions in that case.
     if (this.selectedField?.dataType != 'daterange') {
@@ -106,12 +106,12 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
         });
       }
       if (this.fieldValueDateFrom) {
-        const filterClauseFrom = new FilterClause(this.selectedField.field, this.fieldValueDateFrom, Operators.GREATER_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
+        const filterClauseFrom = new FilterClause(this.selectedField.field, this.fieldValueDateFrom, Operators.GREATER_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions());
         this.filters.push(filterClauseFrom);
       }
 
       if (this.fieldValueDateTo) {
-        const filterClauseTo = new FilterClause(this.selectedField.field, this.fieldValueDateTo, Operators.LESS_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions);
+        const filterClauseTo = new FilterClause(this.selectedField.field, this.fieldValueDateTo, Operators.LESS_THAN_EQUAL.value as FilterClause.Op, 'datetime', this.searchOptions());
         this.filters.push(filterClauseTo);
       }
     }
@@ -123,7 +123,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
       // if no operator was provided, it falls back to the default 'equals' operator
       this.selectedOperator = this.selectedOperator ?? Operators.EQUALS.value;
       // create the filterClause
-      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions);
+      const filterClause = new FilterClause(this.selectedField.field, this.fieldValue, this.selectedOperator as FilterClause.Op, this.selectedField.dataType, this.searchOptions());
       if (!this.selectedField.multiTerm) { // multiTerm means that we can have multiple filter values of the SAME filter clause (eg "filter case types that are Phone OR Address")
         this.filters = this.filters.filter((f) => {
           return f.member !== this.selectedField!.field;
@@ -154,7 +154,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
 
   public isFieldAndOperatorUnpicked(): boolean {
     // if the operators are enabled we need to check for both the field value and the operator value
-    return this.operatorsDisabled ? this.fieldValue === undefined : (this.fieldValue === undefined || this.selectedOperator === undefined);
+    return this.operatorsDisabled() ? this.fieldValue === undefined : (this.fieldValue === undefined || this.selectedOperator === undefined);
   }
 
   public clear() {

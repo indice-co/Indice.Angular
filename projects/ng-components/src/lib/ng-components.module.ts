@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NO_ERRORS_SCHEMA , EnvironmentProviders, ModuleWithProviders, NgModule, makeEnvironmentProviders } from '@angular/core';
+import { EnvironmentProviders, ModuleWithProviders, NgModule, makeEnvironmentProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AddressPipe } from './pipes/address.pipe';
@@ -216,8 +216,7 @@ export function provideIndiceComponents(): EnvironmentProviders {
         ContentTileHeaderComponent,
         StatsGridComponent,
         ProgressBarComponent
-    ],
-    schemas: [NO_ERRORS_SCHEMA]
+    ]
 })
 export class IndiceComponentsModule {
   static forRoot(): ModuleWithProviders<IndiceComponentsModule> {

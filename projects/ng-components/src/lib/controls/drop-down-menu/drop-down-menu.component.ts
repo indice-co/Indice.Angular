@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { MenuOption } from '../../types';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
@@ -13,9 +13,9 @@ export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input() options: MenuOption[] | undefined = [];
   // tslint:disable-next-line:no-input-rename
   @Input('selected') selectedValue: any | null | undefined = undefined;
-  @Input() multiple = false;
-  @Input() placeholder: string = 'Please select...';
-  @Input('show-icons') showIcons = true;
+  readonly multiple = input(false);
+  readonly placeholder = input<string>('Please select...');
+  readonly showIcons = input(true, { alias: "show-icons" });
 
   private selectedOption$: MenuOption | null = null;
   public get selectedOption(): MenuOption | null {
@@ -27,8 +27,8 @@ export class DropDownMenuComponent implements OnInit, OnChanges {
     this.expanded = false;
   }
 
-  @Output() selectedChange: EventEmitter<any> = new EventEmitter<any>();
-  @Output() selectedChanged: EventEmitter<any> = new EventEmitter<any>();
+  readonly selectedChange = output<any>();
+  readonly selectedChanged = output<any>();
 
   private expanded$ = false;
   public get expanded(): boolean {

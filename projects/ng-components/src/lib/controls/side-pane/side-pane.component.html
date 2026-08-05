@@ -4,7 +4,7 @@
     <div [class]="showPane ? 'side-pane-container' : 'hidden'">
       <div [class]="sizeContainerStyle">
         <div class="side-pane">
-            @if(template) { <ng-container *ngTemplateOutlet="template; context: {params: params}"></ng-container> }
+            @if(template) { <ng-container *ngTemplateOutlet="template; context: {params: params()}"></ng-container> }
             <ng-content></ng-content>
         </div>
     </div>

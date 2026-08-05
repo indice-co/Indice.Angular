@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -18,15 +18,15 @@ export class FormLayoutComponent implements OnInit {
   @Input() image: string | null = null;
   @Input() icon: string | null = null;
   // tslint:disable-next-line:no-input-rename
-  @Input('search-placeholder') searchPlaceholder: string | null = 'αναζήτηση'
+  readonly searchPlaceholder = input<string | null>('αναζήτηση', { alias: "search-placeholder" });
   @Input() actions: ViewAction[] | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('sub-title') subTitle: string | null = null;
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
+  readonly onAction = output<ViewAction>();
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
-  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
+  readonly onSearch = output<string>();
+  readonly onComplete = output<boolean>();
 
   constructor(private router$: Router) { }
 

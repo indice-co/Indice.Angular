@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Optional, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, TemplateRef, ChangeDetectionStrategy, input } from '@angular/core';
 
 import { IShellConfig } from '../../../types';
 import { UserSettingsService } from '../../../services/user-settings.service';
@@ -17,7 +17,7 @@ import { RouterOutlet } from '@angular/router';
 export class ShellSidebarLayoutComponent implements OnInit {
   @Input() config: IShellConfig | undefined;
   @Input() public sidebarFooterTemplate?: TemplateRef<any>;
-  @Input() busy: boolean = false;
+  readonly busy = input<boolean>(false);
   
   constructor(private _userSettings: UserSettingsService) {
     this.showMobileSidebar = this._userSettings.get('MobileSideBar');

@@ -1,6 +1,6 @@
 import { SwitchViewAction } from '../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
@@ -16,21 +16,21 @@ export class ViewLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @ViewChild('search') private searchInput$?: ElementRef;
   // tslint:disable-next-line:no-input-rename
-  @Input('show-header') header = true;
-  @Input() fluid = false;
-  @Input() title = 'no title';
+  readonly header = input(true, { alias: "show-header" });
+  readonly fluid = input(false);
+  readonly title = input('no title');
   @Input() icon: string | null = null;
-  @Input() actions: ViewAction[] | null = null;
-  @Input() busy = false;
+  readonly actions = input<ViewAction[] | null>(null);
+  readonly busy = input(false);
   // tslint:disable-next-line:no-input-rename
-  @Input('search-placeholder') searchPlaceholder: string | null = 'search';
+  readonly searchPlaceholder = input<string | null>('search', { alias: "search-placeholder" });
   @Input() view: string | null = null;
   // tslint:disable-next-line:no-input-rename
   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
+  readonly onAction = output<ViewAction>();
   // tslint:disable-next-line:no-output-on-prefix
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+  readonly onSearch = output<string>();
 
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 

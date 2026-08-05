@@ -11,7 +11,7 @@
     @for (tab of tabs; track tab; let i = $index) {
       <option [value]="i"
         >
-        {{ tab.labelText }}
+        {{ tab.labelText() }}
       </option>
     }
   </select>

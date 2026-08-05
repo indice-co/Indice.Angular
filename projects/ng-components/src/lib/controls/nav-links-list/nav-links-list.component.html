@@ -1,7 +1,7 @@
 
-<div [class]="containerClass ?? 'nav-link-list-container'">
-  <div class="nav-link-list-container-inner" [class.icons-only]="!showText">
-    @for (link of links | async; track link) {
+<div [class]="containerClass() ?? 'nav-link-list-container'">
+  <div class="nav-link-list-container-inner" [class.icons-only]="!showText()">
+    @for (link of links() | async; track link) {
       @switch (link.type) {
         @case ('sparator') {
           <div class="h-2"></div>
@@ -10,17 +10,17 @@
           <a
             href="#"
             [routerLink]="[link.path]"
-            [routerLinkActive]="navLinkActiveClass"
+            [routerLinkActive]="navLinkActiveClass()"
             [routerLinkActiveOptions]="{ exact: link.exact }"
             [queryParams]="link.queryParams"
-            [class]="navLinkClass"
-            [class.min-nav-link-text-width]="showText">
+            [class]="navLinkClass()"
+            [class.min-nav-link-text-width]="showText()">
             <div class="inline-flex items-center">
-              @if (showIcons && link.icon) {
-                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              @if (showIcons() && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons()" [class.p-1]="largeIcons()"></i>
               }
-              @if (showText) {
-                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              @if (showText()) {
+                <span [class.ml-3]="showIcons() && link.icon">{{ link.text }}</span>
               }
             </div>
           </a>
@@ -29,14 +29,14 @@
           <a
             [href]="link.path"
             [attr.target]="link.external ? '_blank' : '_self'"
-            [class]="navLinkClass"
-            [class.min-nav-link-text-width]="showText">
+            [class]="navLinkClass()"
+            [class.min-nav-link-text-width]="showText()">
             <div class="inline-flex items-center">
-              @if (showIcons && link.icon) {
-                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              @if (showIcons() && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons()" [class.p-1]="largeIcons()"></i>
               }
-              @if (showText) {
-                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              @if (showText()) {
+                <span [class.ml-3]="showIcons() && link.icon">{{ link.text }}</span>
               }
             </div>
           </a>
@@ -45,14 +45,14 @@
           <a
             routerLink="."
             [fragment]="link.path"
-            [class]="fragmentValue === link.path ? navLinkClass + ' ' + navLinkActiveClass : navLinkClass"
-            [class.min-nav-link-text-width]="showText">
+            [class]="fragmentValue === link.path ? navLinkClass() + ' ' + navLinkActiveClass() : navLinkClass()"
+            [class.min-nav-link-text-width]="showText()">
             <div class="inline-flex items-center">
-              @if (showIcons && link.icon) {
-                <i [class]="link.icon" [class.text-2xl]="largeIcons" [class.p-1]="largeIcons"></i>
+              @if (showIcons() && link.icon) {
+                <i [class]="link.icon" [class.text-2xl]="largeIcons()" [class.p-1]="largeIcons()"></i>
               }
-              @if (showText) {
-                <span [class.ml-3]="showIcons && link.icon">{{ link.text }}</span>
+              @if (showText()) {
+                <span [class.ml-3]="showIcons() && link.icon">{{ link.text }}</span>
               }
             </div>
           </a>

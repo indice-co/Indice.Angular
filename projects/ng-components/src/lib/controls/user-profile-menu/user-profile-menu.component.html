@@ -2,15 +2,15 @@
 
   <div class="inline-flex">
     <!-- Username -->
-    <div [ngClass]="{'shell-header-profile': showUserName}">
-      @if (user && showUserName) {
+    <div [ngClass]="{'shell-header-profile': showUserName()}">
+      @if (user && showUserName()) {
         <div class="shell-header-profile-userName">
           {{ user.profile.name }}
         </div>
       }
     </div>
 
-    <div [class.ml-2]="showUserName">
+    <div [class.ml-2]="showUserName()">
       @if (user) {
         <button type="button"
           class="shell-header-profile-dropdown-button"
@@ -20,10 +20,10 @@
           (click)="userMenuExpanded = !userMenuExpanded">
           <span class="sr-only">Open user menu</span>
           <span class="avatar-container">
-            @if (!showPicture) {
+            @if (!showPicture()) {
               <span class="avatar-text">{{this.avatarName}}</span>
             }
-            @if (showPicture) {
+            @if (showPicture()) {
               <img title="profile-image" [userPicture]="user.profile.sub" [displayName]="user.profile" [size]="32" />
             }
           </span>

@@ -4,19 +4,19 @@
       <div class="shell-header-md-visible">
         <div class="shell-header-links-far-container" (clickOutside)="onClickOutside($event)">
           <!-- Profile dropdown -->
-          @if (profileMenuVisible) {
+          @if (profileMenuVisible()) {
             <div class="ml-4">
-              <lib-user-profile-menu [show-user-name]="showUserNameOnHeader" [show-picture]="showPictureOnHeader"></lib-user-profile-menu>
+              <lib-user-profile-menu [show-user-name]="showUserNameOnHeader()" [show-picture]="showPictureOnHeader()"></lib-user-profile-menu>
             </div>
           }
           <!-- Notifications dropdown -->
-          @if (showAlerts && user) {
+          @if (showAlerts() && user) {
             <div class="ml-4">
               <lib-notifications-indicator></lib-notifications-indicator>
             </div>
           }
           <!-- languages dropdown -->
-          @if (showLangs) {
+          @if (showLangs()) {
             <div class="ml-4">
               <lib-language-selection></lib-language-selection>
             </div>

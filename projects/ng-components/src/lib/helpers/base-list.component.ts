@@ -1,7 +1,7 @@
 import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
 import { Observable, Subject, Subscription, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, Inject, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
@@ -36,7 +36,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   private loadSub$: Subscription | undefined;
   private searchSub$: Subscription | undefined;
   private searchSubject$ = new Subject<string | null>();
-  @Input('auto-load') autoLoad: boolean = true;
+  readonly autoLoad = input<boolean>(true, { alias: "auto-load" });
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
   }
@@ -123,7 +123,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     });
     // just to sync params in query
     this.setRouteParams(true);
-    if(this.autoLoad) this.load();
+    if(this.autoLoad()) this.load();
   }
 
   /**

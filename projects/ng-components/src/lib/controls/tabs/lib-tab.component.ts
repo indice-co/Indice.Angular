@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation, input } from '@angular/core';
 
 import * as uuid from 'uuid';
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
@@ -27,7 +27,7 @@ export class LibTabComponent implements OnInit {
     @ContentChild(LibTabLabelDirective) public label: LibTabLabelDirective | undefined;
     /** Indicates the unique id assigned in the tab. */
     @Input() public id: string | undefined;
-    @Input() public labelText: string | undefined;
+    public readonly labelText = input<string>();
 
     /** Indicates the index of the tab. */
     public get index(): number {

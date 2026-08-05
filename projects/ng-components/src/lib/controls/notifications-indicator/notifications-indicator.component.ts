@@ -1,5 +1,5 @@
 import { IAppNotifications, NavLink } from './../../types';
-import { Component, Inject, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy, input } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
@@ -20,8 +20,8 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   public allNotificationsLink?: NavLink;
   private notificationsSub$: Subscription | undefined;
   private inboxAction: any | undefined = undefined;
-  @Input() noNotifications: string = 'No new notifications';
-  @Input() showNotificationsText: string = 'Show all notifications';
+  readonly noNotifications = input<string>('No new notifications');
+  readonly showNotificationsText = input<string>('Show all notifications');
   public newArrival = false;
   constructor(@Inject(APP_NOTIFICATIONS) public notifications?: IAppNotifications, @Inject(APP_LINKS) public links?: any) { }
 

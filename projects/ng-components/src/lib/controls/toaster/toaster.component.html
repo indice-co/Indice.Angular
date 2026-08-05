@@ -1,6 +1,6 @@
 <div aria-live="assertive"
      [ngClass]="closed ? 'toast-closed': 'toast z-50'"
-     [ngStyle]="isMobile ? { 'margin-bottom.px': i * 85 } : {'margin-top.px': i * 85 }">
+     [ngStyle]="isMobile ? { 'margin-bottom.px': i() * 85 } : {'margin-top.px': i() * 85 }">
   <div class="toast-container">
     <div class="toast-pill">
       <div class="toast-context-padding">
@@ -82,7 +82,7 @@
           </div>
           <div class="toast-close-icon">
             <button class="toast-close-button"
-                    (click)="closeToast(i)">
+                    (click)="closeToast(i())">
               <span class="sr-only">Close</span>
               <!-- Heroicon name: solid/x -->
               <svg class="h-5 w-5"

@@ -31,7 +31,7 @@
               <input id="search"
                 #search
                 class="form-search-input"
-                [placeholder]="searchPlaceholder"
+                [placeholder]="searchPlaceholder()"
                 type="search"
                 name="search"
                 (input)="searchActionType(search.value)">

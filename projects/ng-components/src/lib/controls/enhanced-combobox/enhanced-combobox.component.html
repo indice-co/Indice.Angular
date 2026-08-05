@@ -1,7 +1,7 @@
 <div class="combobox-wrapper" (clickOutside)="onClickOutside()">
   <form autocomplete="off"
-    [id]="id + '-form'">
-    <input [id]="id"
+    [id]="id() + '-form'">
+    <input [id]="id()"
       title="combobox input"
       type="text"
       (click)="onInputClick()"
@@ -14,10 +14,10 @@
       autocomplete="off"
       list="autocomplete"
       [value]="value || ''"
-      [placeholder]="placeholder || ''">
+      [placeholder]="placeholder() || ''">
     </form>
     <div class="combobox-icons">
-      @if (!busy) {
+      @if (!busy()) {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 text-gray-400"
@@ -30,7 +30,7 @@
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         }
-        @if (busy) {
+        @if (busy()) {
           <svg
             class="animate-spin h-6 w-6 text-gray-400"
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@
         }
       </div>
       @if (showResults && items.length > 0) {
-        <ul [id]="id + '-results'"
+        <ul [id]="id() + '-results'"
           class="combobox-results"
           role="listbox">
           @for (item of items; track item; let i = $index) {
@@ -59,12 +59,12 @@
               (click)="onListItemSelected(item)"
               role="option"
               tabindex="-1">
-              <ng-container [ngTemplateOutlet]="itemTemplate || defaultItemTemplate"
+              <ng-container [ngTemplateOutlet]="itemTemplate() || defaultItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: item }">
               </ng-container>
             </li>
           }
-          @if (displayShowMoreOption) {
+          @if (displayShowMoreOption()) {
             <li
               role="option"
               tabindex="-1">
@@ -73,7 +73,7 @@
           }
         </ul>
       }
-      @if (noResultsTemplate && items.length === 0 && !busy) {
+      @if (noResultsTemplate && items.length === 0 && !busy()) {
         <div class="combobox-results"
           >
           <ng-container [ngTemplateOutlet]="noResultsTemplate || defaultnoResultsTemplate"
@@ -89,7 +89,7 @@
         @for (item of selectedItems; track item; let i = $index) {
           <li
             class="mt-3">
-            <ng-container [ngTemplateOutlet]="selectedItemTemplate || defaultSelectedItemTemplate"
+            <ng-container [ngTemplateOutlet]="selectedItemTemplate() || defaultSelectedItemTemplate"
               [ngTemplateOutletContext]="{ $implicit: item }">
             </ng-container>
           </li>

@@ -1,15 +1,15 @@
-<lib-view-layout [title]="title || ' '" [meta-items]="metaItems" [actions]="actions" (onAction)="emitActionClick($event)" [icon]="icon" [busy]="busy">
+<lib-view-layout [title]="title() || ' '" [meta-items]="metaItems()" [actions]="actions()" (onAction)="emitActionClick($event)" [icon]="icon()" [busy]="busy()">
   <main class="model-view-container">
     <div class="model-view-container-inner">
       <aside class="model-view-aside">
         <section aria-labelledby="menu" class="details-view-aside-header-section">
           <div class="model-view-aside-header-container">
             <div class="model-view-aside-header-container-inner">
-              @if (!busy) {
+              @if (!busy()) {
                 <ng-content></ng-content>
               }
 
-              @if (busy) {
+              @if (busy()) {
                 <div class="flex items-center p-5">
                   <div class="w-12 h-14 mr-4 rounded-lg bg-gray-200 animate-pulse"></div>
                   <div>
@@ -27,7 +27,7 @@
             <div class="model-view-menu-container">
               <nav class="model-view-menu-nav">
                 <div class="model-view-menu-item">
-                  @for (section of primary; track section) {
+                  @for (section of primary(); track section) {
                     @if (section.type === 'separator') {
                       <div class="h-3">
                       </div>
@@ -48,7 +48,7 @@
                   }
                 </div>
                 <div class="model-view-menu-item-far">
-                  @for (section of secondary; track section) {
+                  @for (section of secondary(); track section) {
                     @if (section.type === 'separator') {
                       <div class="h-3"></div>
                     }

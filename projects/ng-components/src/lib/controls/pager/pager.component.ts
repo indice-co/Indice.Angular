@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Icons } from '../../icons';
 import { MenuOption } from '../../types';
@@ -12,23 +12,23 @@ import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.componen
 })
 export class PagerComponent implements OnInit, OnChanges {
   // BUSY STATE
-  @Input() busy = false;
+  readonly busy = input(false);
   // PAGING
-  @Input() count: number | null = null;
+  readonly count = input<number | null>(null);
   @Input() page = 1;
   // tslint:disable-next-line:no-input-rename
-  @Input('page-size') pageSize = 20;
+  readonly pageSize = input(20, { alias: "page-size" });
   // tslint:disable-next-line:no-input-rename
-  @Input('page-size-options') pageSizeOptions: MenuOption[] = [
+  readonly pageSizeOptions = input<MenuOption[]>([
     new MenuOption('10', 10),
     new MenuOption('20', 20),
     new MenuOption('30', 30),
     new MenuOption('50', 50),
     new MenuOption('100', 100)
-  ];
+], { alias: "page-size-options" });
   public pages: MenuOption[] = [];
-  @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Output() pageSizeChanged: EventEmitter<number> = new EventEmitter<number>();
+  readonly pageChanged = output<number>();
+  readonly pageSizeChanged = output<number>();
   public canPreviousPage = false;
   public canNextPage = false;
 
@@ -36,11 +36,11 @@ export class PagerComponent implements OnInit, OnChanges {
   // tslint:disable-next-line:no-input-rename
   @Input('sort-options') sortOptions: MenuOption[] = [];
   // tslint:disable-next-line:no-input-rename
-  @Input('sort') sort: string | null = null;
+  readonly sort = input<string | null>(null);
   // tslint:disable-next-line:no-input-rename
-  @Input('sort-dir') sortdir: string | null = 'desc';
-  @Output() sortChanged: EventEmitter<string> = new EventEmitter<string>();
-  @Output() sortdirChanged: EventEmitter<string> = new EventEmitter<string>();
+  readonly sortdir = input<string | null>('desc', { alias: "sort-dir" });
+  readonly sortChanged = output<string>();
+  readonly sortdirChanged = output<string>();
   public sortdirIcon = Icons.SortDesc;
 
   constructor(private router: Router) { }
@@ -54,8 +54,9 @@ export class PagerComponent implements OnInit, OnChanges {
 
   private calcPages(): void {
     this.pages = [];
-    if (this.count && this.count > 0) {
-      const pageCount = this.count / this.pageSize;
+    const count = this.count();
+    if (count && count > 0) {
+      const pageCount = count / this.pageSize();
       for (let i = 0; i < pageCount; i++) {
         this.pages.push(new MenuOption(i + 1 + '', i + 1));
       }
@@ -96,7 +97,7 @@ export class PagerComponent implements OnInit, OnChanges {
 
   public toggleSortdir(): void {
     let sortdir = 'desc';
-    if (this.sortdir === 'desc') {
+    if (this.sortdir() === 'desc') {
       sortdir = 'asc';
       this.sortdirIcon = Icons.SortAsc;
     } else {

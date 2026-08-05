@@ -1,6 +1,6 @@
-@if (type === 'tiles') {
-  <div [class]="deckClass">
-    @for (i of counter(count); track i) {
+@if (type() === 'tiles') {
+  <div [class]="deckClass()">
+    @for (i of counter(count()); track i) {
       <div class="relative p-4 w-80 bg-white overflow-hidden shadow hover:shadow-md rounded-xl" >
         <div class="animate-pulse flex flex-col rounded-xl">
           <div class="rounded w-full h-32 bg-gray-200"></div>
@@ -19,9 +19,9 @@
   </div>
 }
 
-@if (type === 'table') {
+@if (type() === 'table') {
   <div class="cards-deck-1" >
-    @for (i of counter(count); track i) {
+    @for (i of counter(count()); track i) {
       <div class="border border-light-blue-300 shadow rounded-lg p-4 max-w-sm w-full mx-auto mb-4">
         <div class="animate-pulse flex space-x-4">
           <div class="rounded-full bg-light-blue-400 h-12 w-12">&nbsp;</div>

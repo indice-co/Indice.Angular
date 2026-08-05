@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -8,10 +8,8 @@ import { NgClass } from '@angular/common';
     imports: [NgClass]
 })
 export class AvatarInitialsComponent implements OnInit {
-  @Input()
-  public name: string | null | undefined;
-  @Input()
-  public large = false;
+  public readonly name = input<string | null>();
+  public readonly large = input(false);
   public initials?: string;
   public circleColor!: string;
   private colors = [
@@ -31,14 +29,15 @@ export class AvatarInitialsComponent implements OnInit {
   }
 
   private createInititals(): void {
-    if (this.name) {
+    const name = this.name();
+    if (name) {
       let initials = '';
-      for (let i = 0; i < this.name.length; i++) {
-        if (this.name.charAt(i) === ' ') {
+      for (let i = 0; i < name.length; i++) {
+        if (name.charAt(i) === ' ') {
           continue;
         }
-        if (this.name.charAt(i) === this.name.charAt(i).toUpperCase()) {
-          initials += this.name.charAt(i);
+        if (name.charAt(i) === name.charAt(i).toUpperCase()) {
+          initials += name.charAt(i);
           if (initials.length === 2) {
             break;
           }

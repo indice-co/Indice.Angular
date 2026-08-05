@@ -4,15 +4,15 @@
       <i [class]="icon"></i>
     </div>
   }
-  @if (compact) {
+  @if (compact()) {
     <div class="toggle-buttons-list-drop-down-compact-container">
-      <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options" [placeholder]="dropDownMenuPlaceholder">
+      <lib-drop-down-menu class="toggle-buttons-list-drop-down" [(selected)]="value" (selectedChange)="selectOption($event)" [options]="options()" [placeholder]="dropDownMenuPlaceholder()">
       </lib-drop-down-menu>
     </div>
   }
-  @if (!compact) {
+  @if (!compact()) {
     <div class="toggle-buttons-list">
-      @for (option of options; track option; let i = $index) {
+      @for (option of options(); track option; let i = $index) {
         <!-- [tooltip]="option.description" -->
         <button type="button"
           [disabled]="option.value === value"

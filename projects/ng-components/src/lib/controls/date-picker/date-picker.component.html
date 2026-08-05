@@ -1,9 +1,9 @@
 <div [class.relative]="!inline" (clickOutside)="closeCalendar()">
   <div class="datepicker-container">
     @if(!inline) {
-      <input #dateInput [readonly]="readonly" name="dateInput" (blur)="onBlur($event)" id="dateInput" title="dateInput" (focus)="showCalendar = false" [value]="value | date: displayFormat"
-            class="datepicker-input" [class.cursor-not-allowed]="disabled" [placeholder]="placeholder">
-      <button type="button" class="datepicker-button" [disabled]="disabled" (click)="openCalendar()" [class.cursor-not-allowed]="disabled">
+      <input #dateInput [readonly]="readonly()" name="dateInput" (blur)="onBlur($event)" id="dateInput" title="dateInput" (focus)="showCalendar = false" [value]="value | date: displayFormat()"
+            class="datepicker-input" [class.cursor-not-allowed]="disabled()" [placeholder]="placeholder()">
+      <button type="button" class="datepicker-button" [disabled]="disabled()" (click)="openCalendar()" [class.cursor-not-allowed]="disabled()">
         <i class="ms-Icon ms-Icon--DateTime2"></i>
       </button>
     }

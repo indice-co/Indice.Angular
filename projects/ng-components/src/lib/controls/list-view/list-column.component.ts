@@ -1,13 +1,13 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ContentChild, OnInit, TemplateRef, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     selector: 'lib-list-column', template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.Eager
 })
 export class ListColumnComponent {
-  @Input() title: string | null = null;
+  readonly title = input<string | null>(null);
   // tslint:disable-next-line:no-input-rename
-  @Input('full-width') fullWidth = false;
+  readonly fullWidth = input(false, { alias: "full-width" });
   @ContentChild(TemplateRef) template: any | null = null;
   constructor() { }
 }

@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, DOCUMENT, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidePaneOverlayType, SidePaneSize } from '../../types';
 import { NgTemplateOutlet } from '@angular/common';
@@ -11,11 +11,11 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   protected showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
-  @Input('pane-size') size: SidePaneSize | undefined;
-  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() onOpen: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-  @Input('params') params: any | undefined;
+  readonly size = input<SidePaneSize>(undefined, { alias: "pane-size" });
+  readonly onComplete = output<boolean>();
+  readonly onOpen = output<any>();
+  readonly onClose = output<any>();
+  readonly params = input<any>();
   @Input() template: TemplateRef<any> | undefined;
   
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
@@ -37,7 +37,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
 
   private initPane(state?: any) {
     //priority to property for size
-    this.sizeContainerStyle = this.sizeToClass(this.size ?? state?.paneSize);
+    this.sizeContainerStyle = this.sizeToClass(this.size() ?? state?.paneSize);
     this.overlayStyle = this.overlayToClass(state?.paneOverlay);
   }
 
