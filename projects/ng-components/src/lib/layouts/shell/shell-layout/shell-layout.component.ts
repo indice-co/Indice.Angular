@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, ViewChild, ChangeDetectionStrategy, input } from '@angular/core';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, ChangeDetectionStrategy, input, viewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 
 import { Subscription } from 'rxjs';
@@ -15,12 +15,12 @@ import { ToasterContainerComponent } from '../../../controls/toaster/toaster-con
 
 @Component({
     selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ShellStackedLayoutComponent, ShellSidebarLayoutComponent, SidePaneComponent_1, RouterOutlet, ToasterContainerComponent]
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
-  @ViewChild('rightPane') rightPane: SidePaneComponent | undefined;
+  readonly rightPane = viewChild<SidePaneComponent>('rightPane');
   readonly busy = input<boolean>(false);
   public readonly sidebarFooterTemplate = input<TemplateRef<any>>();
   private _routerSub$: Subscription | null = null;
@@ -29,7 +29,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   public loaded = false;
   public hideSidebar = false;
 
-  constructor(private _router: Router, private _componentLoaderFactory: ComponentLoaderFactory, @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined) {
+  constructor(private _router: Router, private _componentLoaderFactory: ComponentLoaderFactory, private _cdr: ChangeDetectorRef, @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined) {
     if (!_config) {
       _config = new DefaultShellConfig();
     }
@@ -37,7 +37,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   }
 
   public ngAfterViewChecked(): void {
-    setTimeout(() => { this.loaded = true; }, 200);
+    setTimeout(() => { this.loaded = true; this._cdr.markForCheck(); }, 200);
   }
 
   public ngOnInit(): void {
@@ -55,6 +55,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
           }
         }
       }
+      this._cdr.markForCheck();
     });
   }
 
@@ -85,10 +86,10 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   }
 
   onSidePaneActivated($event: any): void {
-    this.rightPane?.onSidePaneActivated($event);
+    this.rightPane()?.onSidePaneActivated($event);
   }
 
   onSidePaneDeactivated($event: any): void {
-    this.rightPane?.onSidePaneDeactivated($event);
+    this.rightPane()?.onSidePaneDeactivated($event);
   }
 }

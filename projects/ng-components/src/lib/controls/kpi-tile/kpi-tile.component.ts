@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'lib-kpi-tile',
     templateUrl: './kpi-tile.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass]
 })
 export class KpiTileComponent implements OnInit {

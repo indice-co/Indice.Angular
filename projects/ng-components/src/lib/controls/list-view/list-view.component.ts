@@ -15,7 +15,7 @@ import { ListViewEmptyStateComponent } from './list-view-empty-state.component';
 @Component({
     selector: 'lib-list-view',
     templateUrl: './list-view.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgIf, AdvancedSearchComponent, PagerComponent, NgSwitch, NgSwitchCase, SkeletonLoaderComponent, NgFor, NgTemplateOutlet, NgSwitchDefault, ListViewEmptyStateComponent]
 })
 export class ListViewComponent implements OnChanges {

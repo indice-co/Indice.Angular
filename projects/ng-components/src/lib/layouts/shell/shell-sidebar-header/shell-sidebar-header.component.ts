@@ -13,7 +13,7 @@ import { LanguageSelectionComponent } from '../../../controls/language-selection
 @Component({
     selector: 'lib-shell-sidebar-header',
     templateUrl: './shell-sidebar-header.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, UserProfileMenuComponent, NotificationsIndicatorComponent, LanguageSelectionComponent]
 })
 export class ShellSidebarHeaderComponent extends ShellHeaderComponent {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Inject, Optional, TemplateRef, ViewChild, ViewEncapsulation, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Optional, TemplateRef, ViewEncapsulation, input, viewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -27,7 +27,7 @@ export class LibStepComponent {
     ) { }
 
     /** The content provided for the step. */
-    @ViewChild(TemplateRef, { static: true }) public content!: TemplateRef<any>;
+    public readonly content = viewChild.required(TemplateRef);
     /** The label of the step displayed in header, if applicable. */
     @ContentChild(LibStepLabelDirective) public stepLabel: LibStepLabelDirective | undefined;
     /** The info of the step displayed in header, if applicable. */

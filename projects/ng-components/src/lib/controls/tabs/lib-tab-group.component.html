@@ -8,7 +8,7 @@
     (change)="onTabSelectChanged(+tabsSelect.value)"
     class="tab-group-select"
     #tabsSelect>
-    @for (tab of tabs; track tab; let i = $index) {
+    @for (tab of tabs(); track tab; let i = $index) {
       <option [value]="i"
         >
         {{ tab.labelText() }}
@@ -20,7 +20,7 @@
   <div class="tab-group-container">
     <nav class="tab-group-container-nav"
       aria-label="Tabs">
-      @for (tab of tabs; track tab) {
+      @for (tab of tabs(); track tab) {
         <a
           href="javascript:void(0)"
           [class.tab]="!tab.isActive"

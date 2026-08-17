@@ -1,5 +1,5 @@
 import { IAppNotifications, NavLink } from './../../types';
-import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, ChangeDetectionStrategy, input, inject, ChangeDetectorRef } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { APP_LINKS, APP_NOTIFICATIONS } from '../../tokens';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'lib-notifications-indicator',
     templateUrl: './notifications-indicator.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, NgClass, RouterLink, DatePipe]
 })
 export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
@@ -23,6 +23,7 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
   readonly noNotifications = input<string>('No new notifications');
   readonly showNotificationsText = input<string>('Show all notifications');
   public newArrival = false;
+  private cdr = inject(ChangeDetectorRef);
   constructor(@Inject(APP_NOTIFICATIONS) public notifications?: IAppNotifications, @Inject(APP_LINKS) public links?: any) { }
 
   ngOnDestroy(): void {
@@ -35,6 +36,7 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
     if(this.links && this.links['notifications']) {
       (this.links['notifications'] as Observable<NavLink>).subscribe(notificationsLink => {
         this.allNotificationsLink = notificationsLink;
+        this.cdr.markForCheck();
       });
     }
     if(this.notifications) {
@@ -43,8 +45,9 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
           this.newArrival = true;
           this.unreadCount = result.count;
           this.items = result.items;
-          setTimeout( () => { this.newArrival = false; }, 1000 );
+          setTimeout( () => { this.newArrival = false; this.cdr.markForCheck(); }, 1000 );
         }
+        this.cdr.markForCheck();
       });
     }
   }

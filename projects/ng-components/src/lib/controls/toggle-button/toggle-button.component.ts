@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -11,7 +11,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleButtonComponent implements OnInit {
   @Input() value: boolean = false;
@@ -27,6 +27,7 @@ export class ToggleButtonComponent implements OnInit {
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor() { }
 
@@ -37,6 +38,7 @@ export class ToggleButtonComponent implements OnInit {
     if(obj) {
       this.value = obj || false;
     }
+    this.cdr.markForCheck();
   }
   registerOnChange(fn: any): void {
     this.onChange$ = fn;

@@ -1,5 +1,5 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input, inject, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Event, NavigationStart, Router, RouterLink } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
@@ -16,7 +16,7 @@ import { LanguageSelectionComponent } from '../../../controls/language-selection
     // tslint:disable-next-line:component-selector
     selector: 'lib-shell-header',
     templateUrl: './shell-header.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLink, NavLinksListComponent, ClickOutsideDirective, UserProfileMenuComponent, NotificationsIndicatorComponent, LanguageSelectionComponent]
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
@@ -44,6 +44,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public user: User | null = null;
   public avatarName: string | null = null;
   public activeFragment: any | null = null;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(
     @Inject(AuthService) protected authService: AuthService,
@@ -60,9 +61,11 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
+      this.cdr.markForCheck();
     });
     this.authService.loadUser().subscribe((user) => {
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     }, error => {
       console.error(error);
     });
@@ -70,6 +73,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.userSub$ = this.authService.user$.subscribe((user: any) => {
       // console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     });
   }
 

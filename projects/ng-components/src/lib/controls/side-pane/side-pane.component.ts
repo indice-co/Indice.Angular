@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { SidePaneOverlayType, SidePaneSize } from '../../types';
 import { NgTemplateOutlet } from '@angular/common';
 @Component({
-    selector: 'lib-side-pane', templateUrl: './side-pane.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+    selector: 'lib-side-pane', templateUrl: './side-pane.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
 export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {

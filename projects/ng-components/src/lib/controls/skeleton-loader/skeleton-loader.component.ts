@@ -4,7 +4,7 @@ import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core
     // tslint:disable-next-line:component-selector
     selector: 'lib-skeleton-loader',
     templateUrl: './skeleton-loader.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkeletonLoaderComponent implements OnInit {
   readonly count = input(7);

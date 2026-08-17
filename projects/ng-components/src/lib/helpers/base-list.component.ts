@@ -1,17 +1,18 @@
 import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
-import { Observable, Subject, Subscription, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectorRef, Component, DestroyRef, OnInit, ChangeDetectionStrategy, inject, input } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
 @Component({
     template: '',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
+export abstract class BaseListComponent<T> implements OnInit {
   public items: T[] | null | undefined = null;
   public view: string = ListViewType.Tiles;
   public title: string | null = null;
@@ -32,25 +33,12 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public abstract newItemLink: string | null;
   public minimumSearchCharacters = 3;
   public searchDebounceTime = 300;
-  private routeSub$: Subscription | undefined;
-  private loadSub$: Subscription | undefined;
-  private searchSub$: Subscription | undefined;
   private searchSubject$ = new Subject<string | null>();
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly cdr = inject(ChangeDetectorRef);
   readonly autoLoad = input<boolean>(true, { alias: "auto-load" });
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
-  }
-
-  ngOnDestroy(): void {
-    if (this.routeSub$) {
-      this.routeSub$.unsubscribe();
-    }
-    if (this.loadSub$) {
-      this.loadSub$.unsubscribe();
-    }
-    if (this.searchSub$) {
-      this.searchSub$.unsubscribe();
-    }
   }
 
   public getViewActions(): Observable<ViewAction[]> {
@@ -73,10 +61,11 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       { key: 'count', icon: Icons.ItemsCount, text: 'please wait...' }
     ];
 
-    this.searchSub$ = this.searchSubject$.pipe(
+    this.searchSubject$.pipe(
       filter(value => (value?.length ?? 0) >= this.minimumSearchCharacters || (value?.length ?? 0) === 0),
       debounceTime(this.searchDebounceTime),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(searchText => {
       this.executeSearch(searchText);
     });
@@ -84,7 +73,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
     // until i come up with a solution...
 
-    this.routeSub$ = this.route$.queryParamMap.subscribe(params => {
+    this.route$.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
       if (params.keys.length === 0) {
         return;
       }
@@ -120,6 +109,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       }
       // initialize filters that may reside in the query string
       this.filters = this.getFiltersFrom(params);
+      this.cdr.markForCheck();
     });
     // just to sync params in query
     this.setRouteParams(true);
@@ -184,7 +174,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     // console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
-    this.loadSub$ = this.loadItems().subscribe(result => {
+    this.loadItems().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
       this.count = result ? result.count : 0;
       this.items = result?.items;
       this.updateHeaderMeta();
@@ -200,6 +190,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     if (count) {
       this.count === 1 ? count.text = `${this.count} ${this.singularResult}` : count.text = `${this.count} ${this.pluralResults}`;
     }
+    this.cdr.markForCheck();
   }
 
   public abstract loadItems(): Observable<IResultSet<T> | null | undefined>;

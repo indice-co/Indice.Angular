@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, ContentChildren, forwardRef, OnInit, QueryList, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, forwardRef, OnInit, ChangeDetectionStrategy, input, output, contentChildren } from '@angular/core';
 
 import { LibStepComponent, StepState } from './lib-step.component';
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -12,7 +12,7 @@ import { NgTemplateOutlet } from '@angular/common';
     providers: [
         { provide: LIBSTEPPER_ACCESSOR, useExisting: forwardRef(() => LibStepperComponent) }
     ],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
 export class LibStepperComponent implements OnInit, AfterViewChecked {
@@ -23,7 +23,7 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
     constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
     /** The inner steps of the wizard. */
-    @ContentChildren(LibStepComponent, { descendants: true }) public steps!: QueryList<LibStepComponent>;
+    public readonly steps = contentChildren(LibStepComponent, { descendants: true });
     /** Emmited when a step change occurs. */
     public readonly stepChanged = output<StepSelectedEvent>();
     /** Emmited when the stepper navigates away from the final step. Only emits once. */
@@ -37,7 +37,7 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
 
     /** The current wizard step. */
     public get currentStep(): LibStepComponent | undefined {
-        return this.steps?.get(this._currentStepIndex);
+        return this.steps()?.at(this._currentStepIndex);
     }
 
     /** The index (starting from zero) of the current wizard step. */
@@ -52,7 +52,7 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
 
     /** Indicates whether stepper can go a step forward. */
     public get canGoForward(): boolean {
-        return this._currentStepIndex < this.steps?.length - 1;
+        return this._currentStepIndex < this.steps()?.length - 1;
     }
 
     /** Indicates whether  */
@@ -91,7 +91,7 @@ export class LibStepperComponent implements OnInit, AfterViewChecked {
     }
 
     private updateCurrentStepIndex(newIndex: number): void {
-        const stepsArray = this.steps.toArray();
+        const stepsArray = this.steps();
         const currentStep = stepsArray[this.currentStepIndex];
         const shouldStop = this.linear() && (
             (!currentStep.isValid && newIndex >= this.currentStepIndex) || // If current step is invalid and want to go forward, then stop.

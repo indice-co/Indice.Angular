@@ -1,5 +1,5 @@
 import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames, DatePipe } from '@angular/common';
-import { Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, ViewChild, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, input, output, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
@@ -14,7 +14,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
             multi: true
         }
     ],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, DatePipe]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
@@ -25,7 +25,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   readonly placeholder = input<string | undefined>('');
   @Input() value: Date | undefined | null = null;
   readonly valueChange = output<Date | undefined | null>();
-  @ViewChild('dateInput') dateInput: ElementRef | undefined;
+  readonly dateInput = viewChild<ElementRef>('dateInput');
   readonly minDate = input<Date>();
   readonly maxDate = input<Date>();
   public showCalendar = false;
@@ -60,7 +60,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.calcDays();
   }
 
-  constructor(@Inject(LOCALE_ID) public locale: string) { }
+  constructor(@Inject(LOCALE_ID) public locale: string, private cdr: ChangeDetectorRef) { }
 
   writeValue(obj: any): void {
     if (obj) {
@@ -68,6 +68,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.month = this.value.getMonth();
       this.year = this.value.getFullYear();
     }
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: (_: any) => void): void {
@@ -223,7 +224,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private getDateFromInput() {
-    if(!this.dateInput?.nativeElement.value || this.dateInput?.nativeElement.value === '') {
+    const dateInput = this.dateInput();
+    if(!dateInput?.nativeElement.value || dateInput?.nativeElement.value === '') {
       this.value = undefined;
       this.valueChange.emit(this.value);
       if (this.onChange$) {
@@ -232,8 +234,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       return;
     }
 
-    if (this.dateInput?.nativeElement.value !== '' && !this.inline) {    
-      var dateParts = this.dateInput?.nativeElement.value.split("/");
+    if (dateInput?.nativeElement.value !== '' && !this.inline) {    
+      var dateParts = dateInput?.nativeElement.value.split("/");
       let dateInGrFormat = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], 3, 0, 0);
       if (dateInGrFormat.toString() !== 'Invalid Date') {
         this.writeValue(dateInGrFormat)

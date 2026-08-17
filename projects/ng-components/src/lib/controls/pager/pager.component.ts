@@ -7,7 +7,7 @@ import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.componen
 @Component({
     selector: 'lib-pager',
     templateUrl: './pager.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DropDownMenuComponent]
 })
 export class PagerComponent implements OnInit, OnChanges {

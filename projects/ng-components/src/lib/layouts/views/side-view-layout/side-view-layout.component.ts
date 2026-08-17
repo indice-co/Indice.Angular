@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 @Component({
     selector: 'lib-side-view-layout',
     templateUrl: './side-view-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideViewLayoutComponent implements OnInit {
   readonly title = input<string | null>('Πληροφορίες');

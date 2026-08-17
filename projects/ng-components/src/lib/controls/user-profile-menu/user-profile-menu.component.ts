@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy, input, inject, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, ImgUserPictureDirective } from '@indice/ng-auth';
 import { APP_LINKS } from '../../tokens';
@@ -11,7 +11,7 @@ import { NavLinksListComponent } from '../nav-links-list/nav-links-list.componen
 @Component({
     selector: 'lib-user-profile-menu',
     templateUrl: './user-profile-menu.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, NgClass, ImgUserPictureDirective, NavLinksListComponent]
 })
 export class UserProfileMenuComponent implements OnInit {
@@ -24,6 +24,7 @@ export class UserProfileMenuComponent implements OnInit {
   public user: User | null = null;
   public avatarName: string | null = null;
   public userMenuExpanded = false;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(@Inject(AuthService) protected authService: AuthService,
               @Inject(Router) protected router: Router,
@@ -32,6 +33,7 @@ export class UserProfileMenuComponent implements OnInit {
   ngOnInit(): void {
     this.authService.loadUser().subscribe((user) => {
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     }, error => {
       console.error(error);
     });
@@ -39,6 +41,7 @@ export class UserProfileMenuComponent implements OnInit {
     this.userSub$ = this.authService.user$.subscribe((user: any) => {
       // console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     });
   }
 

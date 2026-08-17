@@ -8,7 +8,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'lib-language-selection',
     templateUrl: './language-selection.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, AsyncPipe]
 })
 export class LanguageSelectionComponent implements OnInit {

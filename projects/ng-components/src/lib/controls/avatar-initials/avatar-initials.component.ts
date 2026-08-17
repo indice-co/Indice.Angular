@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'lib-avatar-initials',
     templateUrl: './avatar-initials.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass]
 })
 export class AvatarInitialsComponent implements OnInit {

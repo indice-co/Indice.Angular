@@ -1,5 +1,5 @@
 import { Observable, Subscription } from 'rxjs';
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, input, inject, ChangeDetectorRef } from '@angular/core';
 import { NavLink } from '../../types';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
@@ -7,7 +7,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'lib-nav-links-list',
     templateUrl: './nav-links-list.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLink, RouterLinkActive, AsyncPipe]
 })
 export class NavLinksListComponent implements OnInit, OnDestroy {
@@ -27,6 +27,7 @@ export class NavLinksListComponent implements OnInit, OnDestroy {
   readonly largeIcons = input<boolean>(false, { alias: "large-icons" });
   public fragmentValue: string | undefined;
   private fragmentSub$: Subscription | undefined;
+  private cdr = inject(ChangeDetectorRef);
   constructor() { }
   
   ngOnDestroy(): void {
@@ -34,7 +35,10 @@ export class NavLinksListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-      this.fragmentSub$ = this.activeFragment()?.subscribe( fragment => this.fragmentValue = fragment);
+      this.fragmentSub$ = this.activeFragment()?.subscribe( fragment => {
+        this.fragmentValue = fragment;
+        this.cdr.markForCheck();
+      });
   }
 
 }

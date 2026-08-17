@@ -5,10 +5,10 @@
     <nav class="stepper-bullets-container"
       aria-label="Progress"
       >
-      <p class="stepper-bullets-counter">Step {{ currentStepIndex + 1 }} of {{ steps.length }}</p>
+      <p class="stepper-bullets-counter">Step {{ currentStepIndex + 1 }} of {{ steps().length }}</p>
       <ol role="list"
         class="stepper-bullets-ol">
-        @for (step of steps; track step) {
+        @for (step of steps(); track step) {
           <li class="cursor-pointer"
             (click)="onSelectStep(step)">
             <!-- Completed Step -->
@@ -54,7 +54,7 @@
       <nav aria-label="Progress">
         <ol role="list"
           class="stepper-bullets-and-text-ol">
-          @for (step of steps; track step) {
+          @for (step of steps(); track step) {
             <li class="cursor-pointer"
               (click)="onSelectStep(step)">
               <!-- Complete Step -->
@@ -131,7 +131,7 @@
         >
         <ol class="flex items-center"
           role="list">
-          @for (step of steps; track step) {
+          @for (step of steps(); track step) {
             <li
               (click)="onSelectStep(step)"
               class="relative pr-8 sm:pr-20 cursor-pointer">
@@ -191,7 +191,7 @@
           >
           <ol role="list"
             class="overflow-hidden">
-            @for (step of steps; track step) {
+            @for (step of steps(); track step) {
               <li
                 (click)="onSelectStep(step)"
                 class="relative pb-10 cursor-pointer">
@@ -305,7 +305,7 @@
             >
             <ol role="list"
               class="border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0">
-              @for (step of steps; track step) {
+              @for (step of steps(); track step) {
                 <li
                   (click)="onSelectStep(step)"
                   class="relative md:flex-1 md:flex cursor-pointer">
@@ -395,7 +395,7 @@
                   aria-label="Progress">
                   <ol role="list"
                     class="panels-with-border-ol">
-                    @for (step of steps; track step) {
+                    @for (step of steps(); track step) {
                       <li
                         (click)="onSelectStep(step)"
                         class="panels-with-border-li">
@@ -546,11 +546,11 @@
                         aria-hidden="true">
                         <div class="bg-gray-200 rounded-full overflow-hidden">
                           <div class="h-2 bg-blue-600 rounded-full"
-                            [style.width]="(((currentStepIndex + 1) / steps.length) * 100) + '%'">
+                            [style.width]="(((currentStepIndex + 1) / steps().length) * 100) + '%'">
                           </div>
                         </div>
                         <div class="hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
-                          @for (step of steps; track step) {
+                          @for (step of steps(); track step) {
                             <div
                               (click)="onSelectStep(step)"
                               class="text-blue-600 cursor-pointer">
@@ -571,7 +571,7 @@
                       >
                       <ol role="list"
                         class="space-y-4 md:flex md:space-y-0 md:space-x-8">
-                        @for (step of steps; track step) {
+                        @for (step of steps(); track step) {
                           <li
                             (click)="onSelectStep(step)"
                             class="md:flex-1 cursor-pointer">
@@ -621,10 +621,10 @@
                     </nav>
                   }
                 }
-                @for (step of steps; track step) {
+                @for (step of steps(); track step) {
                   @if (step.state === StepState.Active) {
                     <ng-container
-                      [ngTemplateOutlet]="step.content">
+                      [ngTemplateOutlet]="step.content()">
                     </ng-container>
                   }
                 }

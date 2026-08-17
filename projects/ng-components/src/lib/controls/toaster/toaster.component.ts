@@ -5,7 +5,7 @@ import { NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf } from 
 @Component({
     selector: 'lib-toaster',
     templateUrl: './toaster.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf]
 })
 export class ToasterComponent implements OnInit {

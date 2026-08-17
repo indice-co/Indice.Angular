@@ -4,7 +4,7 @@ import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-lay
 @Component({
     selector: 'lib-page-not-found',
     templateUrl: './page-not-found.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ViewLayoutComponent]
 })
 export class PageNotFoundComponent implements OnInit {

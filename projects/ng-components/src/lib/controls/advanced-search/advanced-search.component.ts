@@ -9,7 +9,7 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'lib-advanced-search',
     templateUrl: './advanced-search.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DropDownMenuComponent, FormsModule, DatepickerComponent, NgClass]
 })
 export class AdvancedSearchComponent implements OnInit, OnChanges {

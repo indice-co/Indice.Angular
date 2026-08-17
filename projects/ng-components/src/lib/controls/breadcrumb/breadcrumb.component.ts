@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { BreadcrumbService } from '../../services/breadcrumb.service';
 import { BreadcrumbItem } from './breadcrumb-item';
@@ -9,12 +9,13 @@ import { RouterLink } from '@angular/router';
 @Component({
     selector: 'lib-breadcrumb',
     templateUrl: './breadcrumb.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet, RouterLink, AsyncPipe]
 })
 export class BreadcrumbComponent implements OnInit {
     constructor(
-        private _breadcrumbService: BreadcrumbService
+        private _breadcrumbService: BreadcrumbService,
+        private _cdr: ChangeDetectorRef
     ) { }
 
     public ngOnInit(): void {
@@ -22,6 +23,7 @@ export class BreadcrumbComponent implements OnInit {
             .breadcrumb
             .subscribe((breadcrumb: BreadcrumbItem[]) => {
                 this.breadcrumb = [...breadcrumb, new BreadcrumbItem('', '')];
+                this._cdr.markForCheck();
             });
   }
   isAsync(value: any): boolean {

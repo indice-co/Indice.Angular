@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, input, output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
@@ -10,7 +10,7 @@ import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-dow
     // tslint:disable-next-line:component-selector
     selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ViewLayoutComponent, DropDownMenuComponent, RouterLinkActive, RouterLink, RouterOutlet]
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
@@ -67,7 +67,7 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
     }
     return this._options;
   }
-  constructor( private location: Location, private router: Router, private route: ActivatedRoute) { }
+  constructor( private location: Location, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) { }
   
   ngOnInit(): void {
     this.selectedTabSub$ = this.router.events.subscribe(event => {
@@ -80,6 +80,7 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
           }
         }
       }
+      this.cdr.markForCheck();
     });
   }
 

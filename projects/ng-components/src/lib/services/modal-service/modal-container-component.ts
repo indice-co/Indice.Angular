@@ -27,7 +27,7 @@ import { ModalService } from './modal-service';
         '[attr.aria-labelledby]': 'config.ariaLabelledBy',
         '[attr.aria-describedby]': 'config.ariaDescribedby',
     },
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalContainerComponent implements OnInit, OnDestroy {
   public level?: number;

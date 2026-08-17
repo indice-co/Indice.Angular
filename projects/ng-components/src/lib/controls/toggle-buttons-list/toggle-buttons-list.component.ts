@@ -6,7 +6,7 @@ import { DropDownMenuComponent } from '../drop-down-menu/drop-down-menu.componen
 @Component({
     selector: 'lib-toggle-buttons-list',
     templateUrl: './toggle-buttons-list.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DropDownMenuComponent]
 })
 export class ToggleButtonsListComponent implements OnInit {

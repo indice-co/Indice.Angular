@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 import { FormsModule } from '@angular/forms';
@@ -7,12 +7,13 @@ import { NgTemplateOutlet } from '@angular/common';
 @Component({
     selector: 'lib-enhanced-combobox',
     templateUrl: './enhanced-combobox.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, FormsModule, NgTemplateOutlet]
 })
 export class EnhancedComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();
     private _items: any[] = [];
+    private cdr = inject(ChangeDetectorRef);
 
     constructor() { }
 
@@ -54,6 +55,7 @@ export class EnhancedComboboxComponent implements OnInit {
             .subscribe((value: string) => {
                 this.searchTerm = value;
                 this.emitSearchEvent(value);
+                this.cdr.markForCheck();
             });
     }
 

@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core
 @Component({
     selector: 'lib-list-view-empty-state',
     templateUrl: './list-view-empty-state.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListViewEmptyStateComponent implements OnInit {
 

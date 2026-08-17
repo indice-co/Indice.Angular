@@ -11,7 +11,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
     selector: 'lib-shell-sidebar-layout',
     templateUrl: './shell-sidebar-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ShellSidebarComponent, NgTemplateOutlet, ShellSidebarHeaderComponent, BreadcrumbComponent, RouterOutlet]
 })
 export class ShellSidebarLayoutComponent implements OnInit {

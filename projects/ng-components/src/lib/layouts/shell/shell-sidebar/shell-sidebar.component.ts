@@ -10,7 +10,7 @@ import { NavLinksListComponent } from '../../../controls/nav-links-list/nav-link
 @Component({
     selector: 'lib-shell-sidebar',
     templateUrl: './shell-sidebar.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NavLinksListComponent]
 })
 export class ShellSidebarComponent implements OnInit {

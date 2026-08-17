@@ -6,7 +6,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside.directive'
     // tslint:disable-next-line:component-selector
     selector: 'lib-drop-down-menu',
     templateUrl: './drop-down-menu.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective]
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {

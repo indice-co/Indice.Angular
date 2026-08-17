@@ -2,7 +2,7 @@ import { Component, ContentChild, Input, OnInit, TemplateRef, ChangeDetectionStr
 
 @Component({
     selector: 'lib-list-details-section', template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListDetailsSectionComponent{
   @ContentChild(TemplateRef) template: any | null = null;

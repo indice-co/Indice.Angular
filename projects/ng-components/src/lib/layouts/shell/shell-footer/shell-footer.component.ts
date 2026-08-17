@@ -6,7 +6,7 @@ import { AsyncPipe } from '@angular/common';
 @Component({
     selector: 'lib-shell-footer',
     templateUrl: './shell-footer.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [AsyncPipe]
 })
 

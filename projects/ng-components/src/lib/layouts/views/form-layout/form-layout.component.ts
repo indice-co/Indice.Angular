@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -7,13 +7,13 @@ import { RouterViewAction, ViewAction } from '../../../types';
 import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'lib-form-layout', templateUrl: './form-layout.component.html', changeDetection: ChangeDetectionStrategy.Eager,
+    selector: 'lib-form-layout', templateUrl: './form-layout.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass, SidePaneComponent, RouterOutlet]
 })
 export class FormLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @ViewChild('search') private searchInput$?: ElementRef;
-  @ViewChild('formPane') formPane: SidePaneComponent | undefined;
+  private readonly searchInput$ = viewChild<ElementRef>('search');
+  readonly formPane = viewChild<SidePaneComponent>('formPane');
   @Input() title: string | null = null;
   @Input() image: string | null = null;
   @Input() icon: string | null = null;
@@ -31,8 +31,9 @@ export class FormLayoutComponent implements OnInit {
   constructor(private router$: Router) { }
 
   ngOnInit(): void {
-    if (this.searchInput$?.nativeElement){
-      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+    const searchInput$ = this.searchInput$();
+    if (searchInput$?.nativeElement){
+      fromEvent(searchInput$.nativeElement, 'keyup').pipe(
         map((event: any) => {
           return event.target.value; // Get input value.
         }),
@@ -54,7 +55,7 @@ export class FormLayoutComponent implements OnInit {
   }
 
   searchActionType(text: string): void {
-    this.onSearch.emit(this.searchInput$?.nativeElement.value);
+    this.onSearch.emit(this.searchInput$()?.nativeElement.value);
   }
 
   public routerLinkActionClick(action: RouterViewAction | any, relative: boolean = false): void {
@@ -66,12 +67,12 @@ export class FormLayoutComponent implements OnInit {
   }
 
   public onSidePaneDeactivated($event: any): void {
-    this.formPane?.onSidePaneDeactivated($event);
+    this.formPane()?.onSidePaneDeactivated($event);
     this.onComplete.emit(true);
   }
 
   public onSidePaneActivated($event: any): void {
-    this.formPane?.onSidePaneActivated($event);
+    this.formPane()?.onSidePaneActivated($event);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { NgClass } from '@angular/common';
             multi: true
         }
     ],
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass]
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
@@ -25,13 +25,15 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor() { }
-  
+
   writeValue(obj: any): void {
     if(obj) {
       this.value = obj || false;
     }
+    this.cdr.markForCheck();
   }
   registerOnChange(fn: any): void {
     this.onChange$ = fn;

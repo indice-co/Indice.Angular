@@ -1,6 +1,6 @@
 import { SwitchViewAction } from '../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
@@ -9,12 +9,12 @@ import { NgClass } from '@angular/common';
 @Component({
     selector: 'lib-view-layout',
     templateUrl: './view-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass]
 })
 export class ViewLayoutComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @ViewChild('search') private searchInput$?: ElementRef;
+  private readonly searchInput$ = viewChild<ElementRef>('search');
   // tslint:disable-next-line:no-input-rename
   readonly header = input(true, { alias: "show-header" });
   readonly fluid = input(false);
@@ -35,8 +35,9 @@ export class ViewLayoutComponent implements OnInit {
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 
   ngOnInit(): void {
-    if (this.searchInput$?.nativeElement){
-      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+    const searchInput$ = this.searchInput$();
+    if (searchInput$?.nativeElement){
+      fromEvent(searchInput$.nativeElement, 'keyup').pipe(
         map((event: any) => {
           return event.target.value; // Get input value.
         }),
@@ -66,7 +67,7 @@ export class ViewLayoutComponent implements OnInit {
   }
 
   searchActionType(text: string): void {
-    this.onSearch.emit(this.searchInput$?.nativeElement.value);
+    this.onSearch.emit(this.searchInput$()?.nativeElement.value);
   }
 
   public handleClear(event: any): void {

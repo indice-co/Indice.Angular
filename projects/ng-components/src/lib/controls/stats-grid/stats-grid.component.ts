@@ -5,7 +5,7 @@ import { DecimalPipe } from '@angular/common';
 @Component({
     selector: 'lib-stats-grid',
     templateUrl: './stats-grid.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [DecimalPipe]
 })
 export class StatsGridComponent implements OnChanges {

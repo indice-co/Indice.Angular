@@ -2,7 +2,7 @@ import { Component, ContentChild, OnInit, TemplateRef, ChangeDetectionStrategy, 
 
 @Component({
     selector: 'lib-list-column', template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListColumnComponent {
   readonly title = input<string | null>(null);

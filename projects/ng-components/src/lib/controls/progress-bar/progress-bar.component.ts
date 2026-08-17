@@ -3,7 +3,7 @@ import { Component, OnChanges, SimpleChanges, ChangeDetectionStrategy, input } f
 @Component({
     selector: 'lib-progress-bar',
     templateUrl: './progress-bar.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressBarComponent implements OnChanges {
   readonly value = input<number>(0);

@@ -2,7 +2,7 @@ import { Component, ContentChild, Input, OnInit, TemplateRef, ChangeDetectionStr
 
 @Component({
     selector: 'lib-list-tile', template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.Eager
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListTileComponent{
   @ContentChild(TemplateRef) template: any | null = null;

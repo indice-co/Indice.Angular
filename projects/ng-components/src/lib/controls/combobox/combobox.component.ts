@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -9,12 +9,13 @@ import { NgTemplateOutlet } from '@angular/common';
 @Component({
     selector: 'lib-combobox',
     templateUrl: './combobox.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective, FormsModule, NgTemplateOutlet]
 })
 export class ComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();
     private _items: any[] = [];
+    private cdr = inject(ChangeDetectorRef);
 
     private _defaultItemsFilter = (item: any) => {
         const selectedItem = this.selectedItems.find(x => x == item);
@@ -70,6 +71,7 @@ export class ComboboxComponent implements OnInit {
             .subscribe((value: string) => {
                 this.searchTerm = value;
                 this.emitSearchEvent(value);
+                this.cdr.markForCheck();
             });
     }
 

@@ -4,7 +4,7 @@ import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-lay
 @Component({
     selector: 'lib-unauthorized',
     templateUrl: './unauthorized.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ViewLayoutComponent]
 })
 export class UnauthorizedComponent implements OnInit {
