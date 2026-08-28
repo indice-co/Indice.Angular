@@ -11,21 +11,16 @@ import { NgClass } from '@angular/common';
     imports: [NgClass, SidePaneComponent, RouterOutlet]
 })
 export class FormLayoutComponent implements OnInit {
-  // tslint:disable-next-line:no-input-rename
-  private readonly searchInput$ = viewChild<ElementRef>('search');
+   private readonly searchInput$ = viewChild<ElementRef>('search');
   readonly formPane = viewChild<SidePaneComponent>('formPane');
   @Input() title: string | null = null;
   @Input() image: string | null = null;
   @Input() icon: string | null = null;
-  // tslint:disable-next-line:no-input-rename
-  readonly searchPlaceholder = input<string | null>('αναζήτηση', { alias: "search-placeholder" });
+   readonly searchPlaceholder = input<string | null>('αναζήτηση', { alias: "search-placeholder" });
   @Input() actions: ViewAction[] | null = null;
-  // tslint:disable-next-line:no-input-rename
-  @Input('sub-title') subTitle: string | null = null;
-  // tslint:disable-next-line:no-output-on-prefix
-  readonly onAction = output<ViewAction>();
-  // tslint:disable-next-line:no-output-on-prefix
-  readonly onSearch = output<string>();
+   @Input('sub-title') subTitle: string | null = null;
+   readonly onAction = output<ViewAction>();
+   readonly onSearch = output<string>();
   readonly onComplete = output<boolean>();
 
   constructor(private router$: Router) { }
@@ -58,7 +53,7 @@ export class FormLayoutComponent implements OnInit {
     this.onSearch.emit(this.searchInput$()?.nativeElement.value);
   }
 
-  public routerLinkActionClick(action: RouterViewAction | any, relative: boolean = false): void {
+  public routerLinkActionClick(action: RouterViewAction | any, relative = false): void {
     if (action.outlet) {
       this.router$.navigate(['', { outlets: { formRightPane: action.link } }]);
     } else {

@@ -66,18 +66,18 @@ export class AdvancedSearchPlaygroundComponent extends BaseListComponent<SampleV
   }
 
   loadItems(): Observable<IResultSet<SampleViewModel> | null | undefined> {
-    let title = this.filters?.find(f => f.member === 'title')?.value;
-    let description = this.filters?.find(f => f.member === 'description')?.value;
-    let from = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.GREATER_THAN_EQUAL.value as FilterClause.Op)?.value);
-    let to = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.LESS_THAN_EQUAL.value as FilterClause.Op)?.value);
-    let status: string[] = [];
+    const title = this.filters?.find(f => f.member === 'title')?.value;
+    const description = this.filters?.find(f => f.member === 'description')?.value;
+    const from = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.GREATER_THAN_EQUAL.value as FilterClause.Op)?.value);
+    const to = new Date(this.filters?.find(f => f.member === 'dateRange' && f.operator === Operators.LESS_THAN_EQUAL.value as FilterClause.Op)?.value);
+    const status: string[] = [];
     this.filters?.filter(f => f.member === 'status')?.forEach(f => status.push(f.value));
     console.log('title: ' + title);
     console.log('description: ' + description);
     console.log('from: ' + from);
     console.log('to: ' + to);
     console.log('status: ' + status);
-    let items = Array(20).fill(ShellLayoutsListSamples[0]);
+    const items = Array(20).fill(ShellLayoutsListSamples[0]);
     return of({ count: items.length, items }).pipe(delay(1200));
   }
 

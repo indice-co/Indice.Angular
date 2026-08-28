@@ -53,7 +53,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
 
   private sizeToClass(size?: SidePaneSize): string {
     if(!size) return 'side-pane-box-size';
-    let sizeStyleSuffix: string = '-25';
+    let sizeStyleSuffix = '-25';
     if (size === SidePaneSize.Small25) {
       sizeStyleSuffix = '-25';
     } else if (size === SidePaneSize.Medium50) {

@@ -46,9 +46,7 @@ export namespace FilterClause {
 }
 
 // Dictionary with the DataType as a key and the value an array of available operators.
-export interface IDictionary<T> {
-  [key: string]: T;
-}
+export type IDictionary<T> = Record<string, T>;
 
 export const OperatorOptions: IDictionary<{ label: string; value: string; description?: string }[]> = {
   'string': [Operators.EQUALS, Operators.NOT_EQUALS, Operators.CONTAINS],
@@ -79,7 +77,7 @@ export class FilterClause {
       this.uiName = this.member === QueryParameters.FILTER_FROM ? 'From' : 'To';
     } else {
       this.uiName = this.member;
-      let fo = <any>{};
+      let fo = {} as any;
       if (searchOptions && searchOptions.length > 0) {
         fo = searchOptions.find((f) => {
           return f.field === this.member;
@@ -131,8 +129,8 @@ export class FilterClause {
       const matches = pattern.exec(text);
       if (matches != null) {
         const path = matches[1];
-        const op = <FilterClause.Op>matches[2];
-        const dt = <FilterClause.Dt>matches[4];
+        const op = matches[2] as FilterClause.Op;
+        const dt = matches[4] as FilterClause.Dt;
         const v = matches[5];
 
         return new FilterClause(path, v, op, dt);

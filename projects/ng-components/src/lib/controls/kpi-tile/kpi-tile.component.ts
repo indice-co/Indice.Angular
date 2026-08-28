@@ -14,8 +14,7 @@ export class KpiTileComponent implements OnInit {
   readonly kpi = input<any>();
   readonly hideBtn = input<boolean | undefined>(false);
   readonly actionText = input<string>('More', { alias: "action-text" });
-  // tslint:disable-next-line:no-output-rename
-  readonly tileAction = output<any>({ alias: 'tile-action' });
+   readonly tileAction = output<any>({ alias: 'tile-action' });
   constructor() { }
 
   ngOnInit(): void {

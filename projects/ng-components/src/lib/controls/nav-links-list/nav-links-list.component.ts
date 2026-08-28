@@ -13,16 +13,11 @@ import { AsyncPipe } from '@angular/common';
 export class NavLinksListComponent implements OnInit, OnDestroy {
 
   readonly links = input<Observable<NavLink[]>>();
-  // tslint:disable-next-line:no-input-rename
-  readonly activeFragment = input<Observable<string>>(undefined, { alias: "active-fragment" });
-  // tslint:disable-next-line:no-input-rename
-  readonly navLinkClass = input<string | string>('nav-link', { alias: "link-class" });
-  // tslint:disable-next-line:no-input-rename
-  readonly navLinkActiveClass = input<string | string[]>('nav-link-active', { alias: "link-active-class" });
-  // tslint:disable-next-line:no-input-rename
-  readonly containerClass = input<string | string[]>(undefined, { alias: "container-class" });
-  // tslint:disable-next-line:no-input-rename
-  readonly showIcons = input<boolean | undefined>(false, { alias: "show-icons" });
+   readonly activeFragment = input<Observable<string>>(undefined, { alias: "active-fragment" });
+   readonly navLinkClass = input<string | string>('nav-link', { alias: "link-class" });
+   readonly navLinkActiveClass = input<string | string[]>('nav-link-active', { alias: "link-active-class" });
+   readonly containerClass = input<string | string[]>(undefined, { alias: "container-class" });
+   readonly showIcons = input<boolean | undefined>(false, { alias: "show-icons" });
   readonly showText = input<boolean | undefined>(true, { alias: "show-text" });
   readonly largeIcons = input<boolean>(false, { alias: "large-icons" });
   public fragmentValue: string | undefined;

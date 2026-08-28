@@ -16,10 +16,8 @@ export class PagerComponent implements OnInit, OnChanges {
   // PAGING
   readonly count = input<number | null>(null);
   @Input() page = 1;
-  // tslint:disable-next-line:no-input-rename
-  readonly pageSize = input(20, { alias: "page-size" });
-  // tslint:disable-next-line:no-input-rename
-  readonly pageSizeOptions = input<MenuOption[]>([
+   readonly pageSize = input(20, { alias: "page-size" });
+   readonly pageSizeOptions = input<MenuOption[]>([
     new MenuOption('10', 10),
     new MenuOption('20', 20),
     new MenuOption('30', 30),
@@ -33,12 +31,9 @@ export class PagerComponent implements OnInit, OnChanges {
   public canNextPage = false;
 
   // SORTING
-  // tslint:disable-next-line:no-input-rename
-  @Input('sort-options') sortOptions: MenuOption[] = [];
-  // tslint:disable-next-line:no-input-rename
-  readonly sort = input<string | null>(null);
-  // tslint:disable-next-line:no-input-rename
-  readonly sortdir = input<string | null>('desc', { alias: "sort-dir" });
+   @Input('sort-options') sortOptions: MenuOption[] = [];
+   readonly sort = input<string | null>(null);
+   readonly sortdir = input<string | null>('desc', { alias: "sort-dir" });
   readonly sortChanged = output<string>();
   readonly sortdirChanged = output<string>();
   public sortdirIcon = Icons.SortDesc;
@@ -96,7 +91,7 @@ export class PagerComponent implements OnInit, OnChanges {
   }
 
   public toggleSortdir(): void {
-    let sortdir = 'desc';
+    let sortdir: string;
     if (this.sortdir() === 'desc') {
       sortdir = 'asc';
       this.sortdirIcon = Icons.SortAsc;

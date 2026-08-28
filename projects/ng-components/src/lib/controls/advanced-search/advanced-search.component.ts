@@ -21,13 +21,13 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
   public menuOptions: MenuOption[] = [];
   public operatorMenuOptions: MenuOption[] = [];
   public operatorOptions = OperatorOptions;
-  public operators: { [key: string]: MenuOption[] } = {};
+  public operators: Record<string, MenuOption[]> = {};
   public selectedOperator?: string;
   public selectedField?: SearchOption;
   public fieldValue?: string;
   public fieldValueDateFrom: any;
   public fieldValueDateTo: any;
-  public menuOptionsDictionary: { [key: string]: MenuOption[] } = {};
+  public menuOptionsDictionary: Record<string, MenuOption[]> = {};
 
   constructor() { }
 
@@ -68,7 +68,7 @@ export class AdvancedSearchComponent implements OnInit, OnChanges {
     this.selectedOperator = undefined;
     // Since we have special UI handling for the daterange, we don't need to fill the operatorMenuOptions in that case.
     if (this.selectedField?.dataType != 'daterange') {
-      let operatorMenuOpts: MenuOption[] = [];
+      const operatorMenuOpts: MenuOption[] = [];
       // based on the data type that we are filtering, fill the operator dropdown with the correct operators. The default is the string with equals/not-equals/contains
       this.operatorOptions[this.selectedField?.dataType ?? 'string'].forEach(x => {
         operatorMenuOpts.push({

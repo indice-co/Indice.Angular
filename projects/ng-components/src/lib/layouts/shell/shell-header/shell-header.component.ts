@@ -13,25 +13,18 @@ import { NotificationsIndicatorComponent } from '../../../controls/notifications
 import { LanguageSelectionComponent } from '../../../controls/language-selection/language-selection.component';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-shell-header',
+       selector: 'lib-shell-header',
     templateUrl: './shell-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [RouterLink, NavLinksListComponent, ClickOutsideDirective, UserProfileMenuComponent, NotificationsIndicatorComponent, LanguageSelectionComponent]
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line:no-input-rename
-  readonly sectionLinksPath = input('main', { alias: "section-links" });
-  // tslint:disable-next-line:no-input-rename
-  readonly profileMenuVisible = input(true, { alias: "profile-menu" });
-  // tslint:disable-next-line:no-input-rename
-  readonly showUserNameOnHeader = input<boolean | undefined>(false, { alias: "show-userName" });
-  // tslint:disable-next-line:no-input-rename
-  readonly showPictureOnHeader = input<boolean | undefined>(true, { alias: "show-picture" });
-  // tslint:disable-next-line:no-input-rename
-  readonly showAlerts = input<boolean | undefined>(false, { alias: "show-alerts" });
-  // tslint:disable-next-line:no-input-rename
-  readonly showLangs = input<boolean | undefined>(false, { alias: "show-langs" });
+   readonly sectionLinksPath = input('main', { alias: "section-links" });
+   readonly profileMenuVisible = input(true, { alias: "profile-menu" });
+   readonly showUserNameOnHeader = input<boolean | undefined>(false, { alias: "show-userName" });
+   readonly showPictureOnHeader = input<boolean | undefined>(true, { alias: "show-picture" });
+   readonly showAlerts = input<boolean | undefined>(false, { alias: "show-alerts" });
+   readonly showLangs = input<boolean | undefined>(false, { alias: "show-langs" });
   readonly border = input(true);
   readonly busy = input<boolean>(false);
   public sectionLinks: Observable<NavLink[]> = of([]);
@@ -91,8 +84,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  public onClickOutside($event: any) {
+   public onClickOutside($event: any) {
     this.userMenuExpanded = false;
   }
 

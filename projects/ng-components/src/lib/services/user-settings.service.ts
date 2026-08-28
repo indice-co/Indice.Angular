@@ -8,11 +8,11 @@ import { UserSettingKey } from '../types';
 export class UserSettingsService {
     private static SETTINGS_KEY = '@indice/ng-components_user-settings';
 
-    private _defaultPreferences: { [key in UserSettingKey]: any } = {
+    private _defaultPreferences: Record<UserSettingKey, any> = {
         'MobileSideBar': true
     };
 
-    public getAll(): { [key in UserSettingKey]: any } {
+    public getAll(): Record<UserSettingKey, any> {
         const settingsJson = localStorage.getItem(UserSettingsService.SETTINGS_KEY);
         if (settingsJson) {
             return JSON.parse(settingsJson);

@@ -9,12 +9,12 @@ import { IAuthSettings } from '../types';
 })
 export class ImgUserPictureDirective implements OnInit {
     private _userId: string | undefined | null;
-    private _size: number = 48;
-    private _displayName: string = 'John Doe';
+    private _size = 48;
+    private _displayName = 'John Doe';
     private _color: string | undefined | null = undefined;
     private _img: HTMLImageElement;
-    private _version: number = 0;
-    private _initialized: boolean = false;
+    private _version = 0;
+    private _initialized = false;
 
     constructor(@Inject(AUTH_SETTINGS) private authSettings: IAuthSettings, element: ElementRef) {
         this._img = element.nativeElement as HTMLImageElement;
@@ -92,16 +92,16 @@ export class ImgUserPictureDirective implements OnInit {
     }
 
     private setProfileSrc() {
-        let fallbackParts = ['/avatar', this._displayName, this._size, this._color].filter(x => !!(x)).join('/');
+        const fallbackParts = ['/avatar', this._displayName, this._size, this._color].filter(x => !!(x)).join('/');
         if (!this._userId) {
-            let srcParts = ['/api/my/account/picture', this._size].join('/');
+            const srcParts = ['/api/my/account/picture', this._size].join('/');
             this._img.src=`${this.authSettings.authority}${srcParts}?d=${encodeURIComponent(fallbackParts)}&v=${this._version}`;// create my link
             return;
         }
         (async () => {
             // create public link
             const hash = await this.generateSHA256Hash(this._userId!);
-            let srcParts = ['/pictures', hash, this._size].join('/');
+            const srcParts = ['/pictures', hash, this._size].join('/');
             this._img.src=`${this.authSettings.authority}${srcParts}?d=${encodeURIComponent(fallbackParts)}&v=${this._version}`;
         })();
         this._img.alt = `Profile picture ${this._displayName}`;

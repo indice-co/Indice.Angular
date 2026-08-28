@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Contact } from './contact';
@@ -11,7 +11,7 @@ import { EnhancedComboboxComponent } from 'projects/ng-components/src/public-api
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class SampleEnhancedComboboxComponent implements OnInit {
+export class SampleEnhancedComboboxComponent implements OnInit, AfterViewInit {
     @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: EnhancedComboboxComponent;
 
     constructor(
@@ -22,11 +22,11 @@ export class SampleEnhancedComboboxComponent implements OnInit {
     public submitInProgress = false;
     public contacts: Contact[] = [];
     public contactNames: string[] = [];
-    public contactsLoading: boolean = false;
-    public displayShowMoreOption: boolean = false;
+    public contactsLoading = false;
+    public displayShowMoreOption = false;
 
-    private _page: number = 1;
-    private _pageSize: number = 3;
+    private _page = 1;
+    private _pageSize = 3;
     private _lastSearchTerm: string | undefined = undefined;
 
     public ngOnInit(): void { }

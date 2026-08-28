@@ -17,7 +17,7 @@ import { NgTemplateOutlet } from '@angular/common';
 })
 export class LibStepperComponent implements OnInit, AfterViewChecked {
     // Private properties.
-    private _currentStepIndex: number = 0;
+    private _currentStepIndex = 0;
     private _isCompleted = false;
 
     constructor(private _changeDetectorRef: ChangeDetectorRef) { }

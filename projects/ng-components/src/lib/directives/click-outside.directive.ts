@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-// tslint:disable-next-line:directive-selector
+
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
@@ -34,15 +34,15 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   readonly clickOutside = output<Event>();
 
-  // tslint:disable-next-line:variable-name
-  private _nodesExcluded: Array<HTMLElement> = [];
-  // tslint:disable-next-line:variable-name
-  private _events: Array<string> = ['click'];
+ 
+  private _nodesExcluded: HTMLElement[] = [];
+ 
+  private _events: string[] = ['click'];
 
   constructor(
-    // tslint:disable-next-line:variable-name
+   
     private _el: ElementRef,
-    // tslint:disable-next-line:variable-name
+   
     private _ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
@@ -67,7 +67,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    // tslint:disable-next-line:no-string-literal
+   
     if (changes['attachOutsideOnClick'] || changes['exclude'] || changes['emitOnBlur']) {
       this._init();
     }
@@ -104,7 +104,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     const exclude = this.exclude();
     if (exclude) {
       try {
-        const nodes = Array.from(document.querySelectorAll(exclude)) as Array<HTMLElement>;
+        const nodes = Array.from(document.querySelectorAll(exclude)) as HTMLElement[];
         if (nodes) {
           this._nodesExcluded = nodes;
         }
@@ -149,8 +149,8 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _shouldExclude(target: any): boolean {
-    // tslint:disable-next-line:prefer-const
-    for (let excludedNode of this._nodesExcluded) {
+   
+    for (const excludedNode of this._nodesExcluded) {
       if (excludedNode.contains(target)) {
         return true;
       }

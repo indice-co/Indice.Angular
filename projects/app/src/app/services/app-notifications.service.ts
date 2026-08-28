@@ -8,8 +8,8 @@ import { BehaviorSubject, Observable, of, timer } from 'rxjs';
 })
 export class AppNotificationsService implements IAppNotifications {
 
-  // tslint:disable-next-line:variable-name
-  private messages$: BehaviorSubject<any> = new BehaviorSubject({items: [], count: 0});
+ 
+  private messages$ = new BehaviorSubject<any>({items: [], count: 0});
   private monitoring = false;
   private statusTimer$: any;
   private messagesValue: IResultSet<NavLink> = {items: [], count: 0 };

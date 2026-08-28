@@ -6,8 +6,7 @@ import { Component, ContentChild, OnInit, TemplateRef, ChangeDetectionStrategy, 
 })
 export class ListColumnComponent {
   readonly title = input<string | null>(null);
-  // tslint:disable-next-line:no-input-rename
-  readonly fullWidth = input(false, { alias: "full-width" });
+   readonly fullWidth = input(false, { alias: "full-width" });
   @ContentChild(TemplateRef) template: any | null = null;
   constructor() { }
 }

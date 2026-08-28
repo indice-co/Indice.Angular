@@ -4,8 +4,7 @@ import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-lay
 
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-logged-out',
+       selector: 'lib-logged-out',
     templateUrl: './logged-out.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ViewLayoutComponent]

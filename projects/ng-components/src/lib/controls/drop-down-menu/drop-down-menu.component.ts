@@ -3,16 +3,14 @@ import { MenuOption } from '../../types';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-drop-down-menu',
+       selector: 'lib-drop-down-menu',
     templateUrl: './drop-down-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ClickOutsideDirective]
 })
 export class DropDownMenuComponent implements OnInit, OnChanges {
   @Input() options: MenuOption[] | undefined = [];
-  // tslint:disable-next-line:no-input-rename
-  @Input('selected') selectedValue: any | null | undefined = undefined;
+   @Input('selected') selectedValue: any | null | undefined = undefined;
   readonly multiple = input(false);
   readonly placeholder = input<string>('Please select...');
   readonly showIcons = input(true, { alias: "show-icons" });

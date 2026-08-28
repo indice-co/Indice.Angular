@@ -13,24 +13,18 @@ import { NgClass } from '@angular/common';
     imports: [NgClass]
 })
 export class ViewLayoutComponent implements OnInit {
-  // tslint:disable-next-line:no-input-rename
-  private readonly searchInput$ = viewChild<ElementRef>('search');
-  // tslint:disable-next-line:no-input-rename
-  readonly header = input(true, { alias: "show-header" });
+   private readonly searchInput$ = viewChild<ElementRef>('search');
+   readonly header = input(true, { alias: "show-header" });
   readonly fluid = input(false);
   readonly title = input('no title');
   @Input() icon: string | null = null;
   readonly actions = input<ViewAction[] | null>(null);
   readonly busy = input(false);
-  // tslint:disable-next-line:no-input-rename
-  readonly searchPlaceholder = input<string | null>('search', { alias: "search-placeholder" });
+   readonly searchPlaceholder = input<string | null>('search', { alias: "search-placeholder" });
   @Input() view: string | null = null;
-  // tslint:disable-next-line:no-input-rename
-  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
-  // tslint:disable-next-line:no-output-on-prefix
-  readonly onAction = output<ViewAction>();
-  // tslint:disable-next-line:no-output-on-prefix
-  readonly onSearch = output<string>();
+   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
+   readonly onAction = output<ViewAction>();
+   readonly onSearch = output<string>();
 
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 

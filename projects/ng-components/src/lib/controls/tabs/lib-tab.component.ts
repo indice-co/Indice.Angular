@@ -15,7 +15,7 @@ import { LibTabLabelDirective } from './lib-tab-label.directive';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LibTabComponent implements OnInit {
-    private _isActive: boolean = false;
+    private _isActive = false;
 
     constructor(
         @Optional() @Inject(LIBTABGROUP_ACCESSOR) public readonly _tabGroup?: any

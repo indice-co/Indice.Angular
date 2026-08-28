@@ -6,7 +6,7 @@
                        (advancedSearchChanged)="emitAdvancedSearchChanged($event)">
   </lib-advanced-search>
 
-  <lib-pager *ngIf="showPager() && (pagerPosition == 'top' || pagerPosition == 'both')"
+  <lib-pager *ngIf="showPager() && (pagerPosition === 'top' || pagerPosition === 'both')"
              [page]="page()"
              [page-size]="pageSize()"
              [count]="count()"
@@ -158,7 +158,7 @@
 <ng-content></ng-content>
 
 <div class="px-2 mt-2"
-     *ngIf="items && items.length !== 0 && showPager() && (pagerPosition == 'bottom' || pagerPosition == 'both')">
+     *ngIf="items && items.length !== 0 && showPager() && (pagerPosition === 'bottom' || pagerPosition === 'both')">
   <lib-pager [page]="page()"
              [page-size]="pageSize()"
              [count]="count()"

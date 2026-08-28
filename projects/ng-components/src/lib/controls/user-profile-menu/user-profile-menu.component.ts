@@ -16,8 +16,7 @@ import { NavLinksListComponent } from '../nav-links-list/nav-links-list.componen
 })
 export class UserProfileMenuComponent implements OnInit {
 
-  // tslint:disable-next-line:no-input-rename
-  readonly showUserName = input<boolean | undefined>(false, { alias: "show-user-name" });
+   readonly showUserName = input<boolean | undefined>(false, { alias: "show-user-name" });
   readonly showPicture = input<boolean | undefined>(false, { alias: "show-picture" });
   protected userSub$: Subscription | null = null;
   protected statusSub$: Subscription | null = null;
@@ -59,8 +58,7 @@ export class UserProfileMenuComponent implements OnInit {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  public onClickOutside($event: any) {
+   public onClickOutside($event: any) {
     this.userMenuExpanded = false;
   }
 

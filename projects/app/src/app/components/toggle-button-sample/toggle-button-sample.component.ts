@@ -8,8 +8,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class ToggleButtonSampleComponent implements OnInit {
 
-  public toggleValue: boolean = false;
-  public toggleDisabled: boolean = false;
+  public toggleValue = false;
+  public toggleDisabled = false;
   
   constructor() { }
 

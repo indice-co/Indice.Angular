@@ -7,8 +7,7 @@ import { ViewLayoutComponent } from '../view-layout/view-layout.component';
 import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-down-menu.component';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-model-view-layout',
+       selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ViewLayoutComponent, DropDownMenuComponent, RouterLinkActive, RouterLink, RouterOutlet]
@@ -16,24 +15,21 @@ import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-dow
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;
   readonly title = input('no title');
-  // tslint:disable-next-line:no-input-rename
-  readonly primary = input<{
+   readonly primary = input<{
     type?: string;
     text: string;
     link: string;
     icon?: string;
     exact?: boolean;
 }[] | null>(null, { alias: "primary-links" });
-  // tslint:disable-next-line:no-input-rename
-  readonly secondary = input<{
+   readonly secondary = input<{
     type?: string;
     text: string;
     link: string;
     icon?: string;
     exact?: boolean;
 }[] | null>(null, { alias: "secondary-links" });
-  // tslint:disable-next-line:no-input-rename
-  readonly metaItems = input<HeaderMetaItem[] | null>([
+   readonly metaItems = input<HeaderMetaItem[] | null>([
 // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
 ], { alias: "meta-items" });
   readonly icon = input<string | null>(null);
@@ -73,7 +69,7 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
     this.selectedTabSub$ = this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd ) {
         if(event.urlAfterRedirects) {
-          var urlParts = event.urlAfterRedirects.split('/');
+          const urlParts = event.urlAfterRedirects.split('/');
           if(urlParts && urlParts.length > 0) {
             const lastPart = urlParts[urlParts.length-1];
             this.selectedTab = lastPart.split('?')[0];

@@ -30,7 +30,7 @@ export interface IAppLinks {
 
 
 export class NavLink {
-  constructor(text: string, path: string, exact: boolean = false, external: boolean = false, icon?: string, data?: any, queryParams?: Params) {
+  constructor(text: string, path: string, exact = false, external = false, icon?: string, data?: any, queryParams?: Params) {
     this.text = text;
     this.path = path;
     this.exact = exact;
@@ -256,7 +256,7 @@ export interface IValidationProblemDetails {
   status?: number | undefined;
   detail?: string | undefined;
   instance?: string | undefined;
-  errors?: { [key: string]: string[]; } | undefined;
+  errors?: Record<string, string[]> | undefined;
 }
 
 export type UserSettingKey = 'MobileSideBar';

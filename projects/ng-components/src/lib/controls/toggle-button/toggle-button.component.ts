@@ -14,13 +14,13 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleButtonComponent implements OnInit {
-  @Input() value: boolean = false;
+  @Input() value = false;
   readonly disabled = input<boolean>(false);
   readonly icon = input<boolean>(true);
-  @Input('text') text: string | null | undefined;
+  @Input() text: string | null | undefined;
   readonly textTrue = input<string | null>(undefined, { alias: "text-true" });
   readonly textFalse = input<string | null>(undefined, { alias: "text-false" });
-  @Input('description') description: string | null | undefined;
+  @Input() description: string | null | undefined;
   readonly descriptionTrue = input<string | null>(undefined, { alias: "description-true" });
   readonly descriptionFalse = input<string | null>(undefined, { alias: "description-false" });
   readonly valueChange = output<boolean>();

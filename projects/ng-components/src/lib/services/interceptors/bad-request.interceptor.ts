@@ -21,7 +21,7 @@ export class BadRequestInterceptor implements HttpInterceptor {
                 if (error instanceof HttpErrorResponse && error.status === 400) {
                     const fileReader = new FileReader();
                     fileReader.addEventListener('loadend', () => {
-                        // tslint:disable-next-line:no-non-null-assertion
+                       
                         const problemDetails = fileReader.result!;
                         this.toaster.show(ToastType.Error, 'Αποτυχία αιτήματος', `${this.utilities.getValidationProblemDetails(JSON.parse(problemDetails.toString()))}`, 6000);
                     });

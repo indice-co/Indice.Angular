@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class AppLinks implements IAppLinks {
-  // tslint:disable-next-line:variable-name
+ 
   constructor() {
 
   }

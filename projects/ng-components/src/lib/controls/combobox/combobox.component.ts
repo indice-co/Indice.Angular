@@ -27,7 +27,7 @@ export class ComboboxComponent implements OnInit {
     public readonly id = input<string>('combobox');
     public readonly placeholder = input<string>();
 
-    @Input('items') public set items(items: any[]) {
+    @Input() public set items(items: any[]) {
         if (!this.itemTemplate()) {
             this._items = items.filter(this._defaultItemsFilter);
         } else {
@@ -48,14 +48,14 @@ export class ComboboxComponent implements OnInit {
     public readonly selectedItemTemplate = input<TemplateRef<HTMLElement>>();
     @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
     public readonly busy = input<boolean>(false);
-    @Input() public multiple: boolean = true;
+    @Input() public multiple = true;
     public readonly debounceMs = input<number>(1000);
     public readonly onSearch = output<string | undefined>();
     public readonly onItemSelected = output<any>();
-    public showResults: boolean = false;
+    public showResults = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
-    protected searchTerm: string = '';
+    protected searchTerm = '';
 
     public ngOnInit(): void {
         if (this.itemTemplate() && !this.multiple) {

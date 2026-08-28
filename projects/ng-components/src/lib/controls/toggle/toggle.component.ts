@@ -21,7 +21,7 @@ export class ToggleComponent implements OnInit, ControlValueAccessor {
   public readonly disabled = input<boolean | null>();
   readonly privateLabel = input<string>('Private');
   readonly publicLabel = input<string>('The file should be private'); 
-  readonly valueChange = output<Boolean>();
+  readonly valueChange = output<boolean>();
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;

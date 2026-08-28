@@ -49,7 +49,7 @@ export class ModalService implements OnDestroy {
    * @param config - Specific {@link ModalOptions | options}  for this modal. Global and specific options are merged.
    * @returns An instance of {@link Modal}
    */
-  public show<T>(content: string | TemplateRef<any> | { new (...args: any[]): T }, config?: ModalOptions<T>) {
+  public show<T>(content: string | TemplateRef<any> | (new (...args: any[]) => T), config?: ModalOptions<T>) {
     this.modalsCount++;
     const combinedConfig = { ...this.defaultConfig, ...config };
     combinedConfig.id = config?.id || new Date().getUTCMilliseconds();

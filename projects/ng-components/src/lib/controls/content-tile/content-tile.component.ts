@@ -35,8 +35,7 @@ export class ContentTileComponent implements OnInit {
   readonly showAction = input<boolean | undefined>(true, { alias: "show-action" });
   readonly showFooter = input<boolean | undefined>(true, { alias: "show-footer" });
   readonly actionText = input<string>('More', { alias: "action-text" });
-  // tslint:disable-next-line:no-output-rename
-  readonly tileAction = output<any>({ alias: 'tile-action' });
+   readonly tileAction = output<any>({ alias: 'tile-action' });
   public selectedIndex = 0;
 
   public itemTemplates: any[] = [];

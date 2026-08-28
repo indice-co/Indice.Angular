@@ -11,20 +11,13 @@ export class SideViewLayoutComponent implements OnInit {
   readonly title = input<string | null>('Πληροφορίες');
   readonly showActions = input(true);
   readonly disabled = input(false);
-  // tslint:disable-next-line:no-input-rename
-  readonly returnPath = input<string>(undefined, { alias: "return-path" });
-  // tslint:disable-next-line:no-input-rename
-  readonly okLabel = input('Αποθήκευση', { alias: "ok-label" });
-  // tslint:disable-next-line:no-input-rename
-  readonly okShow = input(true, { alias: "ok-show" });
-  // tslint:disable-next-line:no-input-rename
-  readonly closeOnOk = input(true, { alias: "ok-close-dialog" });
-  // tslint:disable-next-line:no-input-rename
-  readonly cancelLabel = input('Ακύρωση', { alias: "cancel-label" });
-  // tslint:disable-next-line:no-input-rename
-  readonly cancelShow = input(true, { alias: "cancel-show" });
-  // tslint:disable-next-line:no-input-rename
-  readonly forceLocationBack = input(false, { alias: "force-location-back" });
+   readonly returnPath = input<string>(undefined, { alias: "return-path" });
+   readonly okLabel = input('Αποθήκευση', { alias: "ok-label" });
+   readonly okShow = input(true, { alias: "ok-show" });
+   readonly closeOnOk = input(true, { alias: "ok-close-dialog" });
+   readonly cancelLabel = input('Ακύρωση', { alias: "cancel-label" });
+   readonly cancelShow = input(true, { alias: "cancel-show" });
+   readonly forceLocationBack = input(false, { alias: "force-location-back" });
   readonly redirectOnClose = input(true, { alias: "redirect-on-close" });
   // @Output() close = new EventEmitter<any>();
   readonly cancel = output<boolean>();

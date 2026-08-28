@@ -29,7 +29,7 @@ export class EnhancedComboboxComponent implements OnInit {
     public readonly equalityPredicate = input<(item: any, otherItem: any) => boolean>((x, y) => x === y);
     public readonly selectedItemsFilter = input<(item: any) => boolean>(() => true);
 
-    @Input('items') public set items(items: any[]) {
+    @Input() public set items(items: any[]) {
         this._items = items;
     }
     public get items(): any[] {
@@ -40,10 +40,10 @@ export class EnhancedComboboxComponent implements OnInit {
     public readonly onItemSelected = output<any>();
     public readonly onShowMore = output<any>();
 
-    public showResults: boolean = false;
+    public showResults = false;
     public selectedItems: any[] = [];
     public value: string | undefined;
-    protected searchTerm: string = '';
+    protected searchTerm = '';
 
     public ngOnInit(): void {
         this.emitSearchEvent();

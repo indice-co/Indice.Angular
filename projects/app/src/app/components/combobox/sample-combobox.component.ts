@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 
 import { ComboboxComponent } from 'projects/ng-components/src/public-api';
 import { Contact, ContactResultSet } from './contact';
@@ -10,7 +10,7 @@ import { Contact, ContactResultSet } from './contact';
     changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class SampleComboboxComponent implements OnInit {
+export class SampleComboboxComponent implements OnInit, AfterViewInit {
     @ViewChild('advancedContactsCombobox', { static: true }) private _advancedContactsCombobox!: ComboboxComponent;
 
     constructor(
@@ -21,8 +21,8 @@ export class SampleComboboxComponent implements OnInit {
     public submitInProgress = false;
     public contacts: Contact[] = [];
     public contactNames: string[] = [];
-    public advancedContactsLoading: boolean = false;
-    public contactsLoading: boolean = false;
+    public advancedContactsLoading = false;
+    public contactsLoading = false;
 
     public advancedContactsFilter = (item: any) => {
         const selectedItem = this._advancedContactsCombobox.selectedItems.find(x => x.id == item.id);

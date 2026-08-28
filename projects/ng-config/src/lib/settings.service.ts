@@ -17,6 +17,6 @@ export class SettingsDataService {
     }
 }
 
-export type AppSettingsState = {
+export interface AppSettingsState {
     settings: IAppSettings | null;
-};
+}

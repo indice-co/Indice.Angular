@@ -122,14 +122,14 @@ export abstract class BaseListComponent<T> implements OnInit {
  * @returns filters found from a paramMap
  */
   private getFiltersFrom(queryParamMap: ParamMap): FilterClause[] {
-    let filterResult: FilterClause[] = [];
+    const filterResult: FilterClause[] = [];
     if (queryParamMap.has(QueryParameters.FILTER) && queryParamMap.get(QueryParameters.FILTER)!.length > 0) {
-      let filterValue = queryParamMap.get(QueryParameters.FILTER);
+      const filterValue = queryParamMap.get(QueryParameters.FILTER);
       const filterValues = filterValue?.split(","); // we may have multiple filters in filter query param
       if (filterValues && filterValues.length > 0) {
         // create the filterClauses derived from the query params
-        for (var index in filterValues) {
-          let filterClause = FilterClause.parse(filterValues[index]);
+        for (const index in filterValues) {
+          const filterClause = FilterClause.parse(filterValues[index]);
           const parsed = new FilterClause(filterClause!.member, filterClause!.value, filterClause!.operator, filterClause!.dataType, this.searchOptions);
           if (parsed !== undefined) {
             filterResult.push(parsed);
@@ -140,7 +140,7 @@ export abstract class BaseListComponent<T> implements OnInit {
     return filterResult;
   }
 
-  private setRouteParams(locationChange: boolean = false): void {
+  private setRouteParams(locationChange = false): void {
     this.router$.navigate([], {
       relativeTo: this.route$, queryParams: {
         view: this.view,

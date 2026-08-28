@@ -10,7 +10,7 @@ import { MenuOption } from '@indice/ng-components';
 export class ToggleButtonsListSampleComponent implements OnInit {
 
   public filterOptions: MenuOption[] | undefined;
-  public selectedFilter: string = "all";
+  public selectedFilter = "all";
   constructor() { }
 
   ngOnInit(): void {

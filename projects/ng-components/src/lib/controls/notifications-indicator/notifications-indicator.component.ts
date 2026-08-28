@@ -78,8 +78,7 @@ export class NotificationsIndicatorComponent implements OnInit, OnDestroy {
     // this.unreadNotificationsCountObs = this.links[this.notificationsCounterLinksPath] as Observable<number>;
     // this.getUnreadNotificationsCount();
 
-  // tslint:disable-next-line:typedef
-  public onClickOutside($event: any) {
+   public onClickOutside($event: any) {
     this.menuExpanded = false;
   }
 

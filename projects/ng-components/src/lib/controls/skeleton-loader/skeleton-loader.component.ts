@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-skeleton-loader',
+       selector: 'lib-skeleton-loader',
     templateUrl: './skeleton-loader.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

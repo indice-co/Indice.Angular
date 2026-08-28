@@ -12,7 +12,7 @@ export class ProgressBarComponent implements OnChanges {
   readonly totalText = input<string>(undefined, { alias: "total-text" });
   readonly text = input<string>();
   readonly busy = input<boolean>(false);
-  public percentage: number = 0;
+  public percentage = 0;
 
   constructor() {
   }
