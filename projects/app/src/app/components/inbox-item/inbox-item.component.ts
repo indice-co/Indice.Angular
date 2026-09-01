@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons } from '@indice/ng-components';
@@ -12,7 +12,8 @@ import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons } from '@in
 export class InboxItemComponent implements OnInit {
   constructor(
     @Inject(APP_NOTIFICATIONS) public notifications: IAppNotifications,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) { }
 
   public title = 'Παρακαλώ περιμένετε...';
@@ -33,6 +34,7 @@ export class InboxItemComponent implements OnInit {
           this.notifications.refresh();
         }
       }
+      this.cdr.markForCheck();
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons, IResultSet, NavLink } from '@indice/ng-components';
@@ -12,7 +12,8 @@ import { APP_NOTIFICATIONS, HeaderMetaItem, IAppNotifications, Icons, IResultSet
 export class InboxComponent implements OnInit {
   constructor(
     @Inject(Router) private _router: Router,
-    @Inject(APP_NOTIFICATIONS) private _notifications: IAppNotifications
+    @Inject(APP_NOTIFICATIONS) private _notifications: IAppNotifications,
+    private _changeDetector: ChangeDetectorRef
   ) { }
 
   public items: any[] = [];
@@ -43,6 +44,7 @@ export class InboxComponent implements OnInit {
           text: `${result.count}`
         });
       }
+      this._changeDetector.markForCheck();
     });
   }
 

@@ -35,7 +35,7 @@ export abstract class BaseListComponent<T> implements OnInit {
   public searchDebounceTime = 300;
   private searchSubject$ = new Subject<string | null>();
   private readonly destroyRef = inject(DestroyRef);
-  private readonly cdr = inject(ChangeDetectorRef);
+  protected readonly cdr = inject(ChangeDetectorRef);
   readonly autoLoad = input<boolean>(true, { alias: "auto-load" });
 
   constructor(private route$: ActivatedRoute, private router$: Router) {

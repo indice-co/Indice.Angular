@@ -65,6 +65,7 @@ export class ModalPlayGroundComponent extends BaseListComponent<SampleViewModel>
     });
     modal.onHidden?.subscribe((res) => {
       this.result = res;
+      this.cdr.markForCheck();
     });
   }
 

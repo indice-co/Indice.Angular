@@ -45,6 +45,7 @@ export class SampleComboboxComponent implements OnInit, AfterViewInit {
             .subscribe((contacts: ContactResultSet) => {
                 this.contacts = contacts.items;
                 this.advancedContactsLoading = false;
+                this._changeDetector.markForCheck();
             });
     }
 
@@ -66,6 +67,7 @@ export class SampleComboboxComponent implements OnInit, AfterViewInit {
             .subscribe((contacts: ContactResultSet) => {
                 this.contactNames = contacts.items.map(x => x.fullName!);
                 this.contactsLoading = false;
+                this._changeDetector.markForCheck();
             });
     }
 

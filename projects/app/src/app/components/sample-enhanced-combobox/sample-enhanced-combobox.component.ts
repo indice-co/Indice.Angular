@@ -55,6 +55,7 @@ export class SampleEnhancedComboboxComponent implements OnInit, AfterViewInit {
             console.error('Error fetching contacts:', error);
         } finally {
             this.contactsLoading = false;
+            this._changeDetector.markForCheck();
         }
     }
 
@@ -70,6 +71,7 @@ export class SampleEnhancedComboboxComponent implements OnInit, AfterViewInit {
             console.error('Error fetching more contacts:', error);
         } finally {
             this.contactsLoading = false;
+            this._changeDetector.markForCheck();
         }
     }
 
