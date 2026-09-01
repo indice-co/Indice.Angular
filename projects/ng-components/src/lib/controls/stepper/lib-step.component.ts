@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Inject, Optional, TemplateRef, ViewEncapsulation, input, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Optional, Signal, TemplateRef, ViewEncapsulation, input, viewChild } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
@@ -23,7 +23,7 @@ export enum StepState {
 })
 export class LibStepComponent {
     constructor(
-        @Optional() @Inject(LIBSTEPPER_ACCESSOR) public readonly _stepper?: any
+        @Optional() @Inject(LIBSTEPPER_ACCESSOR) public readonly _stepper?: ILibStepperAccessor
     ) { }
 
     /** The content provided for the step. */
@@ -39,12 +39,12 @@ export class LibStepComponent {
 
     /** Indicates the index of the step. */
     public get index(): number {
-        return this._stepper ? this._stepper.steps.toArray().indexOf(this) : -1;
+        return this._stepper ? this._stepper.steps().indexOf(this) : -1;
     }
 
     /** Indicates whether this step is the last step. */
     public get isLast(): boolean {
-        return this._stepper ? this._stepper.steps.length - 1 === this.index : false;
+        return this._stepper ? this._stepper.steps().length - 1 === this.index : false;
     }
 
     /** Indicates whether you can navigate to the step or not. */
@@ -59,6 +59,9 @@ export class LibStepComponent {
     /** Shows the current state of the step. */
     public get state(): StepState {
         const currentIndex = this._stepper?.currentStepIndex;
+        if (currentIndex === undefined) {
+            return StepState.Upcoming;
+        }
         if (currentIndex === this.index) {
             return StepState.Active;
         }
@@ -67,4 +70,10 @@ export class LibStepComponent {
         }
         return StepState.Upcoming;
     }
+}
+
+/** Minimal shape of the parent stepper that a step reads (typed here to avoid a circular import). */
+export interface ILibStepperAccessor {
+    readonly steps: Signal<readonly LibStepComponent[]>;
+    readonly currentStepIndex: number;
 }

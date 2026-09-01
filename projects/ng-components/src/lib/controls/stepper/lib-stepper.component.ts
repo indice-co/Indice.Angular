@@ -1,6 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, Component, forwardRef, OnInit, ChangeDetectionStrategy, input, output, contentChildren } from '@angular/core';
 
-import { LibStepComponent, StepState } from './lib-step.component';
+import { ILibStepperAccessor, LibStepComponent, StepState } from './lib-step.component';
 import { LIBSTEPPER_ACCESSOR } from '../../tokens';
 import { StepperType } from './types/stepper-type';
 import { StepSelectedEvent } from './types/step-selected-event';
@@ -15,7 +15,7 @@ import { NgTemplateOutlet } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgTemplateOutlet]
 })
-export class LibStepperComponent implements OnInit, AfterViewChecked {
+export class LibStepperComponent implements OnInit, AfterViewChecked, ILibStepperAccessor {
     // Private properties.
     private _currentStepIndex = 0;
     private _isCompleted = false;

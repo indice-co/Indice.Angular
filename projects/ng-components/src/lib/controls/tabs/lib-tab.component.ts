@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, OnInit, Optional, TemplateRef, ViewChild, ViewEncapsulation, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Inject, Input, OnInit, Optional, Signal, TemplateRef, ViewChild, ViewEncapsulation, input } from '@angular/core';
 
 import * as uuid from 'uuid';
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
@@ -18,7 +18,7 @@ export class LibTabComponent implements OnInit {
     private _isActive = false;
 
     constructor(
-        @Optional() @Inject(LIBTABGROUP_ACCESSOR) public readonly _tabGroup?: any
+        @Optional() @Inject(LIBTABGROUP_ACCESSOR) public readonly _tabGroup?: ILibTabGroupAccessor
     ) { }
 
     /** The content provided for the tab. */
@@ -31,8 +31,8 @@ export class LibTabComponent implements OnInit {
 
     /** Indicates the index of the tab. */
     public get index(): number {
-        const index = this._tabGroup?.tabs.toArray()?.indexOf(this);
-        return index;
+        const index = this._tabGroup?.tabs()?.indexOf(this);
+        return index ?? -1;
     }
 
     /** Indicates whether the tab is active. */
@@ -48,4 +48,9 @@ export class LibTabComponent implements OnInit {
     public ngOnInit(): void {
         this.id = this.id || uuid.v4();
     }
+}
+
+/** Minimal shape of the parent tab group that a tab reads (typed here to avoid a circular import). */
+export interface ILibTabGroupAccessor {
+    readonly tabs: Signal<readonly LibTabComponent[]>;
 }

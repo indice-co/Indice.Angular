@@ -1,7 +1,7 @@
 import { AfterContentChecked, AfterContentInit, Component, forwardRef, OnInit, ChangeDetectionStrategy, output, contentChildren } from '@angular/core';
 
 import { LIBTABGROUP_ACCESSOR } from '../../tokens';
-import { LibTabComponent } from './lib-tab.component';
+import { ILibTabGroupAccessor, LibTabComponent } from './lib-tab.component';
 import { FormsModule } from '@angular/forms';
 import { NgTemplateOutlet } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { NgTemplateOutlet } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [FormsModule, NgTemplateOutlet]
 })
-export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked {
+export class LibTabGroupComponent implements OnInit, AfterContentInit, AfterContentChecked, ILibTabGroupAccessor {
     constructor() { }
 
     /** The inner tabs of the group. */
