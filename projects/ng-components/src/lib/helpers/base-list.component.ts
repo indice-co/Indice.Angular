@@ -2,7 +2,7 @@ import { FilterClause, QueryParameters, SearchOption } from './../controls/advan
 import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChangeDetectorRef, Component, DestroyRef, OnInit, ChangeDetectionStrategy, inject, input } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, OnDestroy, OnInit, ChangeDetectionStrategy, inject, input } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
@@ -12,7 +12,7 @@ import { Icons } from '../icons';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
-export abstract class BaseListComponent<T> implements OnInit {
+export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public items: T[] | null | undefined = null;
   public view: string = ListViewType.Tiles;
   public title: string | null = null;
@@ -115,6 +115,8 @@ export abstract class BaseListComponent<T> implements OnInit {
     this.setRouteParams(true);
     if(this.autoLoad()) this.load();
   }
+
+  ngOnDestroy(): void { }
 
   /**
  * Get filters from a querystring
