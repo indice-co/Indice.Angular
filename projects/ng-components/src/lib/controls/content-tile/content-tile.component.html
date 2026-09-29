@@ -3,7 +3,7 @@
     <div class="kpi-tile-title-container flex align-top">
       @if (!header) {
         <button type="button" class="kpi-tile-action text-left flex-1 uppercase"
-          (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title ?? title()) ?? '-'}}
+          (click)="emitTileAction($event)">{{(this.itemTemplates[selectedIndex].title() ?? title()) ?? '-'}}
         </button>
       }
       @if (header && header.template) {
@@ -19,7 +19,7 @@
     </div>
     @if (itemTemplates) {
       <div class="flex items-center">
-        <ng-template [ngTemplateOutlet]="itemTemplates[selectedIndex].template"></ng-template>
+        <ng-template [ngTemplateOutlet]="itemTemplates[selectedIndex].template()"></ng-template>
       </div>
     }
     @if (itemTemplates && itemTemplates.length>1) {

@@ -67,8 +67,8 @@
                 <th aria-label="details button" class="list-view-th-details"></th>
               </ng-container>
               <ng-container *ngFor="let col of columns">
-                <th scope="col" [class]="col.fullWidth ? fullWidthTHClass : 'list-view-th'">
-                  {{col.title}}
+                <th scope="col" [class]="col.fullWidth() ? fullWidthTHClass : 'list-view-th'">
+                  {{col.title()}}
                 </th>
               </ng-container>
             </tr>
@@ -92,7 +92,7 @@
                   </ng-template>
                 </ng-container>
                 <td *ngFor="let col of columns"
-                    [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
+                    [class]="col.fullWidth() ? fullWidthTDClass : 'list-view-td'">
                   <div class="w-full animate-pulse h-8 bg-gray-200 rounded"></div>
                 </td>
               </tr>
@@ -127,7 +127,7 @@
                   </ng-template>
                 </ng-container>
                 <td *ngFor="let col of columns"
-                    [class]="col.fullWidth ? fullWidthTDClass : 'list-view-td'">
+                    [class]="col.fullWidth() ? fullWidthTDClass : 'list-view-td'">
                   <ng-template [ngTemplateOutlet]="col.template"
                                [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
                 </td>

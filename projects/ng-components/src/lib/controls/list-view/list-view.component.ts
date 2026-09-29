@@ -49,7 +49,7 @@ export class ListViewComponent implements OnChanges {
     if (this.columns && this.columns.length > 0) {
       this.tableViewSupported = true;
     }
-    this.multipleFullWidth = this.columns.filter(c => c.fullWidth).length > 1;
+    this.multipleFullWidth = this.columns.filter(c => c.fullWidth()).length > 1;
     this.fullWidthTHClass = this.multipleFullWidth ? 'list-view-th-half' : 'list-view-th-full';
     this.fullWidthTDClass = this.multipleFullWidth ? 'list-view-td-half' : 'list-view-td-full';
   }
@@ -88,7 +88,7 @@ export class ListViewComponent implements OnChanges {
   public tilesViewSupported = false;
   public detailsSectionSupported = false;
   public loaderItems: any[] = [];
-  public columns: any[] = [];
+  public columns: ListColumnComponent[] = [];
   public tilesDeckClass = 'cards-deck-4';
   public tileTemplate: any | null | undefined = null;
   public detailsTemplate: any | null | undefined = null;

@@ -38,7 +38,7 @@ export class ContentTileComponent implements OnInit {
    readonly tileAction = output<any>({ alias: 'tile-action' });
   public selectedIndex = 0;
 
-  public itemTemplates: any[] = [];
+  public itemTemplates: ContentTileItemComponent[] = [];
   @ContentChildren(ContentTileItemComponent, { read: ContentTileItemComponent })
   set items(refs: QueryList<ContentTileItemComponent>) {
     if (refs) {
