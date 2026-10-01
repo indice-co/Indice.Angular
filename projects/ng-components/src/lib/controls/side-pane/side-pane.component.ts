@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, DOCUMENT, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidePaneOverlayType, SidePaneSize } from '../../types';
 import { NgTemplateOutlet } from '@angular/common';
@@ -17,6 +17,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   readonly onClose = output<any>();
   readonly params = input<any>();
   @Input() template: TemplateRef<any> | undefined;
+  private cdr = inject(ChangeDetectorRef);
   
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
   
@@ -74,11 +75,13 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   public show(): void {
     this.document.body.classList.add('modal-active');
     this.showPane = true;
+    this.cdr.markForCheck();
     this.onOpen.emit(true);
   }
 
   public hide(): void {
     this.showPane = false;
+    this.cdr.markForCheck();
     this.document.body.classList.remove('modal-active');
     this.onClose.emit(false);
     // prepei na allaxei auto!
