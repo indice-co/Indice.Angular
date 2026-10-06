@@ -9,7 +9,7 @@ import { ShellFooterComponent } from '../shell-footer/shell-footer.component';
 @Component({
     selector: 'lib-shell-stacked-layout',
     templateUrl: './shell-stacked-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [DynamicComponentHostDirective, ShellHeaderComponent, RouterOutlet, ShellFooterComponent]
 })
 export class ShellStackedLayoutComponent implements OnInit {

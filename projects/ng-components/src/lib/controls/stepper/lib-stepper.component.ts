@@ -107,5 +107,6 @@ export class LibStepperComponent implements OnInit, AfterViewChecked, ILibSteppe
             previouslySelectedStep: currentStep
         });
         this._currentStepIndex = newIndex;
+        this._changeDetectorRef.markForCheck();
     }
 }

@@ -9,7 +9,7 @@ import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-dow
 @Component({
        selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ViewLayoutComponent, DropDownMenuComponent, RouterLinkActive, RouterLink, RouterOutlet]
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {

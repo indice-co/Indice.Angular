@@ -7,7 +7,9 @@ import { RouterViewAction, ViewAction } from '../../../types';
 import { NgClass } from '@angular/common';
 
 @Component({
-    selector: 'lib-form-layout', templateUrl: './form-layout.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'lib-form-layout',
+    templateUrl: './form-layout.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgClass, SidePaneComponent, RouterOutlet]
 })
 export class FormLayoutComponent implements OnInit {

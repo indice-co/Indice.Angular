@@ -41,8 +41,22 @@ export class EnhancedComboboxComponent implements OnInit {
     public readonly onShowMore = output<any>();
 
     public showResults = false;
-    public selectedItems: any[] = [];
-    public value: string | undefined;
+    private _selectedItems: any[] = [];
+    public get selectedItems(): any[] {
+        return this._selectedItems;
+    }
+    public set selectedItems(items: any[]) {
+        this._selectedItems = items;
+        this.cdr.markForCheck();
+    }
+    private _value: string | undefined;
+    public get value(): string | undefined {
+        return this._value;
+    }
+    public set value(value: string | undefined) {
+        this._value = value;
+        this.cdr.markForCheck();
+    }
     protected searchTerm = '';
 
     public ngOnInit(): void {

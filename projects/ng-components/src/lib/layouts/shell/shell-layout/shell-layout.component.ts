@@ -15,7 +15,7 @@ import { ToasterContainerComponent } from '../../../controls/toaster/toaster-con
 
 @Component({
     selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ShellStackedLayoutComponent, ShellSidebarLayoutComponent, SidePaneComponent_1, RouterOutlet, ToasterContainerComponent]
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
