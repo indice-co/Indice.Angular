@@ -1,5 +1,6 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'lib-toggle',
@@ -11,26 +12,28 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
             multi: true
         }
     ],
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgClass]
 })
 export class ToggleComponent implements OnInit, ControlValueAccessor {
   @Input()
   public value: boolean | null | undefined;
-  @Input()
-  public disabled: boolean | null | undefined;
-  @Input() privateLabel: string = 'Private';
-  @Input() publicLabel: string = 'The file should be private'; 
-  @Output() valueChange: EventEmitter<Boolean> = new EventEmitter<Boolean>();
+  public readonly disabled = input<boolean | null>();
+  readonly privateLabel = input<string>('Private');
+  readonly publicLabel = input<string>('The file should be private'); 
+  readonly valueChange = output<boolean>();
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor() { }
-  
+
   writeValue(obj: any): void {
     if(obj) {
       this.value = obj || false;
     }
+    this.cdr.markForCheck();
   }
   registerOnChange(fn: any): void {
     this.onChange$ = fn;

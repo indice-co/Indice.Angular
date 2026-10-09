@@ -1,16 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { FormsModule } from '@angular/forms';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'lib-combobox',
     templateUrl: './combobox.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ClickOutsideDirective, FormsModule, NgTemplateOutlet]
 })
 export class ComboboxComponent implements OnInit {
     private _debouncer: Subject<string> = new Subject<string>();
     private _items: any[] = [];
+    private cdr = inject(ChangeDetectorRef);
 
     private _defaultItemsFilter = (item: any) => {
         const selectedItem = this.selectedItems.find(x => x == item);
@@ -19,53 +24,68 @@ export class ComboboxComponent implements OnInit {
 
     constructor() { }
 
-    @Input() public id: string = 'combobox';
-    @Input() public placeholder: string | undefined;
+    public readonly id = input<string>('combobox');
+    public readonly placeholder = input<string>();
 
-    @Input('items') public set items(items: any[]) {
-        if (!this.itemTemplate) {
+    @Input() public set items(items: any[]) {
+        if (!this.itemTemplate()) {
             this._items = items.filter(this._defaultItemsFilter);
         } else {
-            this._items = items.filter(this.selectedItemsFilter);
+            this._items = items.filter(this.selectedItemsFilter());
         }
     }
 
     public get items(): any[] {
-        if (!this.itemTemplate) {
+        if (!this.itemTemplate()) {
             return this._items.filter(this._defaultItemsFilter);
         } else {
-            return this._items.filter(this.selectedItemsFilter);
+            return this._items.filter(this.selectedItemsFilter());
         }
     }
 
-    @Input() public itemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
-    @Input() public selectedItemsFilter: (item: any) => boolean | null = () => true;
-    @Input() public selectedItemTemplate: TemplateRef<HTMLElement> | undefined = undefined;
+    public readonly itemTemplate = input<TemplateRef<HTMLElement>>();
+    public readonly selectedItemsFilter = input<(item: any) => boolean | null>(() => true);
+    public readonly selectedItemTemplate = input<TemplateRef<HTMLElement>>();
     @Input() public noResultsTemplate: TemplateRef<unknown> | undefined = undefined;
-    @Input() public busy: boolean = false;
-    @Input() public multiple: boolean = true;
-    @Input() public debounceMs: number = 1000;
-    @Output() public onSearch: EventEmitter<string | undefined> = new EventEmitter();
-    @Output() public onItemSelected: EventEmitter<any> = new EventEmitter();
-    public showResults: boolean = false;
-    public selectedItems: any[] = [];
-    public value: string | undefined;
-    protected searchTerm: string = '';
+    public readonly busy = input<boolean>(false);
+    @Input() public multiple = true;
+    public readonly debounceMs = input<number>(1000);
+    public readonly onSearch = output<string | undefined>();
+    public readonly onItemSelected = output<any>();
+    public showResults = false;
+    private _selectedItems: any[] = [];
+    public get selectedItems(): any[] {
+        return this._selectedItems;
+    }
+    public set selectedItems(items: any[]) {
+        this._selectedItems = items;
+        this.cdr.markForCheck();
+    }
+    private _value: string | undefined;
+    public get value(): string | undefined {
+        return this._value;
+    }
+    public set value(value: string | undefined) {
+        this._value = value;
+        this.cdr.markForCheck();
+    }
+    protected searchTerm = '';
 
     public ngOnInit(): void {
-        if (this.itemTemplate && !this.multiple) {
+        if (this.itemTemplate() && !this.multiple) {
             this.multiple = true;
             console.warn('You cannot have a custom item template with single selection.');
         }
         this.emitSearchEvent();
         this._debouncer
             .pipe(
-                debounceTime(this.debounceMs),
+                debounceTime(this.debounceMs()),
                 distinctUntilChanged()
             )
             .subscribe((value: string) => {
                 this.searchTerm = value;
                 this.emitSearchEvent(value);
+                this.cdr.markForCheck();
             });
     }
 

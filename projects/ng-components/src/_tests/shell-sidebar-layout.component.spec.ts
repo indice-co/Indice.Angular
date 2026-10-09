@@ -8,8 +8,8 @@ describe('ShellSidebarLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShellSidebarLayoutComponent ]
-    })
+    imports: [ShellSidebarLayoutComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ShellSidebarLayoutComponent);

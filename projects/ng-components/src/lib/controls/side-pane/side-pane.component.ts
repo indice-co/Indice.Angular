@@ -1,18 +1,23 @@
-import { Component, DOCUMENT, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Component, DOCUMENT, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidePaneOverlayType, SidePaneSize } from '../../types';
-@Component({ selector: 'lib-side-pane', templateUrl: './side-pane.component.html', standalone: false })
+import { NgTemplateOutlet } from '@angular/common';
+@Component({
+    selector: 'lib-side-pane', templateUrl: './side-pane.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgTemplateOutlet]
+})
 export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   @Input('visible')
   protected showPane = false;
   public sizeContainerStyle = 'side-pane-box-size';
   public overlayStyle = 'side-pane-overlay';
-  @Input('pane-size') size: SidePaneSize | undefined;
-  @Output() onComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() onOpen: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-  @Input('params') params: any | undefined;
+  readonly size = input<SidePaneSize>(undefined, { alias: "pane-size" });
+  readonly onComplete = output<boolean>();
+  readonly onOpen = output<any>();
+  readonly onClose = output<any>();
+  readonly params = input<any>();
   @Input() template: TemplateRef<any> | undefined;
+  private cdr = inject(ChangeDetectorRef);
   
   constructor(private router: Router, @Inject(DOCUMENT) private document: any,) { }
   
@@ -33,7 +38,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
 
   private initPane(state?: any) {
     //priority to property for size
-    this.sizeContainerStyle = this.sizeToClass(this.size ?? state?.paneSize);
+    this.sizeContainerStyle = this.sizeToClass(this.size() ?? state?.paneSize);
     this.overlayStyle = this.overlayToClass(state?.paneOverlay);
   }
 
@@ -49,7 +54,7 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
 
   private sizeToClass(size?: SidePaneSize): string {
     if(!size) return 'side-pane-box-size';
-    let sizeStyleSuffix: string = '-25';
+    let sizeStyleSuffix = '-25';
     if (size === SidePaneSize.Small25) {
       sizeStyleSuffix = '-25';
     } else if (size === SidePaneSize.Medium50) {
@@ -70,11 +75,13 @@ export class SidePaneComponent implements OnInit, OnDestroy, OnChanges {
   public show(): void {
     this.document.body.classList.add('modal-active');
     this.showPane = true;
+    this.cdr.markForCheck();
     this.onOpen.emit(true);
   }
 
   public hide(): void {
     this.showPane = false;
+    this.cdr.markForCheck();
     this.document.body.classList.remove('modal-active');
     this.onClose.emit(false);
     // prepei na allaxei auto!

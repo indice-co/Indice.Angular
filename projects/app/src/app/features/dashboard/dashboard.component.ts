@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Icons, HeaderMetaItem } from '@indice/ng-components';
@@ -7,6 +7,7 @@ import { SampleAppShellConfig } from '../../app-shell-config';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DashboardComponent implements OnInit {

@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Toast } from '../../types';
+import { NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf } from '@angular/common';
 
 @Component({
     selector: 'lib-toaster',
     templateUrl: './toaster.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgClass, NgStyle, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf]
 })
 export class ToasterComponent implements OnInit {
 
   @Input() toast: Toast | undefined;
-  @Input() i = 0;
-  @Output() remove = new EventEmitter<number>();
+  readonly i = input(0);
+  readonly remove = output<number>();
   public isMobile = false;
   public closed = false;
 

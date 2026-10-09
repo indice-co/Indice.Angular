@@ -1,38 +1,38 @@
 <lib-view-layout title="Εισερχόμενα"
-                 [icon]="icon"
-                 [meta-items]="meta">
+  [icon]="icon"
+  [meta-items]="meta">
   <div>
     <ul role="list"
-        class="divide-y divide-gray-300">
-      <ng-container *ngFor="let item of items">
+      class="divide-y divide-gray-300">
+      @for (item of items; track item) {
         <li class="py-4 px-4 cursor-pointer hover:bg-gray-200 hover:shadow-lg"
-            (click)="viewInboxItem(item.data)">
+          (click)="viewInboxItem(item.data)">
           <div class="flex space-x-3">
             <img class="h-10 w-10 rounded-full"
-                 src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
-                 alt="">
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center justify-between">
-                <h3 class="text-sm"
+              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+              alt="">
+              <div class="flex-1 space-y-1">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-sm"
                     [class.font-extrabold]="!item.data.isRead"
                     [class.font-medium]="item.data.isRead">
-                  {{ item.data.title }}
-                </h3>
+                    {{ item.data.title }}
+                  </h3>
+                  <p class="text-sm text-gray-500"
+                    [class.font-strong]="!item.data.isRead"
+                    [class.font-thin]="item.data.isRead">
+                    {{ item.data.date | date:'dd/MM HH:mm:ss' }}
+                  </p>
+                </div>
                 <p class="text-sm text-gray-500"
-                   [class.font-strong]="!item.data.isRead"
-                   [class.font-thin]="item.data.isRead">
-                  {{ item.data.date | date:'dd/MM HH:mm:ss' }}
+                  [class.font-strong]="!item.data.isRead"
+                  [class.font-thin]="item.data.isRead">
+                  {{ item.data.text }}
                 </p>
               </div>
-              <p class="text-sm text-gray-500"
-                 [class.font-strong]="!item.data.isRead"
-                 [class.font-thin]="item.data.isRead">
-                {{ item.data.text }}
-              </p>
             </div>
-          </div>
-        </li>
-      </ng-container>
-    </ul>
-  </div>
-</lib-view-layout>
+          </li>
+        }
+      </ul>
+    </div>
+  </lib-view-layout>

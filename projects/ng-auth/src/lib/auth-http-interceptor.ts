@@ -11,7 +11,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
   constructor(@Inject(AuthService) private authService: AuthService, @Inject(Router) private router: Router) { }
   
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let authRequest = null;
+    let authRequest: HttpRequest<any>;
     if (request.url.indexOf('i18n') >= 0) {
       authRequest = request;
     } else {

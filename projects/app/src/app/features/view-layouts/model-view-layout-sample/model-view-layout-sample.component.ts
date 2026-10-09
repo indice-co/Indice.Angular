@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { HeaderMetaItem, Icons, RouterViewAction, ViewAction } from '@indice/ng-components';
 
 @Component({
     selector: 'app-model-view-layout-sample',
     templateUrl: './model-view-layout-sample.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ModelViewLayoutSampleComponent implements OnInit {

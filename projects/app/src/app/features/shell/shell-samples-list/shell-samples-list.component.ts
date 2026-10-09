@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { SampleViewModel } from '../../../models/sample.vm';
 import { delay, map } from 'rxjs/operators';
@@ -21,6 +21,7 @@ export const ShellLayoutsListSamples = [
     selector: 'lib-shell-samples-list',
     templateUrl: './shell-samples-list.component.html',
     styleUrls: ['./shell-samples-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShellSamplesListComponent extends BaseListComponent<SampleViewModel> implements OnInit {

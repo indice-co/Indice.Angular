@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MenuOption } from '@indice/ng-components';
 
 @Component({
     selector: 'app-toggle-buttons-list-sample',
     templateUrl: './toggle-buttons-list-sample.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ToggleButtonsListSampleComponent implements OnInit {
 
   public filterOptions: MenuOption[] | undefined;
-  public selectedFilter: string = "all";
+  public selectedFilter = "all";
   constructor() { }
 
   ngOnInit(): void {

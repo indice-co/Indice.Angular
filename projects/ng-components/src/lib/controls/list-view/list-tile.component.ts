@@ -1,8 +1,8 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'lib-list-tile', template: '<ng-content></ng-content>',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListTileComponent{
   @ContentChild(TemplateRef) template: any | null = null;

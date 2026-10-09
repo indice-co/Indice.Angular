@@ -1,11 +1,12 @@
 import { ToastType } from './../../../../../../ng-components/src/lib/types';
 import { ToasterService } from '@indice/ng-components';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'lib-toaster-sample',
     templateUrl: './toaster-sample.component.html',
     styleUrls: ['./toaster-sample.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ToasterSampleComponent implements OnInit {

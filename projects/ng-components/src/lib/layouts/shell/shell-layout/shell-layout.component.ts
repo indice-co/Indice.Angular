@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, Input, ViewChild } from '@angular/core';
-import { ActivationStart, Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, OnDestroy, Inject, ViewChildren, QueryList, AfterViewChecked, TemplateRef, ChangeDetectionStrategy, input, viewChild, ChangeDetectorRef } from '@angular/core';
+import { ActivationStart, Router, RouterOutlet } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -8,23 +8,28 @@ import { IShellConfig, DefaultShellConfig } from './../../../types';
 import { DynamicComponentHostDirective } from '../../../directives/dynamic-component-host.directive';
 import { ComponentLoaderFactory } from '../../../services/component-loader/component-loader.factory';
 import { SidePaneComponent } from '../../../../public-api';
+import { ShellStackedLayoutComponent } from '../shell-stacked-layout/shell-stacked-layout.component';
+import { ShellSidebarLayoutComponent } from '../shell-sidebar-layout/shell-sidebar-layout.component';
+import { SidePaneComponent as SidePaneComponent_1 } from '../../../controls/side-pane/side-pane.component';
+import { ToasterContainerComponent } from '../../../controls/toaster/toaster-container.component';
 
 @Component({
     selector: 'lib-shell-layout', templateUrl: './shell-layout.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [ShellStackedLayoutComponent, ShellSidebarLayoutComponent, SidePaneComponent_1, RouterOutlet, ToasterContainerComponent]
 })
 export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   @ViewChildren(DynamicComponentHostDirective) private _dynamicComponentHosts: QueryList<DynamicComponentHostDirective> | null = null;
-  @ViewChild('rightPane') rightPane: SidePaneComponent | undefined;
-  @Input() busy: boolean = false;
-  @Input() public sidebarFooterTemplate?: TemplateRef<any>;
+  readonly rightPane = viewChild<SidePaneComponent>('rightPane');
+  readonly busy = input<boolean>(false);
+  public readonly sidebarFooterTemplate = input<TemplateRef<any>>();
   private _routerSub$: Subscription | null = null;
   public showRightPaneSM = false;
   public activeConfig: IShellConfig = new DefaultShellConfig();
   public loaded = false;
   public hideSidebar = false;
 
-  constructor(private _router: Router, private _componentLoaderFactory: ComponentLoaderFactory, @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined) {
+  constructor(private _router: Router, private _componentLoaderFactory: ComponentLoaderFactory, private _cdr: ChangeDetectorRef, @Inject(SHELL_CONFIG) private _config: IShellConfig | undefined) {
     if (!_config) {
       _config = new DefaultShellConfig();
     }
@@ -32,7 +37,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   }
 
   public ngAfterViewChecked(): void {
-    setTimeout(() => { this.loaded = true; }, 200);
+    setTimeout(() => { this.loaded = true; this._cdr.markForCheck(); }, 200);
   }
 
   public ngOnInit(): void {
@@ -50,6 +55,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
           }
         }
       }
+      this._cdr.markForCheck();
     });
   }
 
@@ -59,7 +65,7 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
 
   private initCustomComponents(): void {
     if (this._dynamicComponentHosts && this._dynamicComponentHosts.length > 0) {
-      this.loadCustomComponent(this._dynamicComponentHosts.find((_) => _.hostName === 'Header'));
+      this.loadCustomComponent(this._dynamicComponentHosts.find((_) => _.hostName() === 'Header'));
     }
   }
 
@@ -80,10 +86,10 @@ export class ShellLayoutComponent implements OnInit, OnDestroy, AfterViewInit, A
   }
 
   onSidePaneActivated($event: any): void {
-    this.rightPane?.onSidePaneActivated($event);
+    this.rightPane()?.onSidePaneActivated($event);
   }
 
   onSidePaneDeactivated($event: any): void {
-    this.rightPane?.onSidePaneDeactivated($event);
+    this.rightPane()?.onSidePaneDeactivated($event);
   }
 }

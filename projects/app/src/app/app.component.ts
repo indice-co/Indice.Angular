@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, ChangeDetectionStrategy } from "@angular/core";
 import { AUTH_SETTINGS } from "projects/ng-auth/src/lib/tokens";
 import { APP_SETTINGS, IAUTH_SETTINGS } from "projects/ng-config/src/lib/tokens";
 import { IAppSettings } from "projects/ng-config/src/lib/types";
@@ -15,6 +15,7 @@ import { IAppSettings } from "projects/ng-config/src/lib/types";
       </span> v6.0.3
     </ng-template>
   `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent {

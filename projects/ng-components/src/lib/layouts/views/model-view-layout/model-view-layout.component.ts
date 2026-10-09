@@ -1,30 +1,41 @@
 import { Location } from '@angular/common';
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, input, output } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterLinkActive, RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HeaderMetaItem, MenuOption, ViewAction } from '../../../types';
+import { ViewLayoutComponent } from '../view-layout/view-layout.component';
+import { DropDownMenuComponent } from '../../../controls/drop-down-menu/drop-down-menu.component';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-model-view-layout',
+       selector: 'lib-model-view-layout',
     templateUrl: './model-view-layout.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.Eager,
+    imports: [ViewLayoutComponent, DropDownMenuComponent, RouterLinkActive, RouterLink, RouterOutlet]
 })
 export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public showRightPaneSM = false;
-  @Input() title = 'no title';
-  // tslint:disable-next-line:no-input-rename
-  @Input('primary-links') primary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
-  // tslint:disable-next-line:no-input-rename
-  @Input('secondary-links') secondary: { type?: string, text: string, link: string, icon?: string, exact? : boolean }[] | null = null;
-  // tslint:disable-next-line:no-input-rename
-  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [
-    // { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
-  ];
-  @Input() icon: string | null = null;
-  @Input() busy = false;
-  @Input() actions: ViewAction[] | null = null;
-  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
+  readonly title = input('no title');
+   readonly primary = input<{
+    type?: string;
+    text: string;
+    link: string;
+    icon?: string;
+    exact?: boolean;
+}[] | null>(null, { alias: "primary-links" });
+   readonly secondary = input<{
+    type?: string;
+    text: string;
+    link: string;
+    icon?: string;
+    exact?: boolean;
+}[] | null>(null, { alias: "secondary-links" });
+   readonly metaItems = input<HeaderMetaItem[] | null>([
+// { key: 'test', icon: Icons.Badges, text: 'βρέθηκαν 200 αποτελέσματα' }
+], { alias: "meta-items" });
+  readonly icon = input<string | null>(null);
+  readonly busy = input(false);
+  readonly actions = input<ViewAction[] | null>(null);
+  readonly onAction = output<ViewAction>();
   private optionsLoaded = false;
   private _options: MenuOption[] = [];
   public selectedTab: any;
@@ -32,14 +43,16 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
   public get tabsOptions(): MenuOption[] {
     if(!this.optionsLoaded) {
       this.optionsLoaded = true;
-      if(this.primary) {
-        this.primary.forEach(p => {
+      const primary = this.primary();
+      if(primary) {
+        primary.forEach(p => {
           this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
 
-      if(this.secondary) {
-        this.secondary.forEach(p => {
+      const secondary = this.secondary();
+      if(secondary) {
+        secondary.forEach(p => {
           this._options.push(new MenuOption(p.text, p.link, undefined, undefined, p.icon));
         });
       }
@@ -50,19 +63,20 @@ export class ModelViewLayoutComponent implements OnInit, OnDestroy {
     }
     return this._options;
   }
-  constructor( private location: Location, private router: Router, private route: ActivatedRoute) { }
+  constructor( private location: Location, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) { }
   
   ngOnInit(): void {
     this.selectedTabSub$ = this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd ) {
         if(event.urlAfterRedirects) {
-          var urlParts = event.urlAfterRedirects.split('/');
+          const urlParts = event.urlAfterRedirects.split('/');
           if(urlParts && urlParts.length > 0) {
             const lastPart = urlParts[urlParts.length-1];
             this.selectedTab = lastPart.split('?')[0];
           }
         }
       }
+      this.cdr.markForCheck();
     });
   }
 

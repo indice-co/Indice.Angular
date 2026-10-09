@@ -54,7 +54,7 @@ export class SettingsFacadeService {
                 }
             }),
             map((settings) => {
-                let runtimeSettings = merge(cloneDeep(this.#environment), settings);
+                const runtimeSettings = merge(cloneDeep(this.#environment), settings);
                 // Assign settings directly to the appSettings object
                 Object.assign(this.tokenAppsettings, runtimeSettings);
 

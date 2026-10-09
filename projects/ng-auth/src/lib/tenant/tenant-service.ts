@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TenantService {
-    private _tenantSubject: BehaviorSubject<string> = new BehaviorSubject('');
+    private _tenantSubject = new BehaviorSubject<string>('');
 
     constructor() { }
 

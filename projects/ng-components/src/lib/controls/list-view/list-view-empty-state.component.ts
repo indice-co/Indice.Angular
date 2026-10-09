@@ -1,17 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     selector: 'lib-list-view-empty-state',
     templateUrl: './list-view-empty-state.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListViewEmptyStateComponent implements OnInit {
 
-  @Input() title = 'No records found.';
-  // tslint:disable-next-line:no-input-rename
-  @Input('sub-title') subTitle = 'Please change your search criteria or start by adding a new record';
-  // tslint:disable-next-line:no-input-rename
-  @Input('new-item-label') newItemLabel = 'New record';
+  readonly title = input('No records found.');
+   readonly subTitle = input('Please change your search criteria or start by adding a new record', { alias: "sub-title" });
+   readonly newItemLabel = input('New record', { alias: "new-item-label" });
   constructor() { }
 
   ngOnInit(): void {

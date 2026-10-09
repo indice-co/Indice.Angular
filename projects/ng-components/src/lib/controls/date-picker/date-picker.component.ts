@@ -1,6 +1,7 @@
-import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames } from '@angular/common';
-import { Component, ElementRef, EventEmitter, forwardRef, Inject, Input, LOCALE_ID, OnInit, Output, ViewChild } from '@angular/core';
+import { getLocaleMonthNames, FormStyle, TranslationWidth, getLocaleDayNames, DatePipe } from '@angular/common';
+import { Component, ElementRef, forwardRef, Inject, Input, LOCALE_ID, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, input, output, viewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 
 // freaksly simple date picker : https://tailwind-elements.com/docs/standard/forms/datepicker/
 @Component({
@@ -13,26 +14,27 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ClickOutsideDirective, DatePipe]
 })
 export class DatepickerComponent implements OnInit, ControlValueAccessor {
-  @Input() readonly: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() inline: boolean = false;
-  @Input('display-format') displayFormat: string | undefined = 'dd/MM/yyyy';
-  @Input() placeholder: string | undefined = '';
+  readonly readonly = input<boolean>(false);
+  readonly disabled = input<boolean>(false);
+  @Input() inline = false;
+  readonly displayFormat = input<string | undefined>('dd/MM/yyyy', { alias: "display-format" });
+  readonly placeholder = input<string | undefined>('');
   @Input() value: Date | undefined | null = null;
-  @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
-  @ViewChild('dateInput') dateInput: ElementRef | undefined;
-  @Input() minDate: Date | undefined = undefined;
-  @Input() maxDate: Date | undefined = undefined;
+  readonly valueChange = output<Date | undefined | null>();
+  readonly dateInput = viewChild<ElementRef>('dateInput');
+  readonly minDate = input<Date>();
+  readonly maxDate = input<Date>();
   public showCalendar = false;
   public showYears = false;
   public monthNames = getLocaleMonthNames(this.locale, FormStyle.Standalone, TranslationWidth.Wide);
   public dayNames = getLocaleDayNames(this.locale, FormStyle.Standalone, TranslationWidth.Abbreviated);
 
-  public month: number = -1;
-  public year: number = -1;
+  public month = -1;
+  public year = -1;
   public calendarDates: any[] = [];
   public calendarYears: any[] = [];
   public showCalendarYears: any[] = [];
@@ -44,7 +46,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   private onTouched$: any | undefined = undefined;
 
   ngOnInit(): void {
-    let today = new Date();
+    const today = new Date();
     this.month = today.getMonth();
     this.year = today.getFullYear();
     this.calendarDates = [{ day: this.value, today: this.value, selected: this.value }];
@@ -58,7 +60,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     this.calcDays();
   }
 
-  constructor(@Inject(LOCALE_ID) public locale: string) { }
+  constructor(@Inject(LOCALE_ID) public locale: string, private cdr: ChangeDetectorRef) { }
 
   writeValue(obj: any): void {
     if (obj) {
@@ -66,6 +68,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       this.month = this.value.getMonth();
       this.year = this.value.getFullYear();
     }
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: (_: any) => void): void {
@@ -86,7 +89,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   public selectDateValue(date: any): void {
     // This should be in UTC
     if (!this.outOfRangeDate(date.day)) {
-      let selectedDate = new Date(this.year, this.month, date.day, 3, 0, 0, 0);
+      const selectedDate = new Date(this.year, this.month, date.day, 3, 0, 0, 0);
       this.value = selectedDate;
       this.valueChange.emit(this.value);
       if (this.onChange$) {
@@ -106,7 +109,7 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     const tempYear = this.year;
     this.year = year.year;
     if (!this.outOfRangeDate(this.calendarDates?.find(x => x.selected == true) ?? { day: 1 })) {
-      let selectedDate = new Date(year.year, this.month ?? 1, this.calendarDates?.find(x => x.selected == true).day ?? 1, 3, 0, 0, 0);
+      const selectedDate = new Date(year.year, this.month ?? 1, this.calendarDates?.find(x => x.selected == true).day ?? 1, 3, 0, 0, 0);
       this.value = selectedDate;
       this.valueChange.emit(this.value);
       if (this.onChange$) {
@@ -189,14 +192,14 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
     // find where to start calendar day of week
     const dayOfWeek = new Date(this.year, this.month).getDay();
     const blankdaysArray = new Array<number>();
-    for (var i = 1; i <= dayOfWeek; i++) {
+    for (let i = 1; i <= dayOfWeek; i++) {
       // check if month is February
       blankdaysArray.push(this.month != 2 ? (32 - i) : (29 - i));
       blankdaysArray.reverse().sort();
     }
     const daysArray = [];
     const today = new Date();
-    for (var i = 1; i <= daysInMonth; i++) {
+    for (let i = 1; i <= daysInMonth; i++) {
       daysArray.push({ day: i, today: this.compareDates(today, i, null), selected: this.compareDates(this.value ?? today, i, null) });
     }
     const yearsArray = [];
@@ -221,7 +224,8 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private getDateFromInput() {
-    if(!this.dateInput?.nativeElement.value || this.dateInput?.nativeElement.value === '') {
+    const dateInput = this.dateInput();
+    if(!dateInput?.nativeElement.value || dateInput?.nativeElement.value === '') {
       this.value = undefined;
       this.valueChange.emit(this.value);
       if (this.onChange$) {
@@ -230,9 +234,9 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
       return;
     }
 
-    if (this.dateInput?.nativeElement.value !== '' && !this.inline) {    
-      var dateParts = this.dateInput?.nativeElement.value.split("/");
-      let dateInGrFormat = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], 3, 0, 0);
+    if (dateInput?.nativeElement.value !== '' && !this.inline) {    
+      const dateParts = dateInput?.nativeElement.value.split("/");
+      const dateInGrFormat = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0], 3, 0, 0);
       if (dateInGrFormat.toString() !== 'Invalid Date') {
         this.writeValue(dateInGrFormat)
         this.calcDays();
@@ -267,19 +271,21 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   outOfRangeDate(date: any): boolean {
-    let outOfRange: boolean = false;
-    if (this.minDate || this.maxDate) {
+    let outOfRange = false;
+    const minDateValue = this.minDate();
+    const maxDateValue = this.maxDate();
+    if (minDateValue || maxDateValue) {
       const d = new Date(this.year, this.month, date.day);
       const dateInMillis = d.getTime();
-      if (this.minDate) {
-        let minDate: number = this.minDate.getTime();
-        if (dateInMillis < minDate && this.minDate.toDateString() !== d.toDateString()) {
+      if (minDateValue) {
+        const minDate: number = minDateValue.getTime();
+        if (dateInMillis < minDate && minDateValue.toDateString() !== d.toDateString()) {
           outOfRange = true;
         }
       }
-      if (this.maxDate) {
-        let maxDate: number = this.maxDate.getTime();
-        if (dateInMillis > maxDate && this.maxDate.toDateString() !== d.toDateString()) {
+      if (maxDateValue) {
+        const maxDate: number = maxDateValue.getTime();
+        if (dateInMillis > maxDate && maxDateValue.toDateString() !== d.toDateString()) {
           outOfRange = true;
         }
       }

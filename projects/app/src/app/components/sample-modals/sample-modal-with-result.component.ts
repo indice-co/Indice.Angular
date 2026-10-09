@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { Modal } from 'projects/ng-components/src/lib/services/modal-service/modal.class';
 
 @Component({
     selector: 'lib-sample-modal-with-result',
     templateUrl: './sample-modal-with-result.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleModalWithResultComponent {

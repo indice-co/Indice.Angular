@@ -3,8 +3,7 @@ import { IAddress } from '../types';
 
 @Pipe({
     name: 'address',
-    pure: false,
-    standalone: false
+    pure: false
 })
 export class AddressPipe implements PipeTransform {
 
@@ -12,7 +11,7 @@ export class AddressPipe implements PipeTransform {
         if (value === undefined || null || '') {
             return '';
         }
-        // tslint:disable-next-line:no-non-null-assertion
+       
         return `${value.street || ''}${value.streetNumber ? ' ' + value.streetNumber : ''}${value.city ? ', ' + value.city : ''}${+value.postalCode! ? ', ' + +value.postalCode! : ''}`;
     }
 }

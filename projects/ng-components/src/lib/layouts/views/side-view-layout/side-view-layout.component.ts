@@ -1,34 +1,27 @@
 import { Router } from '@angular/router';
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input, output } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
     selector: 'lib-side-view-layout',
     templateUrl: './side-view-layout.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideViewLayoutComponent implements OnInit {
-  @Input() title: string | null = 'Πληροφορίες';
-  @Input() showActions = true;
-  @Input() disabled = false;
-  // tslint:disable-next-line:no-input-rename
-  @Input('return-path') returnPath: string | undefined;
-  // tslint:disable-next-line:no-input-rename
-  @Input('ok-label') okLabel = 'Αποθήκευση';
-  // tslint:disable-next-line:no-input-rename
-  @Input('ok-show') okShow = true;
-  // tslint:disable-next-line:no-input-rename
-  @Input('ok-close-dialog') closeOnOk = true;
-  // tslint:disable-next-line:no-input-rename
-  @Input('cancel-label') cancelLabel = 'Ακύρωση';
-  // tslint:disable-next-line:no-input-rename
-  @Input('cancel-show') cancelShow = true;
-  // tslint:disable-next-line:no-input-rename
-  @Input('force-location-back') forceLocationBack = false;
-  @Input('redirect-on-close') redirectOnClose = true;
+  readonly title = input<string | null>('Πληροφορίες');
+  readonly showActions = input(true);
+  readonly disabled = input(false);
+   readonly returnPath = input<string>(undefined, { alias: "return-path" });
+   readonly okLabel = input('Αποθήκευση', { alias: "ok-label" });
+   readonly okShow = input(true, { alias: "ok-show" });
+   readonly closeOnOk = input(true, { alias: "ok-close-dialog" });
+   readonly cancelLabel = input('Ακύρωση', { alias: "cancel-label" });
+   readonly cancelShow = input(true, { alias: "cancel-show" });
+   readonly forceLocationBack = input(false, { alias: "force-location-back" });
+  readonly redirectOnClose = input(true, { alias: "redirect-on-close" });
   // @Output() close = new EventEmitter<any>();
-  @Output() cancel: EventEmitter<boolean> = new EventEmitter();
-  @Output() ok: EventEmitter<boolean> = new EventEmitter();
+  readonly cancel = output<boolean>();
+  readonly ok = output<boolean>();
 
   constructor(private location: Location, private router: Router) { }
 
@@ -36,12 +29,13 @@ export class SideViewLayoutComponent implements OnInit {
   }
 
   public closeSidePane(): void {
-    if (this.returnPath) {
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigateByUrl(this.returnPath || '/'));
+    if (this.returnPath()) {
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigateByUrl(this.returnPath() || '/'));
     } else {
-      if ((this.router.url.split('/(')[0] !== this.router.url) && !this.forceLocationBack) {
+      const forceLocationBack = this.forceLocationBack();
+      if ((this.router.url.split('/(')[0] !== this.router.url) && !forceLocationBack) {
         this.router.navigateByUrl(this.router.url.split('/(')[0]);
-      } else if ((this.router.url.split('(')[0] !== this.router.url) && !this.forceLocationBack) {
+      } else if ((this.router.url.split('(')[0] !== this.router.url) && !forceLocationBack) {
         this.router.navigateByUrl(this.router.url.split('(')[0]);
       } else {
         this.location.back();
@@ -51,21 +45,21 @@ export class SideViewLayoutComponent implements OnInit {
 
   public emitClose(): void {
     this.cancel.emit(false);
-    if(this.redirectOnClose) {
+    if(this.redirectOnClose()) {
       this.closeSidePane();
     }
   }
 
   public emitCancel(): void {
     this.cancel.emit(false);
-    if(this.redirectOnClose) {
+    if(this.redirectOnClose()) {
       this.closeSidePane();
     }
   }
 
   public emitOK(): void {
     this.ok.emit(true);
-    if (this.closeOnOk && this.redirectOnClose) {
+    if (this.closeOnOk() && this.redirectOnClose()) {
       this.closeSidePane();
     }
   }

@@ -1,40 +1,37 @@
 import { SwitchViewAction } from '../../../types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ChangeDetectionStrategy, input, output, viewChild } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HeaderMetaItem, RouterViewAction, ViewAction } from '../../../types';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'lib-view-layout',
     templateUrl: './view-layout.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgClass]
 })
 export class ViewLayoutComponent implements OnInit {
-  // tslint:disable-next-line:no-input-rename
-  @ViewChild('search') private searchInput$?: ElementRef;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-header') header = true;
-  @Input() fluid = false;
-  @Input() title = 'no title';
+   private readonly searchInput$ = viewChild<ElementRef>('search');
+   readonly header = input(true, { alias: "show-header" });
+  readonly fluid = input(false);
+  readonly title = input('no title');
   @Input() icon: string | null = null;
-  @Input() actions: ViewAction[] | null = null;
-  @Input() busy = false;
-  // tslint:disable-next-line:no-input-rename
-  @Input('search-placeholder') searchPlaceholder: string | null = 'search';
+  readonly actions = input<ViewAction[] | null>(null);
+  readonly busy = input(false);
+   readonly searchPlaceholder = input<string | null>('search', { alias: "search-placeholder" });
   @Input() view: string | null = null;
-  // tslint:disable-next-line:no-input-rename
-  @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onAction: EventEmitter<ViewAction> = new EventEmitter<ViewAction>();
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onSearch: EventEmitter<string> = new EventEmitter<string>();
+   @Input('meta-items') metaItems: HeaderMetaItem[] | null = [];
+   readonly onAction = output<ViewAction>();
+   readonly onSearch = output<string>();
 
   constructor(private route$: ActivatedRoute, private router$: Router) { }
 
   ngOnInit(): void {
-    if (this.searchInput$?.nativeElement){
-      fromEvent(this.searchInput$.nativeElement, 'keyup').pipe(
+    const searchInput$ = this.searchInput$();
+    if (searchInput$?.nativeElement){
+      fromEvent(searchInput$.nativeElement, 'keyup').pipe(
         map((event: any) => {
           return event.target.value; // Get input value.
         }),
@@ -64,7 +61,7 @@ export class ViewLayoutComponent implements OnInit {
   }
 
   searchActionType(text: string): void {
-    this.onSearch.emit(this.searchInput$?.nativeElement.value);
+    this.onSearch.emit(this.searchInput$()?.nativeElement.value);
   }
 
   public handleClear(event: any): void {

@@ -3,13 +3,15 @@
     <div class="collapsible-panel-container-inner">
       <button type="button" class="collapsible-panel-button" (click)="visible = !visible">
         <div class="collapsible-panel-button-content-container">
-          <span>{{ title }} </span>
+          <span>{{ title() }} </span>
           <span class="ico-plus"></span>
         </div>
       </button>
-      <div class="collapsible-panel-content-container" *ngIf="visible">
-        <ng-content></ng-content>
-      </div>
+      @if (visible) {
+        <div class="collapsible-panel-content-container">
+          <ng-content></ng-content>
+        </div>
+      }
     </div>
   </div>
 </div>

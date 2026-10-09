@@ -1,9 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-layout.component';
 
 @Component({
     selector: 'lib-unauthorized',
     templateUrl: './unauthorized.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ViewLayoutComponent]
 })
 export class UnauthorizedComponent implements OnInit {
   constructor() { }

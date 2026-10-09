@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, inject, input, output } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -11,22 +11,23 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true
         }
     ],
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToggleButtonComponent implements OnInit {
-  @Input() value: boolean = false;
-  @Input() disabled: boolean = false;
-  @Input() icon: boolean = true;
-  @Input('text') text: string | null | undefined;
-  @Input('text-true') textTrue: string | null | undefined;
-  @Input('text-false') textFalse: string | null | undefined;
-  @Input('description') description: string | null | undefined;
-  @Input('description-true') descriptionTrue: string | null | undefined;
-  @Input('description-false') descriptionFalse: string | null | undefined;
-  @Output() valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() value = false;
+  readonly disabled = input<boolean>(false);
+  readonly icon = input<boolean>(true);
+  @Input() text: string | null | undefined;
+  readonly textTrue = input<string | null>(undefined, { alias: "text-true" });
+  readonly textFalse = input<string | null>(undefined, { alias: "text-false" });
+  @Input() description: string | null | undefined;
+  readonly descriptionTrue = input<string | null>(undefined, { alias: "description-true" });
+  readonly descriptionFalse = input<string | null>(undefined, { alias: "description-false" });
+  readonly valueChange = output<boolean>();
 
   private onChange$: any | undefined = undefined;
   private onTouched$: any | undefined = undefined;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor() { }
 
@@ -37,6 +38,7 @@ export class ToggleButtonComponent implements OnInit {
     if(obj) {
       this.value = obj || false;
     }
+    this.cdr.markForCheck();
   }
   registerOnChange(fn: any): void {
     this.onChange$ = fn;

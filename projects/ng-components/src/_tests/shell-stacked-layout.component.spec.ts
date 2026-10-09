@@ -8,8 +8,8 @@ describe('ShellStackedLayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShellStackedLayoutComponent ]
-    })
+    imports: [ShellStackedLayoutComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ShellStackedLayoutComponent);

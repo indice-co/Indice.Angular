@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Icons } from 'projects/ng-components/src/lib/icons';
 import { MenuOption } from 'projects/ng-components/src/lib/types';
 
 @Component({
     selector: 'app-drop-down-menu-sample',
     templateUrl: './drop-down-menu-sample.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class DropDownMenuSampleComponent implements OnInit {

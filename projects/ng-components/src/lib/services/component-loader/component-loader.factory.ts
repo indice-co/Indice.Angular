@@ -1,4 +1,4 @@
-import { ApplicationRef, ComponentFactoryResolver, Injectable, Injector, ViewContainerRef } from '@angular/core';
+import { ApplicationRef, EnvironmentInjector, Injectable, Injector, ViewContainerRef } from '@angular/core';
 import { ComponentLoader } from './component-loader.class';
 
 /**
@@ -9,7 +9,7 @@ import { ComponentLoader } from './component-loader.class';
 @Injectable({ providedIn: 'root' })
 export class ComponentLoaderFactory {
   constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
+    private environmentInjector: EnvironmentInjector,
     private injector: Injector,
     private applicationRef: ApplicationRef
   ) {}
@@ -22,6 +22,6 @@ export class ComponentLoaderFactory {
    * @public
    */
   createLoader<T extends object>(viewContainerRef?: ViewContainerRef): ComponentLoader<T> {
-    return new ComponentLoader<T>(viewContainerRef, this.componentFactoryResolver, this.applicationRef, this.injector);
+    return new ComponentLoader<T>(viewContainerRef, this.environmentInjector, this.applicationRef, this.injector);
   }
 }

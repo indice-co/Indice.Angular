@@ -5,48 +5,44 @@
 import {
   Directive,
   ElementRef,
-  EventEmitter,
   Inject,
-  Input,
   OnChanges,
   OnDestroy,
   OnInit,
-  Output,
   PLATFORM_ID,
   SimpleChanges,
   NgZone,
+  input,
+  output
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-// tslint:disable-next-line:directive-selector
-@Directive({
-    selector: '[clickOutside]',
-    standalone: false
-})
+
+@Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
-  @Input() clickOutsideEnabled = true;
+  readonly clickOutsideEnabled = input(true);
 
-  @Input() attachOutsideOnClick = false;
-  @Input() delayClickOutsideInit = false;
-  @Input() emitOnBlur = false;
+  readonly attachOutsideOnClick = input(false);
+  readonly delayClickOutsideInit = input(false);
+  readonly emitOnBlur = input(false);
 
-  @Input() exclude = '';
-  @Input() excludeBeforeClick = false;
+  readonly exclude = input('');
+  readonly excludeBeforeClick = input(false);
 
-  @Input() clickOutsideEvents = '';
+  readonly clickOutsideEvents = input('');
 
-  @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
+  readonly clickOutside = output<Event>();
 
-  // tslint:disable-next-line:variable-name
-  private _nodesExcluded: Array<HTMLElement> = [];
-  // tslint:disable-next-line:variable-name
-  private _events: Array<string> = ['click'];
+ 
+  private _nodesExcluded: HTMLElement[] = [];
+ 
+  private _events: string[] = ['click'];
 
   constructor(
-    // tslint:disable-next-line:variable-name
+   
     private _el: ElementRef,
-    // tslint:disable-next-line:variable-name
+   
     private _ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: any) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
@@ -71,32 +67,33 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    // tslint:disable-next-line:no-string-literal
+   
     if (changes['attachOutsideOnClick'] || changes['exclude'] || changes['emitOnBlur']) {
       this._init();
     }
   }
 
   private _init(): void {
-    if (this.clickOutsideEvents !== '') {
-      this._events = this.clickOutsideEvents.split(',').map(e => e.trim());
+    const clickOutsideEvents = this.clickOutsideEvents();
+    if (clickOutsideEvents !== '') {
+      this._events = clickOutsideEvents.split(',').map(e => e.trim());
     }
 
     this._excludeCheck();
 
-    if (this.attachOutsideOnClick) {
+    if (this.attachOutsideOnClick()) {
       this._initAttachOutsideOnClickListener();
     } else {
       this._initOnClickBody();
     }
 
-    if (this.emitOnBlur) {
+    if (this.emitOnBlur()) {
       this._initWindowBlurListener();
     }
   }
 
   private _initOnClickBody(): void {
-    if (this.delayClickOutsideInit) {
+    if (this.delayClickOutsideInit()) {
       setTimeout(this._initClickOutsideListener.bind(this));
     } else {
       this._initClickOutsideListener();
@@ -104,9 +101,10 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _excludeCheck(): void {
-    if (this.exclude) {
+    const exclude = this.exclude();
+    if (exclude) {
       try {
-        const nodes = Array.from(document.querySelectorAll(this.exclude)) as Array<HTMLElement>;
+        const nodes = Array.from(document.querySelectorAll(exclude)) as HTMLElement[];
         if (nodes) {
           this._nodesExcluded = nodes;
         }
@@ -117,16 +115,16 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _onClickBody(ev: Event): void {
-    if (!this.clickOutsideEnabled) { return; }
+    if (!this.clickOutsideEnabled()) { return; }
 
-    if (this.excludeBeforeClick) {
+    if (this.excludeBeforeClick()) {
       this._excludeCheck();
     }
 
     if (!this._el.nativeElement.contains(ev.target) && !this._shouldExclude(ev.target)) {
       this._emit(ev);
 
-      if (this.attachOutsideOnClick) {
+      if (this.attachOutsideOnClick()) {
         this._removeClickOutsideListener();
       }
     }
@@ -145,14 +143,14 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _emit(ev: Event): void {
-    if (!this.clickOutsideEnabled) { return; }
+    if (!this.clickOutsideEnabled()) { return; }
 
     this._ngZone.run(() => this.clickOutside.emit(ev));
   }
 
   private _shouldExclude(target: any): boolean {
-    // tslint:disable-next-line:prefer-const
-    for (let excludedNode of this._nodesExcluded) {
+   
+    for (const excludedNode of this._nodesExcluded) {
       if (excludedNode.contains(target)) {
         return true;
       }

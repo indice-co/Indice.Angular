@@ -31,6 +31,16 @@
             "tsConfig": "projects/ng-auth/tsconfig.spec.json",
             "karmaConfig": "projects/ng-auth/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ng-auth/**/*.ts",
+              "projects/ng-auth/**/*.html"
+            ],
+            "eslintConfig": "projects/ng-auth/eslint.config.js"
+          }
         }
       }
     },
@@ -63,6 +73,16 @@
             "main": "projects/ng-components/src/test.ts",
             "tsConfig": "projects/ng-components/tsconfig.spec.json",
             "karmaConfig": "projects/ng-components/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ng-components/**/*.ts",
+              "projects/ng-components/**/*.html"
+            ],
+            "eslintConfig": "projects/ng-components/eslint.config.js"
           }
         }
       }
@@ -176,6 +196,16 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/app/**/*.ts",
+              "projects/app/**/*.html"
+            ],
+            "eslintConfig": "projects/app/eslint.config.js"
+          }
         }
       }
     },
@@ -208,6 +238,16 @@
               "zone.js",
               "zone.js/testing"
             ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ng-config/**/*.ts",
+              "projects/ng-config/**/*.html"
+            ],
+            "eslintConfig": "projects/ng-config/eslint.config.js"
           }
         }
       }

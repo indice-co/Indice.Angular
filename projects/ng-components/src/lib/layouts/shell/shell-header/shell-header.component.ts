@@ -1,33 +1,32 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
-import { ActivatedRoute, Event, NavigationStart, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, Inject, ChangeDetectionStrategy, input, inject, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Event, NavigationStart, Router, RouterLink } from '@angular/router';
 import { filter, share } from 'rxjs/operators';
 import { NavLink } from '../../../types';
 import { APP_LINKS, SHELL_CONFIG } from '../../../tokens';
 import { Observable, Subscription, of } from 'rxjs';
 import { User } from 'oidc-client-ts';
+import { NavLinksListComponent } from '../../../controls/nav-links-list/nav-links-list.component';
+import { ClickOutsideDirective } from '../../../directives/click-outside.directive';
+import { UserProfileMenuComponent } from '../../../controls/user-profile-menu/user-profile-menu.component';
+import { NotificationsIndicatorComponent } from '../../../controls/notifications-indicator/notifications-indicator.component';
+import { LanguageSelectionComponent } from '../../../controls/language-selection/language-selection.component';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-shell-header',
+       selector: 'lib-shell-header',
     templateUrl: './shell-header.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [RouterLink, NavLinksListComponent, ClickOutsideDirective, UserProfileMenuComponent, NotificationsIndicatorComponent, LanguageSelectionComponent]
 })
 export class ShellHeaderComponent implements OnInit, OnDestroy {
-  // tslint:disable-next-line:no-input-rename
-  @Input('section-links') sectionLinksPath = 'main';
-  // tslint:disable-next-line:no-input-rename
-  @Input('profile-menu') profileMenuVisible = true;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-userName') showUserNameOnHeader: boolean | undefined = false;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-picture') showPictureOnHeader: boolean | undefined = true;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-alerts') showAlerts: boolean | undefined = false;
-  // tslint:disable-next-line:no-input-rename
-  @Input('show-langs') showLangs: boolean | undefined = false;
-  @Input() border = true;
-  @Input() busy: boolean = false;
+   readonly sectionLinksPath = input('main', { alias: "section-links" });
+   readonly profileMenuVisible = input(true, { alias: "profile-menu" });
+   readonly showUserNameOnHeader = input<boolean | undefined>(false, { alias: "show-userName" });
+   readonly showPictureOnHeader = input<boolean | undefined>(true, { alias: "show-picture" });
+   readonly showAlerts = input<boolean | undefined>(false, { alias: "show-alerts" });
+   readonly showLangs = input<boolean | undefined>(false, { alias: "show-langs" });
+  readonly border = input(true);
+  readonly busy = input<boolean>(false);
   public sectionLinks: Observable<NavLink[]> = of([]);
   public mobileMenuExpanded = false;
   public userMenuExpanded = false;
@@ -38,6 +37,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
   public user: User | null = null;
   public avatarName: string | null = null;
   public activeFragment: any | null = null;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(
     @Inject(AuthService) protected authService: AuthService,
@@ -50,13 +50,15 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activeFragment = this.route.fragment.pipe(share());
-    this.sectionLinks = this.links[this.sectionLinksPath] as Observable<NavLink[]>;
+    this.sectionLinks = this.links[this.sectionLinksPath()] as Observable<NavLink[]>;
     this.routerSub$ = this.routeSubject.subscribe((event) => {
       this.mobileMenuExpanded = false;
       this.userMenuExpanded = false;
+      this.cdr.markForCheck();
     });
     this.authService.loadUser().subscribe((user) => {
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     }, error => {
       console.error(error);
     });
@@ -64,6 +66,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     this.userSub$ = this.authService.user$.subscribe((user: any) => {
       // console.log('ShellHeaderComponent user subscription');
       this.setCurrentUser(user);
+      this.cdr.markForCheck();
     });
   }
 
@@ -81,8 +84,7 @@ export class ShellHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  public onClickOutside($event: any) {
+   public onClickOutside($event: any) {
     this.userMenuExpanded = false;
   }
 

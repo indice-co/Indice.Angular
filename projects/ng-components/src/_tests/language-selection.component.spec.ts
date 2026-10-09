@@ -8,8 +8,8 @@ describe('LanguageSelectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LanguageSelectionComponent ]
-    })
+    imports: [LanguageSelectionComponent]
+})
     .compileComponents();
   });
 

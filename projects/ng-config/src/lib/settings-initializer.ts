@@ -1,8 +1,9 @@
 import {
-  APP_INITIALIZER,
   EnvironmentProviders,
   Injector,
-  makeEnvironmentProviders
+  inject,
+  makeEnvironmentProviders,
+  provideAppInitializer
 } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { SettingsFacadeService } from './settings-facade.service';
@@ -45,12 +46,10 @@ export function provideAppSettings(config: AppProvidersArray = {}): EnvironmentP
       provide: APP_ENVIRONMENT,
       useValue: {}
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeAppSettings,
-      deps: [SettingsFacadeService], // Add Injector to deps
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const appSettingsFacade = inject(SettingsFacadeService);
+      return initializeAppSettings(appSettingsFacade)();
+    }),
     {
       provide: IAUTH_SETTINGS,
       useFactory: (runtimeSettings: IAppSettings) => runtimeSettings.auth_settings,

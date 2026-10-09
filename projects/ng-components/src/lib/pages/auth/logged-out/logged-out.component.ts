@@ -1,15 +1,16 @@
 import { AuthService } from '@indice/ng-auth';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { ViewLayoutComponent } from '../../../layouts/views/view-layout/view-layout.component';
 
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'lib-logged-out',
+       selector: 'lib-logged-out',
     templateUrl: './logged-out.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ViewLayoutComponent]
 })
 export class LoggedOutComponent implements OnInit {
-  constructor(@Inject(AuthService) private authService: AuthService) { }
+  constructor(@Inject(AuthService) private authService: AuthService, private cdr: ChangeDetectorRef) { }
 
   public status = 'working on it, please give me a sec...';
   public finished = false;
@@ -18,6 +19,7 @@ export class LoggedOutComponent implements OnInit {
     this.authService.removeUser().subscribe(() => {
       this.status = 'Thank you!';
       this.finished = true;
+      this.cdr.markForCheck();
     });
   }
 }

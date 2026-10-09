@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { StepSelectedEvent } from 'projects/ng-components/src/lib/controls/stepper/types/step-selected-event';
@@ -7,6 +7,7 @@ import { StepperType } from 'projects/ng-components/src/lib/controls/stepper/typ
 @Component({
     selector: 'app-sample-stepper',
     templateUrl: './stepper-sample.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SampleStepperComponent implements OnInit, AfterViewChecked {

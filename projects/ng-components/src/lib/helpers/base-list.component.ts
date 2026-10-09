@@ -1,13 +1,15 @@
 import { FilterClause, QueryParameters, SearchOption } from './../controls/advanced-search/models';
-import { Observable, Subject, Subscription, of } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, Inject, Input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectorRef, Component, DestroyRef, OnDestroy, OnInit, ChangeDetectionStrategy, inject, input } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { HeaderMetaItem, IResultSet, MenuOption, RouterViewAction, ViewAction, ListViewType } from '../types';
 import { Icons } from '../icons';
 
 @Component({
     template: '',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: false
 })
 export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
@@ -31,25 +33,12 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
   public abstract newItemLink: string | null;
   public minimumSearchCharacters = 3;
   public searchDebounceTime = 300;
-  private routeSub$: Subscription | undefined;
-  private loadSub$: Subscription | undefined;
-  private searchSub$: Subscription | undefined;
   private searchSubject$ = new Subject<string | null>();
-  @Input('auto-load') autoLoad: boolean = true;
+  private readonly destroyRef = inject(DestroyRef);
+  protected readonly cdr = inject(ChangeDetectorRef);
+  readonly autoLoad = input<boolean>(true, { alias: "auto-load" });
 
   constructor(private route$: ActivatedRoute, private router$: Router) {
-  }
-
-  ngOnDestroy(): void {
-    if (this.routeSub$) {
-      this.routeSub$.unsubscribe();
-    }
-    if (this.loadSub$) {
-      this.loadSub$.unsubscribe();
-    }
-    if (this.searchSub$) {
-      this.searchSub$.unsubscribe();
-    }
   }
 
   public getViewActions(): Observable<ViewAction[]> {
@@ -72,10 +61,11 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       { key: 'count', icon: Icons.ItemsCount, text: 'please wait...' }
     ];
 
-    this.searchSub$ = this.searchSubject$.pipe(
+    this.searchSubject$.pipe(
       filter(value => (value?.length ?? 0) >= this.minimumSearchCharacters || (value?.length ?? 0) === 0),
       debounceTime(this.searchDebounceTime),
-      distinctUntilChanged()
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(searchText => {
       this.executeSearch(searchText);
     });
@@ -83,7 +73,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     // disabled external route changes monitoring due to sync issues - which is bad :) - refresh from url will not work
     // until i come up with a solution...
 
-    this.routeSub$ = this.route$.queryParamMap.subscribe(params => {
+    this.route$.queryParamMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
       if (params.keys.length === 0) {
         return;
       }
@@ -119,11 +109,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
       }
       // initialize filters that may reside in the query string
       this.filters = this.getFiltersFrom(params);
+      this.cdr.markForCheck();
     });
     // just to sync params in query
     this.setRouteParams(true);
-    if(this.autoLoad) this.load();
+    if(this.autoLoad()) this.load();
   }
+
+  ngOnDestroy(): void { }
 
   /**
  * Get filters from a querystring
@@ -131,14 +124,14 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
  * @returns filters found from a paramMap
  */
   private getFiltersFrom(queryParamMap: ParamMap): FilterClause[] {
-    let filterResult: FilterClause[] = [];
+    const filterResult: FilterClause[] = [];
     if (queryParamMap.has(QueryParameters.FILTER) && queryParamMap.get(QueryParameters.FILTER)!.length > 0) {
-      let filterValue = queryParamMap.get(QueryParameters.FILTER);
+      const filterValue = queryParamMap.get(QueryParameters.FILTER);
       const filterValues = filterValue?.split(","); // we may have multiple filters in filter query param
       if (filterValues && filterValues.length > 0) {
         // create the filterClauses derived from the query params
-        for (var index in filterValues) {
-          let filterClause = FilterClause.parse(filterValues[index]);
+        for (const index in filterValues) {
+          const filterClause = FilterClause.parse(filterValues[index]);
           const parsed = new FilterClause(filterClause!.member, filterClause!.value, filterClause!.operator, filterClause!.dataType, this.searchOptions);
           if (parsed !== undefined) {
             filterResult.push(parsed);
@@ -149,7 +142,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     return filterResult;
   }
 
-  private setRouteParams(locationChange: boolean = false): void {
+  private setRouteParams(locationChange = false): void {
     this.router$.navigate([], {
       relativeTo: this.route$, queryParams: {
         view: this.view,
@@ -183,7 +176,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     // console.log('BaseListComponent LOAD');
     this.count = 0;
     this.items = null;
-    this.loadSub$ = this.loadItems().subscribe(result => {
+    this.loadItems().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
       this.count = result ? result.count : 0;
       this.items = result?.items;
       this.updateHeaderMeta();
@@ -199,6 +192,7 @@ export abstract class BaseListComponent<T> implements OnInit, OnDestroy {
     if (count) {
       this.count === 1 ? count.text = `${this.count} ${this.singularResult}` : count.text = `${this.count} ${this.pluralResults}`;
     }
+    this.cdr.markForCheck();
   }
 
   public abstract loadItems(): Observable<IResultSet<T> | null | undefined>;

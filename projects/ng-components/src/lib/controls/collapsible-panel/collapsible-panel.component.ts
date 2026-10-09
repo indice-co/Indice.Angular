@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
 
 @Component({
     selector: 'lib-collapsible-panel',
     templateUrl: './collapsible-panel.component.html',
-    standalone: false
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CollapsiblePanelComponent implements OnInit {
-  @Input() title: string | null = null;
+  readonly title = input<string | null>(null);
   public visible = false;
 
   constructor() { }
